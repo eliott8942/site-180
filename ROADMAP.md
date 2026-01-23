@@ -23,3 +23,12 @@
   - [ ] Add a page to indicate how the user should buy the book
 
   - [ ] Integrate it into the fringale page
+
+- [ ] Performance and Security
+  lighthouse report
+
+  - [ ] Rework the network dependency tree to make fetch more in parralel
+
+  - [ ] Make the images of the blog cards and blog article page have their full width BEFORE the image is loaded
+  
+  - [ ] Crieur : make requesting map tiles use HTTPS
