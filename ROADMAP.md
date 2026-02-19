@@ -16,6 +16,16 @@
 
 - [ ] Redesign Crieur page
 
+  - [X] Redesign page layout
+
+  - [X] Make a panel info widget
+
+  - [X] Design restaurant locations icons on the map
+
+  - [ ] Create the search engine
+
+  - [X] Change map widget styles
+
 - [ ] Redesign Search
 
 - [ ] Redesign Fringale page

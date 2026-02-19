@@ -60,11 +60,6 @@
   }
 }
 
-#map {
-  height: 50vh;
-  width: 100%;
-}
-
 /* Modal styles */
 .modal {
   display: none;
@@ -100,13 +95,6 @@
   &:hover {
     color: #f00;
   }
-}
-
-#open-filter-button {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  z-index: 10;
 }
 
 /* IPython split style */

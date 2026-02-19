@@ -133,6 +133,8 @@ link = "plugins/font-awesome/v6/solid.css"
 link = "plugins/font-awesome/v6/icons.css"
 [[params.plugins.css]]
 link = "plugins/font-awesome/v6/brands.css"
+[[params.plugins.css]]
+link = "plugins/normalize/normalize.css"
 
 # JS Plugins
 [[params.plugins.js]]

@@ -1,0 +1,19 @@
+{{- $string := .string -}}
+{{- $slice := split $string ":" -}}
+
+{{- if ne ($slice | len) 2 -}}
+  {{- errorf "Invalid hour `%s`" $string -}}
+{{- end -}}
+
+{{- $hour := try (index $slice 0 | int) -}}
+{{- if $hour.Err -}}
+  {{- errorf "Invalid hour `%s`" $string -}}
+{{- end -}}
+
+{{- $min := try (index $slice 1 | int) -}}
+{{- if $min.Err -}}
+  {{- errorf "Invalid hour `%s`" $string -}}
+{{- end -}}
+
+{{- $tuple := slice $hour.Value $min.Value }}
+{{- return $tuple }}

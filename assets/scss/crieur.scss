@@ -1,0 +1,135 @@
+.crieur-deco {
+  width: 30px;
+  height: 30px;
+
+  @apply bg-no-repeat bg-center bg-contain
+}
+
+.crieur-place {
+  width: 40px;
+
+  & .text {
+    text-shadow: 0 0 2px black;
+
+    @apply font-bold text-white text-base
+  }
+
+  @apply relative flex flex-col-reverse items-center bg-cover aspect-square rounded-full border-2 border-white shadow-centered-lg hover:cursor-pointer hover:scale-125 duration-100 shadow-black/10 hover:shadow-black/25
+}
+
+.crieur-status-close-soon {
+  @apply text-orange-500
+}
+.crieur-status-open {
+  @apply text-green-500
+}
+.crieur-status-open-soon {
+  @apply text-orange-500
+}
+.crieur-status-closed {
+  @apply text-red-500
+}
+
+.group:not(:has(#searchmenu-toggle-inner:checked)) .crieur-info-shown {
+  @apply sm:-left-[21rem];
+}
+
+.schedule {
+  & .dayTagSpace {
+    @apply w-10 shrink-0
+  }
+
+  & .scheduleRow {
+    @apply odd:bg-gray-100 flex flex-row w-full grow;
+  }
+
+  & .active {
+    @apply bg-red-100 odd:bg-red-200
+  }
+
+  & .scheduleDayTag {
+    @apply shrink-0 text-sm sticky left-0.5 self-start bg-white border rounded-full p-1 leading-none flex items-center justify-center m-0.5 shadow-md w-8 aspect-square
+  }
+}
+
+.crieur-gallery {
+  @apply h-48 p-2 overflow-auto flex;
+
+  & img {
+    @apply first:ml-0 ml-2 rounded-md;
+  }
+}
+
+#placeInfoLinks {
+  @apply flex flex-row flex-nowrap overflow-auto w-full;
+
+  & .crieur-social-links {
+    @apply grow h-12 flex justify-center rounded-md bg-white hover:bg-gray-200 m-1;
+
+    & .crieur-icon {
+      @apply m-1;
+    }
+  }
+}
+
+.crieur-tops {
+  @apply flex flex-row h-28 p-2 rounded-md odd:rotate-3 even:-rotate-3 border-2 border-black/50 odd:bg-[url(/images/crieur/tops-bg.png)] even:bg-[url(/images/crieur/tops-bg-even.png)] bg-size-[45px] bg-repeat shadow-md;
+
+  &:nth-child(odd) {
+    & .metadata {
+      & .price {
+        @apply right-0;
+      }
+
+      & .priceSpacer {
+        @apply w-14 h-6 float-right;
+      }
+    }
+  }
+
+  &:nth-child(even) {
+    & .metadata {
+      & .price {
+        @apply left-0;
+      }
+
+      & .priceSpacer {
+        @apply hidden
+      }
+    }
+  }
+
+  & .image {
+    @apply h-full aspect-square object-cover rounded-md overflow-hidden shrink-0 shadow-md outline outline-white outline-1
+  }
+
+  & .metadata {
+    @apply pl-3;
+
+    & .price {
+      @apply absolute top-0 -translate-y-1/2 max-w-14 aspect-square bg-primary rounded-full flex justify-center items-center p-1 text-xs text-white text-center font-bold
+    }
+
+    & .title {
+      @apply w-full font-bold text-lg leading-none;
+    }
+
+    & .description {
+      @apply leading-5
+    }
+  }
+}
+
+#placeInfoAddress {
+  & a {
+    @apply text-center;
+
+    &:hover {
+      @apply underline 
+    }
+  }
+
+  & .crieur-icon {
+    @apply h-4 inline-block;
+  }
+}

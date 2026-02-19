@@ -1,0 +1,11 @@
+{{ $address := .address }}
+{{ $variant := .variant | default "full" }}
+
+<span>
+  {{ $address.address }}
+  {{ if ne $variant "short" }}
+    ,
+    {{ $address.postal_code }}
+    {{ $address.city }}
+  {{ end }}
+</span>

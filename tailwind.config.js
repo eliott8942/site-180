@@ -105,6 +105,9 @@ module.exports = {
         secondary: [fontSecondary, fontSecondaryType],
         tertiary: [fontTeriary, fontTeriaryType],
       },
+      boxShadow: {
+        'centered-lg': '0 0px 15px rgb(0 0 0 / 0.1)'
+      }
     },
   },
   plugins: [
@@ -120,11 +123,6 @@ module.exports = {
         4: "1.5rem",
         5: "3rem",
       },
-    }),
-    require('tailwindcss/plugin')(( { matchVariant }) => {
-      matchVariant('group-has', (value) => {
-        return `.group:has(${value}) &`
-      })
     }),
     require('tailwindcss/plugin')(( { matchUtilities }) => {
       matchUtilities({

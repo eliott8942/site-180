@@ -1,0 +1,80 @@
+{{ $path := .path }}
+{{ $data := slice }}
+
+{{ with .scope.Site.GetPage $path }}
+  {{ $places := .Pages }}
+  {{ range $i, $place := $places }}
+    {{ $originalPlace := $place.Params }}
+    {{ $placeWithUrl := dict "url" ($place.RelPermalink | absURL ) }}
+
+    <!-- Replace images path by absolute ones -->
+    {{ $imageNames := slice "thumbnail" "banner" "image" }}
+    {{ range $name := $imageNames }}
+      {{ $variable := $place.Param $name }}
+
+      <!-- Make sure the images are included in the build -->
+      {{ with resources.Get $variable }}
+        {{ .Publish }}
+      {{ end }}
+
+      {{ if $variable }}
+        {{ $originalPlace = merge $originalPlace (dict $name ($variable | absURL)) }}
+      {{ end }}
+    {{ end }}
+    
+    <!-- Do the same thing for the tops image, if any -->
+    {{ $tops := $place.Param "tops" }}
+    {{ if $tops }}
+      {{ $processedTops := slice }}
+      {{ range $top := $tops }}
+        {{ $imageURL := $top.photo | absURL }}
+
+        <!-- Make sure the images are included in the build -->
+        {{ with resources.Get $imageURL }}
+          {{ .Publish }}
+        {{ end }}
+
+        {{ $top = merge $top (dict "photo" $imageURL) }}
+        {{ $processedTops = $processedTops | append $top }}
+      {{ end }}
+      {{ $originalPlace = merge $originalPlace (dict "tops" $processedTops) }}
+    {{ end }}
+    
+
+    <!-- Traverse Galery and extract all the images paths in it, except for the thumbnail -->
+    {{ $gallery := $place.Param "gallery" }}
+    {{ if $gallery }}
+      {{ $imagePath := slice }}
+      {{ range resources.Match (printf "%s/*" $gallery) }}
+        {{ $imagePath = $imagePath | append (.Permalink) }}
+      {{ end }}
+      {{ $originalPlace = merge $originalPlace (dict "gallery" $imagePath) }}
+    {{ end }}
+
+    <!-- Capitalize types and tags -->
+    {{ $imageNames := slice "types" "tags" }}
+    {{ range $name := $imageNames }}
+      {{ $variable := $place.Param $name }}
+      {{ if $variable }}
+        {{ $capitalized := slice }}
+        {{ range $element := $variable }}
+          {{ $capitalized = $capitalized | append ($element | strings.FirstUpper) }}
+        {{ end }}
+        {{ $originalPlace = merge $originalPlace (dict $name ($capitalized)) }}
+      {{ end }}
+    {{ end }}
+
+    <!-- Parse schedule -->
+    {{ $schedule := $place.Param "location.schedule" }}
+    {{ if $schedule }}
+      {{ $parsedScheduleSlice := partial "utils/crieur/parse-schedules.html" (dict "schedule" $schedule) }}
+      {{ $updatedLocation := merge $originalPlace.location (dict "schedule" $parsedScheduleSlice) }}
+      {{ $originalPlace = merge $originalPlace (dict "location" $updatedLocation) }}
+    {{ end }}
+    {{ $place = merge $originalPlace $placeWithUrl }}
+    
+    {{ $data = $data | append $place }}
+  {{ end }}
+
+  {{ return $data }}
+{{ end }}

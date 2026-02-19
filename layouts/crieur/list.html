@@ -4,166 +4,306 @@
 
 {{ define "main" }}
   {{ with site.GetPage "crieur" }}
-    <div class="row items-center justify-between m-0">
-      <section class="section-sm p-0">
-        <div class="row p-0 m-0">
-          <div class="col-12 p-0">
-            <!-- Map -->
-            <div class="col-12 p-0 m-0">
-              <div id="map" style="position: relative; top: 0;">
-                <!-- Add a button to open the filter modal -->
-                <button id="open-filter-button" class="btn btn-primary">
-                  Open Filters
-                </button>
-              </div>
-              <div id="map-popup" class="ol-popup">
-                <a href="#" id="map-popup-closer" class="ol-popup-closer"></a>
-                <div id="map-popup-content">
+    <div class="relative w-full h-screen-with-pad overflow-hidden group">
+      <!-- Info panel -->
+      <div class="absolute w-full h-full bg-black/25 z-30 p-3 opacity-100 has-[#infopanel-toggle-inner:checked]:opacity-0 has-[#infopanel-toggle-inner:checked]:pointer-events-none duration-100">
+        <div class="bg-white w-full h-full rounded-xl overflow-auto shadow-lg">
+          <!-- Sticky header -->
+          <div class="h-12 flex flex-row-reverse sticky top-0">
+            <div class="toggle aspect-square w-12">
+              <input id="infopanel-toggle-inner" type="checkbox" class="hidden" checked="true"/>
+              <label
+                for="infopanel-toggle-inner"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              </label>
+            </div>
+          </div>
+          
+
+          {{ with .Params.sections }}
+          {{ range $i, $section := . }}
+            <section
+              class="section-sm py-2{{ if not (modBool $i 2) }}
+                bg-gradient
+              {{ else if (ne $i (sub (len $.Params.sections) 1) ) }}
+                bg-gradient-reverse
+              {{ end }}"
+            >
+              <div class="container px-10">
+                <div class="row items-center justify-between">
                   <div
-                    class="crieur-place-card flex flex-col gap-2 bg-light dark:bg-light text-dark dark:text-dark rounded-xl p-5 shadow"
+                    class="mb:md-0 {{ if not (modBool $i 2) }}
+                      md:order-2
+                    {{ end }} md:col-5 mb-6"
                   >
-                    <div class="flex flex-col">
-                      <h4
-                        class="font-extrabold dark:text-dark"
-                        id="popup-card-title"
-                      >
-                        ${feature.values_.title}
-                      </h4>
-                      <h6 id="popup-card-style" class="dark:text-dark">
-                        ${feature.values_.style}
-                      </h6>
+                    {{ partial "image" (dict "Src" .image "Alt" .imagealt) }}
+                  </div>
+                  <div
+                    class="content {{ if not (modBool $i 2) }}
+                      md:order-1
+                    {{ end }} md:col-7 lg:col-6"
+                  >
+                    <h2 class="mb-4 font-tertiary font-extrabold">
+                      {{ .title | markdownify }}
+                    </h2>
+                    <p class="mb-8 text-lg">
+                      {{ .content | markdownify }}
+                    </p>
+                    <ul class="list-none">
+                      {{ range .bulletpoints }}
+                        <li class="relative mb-4 pl-6">
+                          <i class="fa fa-check absolute left-0 top-1.5"></i>
+                          {{ .name | markdownify }}
+                          {{ if .list }}
+                            <ul class="list-none">
+                              {{ range .list }}
+                                <li class="relative mb-4">
+                                  {{ . | markdownify }}
+                                </li>
+                              {{ end }}
+                            </ul>
+                          {{ end }}
+                        </li>
+                      {{ end }}
+                    </ul>
+                    <p class="mb-8 text-lg">
+                      {{ .alert | markdownify }}
+                    </p>
+                    {{ with .button }}
+                      {{ if .enable }}
+                        <a class="btn btn-primary mt-6" href="{{ .link | absURL }}">
+                          {{ .label }}
+                          <i class="fa fa-arrow-right pl-2"></i>
+                        </a>
+                      {{ end }}
+                    {{ end }}
+                  </div>
+                </div>
+              </div>
+            </section>
+          {{ end }}
+        {{ end }}
+
+        {{ .Content }}
+        </div>
+      </div>
+      
+      <!-- Search menu layer -->
+      <div class="absolute flex flex-col z-20 max-sm:w-full h-screen-with-pad sm:w-96 pointer-events-none max-sm:h-1/4 max-sm:group-has-[#searchmenu-toggle-inner:checked]:h-3/4 bottom-0 duration-150">
+        <!-- Static header -->
+        <div id="searchMenuInputHeader" class="absolute w-full h-12 shrink-0 flex flex-row items-center border-b bg-white border-b-gray-400 pointer-events-none border-r border-gray-200 duration-150 left-0">
+          <input class="grow outline-none border-0 focus:ring-0 text-lg shrink pointer-events-auto z-10" placeholder="Chercher un restaurant..."/>
+
+          <!-- Search menu toggle -->
+          <div class="toggle h-full aspect-square pointer-events-auto z-20 border-b" id="searchmenu-toggle">
+            <input id="searchmenu-toggle-inner" type="checkbox" class="hidden" checked="true"/>
+            
+            <label
+              for="searchmenu-toggle-inner"
+              class="text-dark bg-white"
+            >
+              <div class="flex items-center justify-center h-full w-full">
+                <div id="show-toggle">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down max-sm:hidden"><path d="m9 18 6-6-6-6"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up-icon lucide-chevron-up sm:hidden"><path d="m18 15-6-6-6 6"/></svg>
+                </div>
+                <div id="hide-toggle">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down sm:hidden"><path d="m6 9 6 6 6-6"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up-icon lucide-chevron-up max-sm:hidden"><path d="m15 18-6-6 6-6"/></svg>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+        
+        <div id="searchMenuContainer" class="relative m:-left-full sm:-left-full sm:group-has-[#searchmenu-toggle-inner:checked]:-left-0 h-full duration-150 left-0 overflow-hidden shadow-centered-lg ">
+          <div id="searchMenuPanelContainer" class="relative h-full flex flex-row -left-0 duration-150">
+            <!-- Search menu -->
+            <div class="flex flex-col h-full w-full duration-150 shrink-0">
+              <!-- Space for static header -->
+              <div class="w-full h-12 shrink-0"></div>
+              
+              <div class="relative grow duration-150 pointer-events-auto border-r border-gray-200 overflow-hidden">
+                <div class="flex flex-col overflow-auto h-full w-full bg-white shrink-0">
+                  {{ $restaurantInfos := .Site.GetPage "crieur/places" }}
+                  {{ range $i, $info := $restaurantInfos.RegularPages }}
+                    {{ partial "components/crieur/card" (dict "info" $info "id" $i) }}
+                  {{ end }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Place Info -->
+            <div class="flex flex-col h-full w-full shrink-0 pointer-events-auto bg-white">
+              <!-- Header --> 
+              <div class="relative w-full flex flex-row h-12 items-center shrink-0 overflow-hidden border-b border-b-gray-400 bg-white shadow-lg z-10">
+                <button onclick="closePanelInfo()" class="h-full aspect-square flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                </button>
+
+                <div id="placeInfoTitleInHeader" class="absolute flex left-1/2 -translate-x-1/2 font-bold text-lg h-full items-center">
+                  Title
+                </div>
+              </div>
+              
+              <div class="grow overflow-auto" id="placeInfoScrollableContainer">
+                <img id="placeInfoBanner" class="h-36 w-full object-cover "/>
+                
+                <div>
+                  <!-- Note : we need the height of the title here to be the same 
+                    as the height of the panel header, so the title transition effect works
+                    correctly
+                  -->
+                  <div class="flex flex-col items-center">
+                    <h4 id="placeInfoTitle" class="h-12 w-full flex items-center justify-center pt-4"></h4>
+                  
+                    <div>
+                      <span id="placeInfoTypes"></span>
+                      <span>‧</span>
+                      <span id="placeInfoPrice"></span>
                     </div>
-                    <hr />
-                    <div class="flex flex-col gap-2">
-                      <div>
-                        <th>Prix :</th>
-                        <td class="text-start">
-                          <span id="popup-card-price"></span>
-                        </td>
+
+                    <div id="placeInfoAddress" class="pb-4 flex flex-row items-center leading-5"></div>
+                  </div>
+  
+                  <!-- Content -->
+                  <div class="*:border-t">
+                    <!-- Google map, social links, description and galery -->
+                    <div>
+                      <!-- Galery -->
+                      <div id="placeInfoGallery" class="crieur-gallery"></div>
+
+                      <!-- Description -->
+                      <!-- Note : make sure that the max-height when folded match the 
+                        registered size in the updateDescription javascript function 
+                      -->
+                      <div class="group/description relative has-[#description-toggle-inner:checked]/description:max-h-[5rem] h-fit overflow-hidden">
+                        <!-- Fold toggle -->
+                        <div class="toggle opacity-75 aspect-square w-6 scale-75 float-left">
+                          <input id="description-toggle-inner" type="checkbox" class="hidden" checked="true"/>
+                          <label
+                            for="description-toggle-inner"
+                            class=""
+                          >
+                            <svg id="hide-toggle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                            <svg id="show-toggle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up-icon lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
+                          </label>
+                        </div>
+                        
+                        <div id="placeInfoDescription" class="z-0 px-2"></div>
+
+                        <div class="fold-gradient absolute bottom-0 w-full h-12 bg-gradient-to-t from-white to-transparent from-5% to-100% z-10 group-has-[#description-toggle-inner:checked]/description:opacity-100 opacity-0 pointer-events-none"></div>
                       </div>
-                      <div>
-                        <th>Type :</th>
-                        <td><span id="popup-card-types"></span></td>
+
+                      <div id="placeInfoLinks"></div>
+                    </div>
+    
+                    <!-- Schedule Section -->
+                    <div class="text-wrap">
+                      <div class="flex flex-row p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days-icon lucide-calendar-days"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+    
+                        <div class="font-bold ml-1"> Schedule </div>
+                      </div>
+    
+                      <!--- That code is ugly, but we need it to make at the sametime the all day labels have the same width and make the rows alternate between backgrounds -->
+                      <div class="flex w-full relative schedule h-64">
+                        <div class="absolute left-0 flex flex-col h-full justify-between">
+                          <span class="scheduleDayTag"> Lu </span>
+                          <span class="scheduleDayTag"> Ma </span>
+                          <span class="scheduleDayTag"> Me </span>
+                          <span class="scheduleDayTag"> Je </span>
+                          <span class="scheduleDayTag"> Ve </span>
+                          <span class="scheduleDayTag"> Sa </span>
+                          <span class="scheduleDayTag"> Di </span>
+                        </div>
+
+                        <div class="grow flex flex-col">
+                          <div class="absolute w-full h-full flex flex-row">
+                            <div class="dayTagSpace"></div>
+                            <div class="grow">
+                              <div id="placeInfoScheduleNowBar" class="relative h-full w-[1.5px] bg-primary"></div>
+                            </div>
+                          </div>
+
+                          <div class="scheduleRow"> <div class="dayTagSpace"></div> <div class="grow flex flex-row" id="placeInfoScheduleRow1"></div> </div>
+                          <div class="scheduleRow"> <div class="dayTagSpace"></div> <div class="grow flex flex-row" id="placeInfoScheduleRow2"></div> </div>
+                          <div class="scheduleRow"> <div class="dayTagSpace"></div> <div class="grow flex flex-row" id="placeInfoScheduleRow3"></div> </div>
+                          <div class="scheduleRow"> <div class="dayTagSpace"></div> <div class="grow flex flex-row" id="placeInfoScheduleRow4"></div> </div>
+                          <div class="scheduleRow"> <div class="dayTagSpace"></div> <div class="grow flex flex-row" id="placeInfoScheduleRow5"></div> </div>
+                          <div class="scheduleRow"> <div class="dayTagSpace"></div> <div class="grow flex flex-row" id="placeInfoScheduleRow6"></div> </div>
+                          <div class="scheduleRow"> <div class="dayTagSpace"></div> <div class="grow flex flex-row" id="placeInfoScheduleRow7"></div> </div>
+                        </div>
                       </div>
                     </div>
-                    <hr />
-                    <a
-                      id="popup-card-link"
-                      class="btn btn-primary flex justify-center"
-                      >Voir</a
-                    >
+    
+                    <!-- Recommendations Section -->
+                    <div class="text-wrap px-2 py-2">
+                      <div class="flex flex-row pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info-icon lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    
+                        <div class="font-bold ml-1" id="placeInfoTipsAndTopsTitle"> Tips </div>
+                      </div>
+    
+                      <div id="placeInfoTips"></div>
+                      <div id="placeInfoTops" class="py-2"></div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-      <div id="filter-modal" class="modal">
-        <div class="modal-content">
-          <span class="close-button">&times;</span>
-          {{ partial "components/crieur-filters.html" . }}
-        </div>
       </div>
-      <section class="section p-0 bg-gradient-reverse">
-        <div id="crieurTop" class="col-12 p-5">
-          <h1 class="mx-4 mt-5 text-center font-tertiary font-extrabold">
-            {{ .Title }}
-          </h1>
-        </div>
-      </section>
+  
+      <!-- Main layer -->
+      <div class="relative flex flex-row max-sm:flex-col-reverse w-full h-full overflow-hidden z-0">
+        <!-- Note on canvas shift when opening/closing the search menu:
+          The most sensible way of doing this is by adding a space and make it grow and shrink depending
+          on if the search menu is open or closed. The problem with that approach is that the size of the
+          canvas changes continously because of the duration-150. This makes maplibre update the map again
+          and again, which visually is not smooth.
+
+          So what i did instead is that i shift the canvas position instead of changing it's size. That way
+          maplibre doesn't have to update the map. However that means that we could draw pixel that aren't
+          visible, but that's small compared the to the size of the screen, so i think it's fine for the time
+          being.
+
+          The space div is used for the mobile mode, to avoid drawing pixels that will never be visible. Note
+          that it's size is constant.
+        -->
+        
+        <!-- Space for mobile mode -->
+        <div class="max-sm:block hidden w-0 max-sm:h-1/4 shrink-0"></div>
+        
+        <!-- .maplibregl-canvas-container represent the div which contains the canvas with all the
+         markers but without the controls (which are contained in maplibregl-control-container) -->
+        
+        <!-- Map Interface -->
+        <div id="map" 
+          class="h-screen-with-pad w-full grow shrink top-0
+          [&_.maplibregl-canvas]:outline-none
+
+          [&_.maplibregl-canvas-container]:relative 
+          [&_.maplibregl-canvas-container]:top-0
+          max-sm:group-has-[#searchmenu-toggle-inner:checked]:[&_.maplibregl-canvas-container]:-top-1/3 
+          [&_.maplibregl-canvas-container]:left-0
+          sm:group-has-[#searchmenu-toggle-inner:checked]:[&_.maplibregl-canvas-container]:left-[12rem]
+          [&_.maplibregl-canvas-container]:duration-150
+
+          sm:group-has-[#searchmenu-toggle-inner:checked]:[&_.maplibregl-ctrl-top-left]:left-96
+          [&_.maplibregl-ctrl-top-left]:left-0
+          sm:group-has-[.crieur-info-shown]:[&_.maplibregl-ctrl-top-left]:left-12
+          [&_.maplibregl-ctrl-top-left]:duration-150
+          
+          sm:group-has-[#searchmenu-toggle-inner:checked]:[&_.maplibregl-ctrl-bottom-left]:left-96
+          sm:group-has-[.crieur-info-shown]:[&_.maplibregl-ctrl-bottom-left]:left-12
+          [&_.maplibregl-ctrl-bottom-left]:left-0
+          [&_.maplibregl-ctrl-bottom-left]:duration-150
+          "
+        ></div>
+      </div>
     </div>
-
-    {{ $paginator := $.Paginate (where .Site.RegularPages "Type" "crieur") 200 }}
-
-
-    <!-- Slider -->
-    <section class="section p-0 bg-gradient">
-      <div class="container px-10">
-        <div class="row">
-          <div class="col-12">
-            <div class="swiper crieur-slider">
-              <div class="swiper-wrapper">
-                {{ range $paginator.Pages }}
-                  <div class="swiper-slide">
-                    {{ partial "components/crieur-card" . }}
-                  </div>
-                {{ end }}
-              </div>
-              <div
-                class="crieur-slider-pagination mt-9 flex items-center justify-center text-center"
-              ></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- /Slider -->
-
-    {{ with .Params.sections }}
-      {{ range $i, $section := . }}
-        <section
-          class="section-sm py-2{{ if not (modBool $i 2) }}
-            bg-gradient
-          {{ else if (ne $i (sub (len $.Params.sections) 1) ) }}
-            bg-gradient-reverse
-          {{ end }}"
-        >
-          <div class="container px-10">
-            <div class="row items-center justify-between">
-              <div
-                class="mb:md-0 {{ if not (modBool $i 2) }}
-                  md:order-2
-                {{ end }} md:col-5 mb-6"
-              >
-                {{ partial "image" (dict "Src" .image "Alt" .imagealt) }}
-              </div>
-              <div
-                class="content {{ if not (modBool $i 2) }}
-                  md:order-1
-                {{ end }} md:col-7 lg:col-6"
-              >
-                <h2 class="mb-4 font-tertiary font-extrabold">
-                  {{ .title | markdownify }}
-                </h2>
-                <p class="mb-8 text-lg">
-                  {{ .content | markdownify }}
-                </p>
-                <ul class="list-none">
-                  {{ range .bulletpoints }}
-                    <li class="relative mb-4 pl-6">
-                      <i class="fa fa-check absolute left-0 top-1.5"></i>
-                      {{ .name | markdownify }}
-                      {{ if .list }}
-                        <ul class="list-none">
-                          {{ range .list }}
-                            <li class="relative mb-4">
-                              {{ . | markdownify }}
-                            </li>
-                          {{ end }}
-                        </ul>
-                      {{ end }}
-                    </li>
-                  {{ end }}
-                </ul>
-                <p class="mb-8 text-lg">
-                  {{ .alert | markdownify }}
-                </p>
-                {{ with .button }}
-                  {{ if .enable }}
-                    <a class="btn btn-primary mt-6" href="{{ .link | absURL }}">
-                      {{ .label }}
-                      <i class="fa fa-arrow-right pl-2"></i>
-                    </a>
-                  {{ end }}
-                {{ end }}
-              </div>
-            </div>
-          </div>
-        </section>
-      {{ end }}
-    {{ end }}
-
-    {{ .Content }}
   {{ end }}
 {{ end }}

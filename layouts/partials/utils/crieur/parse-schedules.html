@@ -1,0 +1,39 @@
+{{- $schedule := .schedule -}}
+{{- if ne ($schedule | len) 7 -}}
+  {{- errorf "Assertion failed: schedule entries must have 7 entries" -}}
+{{- end -}}
+
+{{- $parsedScheduleSlice := slice -}}
+{{- range $scheduleDay := $schedule -}}
+  {{- $parsedScheduleDaySlice := slice -}}
+  {{- if $scheduleDay.openingHours -}}
+    {{- range $timeSpan := $scheduleDay.openingHours -}}
+      {{- $start := partial "utils/crieur/parse-hour.html" (dict "string" $timeSpan.start) -}}
+      {{- $end := partial "utils/crieur/parse-hour.html" (dict "string" $timeSpan.end) -}}
+
+      {{- if eq (len $parsedScheduleDaySlice) 0 -}}
+        {{- $parsedScheduleDaySlice = slice (slice $start $end) -}}
+      {{- else }}
+        {{- $parsedScheduleDaySlice = $parsedScheduleDaySlice | append (slice $start $end) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  <!-- To explain a little what's happening here : Hugo by default initialize the slice with the []interface{} type
+    from my understanding, and then it's supposed to update it's type to the type of the slice it receive. However that's
+    doesn't work in my case, and so appending $parseScheduleDaySlice causes issues. 
+    So what i do is i create an empty slice of the type i need. That way, appending slices work without issues.
+   -->
+  {{- $sliceToAppend := slice (slice (slice 0 0) (slice 0 0)) | first 0 -}}
+  {{- if ne (len $parsedScheduleDaySlice) 0 -}}
+    {{- $sliceToAppend = $parsedScheduleDaySlice -}}
+  {{- end -}}
+  {{- if eq (len $parsedScheduleSlice) 0 -}}
+    {{- $parsedScheduleSlice = slice ($sliceToAppend) -}}
+  {{- else }}
+    {{- $parsedScheduleSlice = $parsedScheduleSlice | append (($sliceToAppend)) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $parsedScheduleSlice -}}
+

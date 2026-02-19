@@ -1,41 +1,45 @@
 <!-- Help the browser prioritize those resources -->
-<link rel="preload" as="image" href="{{ "images/map_marker.png" | absURL }}"></link>
-<link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/ol@10.7.0/dist/ol.min.js"></link>
-<link rel="preload" as="script" href="https://code.jquery.com/jquery-3.6.0.min.js"></link>
+<link rel="preconnect" as="script" href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></link>
+<script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js" fetchpriority="high"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/ol@10.7.0/dist/ol.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{ $styles := slice (resources.Get "scss/css/maplibregl.css") }}
+{{ $styles := $styles | resources.Concat "css/crieur.css" }}
+<style>
+  {{ $styles.Content | safeCSS }}
+</style>
 
 <!-- crieur map -->
-{{ $crieur := resources.Get "js/map.js" }}
+{{ $crieur := slice }}
+{{ $crieur := $crieur | append (resources.Get "js/crieur/utils.js") }}
+{{ $crieur := $crieur | append (resources.Get "js/crieur/uiUtils.js") }}
+{{ $crieur := $crieur | append (resources.Get "js/crieur/map.js") }}
+{{ $crieur := $crieur | append (resources.Get "js/crieur/status-indicator.js") }}
+{{ $crieur := $crieur | append (resources.Get "js/crieur/main.js") }}
+{{ $crieur := $crieur | append (resources.Get "js/crieur/ui.js") }}
+{{ $crieur := $crieur | resources.Concat "js/js.js" }}
 {{ if hugo.IsProduction }}
   {{ $crieur = $crieur | minify | fingerprint }}
 {{ end }}
+
 <script
   crossorigin="anonymous"
   integrity="{{ $crieur.Data.Integrity }}"
   src="{{ $crieur.RelPermalink }}"
-  defer
 ></script>
 
-<script type="text/javascript">
-  {{ $config := index $.Site.Data "config-crieur" | default (dict) }}
+<script type="text/javascript" defer async>
+  {{ partial "utils/crieur/validate-map-data-for-js.html" . }}
 
-  const CRIEUR_CONFIG = {{ $config }};
+  const CRIEUR_CONFIG = {{ partial "utils/crieur/get-map-config.html" . | safeJS }};
 
-  // list all pages of type "crieur"
-  const CRIEUR_PLACES = [
-    {{ with $.Site.GetPage "crieur" }}
-  {{ $places := .Pages }}
-    {{ range $i, $place := $places }}
-      {{ $originalPlace := $place.Params }}
-      {{ $placeWithUrl := dict "url" ($place.RelPermalink | relURL ) }}
-      {{ $place = merge $originalPlace $placeWithUrl }}
-      {{ $place }},
-    {{ end }}
+  const CRIEUR_PLACES = {{ partial "utils/crieur/get-map-data.html" (dict "path" "crieur/places" "scope" .) | jsonify | safeJS }};
+  const CRIEUR_DECO = {{ partial "utils/crieur/get-map-data.html" (dict "path" "crieur/deco" "scope" .) | jsonify | safeJS }};
+
+  {{ with resources.Get "js/crieur/map-style.json" }}
+    const STYLE = {{ .Content | safeJS }};
   {{ end }}
-  ];
 
-  const MAP_MARKER = '{{ "images/map_marker.png" | absURL }}';
-
+  document.addEventListener("DOMContentLoaded", () => {
+    init(CRIEUR_CONFIG, CRIEUR_PLACES, CRIEUR_DECO, STYLE)
+  })
 </script>
