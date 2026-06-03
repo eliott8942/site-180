@@ -63,6 +63,10 @@
 
         {{ if not .thumbnail }}
           {{ warnf "%s:%s" $place "Missing thumbnail" }}
+        {{ else }}
+          {{ if hasPrefix .thumbnail "/" }}
+            {{ warnf "%s:%s" $place "Thumbnail path starts with a /" }}
+          {{ end }}
         {{ end }}
 
         {{ if .links }}
