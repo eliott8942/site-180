@@ -74,7 +74,13 @@
       {{ range site.Menus.main }}
         {{ $menuURL := .URL | absLangURL }}
         {{ $pageURL:= $currentPage.Permalink | absLangURL }}
-        {{ $active := eq $menuURL $pageURL }}
+
+        {{ $active := hasPrefix $pageURL $menuURL }}
+        <!-- If the menu url is the home url ("/") check for strict equality -->
+        {{ if eq (.URL | relLangURL) "/" }}
+          {{ $active = eq $pageURL $menuURL }}
+        {{ end }}
+        
         {{ if .HasChildren }}
           <li class="nav-item nav-dropdown group relative">
             <span
