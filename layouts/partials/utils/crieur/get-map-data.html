@@ -30,7 +30,7 @@
         {{ $imageURL := $top.photo | relURL }}
 
         <!-- Make sure the images are included in the build -->
-        {{ with resources.Get $imageURL }}
+        {{ with resources.Get $top.photo }}
           {{ .Publish }}
         {{ end }}
 
