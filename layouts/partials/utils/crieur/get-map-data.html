@@ -5,7 +5,7 @@
   {{ $places := .Pages }}
   {{ range $i, $place := $places }}
     {{ $originalPlace := $place.Params }}
-    {{ $placeWithUrl := dict "url" ($place.RelPermalink | absURL ) }}
+    {{ $placeWithUrl := dict "url" ($place.RelPermalink | relURL ) }}
 
     <!-- Replace images path by absolute ones -->
     {{ $imageNames := slice "thumbnail" "banner" "image" }}
@@ -27,7 +27,7 @@
     {{ if $tops }}
       {{ $processedTops := slice }}
       {{ range $top := $tops }}
-        {{ $imageURL := $top.photo | absURL }}
+        {{ $imageURL := $top.photo | relURL }}
 
         <!-- Make sure the images are included in the build -->
         {{ with resources.Get $imageURL }}
