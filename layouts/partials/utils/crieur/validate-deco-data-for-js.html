@@ -1,0 +1,26 @@
+{{ with .Site.GetPage "crieur/deco" }}
+  {{ range $i, $place := .Pages }}
+    {{ if not (eq $place.File.BaseFileName "_index") }}
+      {{ with $place.Params }}
+        {{ if not .title }}
+          {{ errorf "%s:%s" $place "Missing title" }}
+        {{ end }}
+
+        {{ if not .location }}
+          {{ errorf "%s:%s" $place "Missing location" }}
+        {{ else }}
+          {{ if not .location.latitude }}
+            {{ errorf "%s:%s" $place "Missing location.latitude" }}
+          {{ end }}
+          {{ if not .location.longitude }}
+            {{ errorf "%s:%s" $place "Missing location.logitude" }}
+          {{ end }}  
+        {{ end }}
+
+        {{ if not .color }}
+          {{ errorf "%s:%s" $place "Missing color" }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}

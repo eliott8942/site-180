@@ -56,10 +56,10 @@ function initMap(config, placeData, decoData, style) {
       // console.log(deco);
 
       const element = div([
-        div([], [], {
+        div([deco.title], [], {
           className: 'crieur-deco',
           style: {
-            backgroundImage: `url(${deco.image})`
+            color: `${deco.color}`
           }
         })
       ])

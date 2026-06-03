@@ -1,8 +1,5 @@
 .crieur-deco {
-  width: 30px;
-  height: 30px;
-
-  @apply bg-no-repeat bg-center bg-contain
+  @apply font-bold;
 }
 
 .crieur-place {
@@ -125,7 +122,7 @@
     @apply text-center;
 
     &:hover {
-      @apply underline 
+      @apply underline
     }
   }
 
