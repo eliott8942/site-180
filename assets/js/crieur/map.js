@@ -254,8 +254,8 @@ class HelpControl {
   onAdd(map) {
     this._map = map
     this._element = div([
-      label([], "infopanel-toggle-inner")
-    ], ["toggle", "maplibregl-ctrl", "maplibregl-ctrl-help", "w-6", "aspect-square", "bg-white", "rounded-full"])
+      label(["?"], "infopanel-toggle-inner")
+    ], ["toggle", "maplibregl-ctrl", "maplibregl-ctrl-help", "h-6", "aspect-square", "bg-white", "rounded-full", "font-bold", "text-lg"])
 
     return this._element;
   }
