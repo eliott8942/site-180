@@ -163,7 +163,9 @@ function setupPlaceMarkers(placeData) {
                 ])
 
                 element.onclick = () => {
-                  MAP.flyTo({ center: coords, zoom: zoom + 1 })
+                  const z = Math.min(MAP.getZoom(), zoom + 1)
+                  
+                  MAP.flyTo({ center: coords, zoom: z })
                 }
 
                 return element
