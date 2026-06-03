@@ -84,10 +84,10 @@ body:has(#nav-toggle input[type="checkbox"]:checked) .header-dim {
 // }
 
 .nav-link {
-  @apply text-dark hover:text-dark dark:text-darkmode-dark block p-3 font-semibold transition lg:px-2 lg:py-3;
+  @apply text-dark hover:text-primary dark:text-darkmode-dark block p-3 font-semibold transition lg:px-2 lg:py-3;
 }
 .nav-link-active {
-  color: rgb(239, 68, 68);
+  @apply underline decoration-primary decoration-2 underline-offset-4
 }
 
 .nav-dropdown {
