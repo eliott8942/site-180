@@ -44,7 +44,7 @@ style: Traiteur vietnamien et supermarché asiatique
 tags:
 - takeaway
 - vege
-thumbnail: /images/crieur/fleur-asie/fleur-asie-banner.jpg
+thumbnail: images/crieur/fleur-asie/fleur-asie-banner.jpg
 title: Fleur d'Asie
 types:
 - traiteur

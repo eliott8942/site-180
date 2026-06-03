@@ -52,7 +52,7 @@ style: Pizzeria
 tags:
 - takeaway
 - vege
-thumbnail: /images/crieur/slice-pizza/slice-front.jpg
+thumbnail: images/crieur/slice-pizza/slice-front.jpg
 title: Slice Pizza
 types:
 - restaurant

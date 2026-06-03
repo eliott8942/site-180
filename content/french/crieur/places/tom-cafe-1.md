@@ -46,7 +46,7 @@ tags:
 - takeaway
 - vege
 - vegan
-thumbnail: /images/crieur/tom-cafe/tom-cafe-banner.png
+thumbnail: images/crieur/tom-cafe/tom-cafe-banner.png
 tips: Il y plat du jour à un prix avantageux + un snack-bar qui propose des plats
   et des boissons à déguster sur place ou à emporter (moins chers)
 title: Tom Café

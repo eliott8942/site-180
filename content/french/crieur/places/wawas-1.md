@@ -58,7 +58,7 @@ tags:
 - vege
 - takeaway
 - delivery
-thumbnail: /images/crieur/wawas/wawas-front.jpg
+thumbnail: images/crieur/wawas/wawas-front.jpg
 tips: 10% sur toutes les commandes à emporter
 title: Wawa's
 types:

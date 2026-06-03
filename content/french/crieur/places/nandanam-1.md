@@ -54,7 +54,7 @@ style: Indien
 tags:
 - takeaway
 - vege
-thumbnail: /images/crieur/nandanam/nandanam-front.jpg
+thumbnail: images/crieur/nandanam/nandanam-front.jpg
 title: Nandanam
 types:
 - restaurant

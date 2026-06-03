@@ -48,7 +48,7 @@ priceTag: 3
 style: Bistro
 tags:
 - vege
-thumbnail: /images/crieur/legram/legram.png
+thumbnail: images/crieur/legram/legram.png
 title: Legram
 types:
 - restaurant

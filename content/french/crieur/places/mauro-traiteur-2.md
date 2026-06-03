@@ -46,7 +46,7 @@ style: Traiteur italien
 tags:
 - takeaway
 - vege
-thumbnail: /images/crieur/mauro-traiteur/mauro-banner.jpg
+thumbnail: images/crieur/mauro-traiteur/mauro-banner.jpg
 title: Mauro Traiteur
 types:
 - traiteur

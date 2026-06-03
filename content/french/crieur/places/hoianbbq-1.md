@@ -63,7 +63,7 @@ tags:
 - vege
 - takeaway
 - delivery
-thumbnail: /images/crieur/hoianbbq/hoianbbq-front.jpg
+thumbnail: images/crieur/hoianbbq/hoianbbq-front.jpg
 title: Hoi An BBQ
 types:
 - restaurant

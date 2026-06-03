@@ -43,7 +43,7 @@ style: Cuisine traditionelle
 tags:
 - vege
 - vegan
-thumbnail: /images/crieur/lesquisse/lesquisse-front.jpg
+thumbnail: images/crieur/lesquisse/lesquisse-front.jpg
 title: L'Esquisse
 types:
 - restaurant

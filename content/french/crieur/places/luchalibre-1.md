@@ -51,7 +51,7 @@ tags:
 - vege
 - takeaway
 - delivery
-thumbnail: /images/crieur/luchalibre/luchalibre-front.jpg
+thumbnail: images/crieur/luchalibre/luchalibre-front.jpg
 title: Lucha Libre
 types:
 - restaurant

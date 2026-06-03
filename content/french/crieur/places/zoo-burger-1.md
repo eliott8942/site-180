@@ -62,7 +62,7 @@ tags:
 - vege
 - takeaway
 - delivery
-thumbnail: /images/crieur/zoo-burger/zoo-burger-front.jpeg
+thumbnail: images/crieur/zoo-burger/zoo-burger-front.jpeg
 title: Zoo Burger
 types:
 - restaurant
