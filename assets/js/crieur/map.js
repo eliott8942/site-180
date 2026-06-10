@@ -265,3 +265,31 @@ class HelpControl {
     this._map = undefined
   }
 }
+
+function selectPlaceOnMap(placeData, id, mode) {
+  if (MAP == undefined) {
+    console.warn("Warning : map has not been loaded.")
+  } else {
+    switch (mode) {
+      case 'fromCard':
+        MAP.flyTo({
+          center: [placeData.location.longitude, placeData.location.latitude],
+          zoom: 17,
+        })
+        
+        break;
+
+      case 'fromPlace':
+        MAP.flyTo({
+          center: [placeData.location.longitude, placeData.location.latitude],
+        })
+
+        break;
+    
+      default:
+        console.warn(`Warning : unknown mode ${mode}`)
+
+        break;
+    }
+  }
+}
