@@ -82,13 +82,13 @@ function initMap(config, placeData, decoData, style) {
       })
     })
 
-    setupPlaceMarkers(placeData)
+    initPlaceMarkers(placeData)
   })
 
   console.log("Done.")
 }
 
-function setupPlaceMarkers(placeData) {
+function initPlaceMarkers(placeData) {
   // convert the data to geosource. this is needed for clustering
   MAP.addSource('places', {
     type: 'geojson',
