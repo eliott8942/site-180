@@ -3,7 +3,7 @@
   <link rel="preconnect" as="script" href="{{ .RelPermalink }}"></link>
   <script src="{{ .RelPermalink }}" fetchpriority="high"></script>
 {{ end }}
-{{ with (resources.Get "scss/css/maplibregl.css" | css.PostCSS | minify | fingerprint) }}
+{{ with (resources.Get "scss/css/maplibregl.css" | minify | fingerprint) }}
   <link rel="stylesheet" href="{{ .RelPermalink }}"></link>
   <style href="{{ .RelPermalink }}" fetchpriority="high"></style>
 {{ end }}
