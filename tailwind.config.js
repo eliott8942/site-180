@@ -44,9 +44,9 @@ module.exports = {
     // scan the hugo stats to scan html
     "./hugo_stats.json",
 
-    // scan the js files since tailwindcss classes are also used here
-    "./assets/js/**/*.js",
-    "./static/js/**/*.js"
+    // scan the crieur js files since tailwindcss classes are also used here
+    "./assets/js/crieur/*.js",
+    "./static/js/crieur/*.js"
   ],
   extract: {
     // Custom extractor for JS — captures strings inside quotes, backticks, and dot notation
