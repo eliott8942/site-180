@@ -10,9 +10,9 @@ function subModulo(a, b, c) {
   return r
 }
 
-function applyStatus(spanID, scheduleArray) {
-  let span = document.getElementById(spanID)
-  if (span == undefined) {
+function createStatusSpan(scheduleArray) {
+  let spanEl = span([])
+  if (spanEl == undefined) {
     console.log("Warning : the id points to nothing")
     return;
   }
@@ -58,19 +58,21 @@ function applyStatus(spanID, scheduleArray) {
 
   if (isOpen) {
     if (closeSoon) {
-      span.innerText = "Ferme bientot";
-      span.classList.add("crieur-status-close-soon");
+      spanEl.innerText = "Ferme bientot";
+      spanEl.classList.add("crieur-status-close-soon");
     } else {
-      span.innerText = "Ouvert";
-      span.classList.add("crieur-status-open");
+      spanEl.innerText = "Ouvert";
+      spanEl.classList.add("crieur-status-open");
     }
   } else {
     if (openSoon) {
-      span.innerText = "Ouvre bientot";
-      span.classList.add("crieur-status-open-soon");
+      spanEl.innerText = "Ouvre bientot";
+      spanEl.classList.add("crieur-status-open-soon");
     } else {
-      span.innerText = "Fermé";
-      span.classList.add("crieur-status-closed");
+      spanEl.innerText = "Fermé";
+      spanEl.classList.add("crieur-status-closed");
     }
   }
+
+  return spanEl
 }
