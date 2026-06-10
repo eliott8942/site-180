@@ -104,7 +104,7 @@
     @apply pl-3;
 
     & .price {
-      @apply absolute top-0 -translate-y-1/2 max-w-14 aspect-square bg-primary rounded-full flex justify-center items-center p-1 text-xs text-white text-center font-bold
+      @apply absolute top-0 -translate-y-1/2 w-[4.5rem] aspect-square flex justify-center items-center p-1 text-xs text-white text-center font-bold
     }
 
     & .title {
