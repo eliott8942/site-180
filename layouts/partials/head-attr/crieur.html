@@ -8,7 +8,16 @@
   {{ $styles.Content | safeCSS }}
 </style>
 
-<!-- crieur map -->
+<!-- main application logic -->
+{{ with (resources.Get "scss/crieur.scss" | toCSS | css.PostCSS | minify | fingerprint) }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}"></link>
+  <style href="{{ .RelPermalink }}" fetchpriority="high"></style>
+{{ end }}
+{{ with (resources.Get "scss/crieurIcons.scss" | toCSS | css.PostCSS | minify | fingerprint) }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}"></link>
+  <style href="{{ .RelPermalink }}" fetchpriority="high"></style>
+{{ end }}
+
 {{ $crieur := slice }}
 {{ $crieur := $crieur | append (resources.Get "js/crieur/utils.js") }}
 {{ $crieur := $crieur | append (resources.Get "js/crieur/uiUtils.js") }}
