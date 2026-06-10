@@ -40,7 +40,28 @@ if (theme.fonts.font_family.tertiary) {
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./hugo_stats.json"],
+  content: [
+    // scan the hugo stats to scan html
+    "./hugo_stats.json",
+
+    // scan the js files since tailwindcss classes are also used here
+    "./assets/js/**/*.js",
+    "./static/js/**/*.js"
+  ],
+  extract: {
+    // Custom extractor for JS — captures strings inside quotes, backticks, and dot notation
+    js: (content) => {
+      const matches = content.matchAll(
+        /['"` ]([a-zA-Z0-9_-]+(?:\s+[a-zA-Z0-9_-]+)*)['"` ]/g
+      );
+      const classes = [];
+      for (const match of matches) {
+        // Split space-separated class strings like "text-red-500 font-bold"
+        classes.push(...match[1].split(/\s+/));
+      }
+      return classes;
+    },
+  },
   safelist: [{ pattern: /^swiper-/ }],
   darkMode: "class",
   theme: {
