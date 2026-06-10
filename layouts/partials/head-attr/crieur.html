@@ -1,6 +1,12 @@
-<!-- Help the browser prioritize those resources -->
-<link rel="preconnect" as="script" href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></link>
-<script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js" fetchpriority="high"></script>
+<!-- libraries -->
+{{ with resources.Get "js/crieur/lib/maplibregl.js" }}
+  <link rel="preconnect" as="script" href="{{ .RelPermalink }}"></link>
+  <script src="{{ .RelPermalink }}" fetchpriority="high"></script>
+{{ end }}
+{{ with (resources.Get "scss/css/maplibregl.css" | css.PostCSS | minify | fingerprint) }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}"></link>
+  <style href="{{ .RelPermalink }}" fetchpriority="high"></style>
+{{ end }}
 
 {{ $styles := slice (resources.Get "scss/css/maplibregl.css") }}
 {{ $styles := $styles | resources.Concat "css/crieur.css" }}
