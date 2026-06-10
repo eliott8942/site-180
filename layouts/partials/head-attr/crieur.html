@@ -8,11 +8,10 @@
   <style href="{{ .RelPermalink }}" fetchpriority="high"></style>
 {{ end }}
 
-{{ $styles := slice (resources.Get "scss/css/maplibregl.css") }}
-{{ $styles := $styles | resources.Concat "css/crieur.css" }}
-<style>
-  {{ $styles.Content | safeCSS }}
-</style>
+{{ with resources.Get "js/crieur/lib/fuse.js" }}
+  <link rel="preconnect" as="script" href="{{ .RelPermalink }}"></link>
+  <script src="{{ .RelPermalink }}" fetchpriority="high" type="module"></script>
+{{ end }}
 
 <!-- main application logic -->
 {{ with (resources.Get "scss/crieur.scss" | toCSS | css.PostCSS | minify | fingerprint) }}
@@ -31,6 +30,7 @@
 {{ $crieur := $crieur | append (resources.Get "js/crieur/status-indicator.js") }}
 {{ $crieur := $crieur | append (resources.Get "js/crieur/main.js") }}
 {{ $crieur := $crieur | append (resources.Get "js/crieur/ui.js") }}
+{{ $crieur := $crieur | append (resources.Get "js/crieur/search.js") }}
 {{ $crieur := $crieur | resources.Concat "js/js.js" }}
 {{ if hugo.IsProduction }}
   {{ $crieur = $crieur | minify | fingerprint }}

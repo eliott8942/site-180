@@ -1,10 +1,13 @@
 PLACE_DATA = null
 
 function init(config, placeData, decoData, style) {
+  placeData = assignIds(placeData)
+  
   PLACE_DATA = placeData
   
   initMap(config, placeData, decoData, style)
-  uiInit()
+  uiInit(placeData)
+  initSearch(placeData)
 
   // fold the search menu on mobile to make the attribution visible on first view
   if (document.documentElement.clientWidth <= 520) {

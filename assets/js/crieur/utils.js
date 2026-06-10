@@ -69,3 +69,7 @@ function getDayInTimeOffset(timeOffset) {
   const local = new Date()
   return new Date(local.getTime() + (local.getTimezoneOffset() + hourTupleToMinutes(timeOffset)) * 60000)
 }
+
+function assignIds(array, getId = (_, i) => i) {
+  return array.map((item, i) => ({ ...item, id: getId(item, i) }));
+}

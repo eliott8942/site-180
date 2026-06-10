@@ -1,4 +1,6 @@
-function uiInit() {
+let CARDS_CACHE = []
+
+function uiInit(placeData) {
   console.log("Initialize ui...")
 
   let tuple = getElementForEachId("searchMenuPanelContainer", "placeInfoScrollableContainer", "placeInfoTitle", "placeInfoTitleInHeader")
@@ -26,6 +28,11 @@ function uiInit() {
     }
   )
   observer.observe(placeInfoTitle)
+
+  for (const place of placeData) {
+    CARDS_CACHE.push(createEntryCard(place))
+  }
+  updateCards()
 
   console.log("Done")
 }
@@ -263,4 +270,38 @@ function closePanelInfo() {
   panelContainer.style.left = "0%";
   container.classList.remove("crieur-info-shown");
   inputHeader.classList.remove("crieur-info-shown");
+}
+
+function createEntryCard(placeInfo) {
+  return div([
+    // image
+    div([
+      img(placeInfo.thumbnail, ["h-full", "aspect-square", "object-cover", "rounded-md"])
+    ], ["w-28", "overflow-hidden", "p-3", "shrink-0"]),
+
+    // metadata
+    div([
+      el("h5", [placeInfo.title]),
+
+      // type
+      div([
+        // types
+        span([placeInfo.types.join(", ")]),
+        span([' ‧ ']),
+        span([placeInfo.price]),
+        span([' ‧ ']),
+        span([placeInfo.location.address.address]),
+        span([' ‧ ']),
+        createStatusSpan(placeInfo.location.schedule)
+      ])
+    ], ["py-3"])
+  ], ["max-h-28", "w-full", "flex", "shrink-0", "flex-row", "overflow-hidden", "first:border-0", "border-t", "hover:bg-gray-100", "cursor-pointer", "unselectable"], { onclick: () => showPlace(placeInfo.id, 'fromCard') })
+}
+
+function updateCards(newCards = CARDS_CACHE) {
+  let tuple = getElementForEachId("searchMenuCardContainer")
+  if (tuple == undefined) { return }
+  let [cardContainer] = tuple
+
+  cardContainer.replaceChildren(...newCards)
 }
