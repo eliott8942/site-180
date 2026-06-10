@@ -317,5 +317,17 @@ function updateCards(newCards = CARDS_CACHE) {
   if (tuple == undefined) { return }
   let [cardContainer] = tuple
 
-  cardContainer.replaceChildren(...newCards)
+  if (newCards.length == 0) {
+    cardContainer.replaceChildren(queryNotFound())
+  } else {
+    cardContainer.replaceChildren(...newCards)
+  }
+}
+
+function queryNotFound() {
+  return div([
+    span(["🍳"], ["text-[4rem]"]),
+    el("h1", ["Oh... on dirais que la page que tu cherches n'est pas la !"], ["h3", "mt-2", "text-center", "px-8"]),
+    span(["Peut etre cherche autre chose ?"], ["font-bold", "text-lg", "pt-2"])
+  ], ["h-80", "w-full", "flex", "items-center", "justify-center", "flex-col"])
 }
