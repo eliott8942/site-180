@@ -137,8 +137,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
                 </button>
 
-                <div id="placeInfoTitleInHeader" class="absolute flex left-1/2 -translate-x-1/2 font-bold text-lg h-full items-center">
-                  Title
+                <div id="placeInfoTitleInHeader" class="absolute flex left-1/2 -translate-x-1/2 font-bold text-lg h-full items-center leading-normal">
                 </div>
               </div>
               
@@ -151,7 +150,7 @@
                     correctly
                   -->
                   <div class="flex flex-col items-center">
-                    <h4 id="placeInfoTitle" class="h-12 w-full flex items-center justify-center pt-4"></h4>
+                    <h4 id="placeInfoTitle" class="h-12 w-full flex items-center justify-center mt-2"></h4>
                   
                     <div>
                       <span id="placeInfoTypes"></span>
@@ -201,7 +200,7 @@
                       <div class="flex flex-row p-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days-icon lucide-calendar-days"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
     
-                        <div class="font-bold ml-1"> Schedule </div>
+                        <div class="font-bold ml-1"> Horaires </div>
                       </div>
     
                       <!--- That code is ugly, but we need it to make at the sametime the all day labels have the same width and make the rows alternate between backgrounds -->
@@ -217,10 +216,10 @@
                         </div>
 
                         <div class="grow flex flex-col">
-                          <div class="absolute w-full h-full flex flex-row">
+                          <div class="absolute w-full h-full flex flex-row overflow-hidden">
                             <div class="dayTagSpace"></div>
                             <div class="grow">
-                              <div id="placeInfoScheduleNowBar" class="relative h-full w-[1.5px] bg-primary"></div>
+                              <div id="placeInfoScheduleNowBar" class="relative h-full w-[2px] bg-primary"></div>
                             </div>
                           </div>
 
@@ -240,11 +239,11 @@
                       <div class="flex flex-row pb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info-icon lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
     
-                        <div class="font-bold ml-1" id="placeInfoTipsAndTopsTitle"> Tips </div>
+                        <div class="font-bold ml-1" id="placeInfoTipsAndTopsTitle"></div>
                       </div>
     
                       <div id="placeInfoTips"></div>
-                      <div id="placeInfoTops" class="py-2"></div>
+                      <div id="placeInfoTops" class="pb-2 pt-6"></div>
                     </div>
                   </div>
                 </div>
