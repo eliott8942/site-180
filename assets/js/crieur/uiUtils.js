@@ -32,6 +32,29 @@ function el(containerType, content, classList = [], attributes = {}) {
   return element
 }
 
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+function svgEl(tagName, content = [], classList = [], attributes = {}) {
+  const element = document.createElementNS(SVG_NS, tagName);
+
+  if (typeof content === "string") {
+    element.textContent = content;
+  } else {
+    element.replaceChildren(...content);
+  }
+
+  for (const [key, value] of Object.entries(attributes)) {
+    if (key === "style" && typeof value === "object") {
+      Object.assign(element.style, value);
+    } else {
+      element.setAttribute(key, value);
+    }
+  }
+
+  if (classList.length) element.classList.add(...classList);
+  return element;
+}
+
 function span(content, classList = [], attributes = {}) {
   return el("span", content, classList, attributes)
 }
