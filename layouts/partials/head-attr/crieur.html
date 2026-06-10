@@ -43,8 +43,9 @@
 ></script>
 
 <script type="text/javascript" defer async>
-  {{ partial "utils/crieur/validate-map-data-for-js.html" . }}
-  {{ partial "utils/crieur/validate-deco-data-for-js.html" . }}
+  // avoid print partials input
+  {{ $_:= partial "utils/crieur/validate-map-data-for-js.html" . }}
+  {{ $_:= partial "utils/crieur/validate-deco-data-for-js.html" . }}
 
   const CRIEUR_CONFIG = {{ partial "utils/crieur/get-map-config.html" . | safeJS }};
 
