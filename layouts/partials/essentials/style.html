@@ -48,11 +48,7 @@
 {{ $styles := $styles | resources.Concat "css/style.css" }}
 {{ $styles = $styles | css.PostCSS | minify | fingerprint }}
 {{ if hugo.IsProduction }}
-  {{ $styles = $styles | resources.ExecuteAsTemplate "css/style.css" . | resources.PostProcess }}
-{{ else }}
-  {{ $styles = $styles | resources.ExecuteAsTemplate "css/style.css" . }}
+  {{ $styles = $styles | resources.PostProcess }}
 {{ end }}
 
-<style>
-  {{ $styles.Content | safeCSS }}
-</style>
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}"></link>
