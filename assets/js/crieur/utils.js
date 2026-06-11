@@ -66,11 +66,28 @@ function differenceBetweenHoursInMinutes(hourTupleStart, hourTupleEnd) {
 }
 
 // convert local time to a specific UTC time zone
-function getDayInUTCTimeZone(timeOffset) {
+function getDayInUTCTimeZone(timeOffset, timeOffsetInDST) {
   const local = new Date()
+
+  // Source - https://stackoverflow.com/a/30280636
+  // Posted by toastrackengima, modified by community. See post 'Timeline' for change history
+  // Retrieved 2026-06-11, License - CC BY-SA 4.0
+  function isDST(d) {
+      let jan = new Date(d.getFullYear(), 0, 1).getTimezoneOffset();
+      let jul = new Date(d.getFullYear(), 6, 1).getTimezoneOffset();
+      return Math.max(jan, jul) !== d.getTimezoneOffset();    
+  }
+
+  if (isDST(local)) {
+    timeOffset = timeOffsetInDST
+  }
   return new Date(local.getTime() + (local.getTimezoneOffset() + hourTupleToMinutes(timeOffset)) * 60000)
 }
 
 function assignIds(array, getId = (_, i) => i) {
   return array.map((item, i) => ({ ...item, id: getId(item, i) }));
 }
+
+// Source - https://stackoverflow.com/a/30280636
+// Posted by toastrackengima, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-06-11, License - CC BY-SA 4.0

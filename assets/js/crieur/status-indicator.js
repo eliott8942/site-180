@@ -10,12 +10,24 @@ function subModulo(a, b, c) {
   return r
 }
 
+function isNowInHourSpan(nowInMinutes, start, end) {
+  const startMinutes = hourTupleToMinutes(start);
+  const endMinutes = hourTupleToMinutes(end);
+  const spanning = startMinutes > endMinutes;
+
+  return spanning
+    ? nowInMinutes >= startMinutes || nowInMinutes <= endMinutes
+    : nowInMinutes >= startMinutes && nowInMinutes <= endMinutes;
+}
+
 function createStatusSpan(scheduleArray) {
   if (scheduleArray.length !== 7) {
     throw new Error("assertError: scheduleArray.length != 7")
   }
 
-  const now = getDayInUTCTimeZone([1, 0]);
+  // Compute now in swiss local time (UTC+2:00), so we can compare it to our swiss based schedule
+  const now = getDayInUTCTimeZone([1, 0], [2, 0]);
+  console.log(now)
   const dayInMinutes = now.getHours() * 60 + now.getMinutes();
   const dayArray = scheduleArray[(now.getDay() + 6) % 7];
 
@@ -24,13 +36,10 @@ function createStatusSpan(scheduleArray) {
   let closeSoon = false;
 
   for (const timeSpan of dayArray) {
+    const active = isNowInHourSpan(dayInMinutes, timeSpan[0], timeSpan[1])
+
     const startMinutes = hourTupleToMinutes(timeSpan[0]);
     const endMinutes = hourTupleToMinutes(timeSpan[1]);
-    const spanning = startMinutes > endMinutes;
-
-    const active = spanning
-      ? dayInMinutes >= startMinutes || dayInMinutes <= endMinutes
-      : dayInMinutes >= startMinutes && dayInMinutes <= endMinutes;
 
     if (active) {
       isOpen = true;

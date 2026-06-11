@@ -84,8 +84,8 @@ function updateSchedule(container, hoursContainer, scheduleData) {
     return [ticks, snappedStart, endMinutes];
   }
 
-  // Compute now in swiss local time (UTC+1:00), so we can compare it to our swiss based schedule
-  let now = new Date();
+  // Compute now in swiss local time (UTC+2:00), so we can compare it to our swiss based schedule
+  let now = getDayInUTCTimeZone([1, 0], [2, 0]);
   let day = now.getDay()
   let todayInMinutes = hourTupleToMinutes([now.getHours(), now.getMinutes()])
 
