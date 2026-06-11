@@ -49,7 +49,7 @@ function updateSearch() {
     updateCards()
   } else {
     const results = FUSE.search(input.value)
-    console.log(results)
+    
     // fore some reason Fuse.js returns results with score higher than that threshold,
     // so what i did was i will filter those results out here
     updateCards(results

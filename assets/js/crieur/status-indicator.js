@@ -11,54 +11,43 @@ function subModulo(a, b, c) {
 }
 
 function createStatusSpan(scheduleArray) {
-  let spanEl = span([])
-  if (spanEl == undefined) {
-    console.log("Warning : the id points to nothing")
-    return;
+  if (scheduleArray.length !== 7) {
+    throw new Error("assertError: scheduleArray.length != 7")
   }
 
-  if (scheduleArray.length != 7) {
-    throw "assertError : scheduleArray.length != 7"
-  }
-  
-  let now = getDayInTimeOffset([1, 0]);
-  let day = now.getDay()
-  let hour = now.getHours()
-  let minutes = now.getMinutes()
-  let dayInMinutes = hour * 60 + minutes;
-
-  let dayArray = scheduleArray[day]
+  const now = getDayInUTCTimeZone([1, 0]);
+  const dayInMinutes = now.getHours() * 60 + now.getMinutes();
+  const dayArray = scheduleArray[(now.getDay() + 6) % 7];
 
   let isOpen = false;
   let openSoon = false;
   let closeSoon = false;
-  for (let index = 0; index < dayArray.length; index++) {
-    const timeSpan = dayArray[index];
-    
-    let startMinutes = hourTupleToMinutes(timeSpan[0]);
-    let endMinutes = hourTupleToMinutes(timeSpan[1]);
 
-    if (startMinutes > endMinutes) {
-      if ((startMinutes <= dayInMinutes && dayInMinutes < 1440) || (dayInMinutes <= endMinutes)) {
-        isOpen = true;
+  for (const timeSpan of dayArray) {
+    const startMinutes = hourTupleToMinutes(timeSpan[0]);
+    const endMinutes = hourTupleToMinutes(timeSpan[1]);
+    const spanning = startMinutes > endMinutes;
+
+    const active = spanning
+      ? dayInMinutes >= startMinutes || dayInMinutes <= endMinutes
+      : dayInMinutes >= startMinutes && dayInMinutes <= endMinutes;
+
+    if (active) {
+      isOpen = true;
+      if (subModulo(endMinutes, dayInMinutes, MINUTES_IN_DAY) <= 30) {
+        closeSoon = true;
       }
     } else {
-      if (startMinutes <= dayInMinutes && dayInMinutes <= endMinutes) {
-        isOpen = true;
+      if (subModulo(startMinutes, dayInMinutes, MINUTES_IN_DAY) <= 30) {
+        openSoon = true;
       }
-    }
-
-    if (subModulo(startMinutes, dayInMinutes, 1440) <= 30) {
-      openSoon = true;
-    }
-    if (subModulo(endMinutes, dayInMinutes, 1440) <= 30) {
-      closeSoon = true;
     }
   }
 
+  const spanEl = span([]);
   if (isOpen) {
     if (closeSoon) {
-      spanEl.innerText = "Ferme bientot";
+      spanEl.innerText = "Ferme bientôt";
       spanEl.classList.add("crieur-status-close-soon");
     } else {
       spanEl.innerText = "Ouvert";
@@ -66,7 +55,7 @@ function createStatusSpan(scheduleArray) {
     }
   } else {
     if (openSoon) {
-      spanEl.innerText = "Ouvre bientot";
+      spanEl.innerText = "Ouvre bientôt";
       spanEl.classList.add("crieur-status-open-soon");
     } else {
       spanEl.innerText = "Fermé";
@@ -74,5 +63,5 @@ function createStatusSpan(scheduleArray) {
     }
   }
 
-  return spanEl
+  return spanEl;
 }
