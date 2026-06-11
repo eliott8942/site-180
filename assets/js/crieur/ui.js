@@ -149,12 +149,17 @@ function updateSchedule(container, hoursContainer, scheduleData) {
 
     let openingHoursText;
     if (scheduleOfTheDay.length == 0) {
-      openingHoursText = div(["Fermé"], ["w-20", "text-xs", "flex", "items-center", "justify-center", "flex-col", "h-8"])
+      openingHoursText = div(["Fermé"], ["w-20", "text-xs", "flex", "items-center", "justify-center", "flex-col", "h-8", "text-gray-500"])
     } else {
       openingHoursText = div(scheduleOfTheDay.map(timeSpan => {
         let [start, end] = timeSpan;
+
+        if (isNowInHourSpan(todayInMinutes, start, end) && isActiveDay) {
+          return span(`${formatHour(start)} - ${formatHour(end)}`, ["font-bold"])
+        } else {
+          return span(`${formatHour(start)} - ${formatHour(end)}`, [])
+        }
         
-        return span(`${formatHour(start)} - ${formatHour(end)}`, [])
       }), ["w-20", "text-xs", "flex", "items-center", "justify-center", "flex-col", "h-8"])
     }
 
