@@ -65,7 +65,8 @@ function differenceBetweenHoursInMinutes(hourTupleStart, hourTupleEnd) {
   return end - start
 }
 
-function getDayInTimeOffset(timeOffset) {
+// convert local time to a specific UTC time zone
+function getDayInUTCTimeZone(timeOffset) {
   const local = new Date()
   return new Date(local.getTime() + (local.getTimezoneOffset() + hourTupleToMinutes(timeOffset)) * 60000)
 }

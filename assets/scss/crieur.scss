@@ -37,7 +37,11 @@
   }
 
   & .scheduleRow {
-    @apply odd:bg-gray-100 flex flex-row w-full grow;
+    @apply odd:bg-black/5 flex flex-row w-full grow items-center;
+
+    & .scheduleText {
+      @apply w-28 from-transparent to-white bg-gradient-to-r text-xs flex items-center justify-center
+    }
   }
 
   & .active {

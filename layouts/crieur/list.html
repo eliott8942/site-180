@@ -202,34 +202,35 @@
     
                         <div class="font-bold ml-1"> Horaires </div>
                       </div>
-    
-                      <!--- That code is ugly, but we need it to make at the sametime the all day labels have the same width and make the rows alternate between backgrounds -->
-                      <div class="flex w-full relative schedule h-64">
-                        <div class="absolute left-0 flex flex-col h-full justify-between">
-                          <span class="scheduleDayTag"> Lu </span>
-                          <span class="scheduleDayTag"> Ma </span>
-                          <span class="scheduleDayTag"> Me </span>
-                          <span class="scheduleDayTag"> Je </span>
-                          <span class="scheduleDayTag"> Ve </span>
-                          <span class="scheduleDayTag"> Sa </span>
-                          <span class="scheduleDayTag"> Di </span>
-                        </div>
 
-                        <div class="grow flex flex-col">
-                          <div class="absolute w-full h-full flex flex-row overflow-hidden">
-                            <div class="dayTagSpace"></div>
-                            <div class="grow">
-                              <div id="placeInfoScheduleNowBar" class="relative h-full w-[2px] bg-primary"></div>
-                            </div>
+                      <!-- Schedule -->
+                      <div class="schedule relative w-full">
+                        <!-- Hours above -->
+                        <div class="absolute left-0 top-0 flex w-full h-full">
+                          <div class="dayTagSpace"></div>
+                          <div id="placeInfoScheduleHourBarsContainer" class="grow relative"></div>
+
+                          <!-- That space should match the one of the hour text aside the bars -->
+                          <div class="w-20"></div>
+                        </div>
+                          
+                        <div class="h-4"></div>
+
+                        <div class="flex w-full relative h-64">
+
+                          <!-- Day tags -->
+                          <div class="absolute left-0 top-0 flex flex-col h-full justify-between z-20">
+                            <span class="scheduleDayTag"> Lu </span>
+                            <span class="scheduleDayTag"> Ma </span>
+                            <span class="scheduleDayTag"> Me </span>
+                            <span class="scheduleDayTag"> Je </span>
+                            <span class="scheduleDayTag"> Ve </span>
+                            <span class="scheduleDayTag"> Sa </span>
+                            <span class="scheduleDayTag"> Di </span>
                           </div>
 
-                          <div class="scheduleRow"> <div class="dayTagSpace"></div> <div class="grow flex flex-row" id="placeInfoScheduleRow1"></div> </div>
-                          <div class="scheduleRow"> <div class="dayTagSpace"></div> <div class="grow flex flex-row" id="placeInfoScheduleRow2"></div> </div>
-                          <div class="scheduleRow"> <div class="dayTagSpace"></div> <div class="grow flex flex-row" id="placeInfoScheduleRow3"></div> </div>
-                          <div class="scheduleRow"> <div class="dayTagSpace"></div> <div class="grow flex flex-row" id="placeInfoScheduleRow4"></div> </div>
-                          <div class="scheduleRow"> <div class="dayTagSpace"></div> <div class="grow flex flex-row" id="placeInfoScheduleRow5"></div> </div>
-                          <div class="scheduleRow"> <div class="dayTagSpace"></div> <div class="grow flex flex-row" id="placeInfoScheduleRow6"></div> </div>
-                          <div class="scheduleRow"> <div class="dayTagSpace"></div> <div class="grow flex flex-row" id="placeInfoScheduleRow7"></div> </div>
+                          <!-- Schedules bars and text -->
+                          <div class="grow flex flex-col z-10" id="placeInfoScheduleContainer"></div>
                         </div>
                       </div>
                     </div>

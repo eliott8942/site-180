@@ -37,78 +37,139 @@ function uiInit(placeData) {
   console.log("Done")
 }
 
-// extends the end hour by 24 hours if the timeSpan crosses midnight
-function denormalizeEndHourTime(timeSpan) {
-  const start = hourTupleToMinutes(timeSpan[0])
-  const end = hourTupleToMinutes(timeSpan[1])
-
-  if (end < start) {
-    return [Array.from(timeSpan[0]), [timeSpan[1][0] + 24, timeSpan[1][1]]]
-  } else {
-    return timeSpan
-  }
-}
-
-function updateSchedule(container, otherElements, scheduleData) {
-  let [nowBar] = otherElements
+function updateSchedule(container, hoursContainer, scheduleData) {
+  // extends the end hour by 24 hours if the timeSpan crosses midnight
+  function denormalizeEndHourTime(timeSpan) {
+    const start = hourTupleToMinutes(timeSpan[0])
+    const end = hourTupleToMinutes(timeSpan[1])
   
-  let now = getDayInTimeOffset([1, 0]);
+    if (end < start) {
+      return [Array.from(timeSpan[0]), [timeSpan[1][0] + 24, timeSpan[1][1]]]
+    } else {
+      return timeSpan
+    }
+  }
+
+  function convertDayFromSundayBasedToMondayBasedWeek(day) {
+    return (day + 6) % 7
+  }
+
+  const range = (n) => Array.from({ length: n }, (_, i) => i)
+
+  function formatHour([hours, minutes]) {
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`
+  }
+
+  // return the ticks for the hours above the schedule
+  function getTimespanDisplay() {
+    const startMinutes = Math.min(...scheduleData.flat().map(timeSpan => hourTupleToMinutes(timeSpan[0])))
+    const endMinutes = Math.max(...scheduleData.flat().map(timeSpan => hourTupleToMinutes(denormalizeEndHourTime(timeSpan)[1])))
+
+    const duration = endMinutes - startMinutes;
+  
+    let step;
+    if (duration <= 60)        step = 15;   // 1h        → every 15 min
+    else if (duration <= 120)  step = 30;   // 1h–2h     → every 30 min
+    else if (duration <= 360)  step = 60;   // 2h–6h     → every 1h
+    else if (duration <= 720)  step = 120;  // 6h–12h    → every 2h
+    else                       step = 360;  // 12h–24h   → every 6h
+  
+    const snappedStart = Math.floor(startMinutes / step) * step;
+  
+    const ticks = [];
+    for (let t = snappedStart + step / 2; t <= endMinutes; t += step) {
+      ticks.push(t);
+    }
+    
+    return [ticks, snappedStart, endMinutes];
+  }
+
+  // Compute now in swiss local time (UTC+1:00), so we can compare it to our swiss based schedule
+  let now = new Date();
   let day = now.getDay()
   let todayInMinutes = hourTupleToMinutes([now.getHours(), now.getMinutes()])
 
   // update now bar
-  const startTotalMinutes = 0
-  const endTotalMinutes = Math.max(24, ...scheduleData.flatMap(day => Math.max(...day.map(timeSpan => hourTupleToMinutes(denormalizeEndHourTime(timeSpan)[1])))))
+  const [hourTicks, startTotalMinutes, endTotalMinutes] = getTimespanDisplay()
+  const nowBarOffset = `${(todayInMinutes - startTotalMinutes) / (endTotalMinutes - startTotalMinutes) * 100}%`
 
-  nowBar.style.left = `${ todayInMinutes / (endTotalMinutes - startTotalMinutes) * 100}%`
-
-  // update schedule table rows
-  for (let index = 0; index < scheduleData.length; index++) {
-    const scheduleOfTheDayContainer = container[index];
-    const scheduleOfTheDay = scheduleData[index];
+  hoursContainer.replaceChildren(...hourTicks.map(tick => {
+    const hour = Math.floor(tick / 60)
+    const minutes = tick % 60
+    const offset = (tick - startTotalMinutes) / (endTotalMinutes - startTotalMinutes) * 100
     
-    // clear childrens
-    scheduleOfTheDayContainer.replaceChildren()
-    scheduleOfTheDayContainer.appendChild(span([], ["scheduleDayTagSpace"]))
-
-    if ((day + 6) % 7 == index) {
-      scheduleOfTheDayContainer.parentElement.classList.add("active")
-    }
-
-    for (let j = 0; j < scheduleOfTheDay.length; j++) {
-      const timeSpan = scheduleOfTheDay[j];
-      
-      let lastTimeSpanEndInMinutes = startTotalMinutes
-      if (j != 0) {
-        lastTimeSpanEndInMinutes = hourTupleToMinutes(scheduleOfTheDay[j - 1][1])
-      }
-      const spaceElement = document.createElement("span")
-      const spaceWidth = differenceBetweenHoursInMinutes(lastTimeSpanEndInMinutes, timeSpan[0]) / (endTotalMinutes - startTotalMinutes) * 100
-      spaceElement.style.width = `${ spaceWidth }%`
-      
-      const timeSpanElement = document.createElement("span")
-      const timeSpanWidth = differenceBetweenHoursInMinutes(timeSpan[0], timeSpan[1]) / (endTotalMinutes - startTotalMinutes) * 100
-      timeSpanElement.style.width = `${ timeSpanWidth }%`
-      timeSpanElement.style.background = "linear-gradient(0deg,rgba(255, 255, 255, 0) 10%, rgba(0, 0, 0, 0.15) 10%, rgba(0, 0, 0, 0.15) 90%, rgba(255, 255, 255, 0) 90%)"
-
-      scheduleOfTheDayContainer.appendChild(spaceElement)
-      scheduleOfTheDayContainer.appendChild(timeSpanElement)
-    }
+    return div([
+      div([formatHour([hour, minutes])], ["leading-none", "text-xs"]),
+      div([], ["w-px", "grow", "bg-black/15"])
+    ], ["absolute", "flex", "flex-col", "h-full", "items-center", "-translate-x-1/2"], { style: { left: `${offset}%` } })
+  }))
+  
+  function nowBarOverlay() {
+    return div([
+      div([], ["dayTagSpace"]),
+      div([
+        div([], ["relative", "h-4/5", "w-[2px]", "bg-primary"], { style: { left: nowBarOffset } })
+      ], ["grow", "h-full", "flex", "flex-row", "items-center"]),
+      div([], ["w-20"])
+    ], ["absolute", "w-full", "h-full", "flex", "flex-row", "items-center"])
   }
+
+  container.replaceChildren(...range(7).map(i => {
+    const scheduleOfTheDay = scheduleData[i];
+    const isActiveDay = convertDayFromSundayBasedToMondayBasedWeek(day) == i;
+
+    const els = [
+      div([], ["dayTagSpace"]),
+      div(scheduleOfTheDay.flatMap((timeSpan, j) => {
+        let lastTimeSpanEndInMinutes = startTotalMinutes
+        if (j != 0) {
+          lastTimeSpanEndInMinutes = hourTupleToMinutes(scheduleOfTheDay[j - 1][1])
+        }
+        const spaceWidth = differenceBetweenHoursInMinutes(lastTimeSpanEndInMinutes, timeSpan[0]) / (endTotalMinutes - startTotalMinutes) * 100
+        const timeSpanWidth = differenceBetweenHoursInMinutes(timeSpan[0], timeSpan[1]) / (endTotalMinutes - startTotalMinutes) * 100
+  
+        const spaceElement = span([], [], { style: { width: `${spaceWidth}%` } })
+        let timeSpanElement;
+        if (isActiveDay) {
+          timeSpanElement = span([], [
+            "h-1/3", "rounded-full",
+            "shadow-inner", "shadow-white/50",
+            "bg-gradient-to-b", "from-gray-300", "to-gray-500","border", "border-gray-300/50"
+          ], { style: { width: `${timeSpanWidth}%` } });
+        } else {
+          timeSpanElement = span([], [
+            "h-1/3", "rounded-full",
+            "bg-gray-300","border", "border-gray-400/50"
+          ], { style: { width: `${timeSpanWidth}%` } });
+        }
+        
+        return [spaceElement, timeSpanElement]
+      }), ["grow", "flex", "flex-row", "items-center", "h-full"])
+    ]
+
+    let openingHoursText;
+    if (scheduleOfTheDay.length == 0) {
+      openingHoursText = div(["Fermé"], ["w-20", "text-xs", "flex", "items-center", "justify-center", "flex-col", "h-8"])
+    } else {
+      openingHoursText = div(scheduleOfTheDay.map(timeSpan => {
+        let [start, end] = timeSpan;
+        
+        return span(`${formatHour(start)} - ${formatHour(end)}`, [])
+      }), ["w-20", "text-xs", "flex", "items-center", "justify-center", "flex-col", "h-8"])
+    }
+
+    els.push(openingHoursText)
+    
+    if (isActiveDay) {
+      els.push(nowBarOverlay())
+    }
+    
+    return div(els, ["scheduleRow", "relative"])
+  }))
 }
 
 function updateLinks(linksContainer, linksData, googleMapLink) {
   let childrens = []
-  // if (googleMapLink) {
-  //   childrens.push(a(
-  //     [
-  //       span([], ["crieur-icon", `crieur-icon-google-map`]),
-  //     ],
-  //     googleMapLink,
-  //     ["crieur-social-links"]
-  //   ))
-  // }
-
   for (const link of linksData) {
     childrens.push(a(
       [
@@ -219,12 +280,12 @@ function updatePanelInfo(data) {
     "placeInfoGallery",
     "placeInfoBanner",
     "placeInfoTops",
-    "placeInfoTipsAndTopsTitle"
+    "placeInfoTipsAndTopsTitle",
+    "placeInfoScheduleContainer",
+    "placeInfoScheduleHourBarsContainer"
   )
-  let scheduleContainerTuples = getElementForEachId(...Array.from({ length: 7 }, (_, i) => `placeInfoScheduleRow${i + 1}`))
-  let scheduleOtherElement = getElementForEachId("placeInfoScheduleNowBar")
-  if (tuple == undefined || scheduleContainerTuples == undefined || scheduleOtherElement == undefined) { return }
-  let [scrollableContainer, titleElement, titleInHeaderElement, typesContainer, priceElement, addressElement, descriptionElement, linksContainer, tipsContainer, galleryContainer, placeBannerElement, placeInfoTops, tipsAndTopsTitle] = tuple
+  if (tuple == undefined) { return }
+  let [scrollableContainer, titleElement, titleInHeaderElement, typesContainer, priceElement, addressElement, descriptionElement, linksContainer, tipsContainer, galleryContainer, placeBannerElement, placeInfoTops, tipsAndTopsTitle, placeInfoScheduleContainer, placeInfoScheduleHourBarsContainer] = tuple
 
   resetPanelState(scrollableContainer)
 
@@ -256,7 +317,7 @@ function updatePanelInfo(data) {
     (_, el) => span(el)
   ))
 
-  updateSchedule(scheduleContainerTuples, scheduleOtherElement, data.location.schedule)
+  updateSchedule(placeInfoScheduleContainer, placeInfoScheduleHourBarsContainer, data.location.schedule)
   updateLinks(linksContainer, data.links, data.location.map)
 
   updateGallery(galleryContainer, data.gallery)
