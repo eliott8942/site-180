@@ -1,6 +1,6 @@
 let FUSE = undefined
 
-const SEARCH_THRESHOLD = 0.6
+const SEARCH_THRESHOLD = 0.3
 
 function initSearch(placeData) {
   console.log('Initializing search...')
@@ -8,13 +8,20 @@ function initSearch(placeData) {
   FUSE = new Fuse(placeData, {
     keys: [
       { name: 'title', weight: 0.7 },
+      { name: 'types', weight: 0.5 },
+      { name: 'tags', weight: 0.5 },
       { name: 'location.address.address', weight: 0.15 },
-      { name: 'location.address.city', weight: 0.15 }
+      { name: 'location.address.city', weight: 0.3 }
     ],
+
     threshold: SEARCH_THRESHOLD,
+
     includeScore: true,
     ignoreDiacritics: true,
-    includeMatches: true
+    includeMatches: true,
+
+    useTokenSearch: true,
+    tokenMatch: 'all'
   })
 
   console.log('Done.')

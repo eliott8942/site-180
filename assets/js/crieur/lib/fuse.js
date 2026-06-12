@@ -47,9 +47,6 @@ function getTag(value) {
 
 //#endregion
 //#region src/core/errorMessages.ts
-const EXTENDED_SEARCH_UNAVAILABLE = "Extended search is not available";
-const LOGICAL_SEARCH_UNAVAILABLE = "Logical search is not available";
-const TOKEN_SEARCH_UNAVAILABLE = "Token search is not available";
 const INCORRECT_INDEX_TYPE = "Incorrect 'index' type";
 const INVALID_DOC_INDEX = "Invalid doc index: must be a non-negative integer within the bounds of the docs array";
 const LOGICAL_SEARCH_INVALID_QUERY_FOR_KEY = (key) => `Invalid value for key ${key}`;
@@ -609,6 +606,310 @@ var BitapSearch = class {
 };
 
 //#endregion
+//#region src/search/extended/matchers.ts
+const MULTI_MATCH_TYPES = new Set(["fuzzy", "include"]);
+function isInverse(type) {
+	return type.startsWith("inverse");
+}
+const matchers = [
+	{
+		type: "exact",
+		multiRegex: /^="(.*)"$/,
+		singleRegex: /^=(.*)$/,
+		create: (pattern) => ({
+			type: "exact",
+			search(text) {
+				const isMatch = text === pattern;
+				return {
+					isMatch,
+					score: isMatch ? 0 : 1,
+					indices: [0, pattern.length - 1]
+				};
+			}
+		})
+	},
+	{
+		type: "include",
+		multiRegex: /^'"(.*)"$/,
+		singleRegex: /^'(.*)$/,
+		create: (pattern) => ({
+			type: "include",
+			search(text) {
+				let location = 0;
+				let index;
+				const indices = [];
+				const patternLen = pattern.length;
+				while ((index = text.indexOf(pattern, location)) > -1) {
+					location = index + patternLen;
+					indices.push([index, location - 1]);
+				}
+				const isMatch = !!indices.length;
+				return {
+					isMatch,
+					score: isMatch ? 0 : 1,
+					indices
+				};
+			}
+		})
+	},
+	{
+		type: "prefix-exact",
+		multiRegex: /^\^"(.*)"$/,
+		singleRegex: /^\^(.*)$/,
+		create: (pattern) => ({
+			type: "prefix-exact",
+			search(text) {
+				const isMatch = text.startsWith(pattern);
+				return {
+					isMatch,
+					score: isMatch ? 0 : 1,
+					indices: [0, pattern.length - 1]
+				};
+			}
+		})
+	},
+	{
+		type: "inverse-prefix-exact",
+		multiRegex: /^!\^"(.*)"$/,
+		singleRegex: /^!\^(.*)$/,
+		create: (pattern) => ({
+			type: "inverse-prefix-exact",
+			search(text) {
+				const isMatch = !text.startsWith(pattern);
+				return {
+					isMatch,
+					score: isMatch ? 0 : 1,
+					indices: [0, text.length - 1]
+				};
+			}
+		})
+	},
+	{
+		type: "inverse-suffix-exact",
+		multiRegex: /^!"(.*)"\$$/,
+		singleRegex: /^!(.*)\$$/,
+		create: (pattern) => ({
+			type: "inverse-suffix-exact",
+			search(text) {
+				const isMatch = !text.endsWith(pattern);
+				return {
+					isMatch,
+					score: isMatch ? 0 : 1,
+					indices: [0, text.length - 1]
+				};
+			}
+		})
+	},
+	{
+		type: "suffix-exact",
+		multiRegex: /^"(.*)"\$$/,
+		singleRegex: /^(.*)\$$/,
+		create: (pattern) => ({
+			type: "suffix-exact",
+			search(text) {
+				const isMatch = text.endsWith(pattern);
+				return {
+					isMatch,
+					score: isMatch ? 0 : 1,
+					indices: [text.length - pattern.length, text.length - 1]
+				};
+			}
+		})
+	},
+	{
+		type: "inverse-exact",
+		multiRegex: /^!"(.*)"$/,
+		singleRegex: /^!(.*)$/,
+		create: (pattern) => ({
+			type: "inverse-exact",
+			search(text) {
+				const isMatch = text.indexOf(pattern) === -1;
+				return {
+					isMatch,
+					score: isMatch ? 0 : 1,
+					indices: [0, text.length - 1]
+				};
+			}
+		})
+	},
+	{
+		type: "fuzzy",
+		multiRegex: /^"(.*)"$/,
+		singleRegex: /^(.*)$/,
+		create: (pattern, options = {}) => {
+			const bitap = new BitapSearch(pattern, {
+				location: options.location ?? Config.location,
+				threshold: options.threshold ?? Config.threshold,
+				distance: options.distance ?? Config.distance,
+				includeMatches: options.includeMatches ?? Config.includeMatches,
+				findAllMatches: options.findAllMatches ?? Config.findAllMatches,
+				minMatchCharLength: options.minMatchCharLength ?? Config.minMatchCharLength,
+				isCaseSensitive: options.isCaseSensitive ?? Config.isCaseSensitive,
+				ignoreDiacritics: options.ignoreDiacritics ?? Config.ignoreDiacritics,
+				ignoreLocation: options.ignoreLocation ?? Config.ignoreLocation
+			});
+			return {
+				type: "fuzzy",
+				search(text) {
+					return bitap.searchIn(text);
+				}
+			};
+		}
+	}
+];
+
+//#endregion
+//#region src/search/extended/parseQuery.ts
+const matchersLen = matchers.length;
+const ESCAPED_PIPE = "\0";
+const OR_TOKEN = "|";
+function tokenize(pattern) {
+	const tokens = [];
+	const len = pattern.length;
+	let i = 0;
+	while (i < len) {
+		while (i < len && pattern[i] === " ") i++;
+		if (i >= len) break;
+		let j = i;
+		while (j < len && pattern[j] !== " " && pattern[j] !== "\"") j++;
+		if (j < len && pattern[j] === "\"") {
+			j++;
+			while (j < len) {
+				if (pattern[j] === "\"") {
+					const next = j + 1;
+					if (next >= len || pattern[next] === " ") {
+						j++;
+						break;
+					}
+					if (pattern[next] === "$" && (next + 1 >= len || pattern[next + 1] === " ")) {
+						j += 2;
+						break;
+					}
+				}
+				j++;
+			}
+			tokens.push(pattern.substring(i, j));
+			i = j;
+		} else {
+			while (j < len && pattern[j] !== " ") j++;
+			tokens.push(pattern.substring(i, j));
+			i = j;
+		}
+	}
+	return tokens;
+}
+function getMatch(pattern, exp) {
+	const matches = pattern.match(exp);
+	return matches ? matches[1] : null;
+}
+function parseQuery(pattern, options = {}) {
+	return pattern.replace(/\\\|/g, ESCAPED_PIPE).split(OR_TOKEN).map((item) => {
+		const query = tokenize(item.replace(/\u0000/g, "|").trim()).filter((item) => item && !!item.trim());
+		const results = [];
+		for (let i = 0, len = query.length; i < len; i += 1) {
+			const queryItem = query[i];
+			let found = false;
+			let idx = -1;
+			while (!found && ++idx < matchersLen) {
+				const def = matchers[idx];
+				const token = getMatch(queryItem, def.multiRegex);
+				if (token) {
+					results.push(def.create(token, options));
+					found = true;
+				}
+			}
+			if (found) continue;
+			idx = -1;
+			while (++idx < matchersLen) {
+				const def = matchers[idx];
+				const token = getMatch(queryItem, def.singleRegex);
+				if (token) {
+					results.push(def.create(token, options));
+					break;
+				}
+			}
+		}
+		return results;
+	});
+}
+
+//#endregion
+//#region src/search/extended/index.ts
+var ExtendedSearch = class {
+	constructor(pattern, { isCaseSensitive = Config.isCaseSensitive, ignoreDiacritics = Config.ignoreDiacritics, includeMatches = Config.includeMatches, minMatchCharLength = Config.minMatchCharLength, ignoreLocation = Config.ignoreLocation, findAllMatches = Config.findAllMatches, location = Config.location, threshold = Config.threshold, distance = Config.distance } = {}) {
+		this.query = null;
+		this.options = {
+			isCaseSensitive,
+			ignoreDiacritics,
+			includeMatches,
+			minMatchCharLength,
+			findAllMatches,
+			ignoreLocation,
+			location,
+			threshold,
+			distance
+		};
+		pattern = isCaseSensitive ? pattern : pattern.toLowerCase();
+		pattern = ignoreDiacritics ? stripDiacritics(pattern) : pattern;
+		this.pattern = pattern;
+		this.query = parseQuery(this.pattern, this.options);
+	}
+	static condition(_, options) {
+		return options.useExtendedSearch;
+	}
+	searchIn(text) {
+		const query = this.query;
+		if (!query) return {
+			isMatch: false,
+			score: 1
+		};
+		const { includeMatches, isCaseSensitive, ignoreDiacritics } = this.options;
+		text = isCaseSensitive ? text : text.toLowerCase();
+		text = ignoreDiacritics ? stripDiacritics(text) : text;
+		let numMatches = 0;
+		const allIndices = [];
+		let totalScore = 0;
+		let hasInverse = false;
+		for (let i = 0, qLen = query.length; i < qLen; i += 1) {
+			const searchers = query[i];
+			allIndices.length = 0;
+			numMatches = 0;
+			hasInverse = false;
+			for (let j = 0, pLen = searchers.length; j < pLen; j += 1) {
+				const matcher = searchers[j];
+				const { isMatch, indices, score } = matcher.search(text);
+				if (isMatch) {
+					numMatches += 1;
+					totalScore += score;
+					if (isInverse(matcher.type)) hasInverse = true;
+					if (includeMatches) if (MULTI_MATCH_TYPES.has(matcher.type)) allIndices.push(...indices);
+					else allIndices.push(indices);
+				} else {
+					totalScore = 0;
+					numMatches = 0;
+					allIndices.length = 0;
+					hasInverse = false;
+					break;
+				}
+			}
+			if (numMatches) {
+				const result = {
+					isMatch: true,
+					score: totalScore / numMatches
+				};
+				if (hasInverse) result.hasInverse = true;
+				if (includeMatches) result.indices = mergeIndices(allIndices);
+				return result;
+			}
+		}
+		return {
+			isMatch: false,
+			score: 1
+		};
+	}
+};
+
+//#endregion
 //#region src/core/register.ts
 const registeredSearchers = [];
 function register(...args) {
@@ -817,6 +1118,86 @@ function createAnalyzer({ isCaseSensitive = false, ignoreDiacritics = false, tok
 }
 
 //#endregion
+//#region src/search/token/index.ts
+const MAX_MASK_TERMS = 31;
+var TokenSearch = class {
+	static condition(_, options) {
+		return options.useTokenSearch;
+	}
+	constructor(pattern, options) {
+		this.options = options;
+		this.analyzer = createAnalyzer({
+			isCaseSensitive: options.isCaseSensitive,
+			ignoreDiacritics: options.ignoreDiacritics,
+			tokenize: options.tokenize
+		});
+		const queryTerms = this.analyzer.tokenize(pattern);
+		const { df, fieldCount } = options._invertedIndex;
+		this.termSearchers = [];
+		this.idfWeights = [];
+		for (const term of queryTerms) {
+			this.termSearchers.push(new BitapSearch(term, {
+				location: options.location,
+				threshold: options.threshold,
+				distance: options.distance,
+				includeMatches: options.includeMatches,
+				findAllMatches: options.findAllMatches,
+				minMatchCharLength: options.minMatchCharLength,
+				isCaseSensitive: options.isCaseSensitive,
+				ignoreDiacritics: options.ignoreDiacritics,
+				ignoreLocation: true
+			}));
+			const docFreq = df.get(term) || 0;
+			const idf = Math.log(1 + (fieldCount - docFreq + .5) / (docFreq + .5));
+			this.idfWeights.push(idf);
+		}
+		this.combineAll = options.tokenMatch === "all";
+		this.numTerms = this.termSearchers.length;
+		this.useMask = this.numTerms <= 31;
+	}
+	searchIn(text) {
+		if (!this.termSearchers.length) return {
+			isMatch: false,
+			score: 1
+		};
+		const allIndices = [];
+		let weightedScore = 0;
+		let maxPossibleScore = 0;
+		let matchedCount = 0;
+		let matchedMask = 0;
+		const matchedTerms = this.combineAll && !this.useMask ? /* @__PURE__ */ new Set() : null;
+		for (let i = 0; i < this.termSearchers.length; i++) {
+			const result = this.termSearchers[i].searchIn(text);
+			const idf = this.idfWeights[i];
+			maxPossibleScore += idf;
+			if (result.isMatch) {
+				matchedCount++;
+				weightedScore += idf * (1 - result.score);
+				if (result.indices) allIndices.push(...result.indices);
+				if (this.combineAll) if (this.useMask) matchedMask |= 1 << i;
+				else matchedTerms.add(i);
+			}
+		}
+		if (matchedCount === 0) return {
+			isMatch: false,
+			score: 1
+		};
+		const normalized = maxPossibleScore > 0 ? 1 - weightedScore / maxPossibleScore : 0;
+		const searchResult = {
+			isMatch: true,
+			score: Math.max(.001, normalized)
+		};
+		if (this.options.includeMatches && allIndices.length) searchResult.indices = mergeIndices(allIndices);
+		if (this.combineAll) {
+			if (this.useMask) searchResult.matchedMask = matchedMask;
+			else searchResult.matchedTerms = matchedTerms;
+			searchResult.termCount = this.numTerms;
+		}
+		return searchResult;
+	}
+};
+
+//#endregion
 //#region src/search/token/InvertedIndex.ts
 function addField(index, text, docIdx, analyzer) {
 	const tokens = analyzer.tokenize(text);
@@ -906,8 +1287,8 @@ var Fuse = class {
 			...Config,
 			...options
 		};
-		if (this.options.useExtendedSearch && true) throw new Error(EXTENDED_SEARCH_UNAVAILABLE);
-		if (this.options.useTokenSearch && true) throw new Error(TOKEN_SEARCH_UNAVAILABLE);
+		if (this.options.useExtendedSearch && false);
+		if (this.options.useTokenSearch && false);
 		this._keyStore = new KeyStore(this.options.keys);
 		this._docs = docs;
 		this._myIndex = null;
@@ -1060,7 +1441,64 @@ var Fuse = class {
 		return results;
 	}
 	_searchLogical(query) {
-		throw new Error(LOGICAL_SEARCH_UNAVAILABLE);
+		const expression = parse(query, this.options);
+		const evaluate = (node, item, idx) => {
+			if (!("children" in node)) {
+				const { keyId, searcher } = node;
+				let matches;
+				if (keyId === null) {
+					matches = [];
+					this._myIndex.keys.forEach((key, keyIndex) => {
+						matches.push(...this._findMatches({
+							key,
+							value: item[keyIndex],
+							searcher
+						}));
+					});
+				} else matches = this._findMatches({
+					key: this._keyStore.get(keyId),
+					value: this._myIndex.getValueForItemAtKeyId(item, keyId),
+					searcher
+				});
+				if (matches && matches.length) return [{
+					idx,
+					item,
+					matches
+				}];
+				return [];
+			}
+			const { children, operator } = node;
+			const res = [];
+			for (let i = 0, len = children.length; i < len; i += 1) {
+				const child = children[i];
+				const result = evaluate(child, item, idx);
+				if (result.length) res.push(...result);
+				else if (operator === LogicalOperator.AND) return [];
+			}
+			return res;
+		};
+		const records = this._myIndex.records;
+		const resultMap = /* @__PURE__ */ new Map();
+		const results = [];
+		records.forEach(({ $: item, i: idx }) => {
+			if (isDefined(item)) {
+				const expResults = evaluate(expression, item, idx);
+				if (expResults.length) {
+					if (!resultMap.has(idx)) {
+						resultMap.set(idx, {
+							idx,
+							item,
+							matches: []
+						});
+						results.push(resultMap.get(idx));
+					}
+					expResults.forEach(({ matches }) => {
+						resultMap.get(idx).matches.push(...matches);
+					});
+				}
+			}
+		});
+		return results;
 	}
 	_searchObjectList(query, { heap, ignoreFieldNorm } = {}) {
 		const searcher = this._getSearcher(query);
@@ -1175,10 +1613,12 @@ Fuse.match = function(pattern, text, options) {
 	}).searchIn(text);
 };
 Fuse.parseQuery = parse;
+register(ExtendedSearch);
+register(TokenSearch);
 Fuse.use = function(...plugins) {
 	plugins.forEach((plugin) => register(plugin));
 };
 var entry_default = Fuse;
 
 //#endregion
-window.Fuse = Fuse;
+window.Fuse = entry_default;
