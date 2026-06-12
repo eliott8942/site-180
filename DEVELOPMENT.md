@@ -36,4 +36,4 @@ npm run build
 
 ## Deployment
 
-If you're on the [official repo](https://github.com/180-C/site-180), the website is automatically deployed on [https://180c.ch](https://180c.ch) when a commit is pushed to the `release` branch.
+If you're on the [official repo](https://github.com/180-C/site-180), the website is automatically deployed on [https://180c.ch](https://180c.ch) when a commit is pushed to the `master` branch.
