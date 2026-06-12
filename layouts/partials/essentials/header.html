@@ -76,8 +76,9 @@
         {{ $pageURL:= $currentPage.Permalink | absLangURL }}
 
         {{ $active := hasPrefix $pageURL $menuURL }}
+        {{ $baseURL := "/" | absLangURL }}
         <!-- If the menu url is the home url ("/") check for strict equality -->
-        {{ if eq (.URL | relLangURL) "/" }}
+        {{ if eq $menuURL $baseURL  }}
           {{ $active = eq $pageURL $menuURL }}
         {{ end }}
         
