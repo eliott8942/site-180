@@ -1,6 +1,6 @@
 let FUSE = undefined
 
-const SEARCH_THRESHOLD = 0.3
+const SEARCH_THRESHOLD = 0.35
 
 function initSearch(placeData) {
   console.log('Initializing search...')
@@ -10,7 +10,7 @@ function initSearch(placeData) {
       { name: 'title', weight: 0.7 },
       { name: 'types', weight: 0.5 },
       { name: 'tags', weight: 0.5 },
-      { name: 'location.address.address', weight: 0.15 },
+      { name: 'location.address.address', weight: 0.3 },
       { name: 'location.address.city', weight: 0.3 }
     ],
 
