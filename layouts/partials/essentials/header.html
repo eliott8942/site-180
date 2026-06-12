@@ -76,8 +76,8 @@
         {{ $pageURL:= $currentPage.Permalink | absLangURL }}
 
         {{ $active := hasPrefix $pageURL $menuURL }}
-        {{ $baseURL := "/" | absLangURL }}
         <!-- If the menu url is the home url ("/") check for strict equality -->
+        {{ $baseURL := "" | absLangURL }}
         {{ if eq $menuURL $baseURL  }}
           {{ $active = eq $pageURL $menuURL }}
         {{ end }}
@@ -130,7 +130,7 @@
         {{ else }}
           <li class="nav-item">
             <a
-              class="nav-link {{ if $active }}nav-link-active{{- end -}}"
+              class="nav-link {{ if $active }}nav-link-active{{ end }}"
               {{ if findRE `^http` .URL }}
                 target="_blank" rel="noopener"
               {{ end }}
