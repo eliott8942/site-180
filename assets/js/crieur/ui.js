@@ -28,11 +28,8 @@ function uiInit(placeData) {
     }
   )
   observer.observe(placeInfoTitle)
-
-  for (const place of placeData) {
-    CARDS_CACHE.push(createEntryCard(place))
-  }
-  updateCards()
+  
+  showAllCards(placeData)
 
   console.log("Done")
 }
@@ -360,7 +357,42 @@ function closePanelInfo() {
   inputHeader.classList.remove("crieur-info-shown");
 }
 
-function createEntryCard(placeInfo) {
+function createEntryCard(placeInfo, hints = []) {
+  function applyHintsOnString(element, hint) {
+    if (hint == undefined) {
+      return [span([element], ["searchresult-part"])]
+    } else {
+      let start = 0
+      const finalEls = []
+      for (const highlightIndices of hint.indices) {
+        if (highlightIndices[0] > start) {
+          let stringPart = element.substring(start, highlightIndices[0]);
+          finalEls.push(span([stringPart], ["searchresult-part"]))
+        }
+
+        let stringPart = element.substring(highlightIndices[0], highlightIndices[1] + 1)
+        finalEls.push(span([stringPart], ["searchresult-part", "highlighted"]))
+
+        start = highlightIndices[1] + 1;
+      }
+
+      if (start < element.length) {
+        let stringPart = element.substring(start)
+        finalEls.push(span([stringPart], ["searchresult-part"]))
+      }
+
+      return finalEls
+    }
+  }
+
+  function joinElements(arr, separator) {
+    return arr.flatMap((item, i) => {
+      if (i === 0) return [item];
+      const sep = typeof separator === "function" ? separator(i) : separator;
+      return [sep, item];
+    });
+  }
+  
   return div([
     // image
     div([
@@ -369,33 +401,26 @@ function createEntryCard(placeInfo) {
 
     // metadata
     div([
-      el("h5", [placeInfo.title]),
+      el("h5", applyHintsOnString(placeInfo.title, hints["title"])),
 
       // type
       div([
         // types
-        span([placeInfo.types.join(", ")]),
+        span(
+          joinElements(
+            placeInfo.types.map((ty, i) => applyHintsOnString(ty, hints["types"] == undefined ? undefined : hints["types"][i])),
+            () => span([", "])
+          ).flat()
+        ),
         span([' ‧ ']),
-        span([placeInfo.price]),
+        span([placeInfo.price], ["searchresult-part"]),
         span([' ‧ ']),
-        span([placeInfo.location.address.address]),
+        span(applyHintsOnString(placeInfo.location.address.address, hints["address"])),
         span([' ‧ ']),
         createStatusSpan(placeInfo.location.schedule)
       ])
     ], ["py-3"])
   ], ["max-h-28", "w-full", "flex", "shrink-0", "flex-row", "overflow-hidden", "first:border-0", "border-t", "hover:bg-gray-100", "cursor-pointer", "unselectable"], { onclick: () => showPlace(placeInfo.id, 'fromCard') })
-}
-
-function updateCards(newCards = CARDS_CACHE) {
-  let tuple = getElementForEachId("searchMenuCardContainer")
-  if (tuple == undefined) { return }
-  let [cardContainer] = tuple
-
-  if (newCards.length == 0) {
-    cardContainer.replaceChildren(queryNotFound())
-  } else {
-    cardContainer.replaceChildren(...newCards)
-  }
 }
 
 function queryNotFound() {

@@ -88,6 +88,6 @@ function assignIds(array, getId = (_, i) => i) {
   return array.map((item, i) => ({ ...item, id: getId(item, i) }));
 }
 
-// Source - https://stackoverflow.com/a/30280636
-// Posted by toastrackengima, modified by community. See post 'Timeline' for change history
-// Retrieved 2026-06-11, License - CC BY-SA 4.0
+function zip(arr1, arr2) {
+  return arr1.map((item, i) => [item, arr2[i]]);
+}

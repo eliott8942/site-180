@@ -40,7 +40,7 @@
         "type": "sans-serif"
       },
       "secondary": {
-        "base": "Signika:wght@500;700",
+        "base": "Signika:wght@400;500;700",
         "type": "sans-serif"
       },
       "tertiary": {
