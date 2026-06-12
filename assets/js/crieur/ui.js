@@ -91,7 +91,15 @@ function updateSchedule(container, hoursContainer, scheduleData) {
 
   // update now bar
   const [hourTicks, startTotalMinutes, endTotalMinutes] = getTimespanDisplay()
-  const nowBarOffset = `${(todayInMinutes - startTotalMinutes) / (endTotalMinutes - startTotalMinutes) * 100}%`
+
+  // If the range crosses midnight and current time is before the start,
+  // it means we're in the "next day" portion — so add a full day to normalize it
+  const normalizedNow = todayInMinutes < startTotalMinutes
+    ? todayInMinutes + MINUTES_IN_DAY
+    : todayInMinutes
+  
+  const rawOffset = (normalizedNow - startTotalMinutes) / (endTotalMinutes - startTotalMinutes) * 100
+  const nowBarOffset = `${rawOffset}%`
 
   hoursContainer.replaceChildren(...hourTicks.map(tick => {
     const hour = Math.floor(tick / 60)
