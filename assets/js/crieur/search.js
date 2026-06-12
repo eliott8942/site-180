@@ -64,42 +64,26 @@ function updateSearch() {
 
     const places = resultsToShow.map(entry => entry.item)
     const hints = resultsToShow.map(entry => {
-      const hintPlace = {}
-
-      let typeRefIndex = 0;
+      const hintPlace = {
+        title: undefined,
+        types: new Array(entry.item.types.length).fill(undefined),
+        address: undefined
+      }
+    
       for (const match of entry.matches) {
         switch (match.key) {
           case "title":
-            Object.assign(hintPlace, { title: match })
+            hintPlace.title = match
             break
           case "types":
-            if ("types" in hintPlace) {
-              // push empty matchs
-              while (typeRefIndex < match.refIndex) {
-                hintPlace.types.push(undefined)
-                typeRefIndex += 1;
-              }
-              
-              hintPlace.types.push(match)
-              typeRefIndex += 1;
-            } else {
-              let array = []
-              // push empty matchs
-              while (typeRefIndex < match.refIndex) {
-                array.push(undefined);
-                typeRefIndex += 1;
-              }
-              array.push(match)
-              
-              Object.assign(hintPlace, { types: array })
-              typeRefIndex += 1;
-            }
+            hintPlace.types[match.refIndex] = match
             break
           case "location.address.address":
-            Object.assign(hintPlace, { "address": match })
+            hintPlace.address = match
+            break
         }
       }
-
+    
       return hintPlace
     })   
 
