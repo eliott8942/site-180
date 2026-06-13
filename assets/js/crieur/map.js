@@ -287,7 +287,9 @@ function selectPlaceOnMap(placeData, id, mode) {
       case 'fromCard':
         MAP.flyTo({
           center: [placeData.location.longitude, placeData.location.latitude],
-          zoom: 17,
+          // the zoom offset we add should avoid us zooming to a number exactly where one cluster is about to split into smaller ones, otherwise there is a possibility of seeing both a cluster and it's children
+          // For now, the +0.5 seems to do the trick
+          zoom: 17.5,
         })
         
         break;
