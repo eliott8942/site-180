@@ -95,8 +95,8 @@ function updateSchedule(container, hoursContainer, scheduleData) {
     ? todayInMinutes + MINUTES_IN_DAY
     : todayInMinutes
   
-  const rawOffset = (normalizedNow - startTotalMinutes) / (endTotalMinutes - startTotalMinutes) * 100
-  const nowBarOffset = `${rawOffset}%`
+  const nowBarRawOffset = (normalizedNow - startTotalMinutes) / (endTotalMinutes - startTotalMinutes) * 100
+  const nowBarOffset = `${nowBarRawOffset}%`
 
   hoursContainer.replaceChildren(...hourTicks.map(tick => {
     const hour = Math.floor(tick / 60)
@@ -170,7 +170,7 @@ function updateSchedule(container, hoursContainer, scheduleData) {
 
     els.push(openingHoursText)
     
-    if (isActiveDay) {
+    if (isActiveDay && 0 <= nowBarRawOffset && nowBarRawOffset <= 100) {
       els.push(nowBarOverlay())
     }
     
