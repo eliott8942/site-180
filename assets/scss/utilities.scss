@@ -38,10 +38,10 @@
 }
 
 .max-h-screen-with-pad {
-  max-height: calc(100vh - 1.5rem - 70px);
+  max-height: calc(100dvh - 1.5rem - 70px);
 }
 .h-screen-with-pad {
-  height: calc(100vh - 1.5rem - 70px);
+  height: calc(100dvh - 1.5rem - 70px);
 }
 
 .unselectable {
