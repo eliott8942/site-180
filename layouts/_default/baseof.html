@@ -14,7 +14,7 @@
     {{ block "headAttrs" . }} {{ end }}
   </head>
 
-  <body class="flex flex-col h-screen overflow-hidden">
+  <body class="flex flex-col h-dvh overflow-hidden">
     <!-- cache partial only in production -->
     {{ if hugo.IsProduction }}
       {{ partialCached "preloader.html" . }}
