@@ -38,5 +38,6 @@ function showPlace(id, mode) {
 
   selectPlaceOnMap(placeData, id, mode)
   showPlaceInfo(placeData)
+  exitSearchMode()
 }
 

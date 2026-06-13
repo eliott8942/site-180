@@ -90,14 +90,14 @@
       </div>
       
       <!-- Search menu layer -->
-      <div class="absolute flex flex-col z-20 max-sm:w-full h-screen-with-pad sm:w-96 pointer-events-none max-sm:h-1/4 max-sm:group-has-[#searchmenu-toggle-inner:checked]:h-3/4 bottom-0 duration-150">
+      <div id="searchMenuLayer" class="searchmenu-layer absolute flex flex-col z-20 max-sm:w-full h-screen-with-pad sm:w-96 pointer-events-none max-sm:h-1/4 max-sm:group-has-[#searchmenu-toggle-inner:checked]:h-[--searchmenu-layer-height] bottom-0 duration-150">
         <!-- Static header -->
         <div id="searchMenuInputHeader" class="absolute w-full h-12 shrink-0 flex flex-row items-center border-b bg-white border-b-gray-400 pointer-events-none border-r border-gray-200 duration-150 left-0">
           <input id="searchmenu-input" class="grow outline-none border-0 focus:ring-0 text-lg shrink pointer-events-auto z-10 text-black" placeholder="Chercher un restaurant..." autocomplete="off" onfocus="switchToSearchMode()" oninput="updateSearch()"/>
 
           <!-- Search menu toggle -->
           <div class="toggle h-full aspect-square pointer-events-auto z-20 border-b" id="searchmenu-toggle">
-            <input id="searchmenu-toggle-inner" type="checkbox" class="hidden" checked="true"/>
+            <input id="searchmenu-toggle-inner" type="checkbox" class="hidden" checked="true" onchange="updateSearchMode()"/>
             
             <label
               for="searchmenu-toggle-inner"

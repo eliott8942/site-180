@@ -33,12 +33,36 @@ function switchToSearchMode() {
     return;
   }
 
-  const tuple = getElementForEachId("searchmenu-toggle-inner", "searchmenu-input")
+  const tuple = getElementForEachId("searchMenuLayer", "searchmenu-toggle-inner", "searchmenu-input")
   if (tuple == undefined) { return; }
-  const [searchMenuToggle, input] = tuple;
+  const [layer, searchMenuToggle, input] = tuple;
 
+  layer.classList.add("searchmode");
   searchMenuToggle.checked = true; 
   input.select();
+}
+
+function updateSearchMode() {
+  if (FUSE == undefined) {
+    console.warn("Search has not been initialized.")
+    return;
+  }
+
+  const tuple = getElementForEachId("searchMenuLayer", "searchmenu-toggle-inner")
+  if (tuple == undefined) { return; }
+  const [layer, searchMenuToggle] = tuple;
+
+  if (searchMenuToggle.checked == false) {
+    exitSearchMode()
+  }
+}
+
+function exitSearchMode() {
+  const tuple = getElementForEachId("searchMenuLayer")
+  if (tuple == undefined) { return; }
+  const [layer] = tuple;
+  
+  layer.classList.remove("searchmode");
 }
 
 function updateSearch() {
