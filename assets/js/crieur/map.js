@@ -124,75 +124,84 @@ function initPlaceMarkers(placeData) {
     return element
   })
 
-  // I'm fairly sure my way of handling the promises below is wrong and has a bug somewhere, but for now the code
-  // seems to be working fine enough.
-
   let clusterCache = {}
   let placeOnScreen = {}
   let clustersOnScreen = {}
+  
   function updateMarkers() {
     let newPlaceOnScreen = {}
     let newClustersOnScreen = {}
     const features = MAP.querySourceFeatures('places')
     const source = MAP.getSource('places')
-
+  
     for (let index = 0; index < features.length; index++) {
-      const place = features[index];
-      
+      const place = features[index]
       const coords = place.geometry.coordinates
       const props = place.properties
 
+      // draw new clusters / places
       if (props.cluster != undefined) {
         const id = props.cluster_id
-        if (clustersOnScreen[id] == undefined) {
-          if (clusterCache[id] == undefined) {
-            clusterCache[id] = Promise.all([source.getClusterLeaves(id, 1, 0), source.getClusterExpansionZoom(id)])
-              .then(tuple => {
-                let [list, zoom] = tuple
-                let [place] = list
-                const element = div([
-                  div([
-                    div([ `+${props.point_count - 1}` ], ['text'])
-                  ], [], {
-                    className: 'crieur-place',
-                    style: {
-                      width: `${ 40 + props.point_count * 2 }px`,
-                      backgroundImage: `url(${place.properties.thumbnail})`,
-                    }
-                  })
-                ])
-
-                element.onclick = () => {
-                  const z = Math.max(MAP.getZoom(), zoom + 1)
-                  
-                  MAP.flyTo({ center: coords, zoom: z })
-                }
-
-                return element
-              })
-          }
-
-          // create a mock element while the marker is generated
-          const element = document.createElement("div")
-          
-          let marker = new maplibregl.Marker({ element })
-            .setLngLat(coords)
-            .addTo(MAP)
-
-          // keep a reference to the promise
-          marker.updaterPromise = clusterCache[id].then(element => {
-            marker.getElement().replaceChildren(element)
-          })
-
-          newClustersOnScreen[id] = marker;
-        } else {
+  
+        if (clustersOnScreen[id] != undefined) {
+          // already on screen, keep it
           newClustersOnScreen[id] = clustersOnScreen[id]
+          continue
         }
+        if (newClustersOnScreen[id] != undefined) {
+          // duplicate feature for the same cluster (tile boundary), skip
+          continue
+        }
+  
+        const element = document.createElement("div")
+        const marker = new maplibregl.Marker({ element })
+          .setLngLat(coords)
+          .addTo(MAP)
+  
+        marker._valid = true
+        newClustersOnScreen[id] = marker
+  
+        if (clusterCache[id] == undefined) {
+          clusterCache[id] = Promise.all([
+            source.getClusterLeaves(id, 1, 0),
+            source.getClusterExpansionZoom(id)
+          ])
+        }
+  
+        clusterCache[id]
+          .then(([list, zoom]) => {
+            // bail out if this marker was removed before the promise resolved
+            if (!marker._valid) return
+  
+            const [leaf] = list
+            const content = div([
+              div([div([`+${props.point_count - 1}`], ['text'])], [], {
+                className: 'crieur-place',
+                style: {
+                  width: `${40 + props.point_count * 2}px`,
+                  height: `${40 + props.point_count * 2}px`,
+                  backgroundImage: `url(${leaf.properties.thumbnail})`,
+                }
+              })
+            ])
+  
+            content.onclick = () => {
+              // the zoom offset we add should avoid us zooming to a number exactly where one cluster is about to split into smaller ones, otherwise there is a possibility of seeing both a cluster and it's children
+              // For now, the +0.5 seems to do the trick
+              const z = Math.max(MAP.getZoom(), zoom + 0.5)
+              MAP.flyTo({ center: coords, zoom: z })
+            }
+  
+            marker.getElement().replaceChildren(content)
+          })
+          .catch(err => {
+            console.error('cluster leaf fetch failed', id, err)
+          })
+  
       } else {
         if (placeOnScreen[props.id] == undefined) {
-          let placeElement = placeElementCache[props.id]
-
-          let marker = new maplibregl.Marker({ element: placeElement })
+          const placeElement = placeElementCache[props.id]
+          const marker = new maplibregl.Marker({ element: placeElement })
             .setLngLat(coords)
             .addTo(MAP)
           newPlaceOnScreen[props.id] = marker
@@ -202,17 +211,21 @@ function initPlaceMarkers(placeData) {
       }
     }
 
-    for (placeId in placeOnScreen) {
+    // remove clusters / places that aren't on screen any more
+    for (const clusterId in clustersOnScreen) {
+      if (newClustersOnScreen[clusterId] == undefined) {
+        const marker = clustersOnScreen[clusterId]
+        marker._valid = false   // tell any pending promise to ignore this marker
+        marker.remove()
+        delete clusterCache[clusterId] // don't let stale content come back later
+      }
+    }
+    for (const placeId in placeOnScreen) {
       if (newPlaceOnScreen[placeId] == undefined) {
         placeOnScreen[placeId].remove()
       }
     }
-    for (clusterId in clustersOnScreen) {
-      if (newClustersOnScreen[clusterId] == undefined) {
-        clustersOnScreen[clusterId].remove()
-      }
-    }
-
+  
     placeOnScreen = newPlaceOnScreen
     clustersOnScreen = newClustersOnScreen
   }
