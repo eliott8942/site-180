@@ -14,7 +14,7 @@
 
   - [ ] Create an ingredient widget
 
-- [ ] Redesign Crieur page
+- [X] Redesign Crieur page
 
   - [X] Redesign page layout
 
@@ -22,7 +22,7 @@
 
   - [X] Design restaurant locations icons on the map
 
-  - [ ] Create the search engine
+  - [X] Create the search engine
 
   - [X] Change map widget styles
 
