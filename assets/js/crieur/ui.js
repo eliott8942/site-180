@@ -418,7 +418,7 @@ function createEntryCard(placeInfo, hints = []) {
         span(applyHintsOnString(placeInfo.location.address.address, hints["address"])),
         span([' ‧ ']),
         createStatusSpan(placeInfo.location.schedule)
-      ])
+      ], ["metadata"])
     ], ["py-3"])
   ], ["max-h-28", "w-full", "flex", "shrink-0", "flex-row", "overflow-hidden", "first:border-0", "border-t", "hover:bg-gray-100", "cursor-pointer", "unselectable"], { onclick: () => showPlace(placeInfo.id, 'fromCard') })
 }
