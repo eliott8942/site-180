@@ -36,7 +36,15 @@
 }
 
 .group:not(:has(#searchmenu-toggle-inner:checked)) .crieur-info-shown {
-  @apply sm:-left-[21rem];
+  @apply sm:-translate-x-[21rem];
+}
+
+#searchMenuLayer {
+  --menu-folded-offset: 100%;
+
+  &.crieur-info-shown {
+    --menu-folded-offset: 0%;
+  }
 }
 
 .schedule {

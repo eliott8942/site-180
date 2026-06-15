@@ -309,16 +309,14 @@ function updatePanelInfo(data) {
 function showPlaceInfo(placeData) {
   updatePanelInfo(placeData)
   
-  SEARCH_COMPONENTS.panelContainer.style.left = "-100%";
-  SEARCH_COMPONENTS.menuContainer.classList.add("crieur-info-shown");
-  SEARCH_COMPONENTS.inputHeader.classList.add("crieur-info-shown");
+  SEARCH_COMPONENTS.panelContainer.style.transform = "translateX(-100%)";
+  SEARCH_COMPONENTS.menuLayer.classList.add("crieur-info-shown");
   SEARCH_COMPONENTS.toggle.checked = true
 }
 
 function closePanelInfo() {
-  SEARCH_COMPONENTS.panelContainer.style.left = "0%";
-  SEARCH_COMPONENTS.menuContainer.classList.remove("crieur-info-shown");
-  SEARCH_COMPONENTS.inputHeader.classList.remove("crieur-info-shown");
+  SEARCH_COMPONENTS.panelContainer.style.transform = "translateX(0%)";
+  SEARCH_COMPONENTS.menuLayer.classList.remove("crieur-info-shown");
 }
 
 function createEntryCard(placeInfo, hints = []) {
