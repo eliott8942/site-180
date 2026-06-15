@@ -21,6 +21,10 @@
 }
 
 .fold-hidden {
+  & > label {
+    @apply hidden
+  }
+  
   & > .toggle {
     @apply hidden
   }
