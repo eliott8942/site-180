@@ -3,26 +3,19 @@ let CARDS_CACHE = []
 function uiInit(placeData) {
   console.log("Initialize ui...")
 
-  let tuple = getElementForEachId("searchMenuPanelContainer", "placeInfoScrollableContainer", "placeInfoTitle", "placeInfoTitleInHeader")
-  if (tuple == undefined) {
-    console.error("Couldn't initialize the ui properly.")
-    return
-  }
-  let [searchMenuPanelContainer, placeInfoScrollableContainer, placeInfoTitle, placeInfoTitleInHeader] = tuple
-
   function syncTitlesPosition() {
-    let parentRect = searchMenuPanelContainer.getBoundingClientRect()
-    let titleRect = placeInfoTitle.getBoundingClientRect()
+    let parentRect = SEARCH_COMPONENTS.panelContainer.getBoundingClientRect()
+    let titleRect = PLACE_INFO_COMPONENTS.title.getBoundingClientRect()
 
     let offset = Math.max(titleRect.top - parentRect.top, 0)
-    placeInfoTitleInHeader.style.top = `${ offset }px`
+    PLACE_INFO_COMPONENTS.titleInHeader.style.top = `${ offset }px`
   }
   syncTitlesPosition()
 
   let observer = new IntersectionObserver(
     () => syncTitlesPosition(),
     {
-      root: placeInfoScrollableContainer,
+      root: PLACE_INFO_COMPONENTS.scrollableContainer,
       // a little hack to make the transition be smooth
       threshold: Array.from({ length: 101 }, (_, i) => i / 100)
     }
@@ -206,12 +199,11 @@ function updateDescription(container, description) {
   container.textContent = description
 
   // apparently parseFloat ignore the px suffix, which is a good thing here
-  const height = parseFloat(getComputedStyle(container).height)
+  const height = container.getBoundingClientRect().height;
   const fontSize = parseFloat(getComputedStyle(document.documentElement).fontSize)
   const sizeInRem = height / fontSize
 
   const MAX_HEIGHT_REM = 5
-  console.log(height, fontSize)
   if (sizeInRem < MAX_HEIGHT_REM) {
     container.parentElement.classList.add("fold-hidden")
   } else {
@@ -277,36 +269,16 @@ function resetPanelState(scrollableContainer) {
 }
 
 function updatePanelInfo(data) {
-  let tuple = getElementForEachId(
-    "placeInfoScrollableContainer",
-    "placeInfoTitle",
-    "placeInfoTitleInHeader",
-    "placeInfoTypes", 
-    "placeInfoPrice", 
-    "placeInfoAddress", 
-    "placeInfoDescription",
-    "placeInfoLinks",
-    "placeInfoTips",
-    "placeInfoGallery",
-    "placeInfoBanner",
-    "placeInfoTops",
-    "placeInfoTipsAndTopsTitle",
-    "placeInfoScheduleContainer",
-    "placeInfoScheduleHourBarsContainer"
-  )
-  if (tuple == undefined) { return }
-  let [scrollableContainer, titleElement, titleInHeaderElement, typesContainer, priceElement, addressElement, descriptionElement, linksContainer, tipsContainer, galleryContainer, placeBannerElement, placeInfoTops, tipsAndTopsTitle, placeInfoScheduleContainer, placeInfoScheduleHourBarsContainer] = tuple
+  resetPanelState(PLACE_INFO_COMPONENTS.scrollableContainer)
 
-  resetPanelState(scrollableContainer)
-
-  titleElement.textContent = data.title
-  titleInHeaderElement.textContent = data.title
-  priceElement.textContent = data.price
+  PLACE_INFO_COMPONENTS.title.textContent = data.title
+  PLACE_INFO_COMPONENTS.titleInHeader.textContent = data.title
+  PLACE_INFO_COMPONENTS.price.textContent = data.price
   // addressElement.textContent = formatLongAddress(data.location.address)
-  placeBannerElement.src = data.banner
+  PLACE_INFO_COMPONENTS.banner.src = data.banner
 
   if (data.location.map != undefined) {
-    addressElement.replaceChildren(
+    PLACE_INFO_COMPONENTS.address.replaceChildren(
       a([
         div([], ["crieur-icon", "crieur-icon-google-map"]),
         formatLongAddress(data.location.address)
@@ -314,47 +286,39 @@ function updatePanelInfo(data) {
       data.location.map
     ))
   } else {
-    addressElement.replaceChildren(
+    PLACE_INFO_COMPONENTS.address.replaceChildren(
       formatLongAddress(data.location.address)
     )
   }
 
-  updateDescription(descriptionElement, data.description)
+  updateDescription(PLACE_INFO_COMPONENTS.description, data.description)
 
-  typesContainer.replaceChildren(...mapSeparated(
+  PLACE_INFO_COMPONENTS.types.replaceChildren(...mapSeparated(
     data.types, 
     span(", "), 
     (_, el) => span(el)
   ))
 
-  updateSchedule(placeInfoScheduleContainer, placeInfoScheduleHourBarsContainer, data.location.schedule)
-  updateLinks(linksContainer, data.links, data.location.map)
+  updateSchedule(PLACE_INFO_COMPONENTS.scheduleContainer, PLACE_INFO_COMPONENTS.scheduleHourBarsContainer, data.location.schedule)
+  updateLinks(PLACE_INFO_COMPONENTS.links, data.links, data.location.map)
 
-  updateGallery(galleryContainer, data.gallery)
-  updateTipsAndTops(tipsContainer, placeInfoTops, data.tips, data.tops, tipsAndTopsTitle)
+  updateGallery(PLACE_INFO_COMPONENTS.gallery, data.gallery)
+  updateTipsAndTops(PLACE_INFO_COMPONENTS.tips, placeInfoTops, data.tips, data.tops, PLACE_INFO_COMPONENTS.tipsAndTopsTitle)
 }
 
 function showPlaceInfo(placeData) {
-  let tuple = getElementForEachId("searchMenuPanelContainer", "searchMenuContainer", "searchMenuInputHeader", "searchmenu-toggle-inner")
-  if (tuple == undefined) { return }
-  let [panelContainer, container, inputHeader, searchMenuToggle] = tuple;
-  
   updatePanelInfo(placeData)
   
-  panelContainer.style.left = "-100%";
-  container.classList.add("crieur-info-shown");
-  inputHeader.classList.add("crieur-info-shown");
-  searchMenuToggle.checked = true
+  SEARCH_COMPONENTS.panelContainer.style.left = "-100%";
+  SEARCH_COMPONENTS.menuContainer.classList.add("crieur-info-shown");
+  SEARCH_COMPONENTS.inputHeader.classList.add("crieur-info-shown");
+  SEARCH_COMPONENTS.toggle.checked = true
 }
 
 function closePanelInfo() {
-  let tuple = getElementForEachId("searchMenuPanelContainer", "searchMenuContainer", "searchMenuInputHeader")
-  if (tuple == undefined) { return }
-  let [panelContainer, container, inputHeader] = tuple;
-
-  panelContainer.style.left = "0%";
-  container.classList.remove("crieur-info-shown");
-  inputHeader.classList.remove("crieur-info-shown");
+  SEARCH_COMPONENTS.panelContainer.style.left = "0%";
+  SEARCH_COMPONENTS.menuContainer.classList.remove("crieur-info-shown");
+  SEARCH_COMPONENTS.inputHeader.classList.remove("crieur-info-shown");
 }
 
 function createEntryCard(placeInfo, hints = []) {
@@ -419,8 +383,8 @@ function createEntryCard(placeInfo, hints = []) {
         span([' ‧ ']),
         createStatusSpan(placeInfo.location.schedule)
       ], ["metadata"])
-    ], ["py-3"])
-  ], ["max-h-28", "w-full", "flex", "shrink-0", "flex-row", "overflow-hidden", "first:border-0", "border-t", "hover:bg-gray-100", "cursor-pointer", "unselectable"], { onclick: () => showPlace(placeInfo.id, 'fromCard') })
+    ], ["py-3", "pr-2", "leading-6"])
+  ], ["min-h-28", "w-full", "flex", "shrink-0", "flex-row", "overflow-hidden", "first:border-0", "border-t", "hover:bg-gray-100", "cursor-pointer", "unselectable"], { onclick: () => showPlace(placeInfo.id, 'fromCard') })
 }
 
 function queryNotFound() {

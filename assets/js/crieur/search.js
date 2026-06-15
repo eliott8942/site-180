@@ -28,54 +28,38 @@ function initSearch(placeData) {
 }
 
 function switchToSearchMode() {
-  if (FUSE == undefined) {
+  if (FUSE == undefined || SEARCH_COMPONENTS == null) {
     console.warn("Search has not been initialized.")
     return;
   }
 
-  const tuple = getElementForEachId("searchMenuLayer", "searchmenu-toggle-inner", "searchmenu-input")
-  if (tuple == undefined) { return; }
-  const [layer, searchMenuToggle, input] = tuple;
-
-  layer.classList.add("searchmode");
-  searchMenuToggle.checked = true; 
-  input.select();
+  SEARCH_COMPONENTS.menuLayer.classList.add("searchmode");
+  SEARCH_COMPONENTS.toggle.checked = true; 
+  SEARCH_COMPONENTS.input.select();
 }
 
 function updateSearchMode() {
-  if (FUSE == undefined) {
+  if (FUSE == undefined || SEARCH_COMPONENTS == null) {
     console.warn("Search has not been initialized.")
     return;
   }
 
-  const tuple = getElementForEachId("searchMenuLayer", "searchmenu-toggle-inner")
-  if (tuple == undefined) { return; }
-  const [layer, searchMenuToggle] = tuple;
-
-  if (searchMenuToggle.checked == false) {
+  if (SEARCH_COMPONENTS.toggle.checked == false) {
     exitSearchMode()
   }
 }
 
 function exitSearchMode() {
-  const tuple = getElementForEachId("searchMenuLayer")
-  if (tuple == undefined) { return; }
-  const [layer] = tuple;
-  
-  layer.classList.remove("searchmode");
+  SEARCH_COMPONENTS.menuLayer.classList.remove("searchmode");
 }
 
 function updateSearch() {
-  if (FUSE == undefined) {
+  if (FUSE == undefined || SEARCH_COMPONENTS == null) {
     console.warn("Search has not been initialized.")
     return;
   }
-  
-  const tuple = getElementForEachId("searchmenu-input")
-  if (tuple == undefined) { return; }
-  const [input] = tuple;
 
-  const searchQuery = input.value.trim()
+  const searchQuery = SEARCH_COMPONENTS.input.value.trim()
 
   const results = FUSE.search(searchQuery)
   
@@ -117,29 +101,21 @@ function updateSearch() {
 }
 
 function showSearchResults(results) {
-  const tuple = getElementForEachId("searchMenuCardContainer")
-  if (tuple == undefined) { return }
-  const [searchMenuCardContainer] = tuple;
-
   if (results.length == 0) {
-    searchMenuCardContainer.replaceChildren(queryNotFound())
+    SEARCH_COMPONENTS.cardContainer.replaceChildren(queryNotFound())
   } else {
     const cards = []
     for (const [data, hints] of results) {
       cards.push(createEntryCard(data, hints))
     }
-    searchMenuCardContainer.replaceChildren(...cards)
+    SEARCH_COMPONENTS.cardContainer.replaceChildren(...cards)
   }
 }
 
 function showAllCards(placeData) {
-  const tuple = getElementForEachId("searchMenuCardContainer")
-  if (tuple == undefined) { return }
-  const [searchMenuCardContainer] = tuple;
-  
   const cards = []
   for (const data of placeData) {
     cards.push(createEntryCard(data))
   }
-  searchMenuCardContainer.replaceChildren(...cards)
+  SEARCH_COMPONENTS.cardContainer.replaceChildren(...cards)
 }

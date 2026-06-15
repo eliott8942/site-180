@@ -1,10 +1,106 @@
-PLACE_DATA = null
+let PLACE_DATA = null
+
+let SEARCH_COMPONENTS = null
+let PLACE_INFO_COMPONENTS = null
+
+function initComponents() {
+  const [
+    menuLayer,
+    menuContainer,
+    inputHeader,
+    toggle,
+    input,
+    cardContainer,
+    panelContainer
+  ] = getElementForEachId(
+    "searchMenuLayer",
+    "searchMenuContainer",
+    "searchMenuInputHeader",
+    "searchmenu-toggle-inner",
+    "searchmenu-input",
+    "searchMenuCardContainer",
+    "searchMenuPanelContainer"
+  ) ?? [];
+  
+  if (!menuLayer) {
+    console.warn("Failed to get all the elements for the search")
+    return;
+  }
+  
+  SEARCH_COMPONENTS = {
+    menuLayer,
+    menuContainer,
+    inputHeader,
+    toggle,
+    input,
+    cardContainer,
+    panelContainer
+  };
+
+  const [
+    scrollableContainer,
+    title,
+    titleInHeader,
+    types,
+    price,
+    address,
+    description,
+    links,
+    tips,
+    gallery,
+    banner,
+    tops,
+    tipsAndTopsTitle,
+    scheduleContainer,
+    scheduleHourBarsContainer
+  ] = getElementForEachId(
+    "placeInfoScrollableContainer",
+    "placeInfoTitle",
+    "placeInfoTitleInHeader",
+    "placeInfoTypes",
+    "placeInfoPrice",
+    "placeInfoAddress",
+    "placeInfoDescription",
+    "placeInfoLinks",
+    "placeInfoTips",
+    "placeInfoGallery",
+    "placeInfoBanner",
+    "placeInfoTops",
+    "placeInfoTipsAndTopsTitle",
+    "placeInfoScheduleContainer",
+    "placeInfoScheduleHourBarsContainer"
+    ) ?? [];
+  
+  if (!scrollableContainer) {
+    console.warn("Failed to get all the elements for the panelInfo")
+    return;
+  }
+
+  PLACE_INFO_COMPONENTS = {
+    scrollableContainer,
+    title,
+    titleInHeader,
+    types,
+    price,
+    address,
+    description,
+    links,
+    tips,
+    gallery,
+    banner,
+    tops,
+    tipsAndTopsTitle,
+    scheduleContainer,
+    scheduleHourBarsContainer
+  };
+}
 
 function init(config, placeData, decoData, style) {
   placeData = assignIds(placeData)
   
   PLACE_DATA = placeData
-  
+
+  initComponents()
   initMap(config, placeData, decoData, style)
   uiInit(placeData)
   initSearch(placeData)
@@ -36,8 +132,8 @@ function showPlace(id, mode) {
 
   console.log(placeData)
 
-  selectPlaceOnMap(placeData, id, mode)
   showPlaceInfo(placeData)
   exitSearchMode()
+  selectPlaceOnMap(placeData, id, mode)
 }
 

@@ -27,7 +27,6 @@ function createStatusSpan(scheduleArray) {
 
   // Compute now in swiss local time (UTC+2:00), so we can compare it to our swiss based schedule
   const now = getDayInUTCTimeZone([1, 0], [2, 0]);
-  console.log(now)
   const dayInMinutes = now.getHours() * 60 + now.getMinutes();
   const dayArray = scheduleArray[(now.getDay() + 6) % 7];
 
