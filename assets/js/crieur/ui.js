@@ -358,7 +358,7 @@ function createEntryCard(placeInfo, hints = []) {
   return div([
     // image
     div([
-      img(placeInfo.thumbnail, ["h-full", "aspect-square", "object-cover", "rounded-md"])
+      img(placeInfo.thumbnail, ["w-full", "aspect-square", "object-cover", "rounded-md"])
     ], ["w-28", "overflow-hidden", "p-3", "shrink-0"]),
 
     // metadata
