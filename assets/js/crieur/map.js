@@ -85,6 +85,17 @@ function initMap(config, placeData, decoData, style) {
     initPlaceMarkers(placeData)
   })
 
+  MAP.on('click', () => {
+    // this is more of a UX improvement, for device with small width (mobile devices or devices with small lcds, or small windows etc)
+    // we fold automatically the search and place layer when we touch the canvas. The drag is not included however, as it makes the canvas
+    // too impredictable imo.
+    if (document.documentElement.clientWidth <= 2 * SEARCH_COMPONENTS.menuLayer.clientWidth) {
+      if (SEARCH_COMPONENTS.toggle.checked) {
+        SEARCH_COMPONENTS.toggle.checked = false;
+      }
+    }
+  })
+
   console.log("Done.")
 }
 
