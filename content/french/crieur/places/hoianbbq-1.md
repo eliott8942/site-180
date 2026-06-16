@@ -19,7 +19,7 @@ location:
     postal_code: 1007
   latitude: 46.5077266669143
   longitude: 6.622463042283977
-  map: https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d171.6261437604218!2d6.622413421420578!3d46.50774812722293!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c2fda0c67c73f%3A0xcd8df29b1e81adbc!2sHoi%20An%20(Restaurant%20HOIAN%20BBQ)!5e0!3m2!1sfr!2sch!4v1678492874124!5m2!1sfr!2sch
+  map: https://www.google.com/maps/place/Restaurant+HOIAN+BBQ/@46.507727,6.6198901,17z/data=!3m1!4b1!4m6!3m5!1s0x478c2fda0c67c73f:0xcd8df29b1e81adbc!8m2!3d46.507727!4d6.622465!16s%2Fg%2F11c525vj21?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D
   schedule:
   - openingHours:
     - end: '14:00'

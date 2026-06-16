@@ -24,7 +24,7 @@ location:
     postal_code: 1003
   latitude: 46.5171856
   longitude: 6.6281226
-  map: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d686.3849561673892!2d6.627349288146241!3d46.51721872155229!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c2fe53ca8db4b%3A0xebd2430627039f06!2stibits!5e0!3m2!1sfr!2sch!4v1668991349948!5m2!1sfr!2sch
+  map: https://www.google.com/maps/place/tibits/@46.5172178,6.6278978,17z/data=!3m2!4b1!5s0x14e9fdfee0411777:0xe31fc05cf9b5b34b!4m6!3m5!1s0x478c2fe53ca8db4b:0xebd2430627039f06!8m2!3d46.5172178!4d6.6278978!16s%2Fg%2F11gsb8h894?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D
   schedule:
   - openingHours:
     - end: '22:30'

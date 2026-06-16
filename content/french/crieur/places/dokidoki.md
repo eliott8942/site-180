@@ -20,7 +20,7 @@ location:
     postal_code: 1005
   latitude: 46.52004283516274
   longitude: 6.640155731947729
-  map: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d408.10567252854304!2d6.6398607773675415!3d46.52004982239319!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c2fc177d8f035%3A0x6b4357054cbc301a!2sDoki%20Doki!5e0!3m2!1sfr!2sch!4v1678491105002!5m2!1sfr!2sch
+  map: https://www.google.com/maps/place/Doki+Doki/@46.5200511,6.6375721,17z/data=!3m1!4b1!4m6!3m5!1s0x478c2fc177d8f035:0x6b4357054cbc301a!8m2!3d46.5200511!4d6.640147!16s%2Fg%2F11kxrqk_qv?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D
   schedule:
   - openingHours:
     - end: '14:00'

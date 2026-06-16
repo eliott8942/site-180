@@ -19,7 +19,7 @@ location:
     postal_code: 1003
   latitude: 46.51826739294827
   longitude: 6.626388955821399
-  map: https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10981.954811743777!2d6.6263675!3d46.5182305!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c2e2cd8e1ee6b%3A0x7511a24ecd866243!2sNandanam!5e0!3m2!1sfr!2sch!4v1675966269454!5m2!1sfr!2sch
+  map: https://www.google.com/maps/place/Nandanam/@46.5182305,6.6263675,17z/data=!3m1!4b1!4m6!3m5!1s0x478c2e2cd8e1ee6b:0x7511a24ecd866243!8m2!3d46.5182305!4d6.6263675!16s%2Fg%2F1tfjv532?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D
   schedule:
   - openingHours:
     - end: '14:30'

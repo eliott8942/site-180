@@ -19,7 +19,7 @@ location:
     postal_code: 1025
   latitude: 46.513308149421604
   longitude: 6.54716671056049
-  map: https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d171.6086737578405!2d6.547414814894374!3d46.513280922996664!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c31404ffc707b%3A0x3f48fc68a4a0e59b!2sMauro%20Traiteur!5e0!3m2!1sfr!2sus!4v1675968228023!5m2!1sfr!2sus
+  map: https://www.google.com/maps/place/Mauro+Traiteur/@46.5132837,6.5450155,17z/data=!3m1!4b1!4m6!3m5!1s0x478c31005ea30e2f:0xff7759093df8632a!8m2!3d46.5132837!4d6.5475904!16s%2Fg%2F11ys14k3ns?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D
   schedule:
   - openingHours:
     - end: '19:30'

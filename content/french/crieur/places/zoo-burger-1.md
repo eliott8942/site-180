@@ -22,7 +22,7 @@ location:
     postal_code: 1005
   latitude: 46.521341987843634
   longitude: 6.639769958041056
-  map: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d408.09766896351044!2d6.6394637466656246!3d46.52111537592649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c2e35d8e49a25%3A0xb37e4674ff3f6d92!2sZooburger!5e0!3m2!1sfr!2sch!4v1676887116688!5m2!1sfr!2sch
+  map: https://www.google.com/maps/place/Rue+Marterey+29,+1005+Lausanne/@46.521415,6.6397891,17z/data=!3m1!4b1!4m6!3m5!1s0x478c2e35d8c4fddb:0xc9a5681ca6c11df8!8m2!3d46.521415!4d6.6397891!16s%2Fg%2F11c88qqvwg?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D
   schedule:
   - openingHours:
     - end: '13:30'

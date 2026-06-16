@@ -19,7 +19,7 @@ location:
     postal_code: 1005
   latitude: 46.52484139487125
   longitude: 6.634625044830118
-  map: https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10980.636510543509!2d6.6346036!3d46.5247529!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x79332bfa4cd655cb!2sBrasserie%20du%20Ch%C3%A2teau!5e0!3m2!1sfr!2sch!4v1669225335208!5m2!1sfr!2sch
+  map: https://www.google.com/maps/place/Brasserie+du+Ch%C3%A2teau+-+home+made+beers+%26+pizzas+since+1997./@46.5247529,6.6320287,17z/data=!3m1!4b1!4m6!3m5!1s0x478c2e30e539120f:0x79332bfa4cd655cb!8m2!3d46.5247529!4d6.6346036!16s%2Fg%2F1td6x050
   schedule:
   - openingHours:
     - end: 01:00

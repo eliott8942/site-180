@@ -18,7 +18,7 @@ location:
     postal_code: 1003
   latitude: 46.52144367626403
   longitude: 6.628195126802893
-  map: https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d171.58309680937668!2d6.628193346942066!3d46.52138029590165!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c2e2dc5090487%3A0xb15fcab4bd5c8635!2sWawa%27s!5e0!3m2!1sen!2sch!4v1697037159213!5m2!1sen!2sch
+  map: https://www.google.com/maps/place/Wawa's/@46.5214441,6.6282049,17z/data=!3m1!4b1!4m6!3m5!1s0x478c2e2dc5090487:0xb15fcab4bd5c8635!8m2!3d46.5214441!4d6.6282049!16s%2Fg%2F11c37km64y?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D
   schedule:
   - openingHours:
     - end: '14:30'

@@ -19,7 +19,7 @@ location:
     postal_code: 1003
   latitude: 46.52103743431745
   longitude: 6.63901059613333
-  map: https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d242.65701193345794!2d6.638969819057395!3d46.52096174231186!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c2e35d21f83a1%3A0x40c7db4d2a7eafb8!2sMAURO%20TRAITEUR%20LAUSANNE!5e0!3m2!1sfr!2sus!4v1675968188685!5m2!1sfr!2sus
+  map: https://www.google.com/maps/place/MAURO+TRAITEUR+LAUSANNE/@46.5756377,5.9110985,9z/data=!4m10!1m2!2m1!1sMauro+Traiteur!3m6!1s0x478c2e35d21f83a1:0x40c7db4d2a7eafb8!8m2!3d46.521039!4d6.6390197!15sCg5NYXVybyBUcmFpdGV1ciIDiAEBWhAiDm1hdXJvIHRyYWl0ZXVykgEQY2F0ZXJpbmdfc2VydmljZeABAA!16s%2Fg%2F1tg9gfvb?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D
   schedule:
   - openingHours:
     - end: '19:30'

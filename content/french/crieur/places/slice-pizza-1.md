@@ -17,7 +17,7 @@ location:
     postal_code: 1004
   latitude: 46.5244960525621
   longitude: 6.631089640669877
-  map: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2745.174534783297!2d6.626626433827467!3d46.524448003339494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c2e302b4aa12d%3A0xf9f2c3a32b4bab28!2sSlice%20Pizza%20Lausanne!5e0!3m2!1sfr!2sch!4v1669237963392!5m2!1sfr!2sch
+  map: https://www.google.com/maps/place/Slice+Pizza+Lausanne/@46.5244444,6.6285362,17z/data=!3m1!4b1!4m6!3m5!1s0x478c2e302b4aa12d:0xf9f2c3a32b4bab28!8m2!3d46.5244444!4d6.6311111!16s%2Fg%2F11cm0dqstl?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D
   schedule:
   - openingHours:
     - end: '22:30'
