@@ -60,7 +60,7 @@
 }
 
 .header-dim {
-  @apply fixed w-screen h-screen bg-black opacity-0 lg:hidden pointer-events-none z-10 duration-100;
+  @apply fixed w-screen h-dvh bg-black opacity-0 lg:hidden pointer-events-none z-10 duration-100;
 }
 // when in a :has, we don't need to add chain :has again, we just need a space
 body:has(#nav-toggle input[type="checkbox"]:checked) .header-dim {
