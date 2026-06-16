@@ -25,6 +25,24 @@
   - [X] Create the search engine
 
   - [X] Change map widget styles
+  
+  - [ ] Ability to request a place modification
+
+    - [ ] Add a place
+    
+    - [ ] Remove a place
+    
+    - [ ] Update a place 
+
+  - [ ] Ability to add filters to the search engine
+
+    - [ ] Filter by price
+
+    - [ ] Filter by tags and types
+
+  - [ ] Ability to share a place
+
+  - [ ] Avility to refresh the open statuses and the calendars
 
 - [ ] Redesign Search
 
