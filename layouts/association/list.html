@@ -99,13 +99,11 @@
                       bg-secondary dark:bg-body
                     {{ end }}"
                   >
-                    <a href="{{ .link }}" target="_blank">
-                      {{ if .image }}
-                        {{ partial "image" (dict "Src" .image "Alt" .Title "Class" "rounded img-fluid" "size" "120x120") }}
-                      {{ else }}
-                        {{ partial "image" (dict "Src" "images/unknown.png" "Alt" .Title "Class" "rounded img-fluid" "size" "120x120") }}
-                      {{ end }}
-                    </a>
+                    {{ if .image }}
+                      {{ partial "image" (dict "Src" .image "Alt" .Title "Class" "rounded img-fluid" "size" "120x120") }}
+                    {{ else }}
+                      {{ partial "image" (dict "Src" "images/unknown.png" "Alt" .Title "Class" "rounded img-fluid" "size" "120x120") }}
+                    {{ end }}
 
                     <div class="card-body">
                       <h4
@@ -115,9 +113,11 @@
                           text-light dark:text-dark
                         {{ end }}"
                       >
-                        <a href="{{ .link }}" target="_blank">
-                          {{ .name }}
-                        </a>
+                        <span class="inline-block align-middle h-8">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chef-hat-icon lucide-chef-hat"><path d="M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z"/><path d="M6 17h12"/></svg>
+                        </span>
+                        
+                        {{ .name }}
                       </h4>
                       <h5
                         class="font-tertiary {{ if (modBool $i 2) }}
@@ -133,7 +133,12 @@
                 </div>
               {{ end }}
             </div>
-            <div class="row justify-center m-0 p-0 pt-4">
+
+            <div class="w-full flex justify-center">
+              <div class="w-4/5 h-px bg-white/50 my-4"></div>
+            </div>
+            
+            <div class="row justify-center m-0 p-0 border-white">
               {{ range $other_members }}
                 <div class="col-12 md:col-6 lg:col-3 my-2">
                   <div
@@ -143,13 +148,11 @@
                       bg-secondary dark:bg-body
                     {{ end }}"
                   >
-                    <a href="{{ .link }}" target="_blank">
-                      {{ if .image }}
-                        {{ partial "image" (dict "Src" .image "Alt" .Title "Class" "rounded img-fluid" "size" "120x120") }}
-                      {{ else }}
-                        {{ partial "image" (dict "Src" "images/unknown.png" "Alt" .Title "Class" "rounded img-fluid" "size" "120x120") }}
-                      {{ end }}
-                    </a>
+                    {{ if .image }}
+                      {{ partial "image" (dict "Src" .image "Alt" .Title "Class" "rounded img-fluid" "size" "120x120") }}
+                    {{ else }}
+                      {{ partial "image" (dict "Src" "images/unknown.png" "Alt" .Title "Class" "rounded img-fluid" "size" "120x120") }}
+                    {{ end }}
 
                     <div class="card-body">
                       <h4
@@ -159,9 +162,7 @@
                           text-light dark:text-dark
                         {{ end }}"
                       >
-                        <a href="{{ .link }}" target="_blank">
-                          {{ .name }}
-                        </a>
+                        {{ .name }}
                       </h4>
                       <h5
                         class="font-tertiary {{ if (modBool $i 2) }}
@@ -188,13 +189,11 @@
                       bg-secondary dark:bg-body
                     {{ end }}"
                   >
-                    <a href="{{ .link }}" target="_blank">
-                      {{ if .image }}
-                        {{ partial "image" (dict "Src" .image "Alt" .Title "Class" "rounded img-fluid" "size" "120x120") }}
-                      {{ else }}
-                        {{ partial "image" (dict "Src" "images/unknown.png" "Alt" .Title "Class" "rounded img-fluid" "size" "120x120") }}
-                      {{ end }}
-                    </a>
+                    {{ if .image }}
+                      {{ partial "image" (dict "Src" .image "Alt" .Title "Class" "rounded img-fluid" "size" "120x120") }}
+                    {{ else }}
+                      {{ partial "image" (dict "Src" "images/unknown.png" "Alt" .Title "Class" "rounded img-fluid" "size" "120x120") }}
+                    {{ end }}
                     <div class="card-body">
                       <h4
                         class="font-secondary {{ if (modBool $i 2) }}
@@ -203,19 +202,8 @@
                           text-light dark:text-dark
                         {{ end }}"
                       >
-                        <a href="{{ .link }}" target="_blank">
-                          {{ .name }}
-                        </a>
+                        {{ .name }}
                       </h4>
-                      <h5
-                        class="font-tertiary {{ if (modBool $i 2) }}
-                          text-dark dark:text-dark
-                        {{ else }}
-                          text-light dark:text-dark
-                        {{ end }}"
-                      >
-                        {{ .role }}
-                      </h5>
                     </div>
                   </div>
                 </div>
@@ -226,25 +214,14 @@
                 <div class="p-4 w-fit">
                   <div class="card-body">
                     <h4
-                      class="font-secondary {{ if (modBool $i 2) }}
+                      class="font-secondary flex items-center leading-none {{ if (modBool $i 2) }}
                         text-light dark:text-dark
                       {{ else }}
                         text-dark dark:text-dark
                       {{ end }}"
                     >
-                      <a href="{{ .link }}" target="_blank">
-                        {{ .name }}
-                      </a>
+                      {{ .name }}
                     </h4>
-                    <h5
-                      class="font-tertiary {{ if (modBool $i 2) }}
-                        text-light dark:text-dark
-                      {{ else }}
-                        text-dark dark:text-dark
-                      {{ end }}"
-                    >
-                      {{ .role }}
-                    </h5>
                   </div>
                 </div>
               {{ end }}

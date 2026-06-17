@@ -6,7 +6,7 @@
 
   display: flex;
   flex-direction: row;
-  @apply md:flex-col;
+  @apply md:flex-col md:h-full;
 
   .card-body {
     @apply flex flex-col grow items-center justify-center p-4;
@@ -23,11 +23,10 @@
   }
 
   img {
-    height: 100%;
     aspect-ratio: 1/1;
     border-radius: 0;
 
-    @apply max-sm:hidden max-md:h-32 max-md:min-w-32;
+    @apply max-sm:hidden max-md:h-32 max-md:min-w-32 max-sm:h-full md:w-full;
   }
 
   // Name
