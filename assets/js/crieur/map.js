@@ -44,7 +44,7 @@ function initMap(config, placeData, decoData, style) {
   MAP.addControl(new maplibregl.NavigationControl({
     showCompass: false
   }), 'top-right')
-  MAP.addControl(new maplibregl.FullscreenControl({
+  MAP.addControl(new FullscreenControl({
     container: document.getElementById('map')
   }), 'top-right')
 
@@ -286,8 +286,7 @@ class HelpControl {
     `
   }
   
-  onAdd(map) {
-    this._map = map
+  onAdd(_map) {
     this._element = document.createElement("div")
     Lit.render(this._elementFactory, this._element);
     
@@ -296,7 +295,51 @@ class HelpControl {
 
   onRemove() {
     this._container.parentNode.removeChild(this._container)
-    this._map = undefined
+
+    delete this._element;
+    this._element = undefined;
+  }
+}
+
+class FullscreenControl {
+  constructor(params) {
+    this._params = params
+    this._fullscreenHandler = new FullscreenControler() 
+  }
+
+  _elementFactory() {
+    return Lit.html`
+      <div class="maplibregl-ctrl maplibregl-ctrl-group">
+        <button class="${this._fullscreenHandler.isInFullscreen() ? "maplibregl-ctrl-shrink" : "maplibregl-ctrl-fullscreen"}" type="button" @click=${() => this._onFullscreenClick()}>
+          <span class="maplibregl-ctrl-icon"></span>
+        </button>
+      </div>
+    `
+  }
+
+  _onFullscreenClick() {
+    if (this._fullscreenHandler.isInFullscreen()) {
+      this._fullscreenHandler.exitFullscreen()
+    } else {
+      this._fullscreenHandler.enterFullscreen(this._params.container)
+    }
+
+    this._fullscreen = !this._fullscreen
+    Lit.render(this._elementFactory(), this._element);
+  }
+
+  onAdd(_map) {
+    this._element = document.createElement("div")
+    Lit.render(this._elementFactory(), this._element);
+
+    return this._element
+  }
+
+  onRemove() {
+    this._container.parentNode.removeChild(this._container)
+    
+    delete this._element;
+    this._element = undefined;
   }
 }
 
