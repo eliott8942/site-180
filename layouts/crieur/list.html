@@ -256,10 +256,11 @@
           class="h-screen-with-pad w-full grow shrink
           [&_.maplibregl-canvas]:outline-none
 
-          max-sm:group-has-[#searchmenu-toggle-inner:checked]:-translate-y-1/3
-          sm:group-has-[#searchmenu-toggle-inner:checked]:[&_.maplibregl-canvas-container]:translate-x-[12rem]
           duration-150
           [&_.maplibregl-canvas-container]:duration-150
+
+          max-sm:group-has-[#searchmenu-toggle-inner:checked]:-translate-y-1/3
+          sm:group-has-[#searchmenu-toggle-inner:checked]:[&_.maplibregl-canvas-container]:translate-x-[12rem]
 
           sm:group-has-[#searchmenu-toggle-inner:checked]:[&_.maplibregl-ctrl-top-left]:translate-x-96
           [&_.maplibregl-ctrl-top-left]:left-0
@@ -270,6 +271,12 @@
           sm:group-has-[.crieur-info-shown]:[&_.maplibregl-ctrl-bottom-left]:translate-x-12
           [&_.maplibregl-ctrl-bottom-left]:translate-x-0
           [&_.maplibregl-ctrl-bottom-left]:duration-150
+
+          [&:fullscreen_.maplibregl-ctrl-help]:hidden
+          [&:fullscreen]:!translate-y-0
+          [&:fullscreen_.maplibregl-canvas-container]:!translate-x-0
+          [&:fullscreen_.maplibregl-ctrl-top-left]:!translate-x-0
+          [&:fullscreen_.maplibregl-ctrl-bottom-left]:!translate-x-0
           "
         ></div>
       </div>

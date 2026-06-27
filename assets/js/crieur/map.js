@@ -44,6 +44,9 @@ function initMap(config, placeData, decoData, style) {
   MAP.addControl(new maplibregl.NavigationControl({
     showCompass: false
   }), 'top-right')
+  MAP.addControl(new maplibregl.FullscreenControl({
+    container: document.getElementById('map')
+  }), 'top-right')
 
   MAP.addControl(new maplibregl.AttributionControl(), 'bottom-right')
   MAP.addControl(new HelpControl(), 'bottom-right')
