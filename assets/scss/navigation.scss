@@ -44,7 +44,7 @@
 
 .navbar:has(#nav-toggle input[type="checkbox"]:checked) {
   #nav-menu {
-    @apply lg:flex max-lg:max-h-80 pb-6;
+    @apply lg:flex max-lg:max-h-80 max-lg:pb-6;
   }
 }
 
