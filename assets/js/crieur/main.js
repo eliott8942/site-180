@@ -68,7 +68,6 @@ function initComponents() {
     "placeInfoTops",
     "placeInfoTipsAndTopsTitle",
     "placeInfoScheduleContainer",
-    "placeInfoScheduleHourBarsContainer"
     ) ?? [];
   
   if (!scrollableContainer) {

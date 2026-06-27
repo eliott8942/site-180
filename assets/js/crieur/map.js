@@ -49,20 +49,20 @@ function initMap(config, placeData, decoData, style) {
   MAP.addControl(new HelpControl(), 'bottom-right')
 
   MAP.on('load', () => {
+    const placeElement = (deco) => Lit.html`
+      <div class="crieur-deco" style="color:${deco.color}">
+        ${deco.title}
+      </div>
+    `
+    
     // place deco
     let decoMarkers = []
     for (let index = 0; index < decoData.length; index++) {
       const deco = decoData[index];
       // console.log(deco);
 
-      const element = div([
-        div([deco.title], [], {
-          className: 'crieur-deco',
-          style: {
-            color: `${deco.color}`
-          }
-        })
-      ])
+      const element = document.createElement("div")
+      Lit.render(placeElement(deco), element)
 
       let marker = new maplibregl.Marker({ element })
         .setLngLat([deco.location.longitude, deco.location.latitude])
@@ -120,17 +120,25 @@ function initPlaceMarkers(placeData) {
   })
 
   // precompute all the markers element since those will not change
-  const placeElementCache = placeData.map((place, index) => {
-    const element = div([
-      div([], [], {
-        className: 'crieur-place',
-        style: {
-          backgroundImage: `url(${place.thumbnail})`
-        }
-      })
-    ])
+  const placeElement = (place) => Lit.html`
+    <div class="crieur-place" style="background-image:url('${place.thumbnail}')"></div>
+  `
+  const clusterElement = (place, placeCount) => Lit.html`
+    <div class="crieur-place" style="background-image:url('${place.thumbnail}');width:${40 + placeCount * 2}px;height:${40 + placeCount * 2}px">
+      <div class="text">"+${placeCount - 1}"</div>
+    </div>
+  `
 
-    element.onclick = () => showPlace(index, 'fromPlace')
+  const placeElementCache = placeData.map((place, index) => {
+    const element = document.createElement("div")
+    Lit.render(placeElement(place), element)
+
+    element.onclick = (event) => {
+      // avoid being catch up by the canvas onclick listener
+      event.stopPropagation()
+      
+      showPlace(index, 'fromPlace')
+    }
 
     return element
   })
@@ -185,16 +193,8 @@ function initPlaceMarkers(placeData) {
             if (!marker._valid) return
   
             const [leaf] = list
-            const content = div([
-              div([div([`+${props.point_count - 1}`], ['text'])], [], {
-                className: 'crieur-place',
-                style: {
-                  width: `${40 + props.point_count * 2}px`,
-                  height: `${40 + props.point_count * 2}px`,
-                  backgroundImage: `url(${leaf.properties.thumbnail})`,
-                }
-              })
-            ])
+            const content = document.createElement("div")
+            Lit.render(clusterElement(leaf.properties, props.point_count), content)
   
             content.onclick = () => {
               // the zoom offset we add should avoid us zooming to a number exactly where one cluster is about to split into smaller ones, otherwise there is a possibility of seeing both a cluster and it's children
@@ -275,12 +275,19 @@ function convertToGeoJSON(placeData) {
 }
 
 class HelpControl {
+  constructor() {
+    this._elementFactory = Lit.html`
+      <div class="toggle maplibregl-ctrl maplibregl-ctrl-help h-6 aspect-square bg-white rounded-full font-bold text-lg">
+        <label for="infopanel-toggle-inner">?</label>
+      </div>
+    `
+  }
+  
   onAdd(map) {
     this._map = map
-    this._element = div([
-      label(["?"], "infopanel-toggle-inner")
-    ], ["toggle", "maplibregl-ctrl", "maplibregl-ctrl-help", "h-6", "aspect-square", "bg-white", "rounded-full", "font-bold", "text-lg"])
-
+    this._element = document.createElement("div")
+    Lit.render(this._elementFactory, this._element);
+    
     return this._element;
   }
 

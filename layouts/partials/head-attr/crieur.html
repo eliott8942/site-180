@@ -13,6 +13,11 @@
   <script src="{{ .RelPermalink }}" fetchpriority="high" type="module"></script>
 {{ end }}
 
+{{ with resources.Get "js/crieur/lib/lit-core.min.js" }}
+  <link rel="preconnect" as="script" href="{{ .RelPermalink }}"></link>
+  <script src="{{ .RelPermalink }}" fetchpriority="high" type="module"></script>
+{{ end }}
+
 <!-- main application logic -->
 {{ with (resources.Get "scss/crieur.scss" | toCSS | css.PostCSS | minify | fingerprint) }}
   <link rel="stylesheet" href="{{ .RelPermalink }}"></link>
@@ -24,13 +29,8 @@
 {{ end }}
 
 {{ $crieur := slice }}
-{{ $crieur := $crieur | append (resources.Get "js/crieur/utils.js") }}
-{{ $crieur := $crieur | append (resources.Get "js/crieur/uiUtils.js") }}
-{{ $crieur := $crieur | append (resources.Get "js/crieur/map.js") }}
-{{ $crieur := $crieur | append (resources.Get "js/crieur/status-indicator.js") }}
-{{ $crieur := $crieur | append (resources.Get "js/crieur/main.js") }}
-{{ $crieur := $crieur | append (resources.Get "js/crieur/ui.js") }}
-{{ $crieur := $crieur | append (resources.Get "js/crieur/search.js") }}
+{{ $crieur := $crieur | append (resources.Match "js/crieur/*.js") }}
+{{ $crieur := $crieur | append (resources.Match "js/crieur/components/*.js") }}
 {{ $crieur := $crieur | resources.Concat "js/js.js" }}
 {{ if hugo.IsProduction }}
   {{ $crieur = $crieur | minify | fingerprint }}

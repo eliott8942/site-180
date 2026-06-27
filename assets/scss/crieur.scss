@@ -53,19 +53,19 @@
   }
 
   & .scheduleRow {
-    @apply odd:bg-black/5 flex flex-row w-full grow items-center;
+    @apply odd:bg-black/5 flex flex-row w-full items-center;
 
-    & .scheduleText {
+    & .hourText {
       @apply w-28 from-transparent to-white bg-gradient-to-r text-xs flex items-center justify-center
     }
-  }
 
-  & .active {
-    @apply bg-red-100 odd:bg-red-200
-  }
-
-  & .scheduleDayTag {
-    @apply shrink-0 text-sm sticky left-0.5 self-start bg-white border rounded-full p-1 leading-none flex items-center justify-center m-0.5 shadow-md w-8 aspect-square
+    & .hourBars {
+      @apply grow
+    }
+    
+    & .scheduleDayTag {
+      @apply shrink-0 text-sm sticky left-0.5 self-start bg-white border rounded-full p-1 leading-none flex items-center justify-center m-0.5 shadow-md w-8 aspect-square
+    }
   }
 }
 
@@ -90,7 +90,7 @@
 }
 
 .crieur-tops {
-  @apply flex flex-row h-28 p-2 rounded-md odd:rotate-3 even:-rotate-3 border-2 border-black/50 odd:bg-[url(/images/crieur/tops-bg.png)] even:bg-[url(/images/crieur/tops-bg-even.png)] bg-size-[45px] bg-repeat shadow-md;
+  @apply flex flex-row min-h-28 p-2 rounded-md odd:rotate-3 even:-rotate-3 border-2 border-black/50 odd:bg-[url(/images/crieur/tops-bg.png)] even:bg-[url(/images/crieur/tops-bg-even.png)] bg-size-[45px] bg-repeat shadow-md;
 
   &:nth-child(odd) {
     & .metadata {
@@ -98,7 +98,7 @@
         @apply right-0;
       }
 
-      & .priceSpacer {
+      & .price-spacer {
         @apply w-14 h-6 float-right;
       }
     }
@@ -110,14 +110,14 @@
         @apply left-0;
       }
 
-      & .priceSpacer {
+      & .price-spacer {
         @apply hidden
       }
     }
   }
 
   & .image {
-    @apply h-full aspect-square object-cover rounded-md overflow-hidden shrink-0 shadow-md outline outline-white outline-1
+    @apply h-24 aspect-square object-cover rounded-md overflow-hidden shrink-0 shadow-md outline outline-white outline-1
   }
 
   & .metadata {

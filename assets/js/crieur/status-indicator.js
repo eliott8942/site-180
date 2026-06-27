@@ -3,7 +3,7 @@ function subModulo(a, b, c) {
   let r = a - b;
   if (r < 0) {
     r += c;
-  } else if (r > c) {
+  } else if (r >= c) {
     r %= c;
   }
 
@@ -20,7 +20,7 @@ function isNowInHourSpan(nowInMinutes, start, end) {
     : nowInMinutes >= startMinutes && nowInMinutes <= endMinutes;
 }
 
-function createStatusSpan(scheduleArray) {
+function statusSpanElement(scheduleArray) {
   if (scheduleArray.length !== 7) {
     throw new Error("assertError: scheduleArray.length != 7")
   }
@@ -51,25 +51,26 @@ function createStatusSpan(scheduleArray) {
       }
     }
   }
-
-  const spanEl = span([]);
+  
+  let innerText;
+  let class_;
   if (isOpen) {
     if (closeSoon) {
-      spanEl.innerText = "Ferme bientôt";
-      spanEl.classList.add("crieur-status-close-soon");
+      innerText = "Ferme bientôt";
+      class_ = "crieur-status-close-soon";
     } else {
-      spanEl.innerText = "Ouvert";
-      spanEl.classList.add("crieur-status-open");
+      innerText = "Ouvert";
+      class_ = "crieur-status-open";
     }
   } else {
     if (openSoon) {
-      spanEl.innerText = "Ouvre bientôt";
-      spanEl.classList.add("crieur-status-open-soon");
+      innerText = "Ouvre bientôt";
+      class_ = "crieur-status-open-soon";
     } else {
-      spanEl.innerText = "Fermé";
-      spanEl.classList.add("crieur-status-closed");
+      innerText = "Fermé";
+      class_ = "crieur-status-closed";
     }
   }
 
-  return spanEl;
+  return Lit.html`<span class="${class_}">${innerText}</span>`;
 }

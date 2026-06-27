@@ -46,6 +46,7 @@ module.exports = {
 
     // scan the crieur js files since tailwindcss classes are also used here
     "./assets/js/crieur/*.js",
+    "./assets/js/crieur/components/*.js",
     "./static/js/crieur/*.js"
   ],
   extract: {

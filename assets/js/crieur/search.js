@@ -102,20 +102,18 @@ function updateSearch() {
 
 function showSearchResults(results) {
   if (results.length == 0) {
-    SEARCH_COMPONENTS.cardContainer.replaceChildren(queryNotFound())
+    Lit.render(queryNotFoundElement(), SEARCH_COMPONENTS.cardContainer)
   } else {
-    const cards = []
-    for (const [data, hints] of results) {
-      cards.push(createEntryCard(data, hints))
-    }
-    SEARCH_COMPONENTS.cardContainer.replaceChildren(...cards)
+    Lit.render(
+      results.map(([data, hints]) => entryCardElement(data, hints)),
+      SEARCH_COMPONENTS.cardContainer
+    )
   }
 }
 
 function showAllCards(placeData) {
-  const cards = []
-  for (const data of placeData) {
-    cards.push(createEntryCard(data))
-  }
-  SEARCH_COMPONENTS.cardContainer.replaceChildren(...cards)
+  Lit.render(
+    placeData.map(data => entryCardElement(data)),
+    SEARCH_COMPONENTS.cardContainer
+  )
 }
