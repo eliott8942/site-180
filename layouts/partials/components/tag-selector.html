@@ -1,3 +1,8 @@
+<!-- 
+Note : That widget is made to be only instanced once per page. The code should be updated
+if you need more.
+-->
+
 {{ $scope := .scope }}
 
 {{ $currentTag := "" }}
@@ -24,11 +29,11 @@ checker input for another reason, that would break.
 -->
 
 {{ if $nonEmptyWidgetPresent }}
-  <div class="border rounded-3xl bg-gray-100 group has-[input:checked]:shadow-lg duration-75">
+  <div class="tag-selector-autofold border rounded-3xl bg-gray-100 group has-[input:checked]:shadow-lg duration-75">
     <!-- Header -->
-    <div class="flex flex-row bg-gray-100 items-center rounded-3xl has-[input:checked]:bg-gray-200 duration-50">
+    <div class="relative flex flex-row bg-gray-100 items-center rounded-3xl has-[input:checked]:bg-gray-200 duration-50">
       {{ if $hasCurrentTag }}
-        <div class="flex flex-row items-center tracking-wide leading-8 bg-white py-1 pl-5 pr-2 rounded-full shrink-0 m-1 box-border outline outline-secondary/50 outline-1 hover:outline-2 duration-75">
+        <div class="relative flex flex-row items-center tracking-wide leading-8 bg-white py-1 pl-5 pr-2 rounded-full shrink-0 m-1 box-border outline outline-secondary/50 outline-1 hover:outline-2 duration-75 z-20">
           <div class="text-secondary">
             {{ $currentTag }}
           </div>
@@ -51,15 +56,16 @@ checker input for another reason, that would break.
       <div class="grow"></div>
 
       <div class="order-3 toggle bg-white rounded-full mr-1 border" id="selector-toggle">
-        <input id="selector-toggle-inner" type="checkbox" class="hidden" />
+        <input id="tag-selector-toggle-inner" type="checkbox" class="hidden" />
         <label
-          for="selector-toggle-inner"
+          for="tag-selector-toggle-inner"
           class="flex items-center text-dark dark:text-white lg:order-1 w-full h-full p-2"
         >
           <svg id="show-toggle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down block"><path d="m6 9 6 6 6-6"/></svg>
           <svg id="hide-toggle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up-icon lucide-chevron-up hidden"><path d="m18 15-6-6-6 6"/></svg>
         </label>
       </div>
+      <label for="tag-selector-toggle-inner" class="absolute w-full h-full z-10 cursor-pointer"></label>
     </div>
 
     <!-- Content -->

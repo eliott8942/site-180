@@ -38,4 +38,32 @@
       },
     },
   });
+
+  // Tag selector handling
+  // ----------------------------------------
+  // Note : that code is made only for one toggle per page, that code should be updated to account for more if needed
+  const tagSelectorInput = document.querySelector("#tag-selector-toggle-inner")
+  if (tagSelectorInput) {
+    const tagSelectorsWithAutoFold = document.querySelector(".tag-selector-autofold")
+    if (tagSelectorsWithAutoFold) {
+      document.addEventListener("click", (event) => {
+        if (!tagSelectorInput.checked) {
+          return
+        }
+        if (!tagSelectorsWithAutoFold.contains(event.target)) {
+          tagSelectorInput.checked = false
+        }
+      })
+
+      document.addEventListener("touchend", (event) => {
+        if (!tagSelectorInput.checked) {
+          return
+        }
+        if (!tagSelectorsWithAutoFold.contains(event.target)) {
+          tagSelectorInput.checked = false
+        }
+      }, { passive: true })
+    }
+  }
+  
 })();
