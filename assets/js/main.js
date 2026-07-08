@@ -38,31 +38,4 @@
       },
     },
   });
-
-  // Crieur Slider
-  // ----------------------------------------
-  document.querySelectorAll(".crieur-slider").forEach((elm) => {
-    new Swiper(elm, {
-      spaceBetween: 24,
-      loop: false,
-      pagination: {
-        el: ".crieur-slider-pagination",
-        type: "bullets",
-        clickable: true,
-      },
-      slidesPerGroup: 1,
-      slidesPerView: 1,
-      centeredSlides: false,
-      breakpoints: {
-        520: {
-          slidesPerView: 2,
-          slidesPerGroup: 2,
-        },
-        992: {
-          slidesPerView: 3,
-          slidesPerGroup: 3,
-        },
-      },
-    });
-  });
 })();
