@@ -60,7 +60,9 @@ const _scheduleRowElement = (i, dayData, timespanInfo, now, strings) => {
   const showNowBar = (now.getDay() + 6) % 7 >= i
   
   const _dayTagElement = (dayTag) => Lit.html`
-    <div class="shrink-0 text-sm sticky left-0.5 self-start bg-white rounded-full p-1 leading-none flex items-center justify-center m-0.5 shadow-md w-8 aspect-square ${isActiveDay ? "font-bold text-red-500 border-2 border-red-500" : "border"}">${dayTag}</div>
+    <div class="shrink-0 bg-white rounded-full ml-0.5 flex items-center justify-center shadow-md w-8 aspect-square ${isActiveDay ? "font-bold text-red-500 border-2 border-red-500" : "border"}">
+      <span class="text-sm leading-none">${dayTag}</span>
+    </div>
   `
   
   const _hourBarsElement = () => {

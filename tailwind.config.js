@@ -4,35 +4,38 @@ const themePath = path.join(__dirname, "data/theme.json");
 const themeRead = fs.readFileSync(themePath, "utf8");
 const theme = JSON.parse(themeRead);
 
-let font_base = Number(theme.fonts.font_size.base.replace("px", ""));
+let font_initial_size = Number(theme.fonts.font_size.base.replace("px", ""));
 let font_scale = Number(theme.fonts.font_size.scale);
-let h6 = font_base / font_base;
+
+let h6 = font_initial_size / font_initial_size;
 let h5 = h6 * font_scale;
 let h4 = h5 * font_scale;
 let h3 = h4 * font_scale;
 let h2 = h3 * font_scale;
 let h1 = h2 * font_scale;
-let fontPrimary,
+
+let fontPrimaryName,
   fontPrimaryType,
-  fontSecondary,
+  fontSecondaryName,
   fontSecondaryType,
-  fontTeriary,
+  fontTeriaryName,
   fontTeriaryType;
+
 if (theme.fonts.font_family.primary) {
-  fontPrimary = theme.fonts.font_family.primary.base
+  // Extract font names from google font urls
+  fontPrimaryName = theme.fonts.font_family.primary.base
     .replace(/\+/g, " ")
     .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;]+/gi, "");
   fontPrimaryType = theme.fonts.font_family.primary.type;
 }
 if (theme.fonts.font_family.secondary) {
-  fontSecondary = theme.fonts.font_family.secondary.base
+  fontSecondaryName = theme.fonts.font_family.secondary.base
     .replace(/\+/g, " ")
     .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;]+/gi, "");
   fontSecondaryType = theme.fonts.font_family.secondary.type;
 }
-
 if (theme.fonts.font_family.tertiary) {
-  fontTeriary = theme.fonts.font_family.tertiary.base
+  fontTeriaryName = theme.fonts.font_family.tertiary.base
     .replace(/\+/g, " ")
     .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;]+/gi, "");
   fontTeriaryType = theme.fonts.font_family.tertiary.type;
@@ -111,7 +114,7 @@ module.exports = {
         },
       },
       fontSize: {
-        base: font_base + "px",
+        base: font_initial_size + "px",
         h1: h1 + "rem",
         "h1-sm": h1 * 0.8 + "rem",
         h2: h2 + "rem",
@@ -123,9 +126,9 @@ module.exports = {
         h6: h6 + "rem",
       },
       fontFamily: {
-        primary: [fontPrimary, fontPrimaryType],
-        secondary: [fontSecondary, fontSecondaryType],
-        tertiary: [fontTeriary, fontTeriaryType],
+        primary: [fontPrimaryName, fontPrimaryType],
+        secondary: [fontSecondaryName, fontSecondaryType],
+        tertiary: [fontTeriaryName, fontTeriaryType],
       },
       boxShadow: {
         'centered-lg': '0 0px 15px rgb(0 0 0 / 0.1)'
