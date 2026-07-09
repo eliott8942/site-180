@@ -54,16 +54,6 @@
           tagSelectorInput.checked = false
         }
       })
-
-      document.addEventListener("touchend", (event) => {
-        if (!tagSelectorInput.checked) {
-          return
-        }
-        if (!tagSelectorsWithAutoFold.contains(event.target)) {
-          tagSelectorInput.checked = false
-        }
-      }, { passive: true })
     }
   }
-  
 })();
