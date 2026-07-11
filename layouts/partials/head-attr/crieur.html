@@ -1,31 +1,23 @@
 <!-- libraries -->
 {{ with resources.Get "js/crieur/lib/maplibregl.js" }}
-  <link rel="preconnect" as="script" href="{{ .RelPermalink }}"></link>
-  <script src="{{ .RelPermalink }}" fetchpriority="high"></script>
+  <!-- Enable defer here because it's not a module -->
+  <script src="{{ .RelPermalink }}" fetchpriority="high" defer></script>
 {{ end }}
-{{ with (resources.Get "scss/css/maplibregl.css" | minify | fingerprint) }}
+{{ with (resources.Get "scss/css/maplibregl.css" | fingerprint) }}
   <link rel="stylesheet" href="{{ .RelPermalink }}"></link>
-  <style href="{{ .RelPermalink }}" fetchpriority="high"></style>
 {{ end }}
 
 {{ with resources.Get "js/crieur/lib/fuse.js" }}
-  <link rel="preconnect" as="script" href="{{ .RelPermalink }}"></link>
   <script src="{{ .RelPermalink }}" fetchpriority="high" type="module"></script>
 {{ end }}
 
 {{ with resources.Get "js/crieur/lib/lit-core.min.js" }}
-  <link rel="preconnect" as="script" href="{{ .RelPermalink }}"></link>
   <script src="{{ .RelPermalink }}" fetchpriority="high" type="module"></script>
 {{ end }}
 
 <!-- main application logic -->
 {{ with (resources.Get "scss/crieur.scss" | toCSS | css.PostCSS | minify | fingerprint) }}
   <link rel="stylesheet" href="{{ .RelPermalink }}"></link>
-  <style href="{{ .RelPermalink }}" fetchpriority="high"></style>
-{{ end }}
-{{ with (resources.Get "scss/crieurIcons.scss" | toCSS | css.PostCSS | minify | fingerprint) }}
-  <link rel="stylesheet" href="{{ .RelPermalink }}"></link>
-  <style href="{{ .RelPermalink }}" fetchpriority="high"></style>
 {{ end }}
 
 {{ $crieur := slice }}
