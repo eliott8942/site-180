@@ -94,13 +94,13 @@ function initComponents() {
   };
 }
 
-function init(config, placeData, decoData, style) {
+function init(placeData, decoData, style) {
   placeData = assignIds(placeData)
   
   PLACE_DATA = placeData
 
   initComponents()
-  initMap(config, placeData, decoData, style)
+  initMap(placeData, decoData, style)
   uiInit(placeData)
   initSearch(placeData)
 

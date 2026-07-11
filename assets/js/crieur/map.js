@@ -6,7 +6,7 @@ function clamp(max, min, a) {
   return Math.max(Math.min(a, max), min)
 }
 
-function initMap(config, placeData, decoData, style) {
+function initMap(placeData, decoData, style) {
   if (typeof maplibregl == 'undefined') {
     console.warn("Warning : maplibregl is not defined.")
     return
