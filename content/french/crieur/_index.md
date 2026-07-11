@@ -5,7 +5,7 @@ description: "Le Crieur est un carnet d'adresses recommandées par les membres d
 draft: false
 disableFooter: true
 
-# Sections
+# Content of the help widget
 sections:
   - title: "Comment ça marche ?"
     content: "Ce carnet se compose d'adresses recommandées par les membres de la communauté étudiante, ainsi que nos préférées: celles que nous conseillons les yeux fermés. Cherche simplement un restaurant ou une categorie, et nous te retournons tous les restaurants correspondants."
