@@ -9,9 +9,9 @@ Currently, that version is still on beta. If you want to check the released vers
 
 If you want to check the roadmap, check [ROADMAP.md](./ROADMAP.md)
 
-## Development
+## Development and maintaining
 
-See [DEVELOPMENT.md](./DEVELOPMENT.md)
+See [DEVELOPMENT.md](./DEVELOPMENT.md) and [MAINTAINING.md](./MAINTAINING.md)
 
 ## License
 
