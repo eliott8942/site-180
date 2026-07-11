@@ -6,7 +6,6 @@
 {{ end }}
 
 {{ define "main" }}
-  {{ with site.GetPage "homepage" }}
     <!-- Banner -->
     {{ with .Params.banner }}
       <section class="p-0 m-0">
@@ -103,5 +102,4 @@
       {{ end }}
     </section>
     <!-- /Sections -->
-  {{ end }}
 {{ end }}
