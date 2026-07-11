@@ -25,28 +25,28 @@ location:
   latitude: 46.5171856
   longitude: 6.6281226
   map: https://www.google.com/maps/place/tibits/@46.5172178,6.6278978,17z/data=!3m2!4b1!5s0x14e9fdfee0411777:0xe31fc05cf9b5b34b!4m6!3m5!1s0x478c2fe53ca8db4b:0xebd2430627039f06!8m2!3d46.5172178!4d6.6278978!16s%2Fg%2F11gsb8h894?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D
-  schedule:
-  - openingHours:
-    - end: '22:30'
-      start: '19:00'
-  - openingHours:
-    - end: '22:30'
-      start: '19:00'
-  - openingHours:
-    - end: '22:30'
-      start: '19:00'
-  - openingHours:
-    - end: '22:30'
-      start: '19:00'
-  - openingHours:
-    - end: '22:30'
-      start: '19:00'
-  - openingHours:
-    - end: '23:00'
-      start: '19:00'
-  - openingHours:
-    - end: '23:00'
-      start: '19:00'
+schedule:
+- openingHours:
+  - end: '22:30'
+    start: '19:00'
+- openingHours:
+  - end: '22:30'
+    start: '19:00'
+- openingHours:
+  - end: '22:30'
+    start: '19:00'
+- openingHours:
+  - end: '22:30'
+    start: '19:00'
+- openingHours:
+  - end: '22:30'
+    start: '19:00'
+- openingHours:
+  - end: '23:00'
+    start: '19:00'
+- openingHours:
+  - end: '23:00'
+    start: '19:00'
 price: 25 CHF
 priceTag: 3
 style: Buffet végétarien/vegan

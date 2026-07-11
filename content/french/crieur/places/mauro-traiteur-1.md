@@ -20,26 +20,26 @@ location:
   latitude: 46.52103743431745
   longitude: 6.63901059613333
   map: https://www.google.com/maps/place/MAURO+TRAITEUR+LAUSANNE/@46.5756377,5.9110985,9z/data=!4m10!1m2!2m1!1sMauro+Traiteur!3m6!1s0x478c2e35d21f83a1:0x40c7db4d2a7eafb8!8m2!3d46.521039!4d6.6390197!15sCg5NYXVybyBUcmFpdGV1ciIDiAEBWhAiDm1hdXJvIHRyYWl0ZXVykgEQY2F0ZXJpbmdfc2VydmljZeABAA!16s%2Fg%2F1tg9gfvb?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D
-  schedule:
-  - openingHours:
-    - end: '19:30'
-      start: '9:30'
-  - openingHours:
-    - end: '19:30'
-      start: '9:30'
-  - openingHours:
-    - end: '19:30'
-      start: '9:30'
-  - openingHours:
-    - end: '19:30'
-      start: '9:30'
-  - openingHours:
-    - end: '19:30'
-      start: '9:30'
-  - openingHours:
-    - end: '17:00'
-      start: '9:30'
-  - openingHours: []
+schedule:
+- openingHours:
+  - end: '19:30'
+    start: '9:30'
+- openingHours:
+  - end: '19:30'
+    start: '9:30'
+- openingHours:
+  - end: '19:30'
+    start: '9:30'
+- openingHours:
+  - end: '19:30'
+    start: '9:30'
+- openingHours:
+  - end: '19:30'
+    start: '9:30'
+- openingHours:
+  - end: '17:00'
+    start: '9:30'
+- openingHours: []
 price: 5 - 10 CHF
 priceTag: 1
 style: Traiteur italien

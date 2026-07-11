@@ -50,7 +50,7 @@ const entryCardElement = (placeInfo, hints = {}) => {
           <span> ‧ </span>
           <span>${_applyHintsOnString(placeInfo.location.address.address, hints["address"])}</span>
           <span> ‧ </span>
-          ${statusSpanElement(placeInfo.location.schedule)}
+          ${statusSpanElement(placeInfo.schedule)}
         </div>
       </div>
     </div>

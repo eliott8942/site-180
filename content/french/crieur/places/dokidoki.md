@@ -21,40 +21,40 @@ location:
   latitude: 46.52004283516274
   longitude: 6.640155731947729
   map: https://www.google.com/maps/place/Doki+Doki/@46.5200511,6.6375721,17z/data=!3m1!4b1!4m6!3m5!1s0x478c2fc177d8f035:0x6b4357054cbc301a!8m2!3d46.5200511!4d6.640147!16s%2Fg%2F11kxrqk_qv?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D
-  schedule:
-  - openingHours:
-    - end: '14:00'
-      start: '11:30'
-    - end: '22:00'
-      start: '18:30'
-  - openingHours:
-    - end: '14:00'
-      start: '11:30'
-    - end: '22:00'
-      start: '18:30'
-  - openingHours:
-    - end: '14:00'
-      start: '11:30'
-    - end: '22:00'
-      start: '18:30'
-  - openingHours:
-    - end: '14:00'
-      start: '11:30'
-    - end: '22:00'
-      start: '18:30'
-  - openingHours:
-    - end: '14:00'
-      start: '11:30'
-    - end: '22:00'
-      start: '18:30'
-  - openingHours:
-    - end: '14:00'
-      start: '12:00'
-    - end: '22:00'
-      start: '18:30'
-  - openingHours:
-    - end: '14:00'
-      start: '12:00'
+schedule:
+- openingHours:
+  - end: '14:00'
+    start: '11:30'
+  - end: '22:00'
+    start: '18:30'
+- openingHours:
+  - end: '14:00'
+    start: '11:30'
+  - end: '22:00'
+    start: '18:30'
+- openingHours:
+  - end: '14:00'
+    start: '11:30'
+  - end: '22:00'
+    start: '18:30'
+- openingHours:
+  - end: '14:00'
+    start: '11:30'
+  - end: '22:00'
+    start: '18:30'
+- openingHours:
+  - end: '14:00'
+    start: '11:30'
+  - end: '22:00'
+    start: '18:30'
+- openingHours:
+  - end: '14:00'
+    start: '12:00'
+  - end: '22:00'
+    start: '18:30'
+- openingHours:
+  - end: '14:00'
+    start: '12:00'
 price: 3 - 18 CHF
 priceTag: 2
 style: Cuisine japonaise / Ramen

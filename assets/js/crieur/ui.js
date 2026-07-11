@@ -125,7 +125,7 @@ function updatePanelInfo(data) {
 
   PLACE_INFO_COMPONENTS.types.textContent = data.types.join(", ")
 
-  Lit.render(scheduleElement(data.location.schedule), PLACE_INFO_COMPONENTS.scheduleContainer)
+  Lit.render(scheduleElement(data.schedule), PLACE_INFO_COMPONENTS.scheduleContainer)
   
   Lit.render(
     data.links.map(link => socialLinkElement(link)),

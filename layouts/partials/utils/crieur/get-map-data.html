@@ -65,11 +65,10 @@
     {{ end }}
 
     <!-- Parse schedule -->
-    {{ $schedule := $place.Param "location.schedule" }}
+    {{ $schedule := $place.Param "schedule" }}
     {{ if $schedule }}
       {{ $parsedScheduleSlice := partial "utils/crieur/parse-schedules.html" (dict "schedule" $schedule) }}
-      {{ $updatedLocation := merge $originalPlace.location (dict "schedule" $parsedScheduleSlice) }}
-      {{ $originalPlace = merge $originalPlace (dict "location" $updatedLocation) }}
+      {{ $originalPlace = merge $originalPlace (dict "schedule" $parsedScheduleSlice) }}
     {{ end }}
     {{ $place = merge $originalPlace $placeWithUrl }}
     

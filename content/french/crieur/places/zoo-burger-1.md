@@ -23,38 +23,38 @@ location:
   latitude: 46.521341987843634
   longitude: 6.639769958041056
   map: https://www.google.com/maps/place/Rue+Marterey+29,+1005+Lausanne/@46.521415,6.6397891,17z/data=!3m1!4b1!4m6!3m5!1s0x478c2e35d8c4fddb:0xc9a5681ca6c11df8!8m2!3d46.521415!4d6.6397891!16s%2Fg%2F11c88qqvwg?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D
-  schedule:
-  - openingHours:
-    - end: '13:30'
-      start: '11:30'
-    - end: '21:30'
-      start: '18:00'
-  - openingHours:
-    - end: '13:30'
-      start: '11:30'
-    - end: '21:30'
-      start: '18:00'
-  - openingHours:
-    - end: '14:00'
-      start: '11:30'
-    - end: '21:30'
-      start: '18:00'
-  - openingHours:
-    - end: '14:00'
-      start: '11:30'
-    - end: '21:30'
-      start: '18:00'
-  - openingHours:
-    - end: '14:00'
-      start: '11:30'
-    - end: '21:30'
-      start: '18:00'
-  - openingHours:
-    - end: '15:00'
-      start: '11:30'
-    - end: '21:30'
-      start: '18:00'
-  - openingHours: []
+schedule:
+- openingHours:
+  - end: '13:30'
+    start: '11:30'
+  - end: '21:30'
+    start: '18:00'
+- openingHours:
+  - end: '13:30'
+    start: '11:30'
+  - end: '21:30'
+    start: '18:00'
+- openingHours:
+  - end: '14:00'
+    start: '11:30'
+  - end: '21:30'
+    start: '18:00'
+- openingHours:
+  - end: '14:00'
+    start: '11:30'
+  - end: '21:30'
+    start: '18:00'
+- openingHours:
+  - end: '14:00'
+    start: '11:30'
+  - end: '21:30'
+    start: '18:00'
+- openingHours:
+  - end: '15:00'
+    start: '11:30'
+  - end: '21:30'
+    start: '18:00'
+- openingHours: []
 price: 25 - 30 CHF
 priceTag: 3
 style: Burger
