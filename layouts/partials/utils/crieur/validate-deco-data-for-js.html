@@ -6,17 +6,8 @@
           {{ errorf "%s:%s" $place "Missing title" }}
         {{ end }}
 
-        {{ if not .location }}
-          {{ errorf "%s:%s" $place "Missing location" }}
-        {{ else }}
-          {{ if not .location.latitude }}
-            {{ errorf "%s:%s" $place "Missing location.latitude" }}
-          {{ end }}
-          {{ if not .location.longitude }}
-            {{ errorf "%s:%s" $place "Missing location.logitude" }}
-          {{ end }}  
-        {{ end }}
-
+        {{ partial "utils/validate-location" (dict "location" .location "place" $place "require_address" false) }}
+        
         {{ if not .color }}
           {{ errorf "%s:%s" $place "Missing color" }}
         {{ end }}

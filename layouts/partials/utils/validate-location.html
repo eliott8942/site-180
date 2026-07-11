@@ -1,0 +1,30 @@
+{{ $location := .location }}
+{{ $place := .place }}
+{{ $require_address := .require_address | default true }}
+
+{{ if not $location }}
+  {{ errorf "%s:%s" $place "Missing location" }}
+{{ else }}
+  {{ if not $location.latitude }}
+    {{ errorf "%s:%s" $place "Missing location.latitude" }}
+  {{ end }}
+  {{ if not $location.longitude }}
+    {{ errorf "%s:%s" $place "Missing location.logitude" }}
+  {{ end }}
+
+  {{ if $require_address }}
+    {{ if not $location.address }}
+      {{ errorf "%s:%s" $place "Missing location.address" }}
+    {{ else }}
+      {{ if not $location.address.address }}
+        {{ errorf "%s:%s" $place "Missing location.address.address" }}
+      {{ end }}
+      {{ if not $location.address.city }}
+        {{ errorf "%s:%s" $place "Missing location.address.city" }}
+      {{ end }}
+      {{ if not $location.address.postal_code }}
+        {{ errorf "%s:%s" $place "Missing location.address.postal_code" }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}

@@ -24,23 +24,7 @@
           {{ end }}
         {{ end }}
 
-        {{ if not .location }}
-          {{ errorf "%s:%s" $place "Missing location" }}
-        {{ else }}
-          {{ if not .location.address }}
-            {{ errorf "%s:%s" $place "Missing location.address" }}
-          {{ else }}
-            {{ if not .location.address.address }}
-              {{ errorf "%s:%s" $place "Missing location.address.address" }}
-            {{ end }}
-            {{ if not .location.address.city }}
-              {{ errorf "%s:%s" $place "Missing location.address.city" }}
-            {{ end }}
-            {{ if not .location.address.postal_code }}
-              {{ errorf "%s:%s" $place "Missing location.address.postal_code" }}
-            {{ end }}
-          {{ end }}
-        {{ end }}
+        {{ partial "utils/validate-location" (dict "location" .location "place" $place) }}
         
         {{ if not .schedule }}
           {{ errorf "%s:%s" $place "Missing schedule" }}
