@@ -23,7 +23,7 @@
 {{ $crieur := slice }}
 {{ $crieur := $crieur | append (resources.Match "js/crieur/*.js") }}
 {{ $crieur := $crieur | append (resources.Match "js/crieur/components/*.js") }}
-{{ $crieur := $crieur | resources.Concat "js/js.js" }}
+{{ $crieur := $crieur | resources.Concat "js/crieur/js.js" }}
 {{ if hugo.IsProduction }}
   {{ $crieur = $crieur | minify | fingerprint }}
 {{ end }}
