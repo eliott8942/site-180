@@ -40,21 +40,21 @@
               {{ errorf "%s:%s" $place "Missing location.address.postal_code" }}
             {{ end }}
           {{ end }}
-
-          {{ if not .schedule }}
-            {{ errorf "%s:%s" $place "Missing schedule" }}
+        {{ end }}
+        
+        {{ if not .schedule }}
+          {{ errorf "%s:%s" $place "Missing schedule" }}
+        {{ else }}
+          {{ if ne (.schedule | len) 7 }}
+            {{ errorf "%s:%s" $place "Location schedule length is not 7" }}
           {{ else }}
-            {{ if ne (.schedule | len) 7 }}
-              {{ errorf "%s:%s" $place "Location schedule length is not 7" }}
-            {{ else }}
-              {{ range $i, $openHours := .schedule }}
-                {{ range $timeSpan := $openHours.openHours }}
-                  {{ if not (index $timeSpan "start") }}
-                    {{ errorf "%s:%s" $place "Missing openingHours.start" }}
-                  {{ end }}
-                  {{ if not (index $timeSpan "end") }}
-                    {{ errorf "%s:%s" $place "Missing openingHours.end" }}
-                  {{ end }}
+            {{ range $i, $openHours := .schedule }}
+              {{ range $timeSpan := $openHours.openHours }}
+                {{ if not (index $timeSpan "start") }}
+                  {{ errorf "%s:%s" $place "Missing openingHours.start" }}
+                {{ end }}
+                {{ if not (index $timeSpan "end") }}
+                  {{ errorf "%s:%s" $place "Missing openingHours.end" }}
                 {{ end }}
               {{ end }}
             {{ end }}
