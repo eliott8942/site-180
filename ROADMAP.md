@@ -48,15 +48,14 @@
 
 - [ ] Redesign Fringale page
 
-  - [ ] Add a page to indicate how the user should buy the book
-
-  - [ ] Integrate it into the fringale page
-
-- [ ] Performance and Security
-  lighthouse report
-
-  - [ ] Rework the network dependency tree to make fetch more in parralel
-
-  - [ ] Make the images of the blog cards and blog article page have their full width BEFORE the image is loaded
+  - [ ] Add sales schedule
   
-  - [ ] Crieur : make requesting map tiles use HTTPS
+  - [X] Image gallery
+
+    - [X] Scrollable
+
+    - [X] Image grid on large screens 
+
+      - [X] Above 6 pictures
+
+  - [ ] 3D Rendering of the images
