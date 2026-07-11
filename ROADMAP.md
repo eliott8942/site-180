@@ -59,3 +59,5 @@
       - [X] Above 6 pictures
 
   - [ ] 3D Rendering of the images
+
+- [ ] Website documentation : Explain how to add content to it
