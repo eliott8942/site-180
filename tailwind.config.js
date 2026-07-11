@@ -41,6 +41,28 @@ if (theme.fonts.font_family.tertiary) {
   fontTeriaryType = theme.fonts.font_family.tertiary.type;
 }
 
+const STRING_LITERAL_RE = /['"`]((?:[^'"`\\]|\\.)*)['"`]/g;
+const CLASS_TOKEN_RE = /[a-zA-Z0-9_-]+/g;
+const TEMPLATE_EXPR_RE = /\$\{[^}]*\}/g; // strip `${...}` interpolations
+
+function getClassesInJS(content) {
+  const classes = new Set();
+  let strMatch;
+
+  while ((strMatch = STRING_LITERAL_RE.exec(content))) {
+    // Remove any ${...} interpolation so JS identifiers inside it
+    // don't get mistaken for class names
+    const inner = strMatch[1].replace(TEMPLATE_EXPR_RE, ' ');
+
+    let tokenMatch;
+    while ((tokenMatch = CLASS_TOKEN_RE.exec(inner))) {
+      classes.add(tokenMatch[0]);
+    }
+  }
+
+  return [...classes];
+}
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -54,17 +76,7 @@ module.exports = {
   ],
   extract: {
     // Custom extractor for JS — captures strings inside quotes, backticks, and dot notation
-    js: (content) => {
-      const matches = content.matchAll(
-        /['"` ]([a-zA-Z0-9_-]+(?:\s+[a-zA-Z0-9_-]+)*)['"` ]/g
-      );
-      const classes = [];
-      for (const match of matches) {
-        // Split space-separated class strings like "text-red-500 font-bold"
-        classes.push(...match[1].split(/\s+/));
-      }
-      return classes;
-    },
+    js: getClassesInJS,
   },
   safelist: [{ pattern: /^swiper-/ }],
   darkMode: "class",
