@@ -71,6 +71,9 @@
       {{ $originalPlace = merge $originalPlace (dict "schedule" $parsedScheduleSlice) }}
     {{ end }}
     {{ $place = merge $originalPlace $placeWithUrl }}
+
+    <!-- Assign an id to the place -->
+    {{ $place = merge $place (dict "id" $i) }}
     
     {{ $data = $data | append $place }}
   {{ end }}

@@ -95,8 +95,6 @@ function initComponents() {
 }
 
 function init(placeData, decoData, style) {
-  placeData = assignIds(placeData)
-  
   PLACE_DATA = placeData
 
   initComponents()
