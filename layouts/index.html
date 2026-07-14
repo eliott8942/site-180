@@ -44,12 +44,8 @@
     <!-- /Banner -->
 
     <!-- Posts -->
-    {{ with site.GetPage "sections/actualites" }}
-      {{ if .Params.enable }}
-        {{ $paginator := $.Paginate (where .Site.RegularPages "Type" "in" "blog") 10 }}
-        {{ partial "components/posts-swipe" (dict "Title" .Title "Description" .Params.Description "Posts" $paginator.Pages) }}
-      {{ end }}
-    {{ end }}
+    {{ $paginator := $.Paginate (where .Site.RegularPages "Type" "in" "blog") 10 }}
+    {{ partial "components/posts-swipe" (dict "Title" .Params.news.title "Posts" $paginator.Pages) }}
     <!-- /Posts -->
 
     <!-- Sections -->
