@@ -4,7 +4,11 @@
   {{ range $paginator.Pages }}
     <div class="">
       <div class="bg-white rounded-xl shadow-xl">
-        {{ $image:= .Params.thumbnail }}
+        {{ $image := .Params.thumbnail }}
+        {{ if not (resources.GetMatch $image) }}
+          {{ $image = "images/unknown.png" }}
+        {{ end }}
+        
         {{ if $image }}
           <a href="{{ .RelPermalink }}">
             {{ partial "image" (dict "Src" $image "Alt" .Title "Class" "rounded-t-xl aspect-square object-cover object-center") }}
@@ -20,5 +24,6 @@
       </div>
     </div>
   {{ end }}
+
   {{ partial "components/pagination.html" . }}
 </div>

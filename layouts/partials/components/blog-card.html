@@ -22,7 +22,7 @@
         {{ time.Format ":date_long" .PublishDate }}
       </div>
 
-      {{ partial "components/time-indicator" (dict "timeMin" .Params.lectureTimeMin "class" "opacity-50") }}
+      {{ partial "components/blog/time-indicator" (dict "timeMin" .Params.lectureTimeMin "class" "opacity-50") }}
     </div>
 
     <!-- TODO : make it expand into the card, so the description can be only shown when hovered -->
@@ -34,8 +34,8 @@
     </div>
 
     <div>
-      {{ partial "components/tag-list" ( dict "scope" . "group" "tags" "icon" "fa-tag" ) }}
-      {{ partial "components/tag-list" ( dict "scope" . "group" "categories" "icon" "fa-folder" ) }}
+      {{ partial "components/blog/tag-list" ( dict "scope" . "group" "tags" "icon" "fa-tag" ) }}
+      {{ partial "components/blog/tag-list" ( dict "scope" . "group" "categories" "icon" "fa-folder" ) }}
     </div>
   </div>
 </div>
