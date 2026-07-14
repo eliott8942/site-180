@@ -22,7 +22,7 @@ npm i
 npm run update-modules
 ```
 
-Finally, be ready to spend a lot of time learning how to write hugo partials and understanding those who already exists, because the syntax is just awfull. I hope i'm not just blindman again and i didn't figured how to write cleaner partials.
+Finally, be ready to spend a lot of time learning how to write hugo partials and understanding those who already exists, because the syntax is just awfull.
 
 ### Run the website locally
 
