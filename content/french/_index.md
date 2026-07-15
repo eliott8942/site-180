@@ -9,6 +9,9 @@ banner:
     label: "Get Started For Free"
     link: "https://github.com/zeon-studio/hugoplate"
 
+news:
+  title: "Quoi de neuf ?"
+
 # Sections
 sections:
   - title: "Le Crieur"
