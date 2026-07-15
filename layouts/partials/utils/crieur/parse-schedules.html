@@ -8,8 +8,8 @@
   {{- $parsedScheduleDaySlice := slice -}}
   {{- if $scheduleDay.openingHours -}}
     {{- range $timeSpan := $scheduleDay.openingHours -}}
-      {{- $start := partial "utils/crieur/parse-hour.html" (dict "string" $timeSpan.start) -}}
-      {{- $end := partial "utils/crieur/parse-hour.html" (dict "string" $timeSpan.end) -}}
+      {{- $start := partial "utils/parse-hour.html" (dict "string" $timeSpan.start) -}}
+      {{- $end := partial "utils/parse-hour.html" (dict "string" $timeSpan.end) -}}
 
       {{- if eq (len $parsedScheduleDaySlice) 0 -}}
         {{- $parsedScheduleDaySlice = slice (slice $start $end) -}}

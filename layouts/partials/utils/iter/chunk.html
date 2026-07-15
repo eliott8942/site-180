@@ -1,0 +1,18 @@
+{{ $items := .items }}
+{{ $size := .size }}
+
+{{ $chunks := slice }}
+
+{{ range $i, $item := $items }}
+  {{ if eq (mod $i $size) 0 }}
+    <!-- Set the type of the elements inside the slice because hugo doesn't do it by itself apparently -->
+    {{ $chunk := first $size (after $i $items) }}
+    {{ if eq (len $chunks) 0 }}
+      {{ $chunks = slice ($chunk) }}  
+    {{ else }}
+      {{ $chunks = $chunks | append (($chunk)) }}  
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ return $chunks }}

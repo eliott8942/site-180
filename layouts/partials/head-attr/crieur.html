@@ -36,11 +36,11 @@
 
 <script type="text/javascript" defer>
   // avoid print partials input
-  {{ $_:= partial "utils/crieur/validate-map-data-for-js.html" . }}
-  {{ $_:= partial "utils/crieur/validate-deco-data-for-js.html" . }}
+  {{ $_:= partial "utils/crieur/validate-map-data.html" . }}
+  {{ $_:= partial "utils/crieur/validate-deco-data.html" . }}
 
-  const CRIEUR_PLACES = {{ partial "utils/crieur/get-map-data.html" (dict "path" "crieur/places" "scope" .) | jsonify | safeJS }};
-  const CRIEUR_DECO = {{ partial "utils/crieur/get-map-data.html" (dict "path" "crieur/deco" "scope" .) | jsonify | safeJS }};
+  const CRIEUR_PLACES = {{ partial "utils/crieur/process-map-data.html" (dict "path" "crieur/places" "scope" .) | jsonify | safeJS }};
+  const CRIEUR_DECO = {{ partial "utils/crieur/process-map-data.html" (dict "path" "crieur/deco" "scope" .) | jsonify | safeJS }};
 
   {{ with resources.Get "js/crieur/map-style.json" }}
     const STYLE = {{ .Content | safeJS }};
