@@ -52,11 +52,11 @@
   
   - [X] Image gallery
 
-    - [X] Scrollable
+    - [X] Image gallery on small / medium screens
 
     - [X] Image grid on large screens 
 
-      - [X] Above 6 pictures
+      - [X] 6 or above pictures
 
   - [ ] 3D Rendering of the images
 

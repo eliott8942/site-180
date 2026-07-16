@@ -1,0 +1,64 @@
+{{ $gallery := .gallery }}
+{{ $gallery := partial "utils/iter/chunk.html" (dict "items" $gallery "size" 2) }}
+
+<div class="swiper fringale-slider lg:p-1">
+  <!-- In swiper css, flex of swiper-wrapper is nowrap by default. We override this for bigger screens where we disable swiper js entirely -->
+  <div class="swiper-wrapper z-10 lg:grid grid-cols-2">
+    <!-- Honestly don't look at that code here, i've overcomplicated things just to make the image responsiveness prettier -->
+    {{ range $row := $gallery }}
+      {{ if eq (len $row) 2 }}
+        {{ $img1 := index $row 0 }}
+        {{ $img2 := index $row 1 }}
+        
+        {{ if le $img1.Width $img2.Width }}
+          {{ $aspect_ratio := div (float $img2.Width) (float $img2.Height) }}
+
+          <div class="swiper-slide max-lg:p-2 lg:p-1">
+            <div class="h-full overflow-hidden rounded-lg border shadow-inner-xl z-1 shadow-black/30">
+              <div class="relative left-1/2 -translate-x-1/2 h-full overflow-hidden lg:aspect-[var(--aspect-ratio)]" style="--aspect-ratio: {{$aspect_ratio}};">
+                {{ partial "image" (dict "Src" $img1.RelPermalink "Class" "w-full h-full min-h-80 relative lg:top-1/2 lg:-translate-y-1/2 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high") }}
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide max-lg:p-2 lg:p-1">
+            <div class="h-full overflow-hidden rounded-lg border shadow-inner-xl z-1 shadow-black/30">
+              {{ partial "image" (dict "Src" $img2.RelPermalink "Class" "w-full h-full min-h-80 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high") }}
+            </div>
+          </div>
+        {{ else }}
+          {{ $aspect_ratio := div (float $img1.Width) (float $img1.Height) }}
+
+          <div class="swiper-slide max-lg:p-2 lg:p-1">
+            <div class="h-full overflow-hidden rounded-lg border shadow-inner-xl z-1 shadow-black/30">
+              {{ partial "image" (dict "Src" $img1.RelPermalink "Class" "w-full h-full min-h-80 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high") }}
+            </div>
+          </div>
+
+          <div class="swiper-slide max-lg:p-2 lg:p-1">
+            <div class="h-full overflow-hidden rounded-lg border shadow-inner-xl z-1 shadow-black/30">
+              <div class="relative left-1/2 -translate-x-1/2 h-full overflow-hidden lg:aspect-[var(--aspect-ratio)]" style="--aspect-ratio: {{$aspect_ratio}};">
+                {{ partial "image" (dict "Src" $img2.RelPermalink "Class" "w-full h-full min-h-80 relative lg:top-1/2 lg:-translate-y-1/2 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high") }}
+              </div>
+            </div>
+          </div>
+        {{ end }}
+      {{ else }}
+        {{ $img1 := index $row 0 }}
+      
+        <div class="swiper-slide max-lg:p-2 lg:p-1">
+          <div class="h-full overflow-hidden rounded-lg border shadow-inner-xl z-1 shadow-black/30">
+            {{ partial "image" (dict "Src" $img1.RelPermalink "Class" "w-full h-full min-h-80 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high") }}
+          </div>
+        </div>
+      {{ end }}
+    {{ end }} 
+  </div>
+</div>
+<div class="absolute left-1/2 bottom-0 mb-8 z-10 -translate-x-1/2">
+  <div class="shadow-md shadow-black/15 rounded-full">
+    <div
+      class="p-2 bg-white/15 rounded-full backdrop-blur-sm shadow-inner-centered shadow-white/50 fringale-slider-pagination flex items-center justify-center text-center shrink-0 grow-0 lg:hidden"
+    ></div>
+  </div>
+</div>

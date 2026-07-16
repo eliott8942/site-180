@@ -1,0 +1,8 @@
+{{ $gallery := .Params.gallery }}
+
+{{ if not (strings.HasSuffix $gallery "/") }}
+  {{ errorf "%s:`%s` doesn't end with a '/'" .File.Path $gallery }}
+{{ end }}
+{{ $gallery = print $gallery "*" }}
+
+{{ return resources.Match $gallery }}

@@ -1,42 +1,38 @@
+{{ define "headAttrs" }}
+  {{ $script := resources.Get "js/fringale/single.js" }}
+  {{ if hugo.IsProduction }}
+    {{ $script = $script | minify | fingerprint }}
+  {{ end }}
+
+  <script defer
+    crossorigin="anonymous"
+    integrity="{{ $script.Data.Integrity }}"
+    src="{{ $script.RelPermalink }}"
+  ></script>
+{{ end }}
+
 {{ define "main" }}
-  <section>
-    <div class="container text-center">
-      <div
-        class="from-body to-theme-light dark:from-darkmode-body dark:to-darkmode-theme-light rounded-2xl bg-gradient-to-b px-8"
-      >
-        {{ partial "components/breadcrumb" (dict "Context" . "Class" "mt-6 mb-6") }}
-      </div>
+  {{ $gallery := partial "utils/fringale/get-gallery-files.html" . }}
+  
+  <div class="flex flex-col lg:flex-row w-full">
+    <!-- Image gallery -->
+    <div class="relative bg-gradient-reverse">
+      {{ partial "components/fringale/image-gallery" (dict "gallery" $gallery) }}
     </div>
-  </section>
 
-  <section class="section pt-7">
-    <div class="container">
-      <div class="row justify-center">
-        <div class="lg:col-6 p-5">
-          {{ $image:= .Params.image }}
-          {{ if $image }}
-            {{ partial "image" (dict "Src" $image "Alt" .Title "Class" "w-full rounded") }}
-          {{ end }}
-        </div>
-
-        <div class="lg:col-6 p-5">
-          <h1 class="h1 mt-10">
+    <!-- Info panel -->
+    <div class="grow shrink-0 lg:border-l max-lg:border-t max-lg:border-b lg:h-full lg:w-[24rem] 2xl:w-[32rem] max-lg:w-full shadow-centered-lg">
+      <!-- Description -->
+      <div class="sticky top-0">
+        <div class="p-10">
+          <h1 class="h2">
             {{ .Title }}
           </h1>
-          <div class="content mb-10">
+          <div class="content">
             {{ .Content | safeHTML }}
           </div>
         </div>
-
-        <div class="row items-start justify-end">
-          <div class="lg:col-4 flex items-center">
-            <!-- TODO : Remplement -->
-            <!-- <div class="lg:col-4 flex items-center">
-            {{ partial "social-share" (dict "Class" "share-icons" "Title" (i18n "share") "Reddit" false "Twitter" false) }}
-          </div> -->
-          </div>
-        </div>
       </div>
     </div>
-  </section>
+  </div>
 {{ end }}

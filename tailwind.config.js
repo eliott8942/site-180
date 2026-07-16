@@ -143,7 +143,9 @@ module.exports = {
         tertiary: [fontTeriaryName, fontTeriaryType],
       },
       boxShadow: {
-        'centered-lg': '0 0px 15px rgb(0 0 0 / 0.1)'
+        'centered-lg': '0 0px 15px rgb(0 0 0 / 0.1)',
+        'inner-xl': 'inset 0 20px 25px rgb(0 0 0 / 0.1)',
+        'inner-centered': 'inset 0 0px 4px rgb(0 0 0 / 0.1)',
       }
     },
   },

@@ -2,8 +2,7 @@
 title: "Fringale Vol.2"
 draft: false
 date: 2023-09-01T00:00:00Z
-type: "fringale/volume2"
-image: "images/fringale/volume2/fringale2.png"
+gallery: "images/fringale/volume2/"
 thumbnail: "images/fringale/volume2/fringale2.png"
 ---
 
