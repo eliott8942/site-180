@@ -14,7 +14,7 @@
 {{ define "main" }}
   {{ $gallery := partial "utils/fringale/get-gallery-files.html" . }}
   
-  <div class="flex flex-col lg:flex-row w-full">
+  <div class="flex flex-col lg:flex-row w-full lg:min-h-full">
     <!-- Image gallery -->
     <div class="relative bg-gradient-reverse">
       {{ partial "components/fringale/image-gallery" (dict "gallery" $gallery) }}
