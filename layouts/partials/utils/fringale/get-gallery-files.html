@@ -3,6 +3,14 @@
 {{ if not (strings.HasSuffix $gallery "/") }}
   {{ errorf "%s:`%s` doesn't end with a '/'" .File.Path $gallery }}
 {{ end }}
+{{ if (strings.HasPrefix $gallery "/") }}
+  {{ warnf "%s:`%s` starts with '/'. This can cause issues when rendered with baseURL." .File.Path $gallery }}
+{{ end }}
 {{ $gallery = print $gallery "*" }}
 
-{{ return resources.Match $gallery }}
+{{ $matchedImgs := resources.Match $gallery }}
+{{ if eq (len $matchedImgs) 0 }}
+  {{ warnf "%s:`%s` match no images" .File.Path $gallery }}
+{{ end }}
+
+{{ return $matchedImgs }}

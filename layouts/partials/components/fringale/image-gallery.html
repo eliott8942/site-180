@@ -19,16 +19,14 @@
           <div class="swiper-slide max-lg:p-2 lg:p-1">
             <div class="h-full overflow-hidden rounded-lg border shadow-inner-xl z-1 shadow-black/30">
               <div class="relative left-1/2 -translate-x-1/2 h-full overflow-hidden lg:aspect-[var(--aspect-ratio)]" style="--aspect-ratio: {{$aspect_ratio}};">
-                {{ warnf "DEBUG: $img1 := %s" $img1 }}
-                {{ partial "image" (dict "Src" $img1.RelPermalink "Class" "w-full h-full min-h-80 relative lg:top-1/2 lg:-translate-y-1/2 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high") }}
+                {{ partial "image" (dict "Src" (strings.TrimPrefix "/" $img1) "Class" "w-full h-full min-h-80 relative lg:top-1/2 lg:-translate-y-1/2 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high") }}
               </div>
             </div>
           </div>
 
           <div class="swiper-slide max-lg:p-2 lg:p-1">
             <div class="h-full overflow-hidden rounded-lg border shadow-inner-xl z-1 shadow-black/30">
-              {{ warnf "DEBUG: $img2 := %s" $img2 }}
-              {{ partial "image" (dict "Src" $img2.RelPermalink "Class" "w-full h-full min-h-80 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high") }}
+              {{ partial "image" (dict "Src" (strings.TrimPrefix "/" $img2) "Class" "w-full h-full min-h-80 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high") }}
             </div>
           </div>
         {{ else }}
@@ -36,16 +34,14 @@
 
           <div class="swiper-slide max-lg:p-2 lg:p-1">
             <div class="h-full overflow-hidden rounded-lg border shadow-inner-xl z-1 shadow-black/30">
-              {{ warnf "DEBUG: $img1 := %s" $img1 }}
-              {{ partial "image" (dict "Src" $img1.RelPermalink "Class" "w-full h-full min-h-80 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high") }}
+              {{ partial "image" (dict "Src" (strings.TrimPrefix "/" $img1) "Class" "w-full h-full min-h-80 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high") }}
             </div>
           </div>
 
           <div class="swiper-slide max-lg:p-2 lg:p-1">
             <div class="h-full overflow-hidden rounded-lg border shadow-inner-xl z-1 shadow-black/30">
               <div class="relative left-1/2 -translate-x-1/2 h-full overflow-hidden lg:aspect-[var(--aspect-ratio)]" style="--aspect-ratio: {{$aspect_ratio}};">
-                {{ warnf "DEBUG: $img2 := %s" $img2 }}
-                {{ partial "image" (dict "Src" $img2.RelPermalink "Class" "w-full h-full min-h-80 relative lg:top-1/2 lg:-translate-y-1/2 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high") }}
+                {{ partial "image" (dict "Src" (strings.TrimPrefix "/" $img2) "Class" "w-full h-full min-h-80 relative lg:top-1/2 lg:-translate-y-1/2 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high") }}
               </div>
             </div>
           </div>
@@ -55,8 +51,7 @@
       
         <div class="swiper-slide max-lg:p-2 lg:p-1">
           <div class="h-full overflow-hidden rounded-lg border shadow-inner-xl z-1 shadow-black/30">
-            {{ warnf "DEBUG: $img1 := %s" $img1 }}
-            {{ partial "image" (dict "Src" $img1.RelPermalink "Class" "w-full h-full min-h-80 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high") }}
+            {{ partial "image" (dict "Src" (strings.TrimPrefix "/" $img1) "Class" "w-full h-full min-h-80 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high") }}
           </div>
         </div>
       {{ end }}
