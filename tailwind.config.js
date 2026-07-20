@@ -163,12 +163,14 @@ module.exports = {
         5: "3rem",
       },
     }),
-    require('tailwindcss/plugin')(( { matchUtilities }) => {
+    require('tailwindcss/plugin')(( { matchUtilities, addVariant }) => {
       matchUtilities({
         'bg-size': (value) => ({
           'background-size': value
         })
       })
+
+      addVariant('2-children', '&:has(> :nth-child(2))')
     })
   ],
 };
