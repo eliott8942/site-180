@@ -7,13 +7,11 @@ function initHover3DEffect() {
       continue;
     }
 
-    container.addEventListener('mousemove', (e) => {
+    function handleMove(x, y) {
       const rect = container.getBoundingClientRect(); // was: wrap.getBoundingClientRect()
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
 
-      const px = x / rect.width;
-      const py = y / rect.height;
+      const px = (x - rect.left) / rect.width;
+      const py = (y - rect.top) / rect.height;
 
       innerCard.style.setProperty('--px', `${px}`);
       innerCard.style.setProperty('--py', `${py}`);
@@ -31,11 +29,21 @@ function initHover3DEffect() {
         )
         scale3d(1.03, 1.03, 1.03)
         translateY(-4px)`;
+    }
+    
+    container.addEventListener('mousemove', (e) => {
+      handleMove(e.clientX, e.clientY)
     });
+    container.addEventListener('touchmove', (e) => {
+      handleMove(e.touches[0].clientX, e.touches[0].clientY)
+    })
 
-    container.addEventListener('mouseleave', () => {
+    container.addEventListener('pointerleave', () => {
       innerCard.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1,1,1) translateY(0px)';
     });
+    container.addEventListener('touchend', () => {
+      innerCard.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1,1,1) translateY(0px)';
+    })
   }
 }
 document.addEventListener('DOMContentLoaded', initHover3DEffect);
