@@ -1,13 +1,21 @@
 {{ $scope := .scope }}
 {{ $class := .class }}
 {{ $selectorClass := .selectorClass }}
+{{ $allWidgets := .allSections }}
 
-{{ $allWidgets := slice "tags" "categories" }}
+{{ warnf "%s" $allWidgets }}
+
 {{ $widgetNonEmpty := false }}
 {{ range $widget := $allWidgets }}
   {{ $taxonomy := index site.Taxonomies (printf "%s/%s" $scope.Section $widget) }}
-  {{ $widgetNonEmpty = or $widgetNonEmpty (and $taxonomy (not (eq (len $taxonomy) 0) )) }}
+  {{ warnf "%s/%s" $scope.Section $widget }}
+  {{ if not $taxonomy }}
+    {{ continue }}
+  {{ end }}
+  {{ $widgetNonEmpty = or $widgetNonEmpty (not (eq (len $taxonomy) 0) ) }}
 {{ end }}
+
+{{ warnf "%s" $widgetNonEmpty }}
 
 {{ if $widgetNonEmpty }}
 <div class="top-0 sticky flex flex-col items-center {{ $class }}">
@@ -15,7 +23,7 @@
 
   <div class="relative px-3 pt-4 z-10 max-w-screen-md w-full">
     <div class="{{ $selectorClass }}">
-      {{ partial ( print "components/tag-selector" ) ( dict "scope" $scope ) }}
+      {{ partial ( print "components/tag-selector" ) ( dict "scope" $scope "allSections" $allWidgets) }}
     </div>
   </div>
 </div>

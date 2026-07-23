@@ -12,7 +12,7 @@ if you need more.
   {{ $hasCurrentTag = true }}
 {{ end }}
 
-{{ $allWidgets := slice "tags" "categories" }}
+{{ $allWidgets := .allSections }}
 {{ $nonEmptyWidgetCount := 0 }}
 {{ range $widget := $allWidgets }}
   {{ $taxonomy := index site.Taxonomies (printf "%s/%s" $scope.Section $widget) }}
@@ -72,12 +72,13 @@ checker input for another reason, that would break.
     <div class="relative overflow-auto max-h-0 group-has-[input:checked]:max-h-64 duration-75">
       <div class="px-5 py-3 overflow-auto">
         {{ range $widget := $allWidgets }}
-          {{ $taxonomy := index site.Taxonomies (printf "%s/%s" $scope.Section $widget) }}
+          {{ $fullname := printf "%s/%s" $scope.Section $widget }}
+          {{ $taxonomy := index site.Taxonomies $fullname }}
           {{ if $taxonomy }}
             {{ if not (eq (len $taxonomy) 0) }}
               {{ if ne $nonEmptyWidgetCount 1 }}
                 <div class="border-b border-secondary border-opacity-70">
-                  <h4 class="leading-loose"> {{ i18n $widget | humanize }} </h4>
+                  <h4 class="leading-loose"> {{ i18n $fullname | humanize }} </h4>
                 </div>
               {{ end }}
               <div class="flex flex-row flex-wrap pt-2">
