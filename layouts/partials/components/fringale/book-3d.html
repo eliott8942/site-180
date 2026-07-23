@@ -1,0 +1,28 @@
+{{ $class := .class }}
+{{ $image := .image }}
+{{ $side_color := .side_color }}
+
+<div class="card-hover-3d cell-shading group" style="--card-tickness:23px;--max-tilt:30deg">
+  <div class="card">
+    <div class="border-l face-front shadow-xl border group-hover:border-0">
+      {{ partial "image" (dict "Src" $image "Alt" .Title "Class" $class) }}
+    </div>
+
+    {{ $image := resources.Get "images/fringale/book_side_page_texture.png" }}
+    {{ $image.Publish }}
+    {{ $imageSide := resources.Get "images/fringale/book_side_page_texture_side.png" }}
+    {{ $imageSide.Publish }}
+    
+    <div class="face-left border-l" style="background-color: {{ $side_color }};">
+    </div>
+    <div class="face-right">
+      <div class="h-full w-full bg-[url({{ $imageSide.RelPermalink }})] bg-size-[80px] bg-repeat-cover"></div>
+    </div>
+    <div class="face-top border-r">
+      <div class="h-full w-full bg-[url({{ $image.RelPermalink }})] bg-size-[80px] bg-repeat-cover"></div>
+    </div>
+    <div class="face-bottom border-r">
+      <div class="h-full w-full bg-[url({{ $image.RelPermalink }})] bg-size-[80px] bg-repeat-cover"></div>
+    </div>
+  </div>
+</div>

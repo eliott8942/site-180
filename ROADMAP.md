@@ -49,6 +49,8 @@
 - [ ] Redesign Fringale page
 
   - [ ] Add sales schedule
+
+  - [X] List page
   
   - [X] Image gallery
 

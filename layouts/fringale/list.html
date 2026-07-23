@@ -1,15 +1,23 @@
+{{ define "headAttrs" }}
+  {{ partial "head-attr/effects/card-hover-3d" }}
+{{ end }}
+
 {{ define "main" }}
   <section class="section-sm">
     <div class="container text-center section-pb">
       <h1>{{ .Title | title }}</h1>
-      {{ if .Params.Summary }}
-        {{ .Params.Summary }}
-      {{ end }}
+
+      {{ .Content }}
     </div>
 
     <div class="container">
-      {{ .Content }}
-      {{ partial "components/fringale/card-list.html" . }}
+      {{ $paginator := .Paginate .RegularPages 6 }}
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gx-5 py-3 gap-5 max-md:gap-10">
+        {{ range $paginator.Pages }}
+          {{ partial "components/fringale/card" . }}
+        {{ end }}
+      </div>
+      {{ partial "components/pagination.html" . }}
     </div>
   </section>
 {{ end }}

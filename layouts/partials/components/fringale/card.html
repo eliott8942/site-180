@@ -1,0 +1,23 @@
+{{ $image := .Params.cover }}
+{{ if not (resources.GetMatch $image) }}
+  {{ $image = "images/unknown.png" }}
+{{ end }}
+
+{{ if $image }}
+  <a href="{{ .RelPermalink }}">
+    <div class="w-full h-full flex items-center justify-center">
+      <div class="h-full flex flex-col">
+        <div class="grow flex items-center justify-center">
+          {{ partial "components/fringale/book-3d" (dict "image" $image "class" "!max-h-96 !w-auto" "side_color" .Params.side_color) }}
+        </div>
+  
+        <div class="w-full mt-5">
+          <h3 class="font-tertiary">
+            {{ .Title }}
+          </h3>
+        </div>
+        {{ .PublishDate | time.Format ":date_short" }}   
+      </div>
+    </div>
+  </a>
+{{ end }}
