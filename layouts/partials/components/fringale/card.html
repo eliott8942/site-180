@@ -5,14 +5,14 @@
 
 {{ if $image }}
   <a href="{{ .RelPermalink }}">
-    <div class="w-full h-full flex items-center justify-center">
+    <div class="w-full h-full flex items-center justify-center group/book-card">
       <div class="h-full flex flex-col">
         <div class="grow flex items-center justify-center">
           {{ partial "components/fringale/book-3d" (dict "image" $image "class" "!max-h-96 !w-auto" "side_color" .Params.side_color) }}
         </div>
   
-        <div class="w-full mt-5">
-          <h3 class="font-tertiary">
+        <div class="w-full mt-5 mb-2">
+          <h3 class="font-tertiary underline-translate group-hover/book-card:focus">
             {{ .Title }}
           </h3>
         </div>
