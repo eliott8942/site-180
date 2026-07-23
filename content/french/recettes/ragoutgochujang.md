@@ -4,10 +4,12 @@ date: 2024-04-17T12:00:00+01:00
 draft: false
 image: "images/fringale/volume3/avril24/ragoutgochujang.png"
 thumbnail: "images/fringale/volume3/avril24/ragoutgochujang.png"
+"recettes/order": ["Plat"]
+"recettes/copiosity": ["Copieux"]
 weight: 1
 hidden: false
 quantity: "2-3"
-duration: "35min"
+durationMin: "35"
 ---
 
 #### Ingrédients

@@ -51,3 +51,15 @@
 
 - id: blog/categories
   translation: "Catégories"
+
+- id: recettes/categories
+  translation: "Catégories"
+
+- id: recettes/tags
+  translation: "Tags"
+
+- id: recettes/order
+  translation: "Type de plat"
+
+- id: recettes/copiosity
+  translation: "Generosité du plat"

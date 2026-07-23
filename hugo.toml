@@ -21,6 +21,8 @@ defaultContentLanguage = "fr"
     blog_categories = "blog/categories"
     blog_tags = "blog/tags"
     recettes_categories = "recettes/categories"
+    recettes_order = "recettes/order"
+    recettes_copiosity = "recettes/copiosity"
     recettes_tags = "recettes/tags"
 
 

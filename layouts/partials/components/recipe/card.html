@@ -1,22 +1,53 @@
-<div class="flex flex-col h-full w-full bg-body dark:bg-darkmode-body">
+<div 
+  class="
+    relative
+    border
+    flex flex-col 
+    h-full
+    bg-body
+    shadow-md hover:shadow-2xl
+    hover:scale-[103%]
+    z-0 hover:z-10
+    rounded-xl overflow-hidden 
+    cursor-pointer
+    duration-100
+  "
+  onclick="window.location.href='{{ .RelPermalink }}'"
+>
   {{ $image:= .Params.image }}
-  {{ if $image }}
-    <a href="{{ .RelPermalink }}" class="">
-      <div class="w-full aspect-square mb-6 rounded-xl overflow-hidden">
-        {{ partial "image" (dict "Src" $image "Alt" .Title "Class" "aspect-square object-cover") }}
-      </div>
-    </a>
-  {{ end }}
-
-
-  <div class="flex flex-col flex-grow mb-4">
-    <h4>
-      <a href="{{ .RelPermalink }}">
-        {{ .Title }}
-      </a>
-    </h4>
-    <p class="mb-6">{{ .Params.Summary }}</p>
+  <div class="shrink overflow-hidden">
+    {{ partial "image" (dict "Src" $image "Alt" .Title "Class" "aspect-square object-cover") }}
   </div>
+  
+  <div class="flex flex-col p-4 border-t shrink-0 grow">
+    <div class="flex flex-row justify-between flex-wrap">
+      <!-- 
+        Metadata containers
+        We need it because we have some css rules which activates when we're not the first 
+        child of a container
+      -->
 
-  {{ partial "components/recipe/info-list" . }}
+      <div>
+        {{ partial "components/blog/time-indicator" (dict "timeMin" .Params.durationMin "class" "opacity-50" "scope" . ) }}
+      </div>
+
+      <div>
+        {{ partial "components/recipe/number-people-indicator" (dict "quantity" .Params.quantity "class" "opacity-75" "scope" .) }}
+      </div>
+    </div>
+
+    <!-- TODO : make it expand into the card, so the description can be only shown when hovered -->
+    <div class="my-2 flex flex-col grow">
+      <h4> {{ .Title }} </h4>
+      <div class="grow min-h-4">
+        <p> {{ .Params.Summary }} </p>
+      </div>
+    </div>
+
+    <div>
+      {{ partial "components/blog/tag-list" ( dict "scope" . "group" "order" "icon" "fa-utensils" ) }}
+      {{ partial "components/blog/tag-list" ( dict "scope" . "group" "copiosity" "icon" "fa-bowl-food" ) }}
+      {{ partial "components/blog/tag-list" ( dict "scope" . "group" "tags" "icon" "fa-tag" ) }}
+    </div>
+  </div>
 </div>

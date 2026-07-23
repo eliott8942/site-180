@@ -4,9 +4,13 @@ date: 2024-04-17T10:00:00+01:00
 draft: false
 image: "images/fringale/volume3/avril24/oeufbenedict.png"
 thumbnail: "images/fringale/volume3/avril24/oeufbenedict.png"
+"recettes/order": ["Plat"]
+"recettes/tags": ["Brunch"]
+"recettes/copiosity": ["Équilibré", "Copieux"]
 weight: 2
 hidden: false
 quantity: "1"
+durationMin: "60"
 ---
 
 #### Ingrédients

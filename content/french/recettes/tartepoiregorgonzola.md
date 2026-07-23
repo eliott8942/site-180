@@ -4,10 +4,13 @@ date: 2024-04-17T00:00:00+01:00
 draft: false
 image: "images/fringale/volume3/mars24/tartepoiregorgonzola.jpg"
 thumbnail: "images/fringale/volume3/mars24/tartepoiregorgonzola.jpg"
+"recettes/order": ["Entrée", "Plat"]
+"recettes/tags": ["Tarte", "Salée/Sucrée"]
+"recettes/copiosity": ["Équilibré", "Copieux"]
 hidden: false
 weight: 1
 quantity: "4"
-duration: "35min"
+durationMin: "35"
 ---
 
 #### Ingrédients

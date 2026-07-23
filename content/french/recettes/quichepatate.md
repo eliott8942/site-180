@@ -4,9 +4,11 @@ date: 2023-11-06T12:00:00+01:00
 draft: false
 image: "images/fringale/volume3/novembre23/quichepatate.jpg"
 thumbnail: "images/fringale/volume3/novembre23/quichepatate.jpg"
+"recettes/order": ["Entrée", "Plat"]
+"recettes/copiosity": ["Copieux"]
 weight: 3
 hidden: false
-duration: "1h"
+durationMin: "60"
 ---
 
 #### Ingrédients
