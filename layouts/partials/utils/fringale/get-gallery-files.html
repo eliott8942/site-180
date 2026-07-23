@@ -1,4 +1,8 @@
 {{ $gallery := .Params.gallery }}
+{{ if not $gallery }}
+  {{ errorf "%s doesn't have a `gallery` property" .File.Path }}
+  {{ return }}
+{{ end }}
 
 {{ if not (strings.HasSuffix $gallery "/") }}
   {{ errorf "%s:`%s` doesn't end with a '/'" .File.Path $gallery }}
