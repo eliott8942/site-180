@@ -1,8 +1,29 @@
+{{ $scope := .scope }}
 {{ $timeMin := .timeMin }}
 {{ $class := .class }}
 
-<div class = "{{ $class }}">
+<div class = "{{ $class }} [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2">
   <i class="fa-regular fa-clock"></i>
-  {{ $timeMin }}
-  m
+
+  {{ if not $timeMin }}
+    {{ warnf "%s: $timeMin is not defined" $scope }}
+    undefined
+  {{ else }}
+    {{ $duration := time.ParseDuration (print $timeMin "m") }}
+    {{ $hour := int $duration.Hours }}
+    {{ if gt $hour 0 }}
+      {{ int $hour  }}
+      h
+    {{ end }}
+
+    {{ $minutes := mod (int $duration.Minutes) 60 }}
+    {{ if gt $minutes 0 }}
+      {{ $minutes }}
+      m
+    {{ else }}
+      {{ if eq $hour 0 }}
+        0m
+      {{ end }}
+    {{ end }}
+  {{ end }}
 </div>

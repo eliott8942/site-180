@@ -25,7 +25,14 @@
         {{ time.Format ":date_long" .PublishDate }}
       </div>
 
-      {{ partial "components/blog/time-indicator" (dict "timeMin" .Params.lectureTimeMin "class" "opacity-50") }}
+      <!-- 
+        Metadata container
+        We need it because we have some css rules which activates when we're not the first 
+        child of the container
+      -->
+      <div>
+        {{ partial "components/blog/time-indicator" (dict "timeMin" .Params.lectureTimeMin "class" "opacity-50" "scope" .) }}
+      </div>
     </div>
 
     <!-- TODO : make it expand into the card, so the description can be only shown when hovered -->
