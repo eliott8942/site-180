@@ -163,7 +163,7 @@ module.exports = {
         5: "3rem",
       },
     }),
-    require('tailwindcss/plugin')(( { matchUtilities, addVariant }) => {
+    require('tailwindcss/plugin')(( { matchUtilities, addVariant, theme, addBase }) => {
       matchUtilities({
         'bg-size': (value) => ({
           'background-size': value
@@ -171,6 +171,33 @@ module.exports = {
       })
 
       addVariant('2-children', '&:has(> :nth-child(2))')
+
+      addBase({
+        ':root': {
+          '--underline-color': 'currentColor',
+          '--underline-hover-color': 'currentColor',
+          '--underline-h': theme('spacing.0.5', '0.1em'), // pick a sensible default
+        },
+      })
+      matchUtilities(
+        {
+          'underline-color': (value) => ({
+            '--underline-color': value
+          }),
+          'underline-hover-color': (value) => ({
+            '--underline-hover-color': value
+          })
+        },
+        { values: theme('colors') }
+      )
+      matchUtilities(
+        {
+          'underline-h': (value) => ({
+            '--underline-h': value
+          }),
+        },
+        { values: theme('spacing') }
+      )
     })
   ],
 };

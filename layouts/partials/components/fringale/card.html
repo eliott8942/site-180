@@ -3,21 +3,25 @@
   {{ $image = "images/unknown.png" }}
 {{ end }}
 
-{{ if $image }}
+<div class="w-full h-full flex items-center justify-center">
   <a href="{{ .RelPermalink }}">
-    <div class="w-full h-full flex items-center justify-center group/book-card">
-      <div class="h-full flex flex-col">
-        <div class="grow flex items-center justify-center drop-shadow-none group-hover/book-card:drop-shadow-2xl scale-95 group-hover/book-card:scale-100 transition-all duration-300">
-          {{ partial "components/fringale/book-3d" (dict "image" $image "class" "!max-h-96 !w-auto" "side_color" .Params.side_color) }}
-        </div>
-  
-        <div class="w-full mt-6 mb-2">
-          <h3 class="font-tertiary underline-translate group-hover/book-card:focus">
-            {{ .Title }}
-          </h3>
-        </div>
-        {{ .PublishDate | time.Format ":date_short" }}   
+    <div class="h-full flex flex-col group/book-card">
+      <div class="grow flex items-center justify-center drop-shadow-none group-hover/book-card:drop-shadow-2xl scale-95 group-hover/book-card:scale-100 transition-all duration-300">
+        {{ partial "components/fringale/book-3d" (dict "image" $image "class" "!max-h-96 !w-auto" "side_color" .Params.side_color) }}
+      </div>
+
+      <div class="w-full mt-6 mb-2">
+        <h3 class="font-tertiary underline-translate group-hover/book-card:underline-translate-active underline-color-transparent underline-hover-color-black underline-h-[0.1em] duration-300">
+          {{ .Title }}
+        </h3>
+      </div>
+      <div class="flex flex-row justify-between">
+        {{ if .Params.price }}
+          <div class="text-2xl font-regular"> {{ .Params.price }} </div>
+        {{ end }}
+        
+        <p class="text-neutral-500 font-primary">{{ .PublishDate | time.Format ":date_short" }}</p> 
       </div>
     </div>
   </a>
-{{ end }}
+</div>

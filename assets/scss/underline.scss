@@ -1,15 +1,15 @@
 @layer utilities {
   .underline-translate {
     background: 
-      linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
-      linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
-    background-size: 100% 0.1em, 0 0.1em;
+      linear-gradient(to right, var(--underline-color), var(--underline-color)),
+      linear-gradient(to right, var(--underline-hover-color), var(--underline-hover-color));
+    background-size: 100% var(--underline-h), 0 var(--underline-h);
     background-position: 100% 100%, 0 100%;
     background-repeat: no-repeat;
-    transition: background-size 300ms;
+    transition-property: background-size;
   
-    &.focus {
-      background-size: 0 0.1em, 100% 0.1em;
+    &-active {
+      background-size: 0 var(--underline-h), 100% var(--underline-h);
     }
   }
 }
