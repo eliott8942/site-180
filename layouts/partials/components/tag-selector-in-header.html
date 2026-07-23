@@ -1,5 +1,6 @@
 {{ $scope := .scope }}
 {{ $class := .class }}
+{{ $selectorClass := .selectorClass }}
 
 {{ $allWidgets := slice "tags" "categories" }}
 {{ $widgetNonEmpty := false }}
@@ -11,9 +12,11 @@
 {{ if $widgetNonEmpty }}
 <div class="top-0 sticky flex flex-col items-center {{ $class }}">
   <div class="absolute w-full h-20 bg-gradient-to-b from-white z-0"></div>
-  
+
   <div class="relative px-3 pt-4 z-10 max-w-screen-md w-full">
-    {{ partial ( print "components/tag-selector" ) ( dict "scope" $scope ) }}
+    <div class="{{ $selectorClass }}">
+      {{ partial ( print "components/tag-selector" ) ( dict "scope" $scope ) }}
+    </div>
   </div>
 </div>
 {{ end }}

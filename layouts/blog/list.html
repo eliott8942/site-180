@@ -8,7 +8,7 @@
 
   <!-- Tag selection -->
   <!-- Note : That needs to be at the root of the "header" block to work. -->
-  {{ partial "components/tag-selector-in-header" ( dict "scope" . "class" "z-10 container") }}
+  {{ partial "components/tag-selector-in-header" ( dict "scope" . "class" "z-10" "selectorClass" "container") }}
 {{ end }}
 
 {{ define "main" }}
