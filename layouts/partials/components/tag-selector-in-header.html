@@ -3,19 +3,14 @@
 {{ $selectorClass := .selectorClass }}
 {{ $allWidgets := .allSections }}
 
-{{ warnf "%s" $allWidgets }}
-
 {{ $widgetNonEmpty := false }}
 {{ range $widget := $allWidgets }}
   {{ $taxonomy := index site.Taxonomies (printf "%s/%s" $scope.Section $widget) }}
-  {{ warnf "%s/%s" $scope.Section $widget }}
   {{ if not $taxonomy }}
     {{ continue }}
   {{ end }}
   {{ $widgetNonEmpty = or $widgetNonEmpty (not (eq (len $taxonomy) 0) ) }}
 {{ end }}
-
-{{ warnf "%s" $widgetNonEmpty }}
 
 {{ if $widgetNonEmpty }}
 <div class="top-0 sticky flex flex-col items-center {{ $class }}">
