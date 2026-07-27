@@ -14,6 +14,28 @@
 
   - [ ] Create an ingredient widget
 
+  - [ ] Recipee List 
+
+    - [X] Rework recipe card
+  
+      - [X] Intolerances indicator
+  
+      - [X] Copiosity indicator
+
+        - [ ] Add it to the tag selector 
+  
+    - [ ] Indicators documentation
+  
+      - [ ] Intolerances
+  
+      - [ ] Copiosity
+  
+      - [ ] Spiciness
+
+  - [ ] Recipe page
+
+    - [ ] Intolerance indicator
+
 - [X] Redesign Crieur page
 
   - [X] Redesign page layout
