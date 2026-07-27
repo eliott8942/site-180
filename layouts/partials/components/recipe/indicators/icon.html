@@ -1,0 +1,19 @@
+{{ $label := .label }}
+{{ $data := .data }}
+
+{{ if $data.useFontAwesome }}
+  {{ if not $data.icon }}
+    {{ errorf "Error in the intolerance data : %s doesn't define `icon`" $label }}
+  {{ end }}
+  {{ if not $data.color }}
+    {{ errorf "Error in the intolerance data : %s doesn't define `color`" $label }}
+  {{ end }}
+  
+  <i class="align-middle fa-solid {{ $data.icon }} {{ $data.color }}"></i>
+{{ else }}
+  {{ if not $data.icon }}
+    {{ errorf "Error in the intolerance data : %s doesn't define `icon`" $label }}
+  {{ end }}
+
+  <span class="h-[1em] custom-icon {{ $data.icon }}"></span>
+{{ end }}

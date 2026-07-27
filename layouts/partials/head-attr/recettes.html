@@ -1,0 +1,6 @@
+{{ $css := slice }}
+{{ $css = $css | append (resources.Get "scss/recettes/custom-icons.css") }}
+{{ $css = $css | resources.Concat "css/recettes.css" }}
+
+<link rel="stylesheet" href="{{ $css.RelPermalink }}"></link>
+

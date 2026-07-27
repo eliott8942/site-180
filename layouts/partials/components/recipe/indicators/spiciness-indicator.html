@@ -1,0 +1,27 @@
+{{ $MIN_SPICINESS := 1 }}
+
+{{ $spiciness := .spiciness }}
+{{ $scope := .scope }}
+{{ if not $spiciness }}
+  {{ errorf "%s: $spiciness is not provided" $scope }}
+  {{ return }}
+{{ else }}
+  {{ if or (lt $spiciness $MIN_SPICINESS) }}
+    {{ errorf "%s: $spiciness should be greater or equal to 1" $scope }}
+    {{ return }}
+  {{ end }}
+
+  {{ $spiciness = float $spiciness }}
+  {{ $frac := sub $spiciness (math.Floor $spiciness) }}
+
+  {{ if ne $frac 0.0 }}
+    {{ warnf "%s: only integers are supported for spiciness, found %s. The fractional part will be ignored." $scope $spiciness }}
+  {{ end }}
+{{ end }}
+
+<div class="shrink-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 align-middle">
+  {{ range $i := (seq $MIN_SPICINESS $spiciness) }}
+    <!-- Full food icons -->
+    <span class="h-[1em] custom-icon icon-pepper"></span>
+  {{ end }}
+</div>

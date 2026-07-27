@@ -32,21 +32,30 @@
       </div>
 
       <div>
-        {{ partial "components/recipe/number-people-indicator" (dict "quantity" .Params.quantity "class" "opacity-75" "scope" .) }}
+        {{ partial "components/recipe/indicators/number-people-indicator" (dict "quantity" .Params.quantity "class" "opacity-75" "scope" .) }}
       </div>
     </div>
 
     <!-- TODO : make it expand into the card, so the description can be only shown when hovered -->
     <div class="my-2 flex flex-col grow">
       <h4> {{ .Title }} </h4>
-      <div class="grow min-h-4">
-        <p> {{ .Params.Summary }} </p>
+    </div>
+
+    <div class="flex flex-row flex-wrap justify-between items-center text-lg">
+      <div class="flex flex-row flex-wrap">
+        {{ partial "components/recipe/indicators/intolerances-indicator" (dict "scope" . "intolerances" .Params.intolerances) }}
+
+        {{ if .Params.spicinessLevel }}
+          {{ partial "components/recipe/indicators/spiciness-indicator" (dict "scope" . "spiciness" .Params.spicinessLevel) }}
+        {{ end }}
+      </div>
+      <div class="flex flex-row flex-wrap">
+        {{ partial "components/recipe/indicators/copiosity-indicator" (dict "scope" . "copiosity" .Params.copiosityLevel) }}
       </div>
     </div>
 
-    <div>
-      {{ partial "components/blog/tag-list" ( dict "scope" . "group" "order" "icon" "fa-utensils" ) }}
-      {{ partial "components/blog/tag-list" ( dict "scope" . "group" "copiosity" "icon" "fa-bowl-food" ) }}
+    <div class="my-2">
+      {{ partial "components/blog/tag-list" ( dict "scope" . "group" "order" "icon" "custom-icon icon-dishes" "notFlaticon" "true" ) }}
       {{ partial "components/blog/tag-list" ( dict "scope" . "group" "tags" "icon" "fa-tag" ) }}
     </div>
   </div>

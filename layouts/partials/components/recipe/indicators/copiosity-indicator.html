@@ -1,0 +1,36 @@
+{{ $MAX_COPIOSITY := 4 }}
+{{ $MIN_COPIOSITY := 1 }}
+
+{{ $copiosity := .copiosity }}
+{{ $scope := .scope }}
+{{ if not $copiosity }}
+  {{ errorf "%s: $copiosity is not provided" $scope }}
+  {{ return }}
+{{ else }}
+  {{ if or (lt $copiosity $MIN_COPIOSITY) (gt $copiosity $MAX_COPIOSITY) }}
+    {{ errorf "%s: $copiosity is not between 1 and 4" $scope }}
+    {{ return }}
+  {{ end }}
+{{ end }}
+
+<div class="shrink-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 align-middle">
+  {{ range $i := (seq $MIN_COPIOSITY $MAX_COPIOSITY) }}
+    {{ if le $i $copiosity }}
+      <!-- Full food icons -->
+      <span class="h-[1em] custom-icon icon-drumstick"></span>
+    {{ else }}
+      {{ $fracDiff := sub $copiosity (sub (float $i) 1) }}
+      {{ if gt $fracDiff 0 }}
+        <!-- Half-full food icon -->
+        {{ $fracDiffPercent := mul $fracDiff 100 }}
+        <span class="inline-flex align-middle">
+          <span class="h-[1em] custom-icon icon-drumstick overflow-hidden !bg-left" style="width:calc({{ $fracDiff }} * 1em);"></span>
+          <span class="h-[1em] custom-icon icon-drumstick gray overflow-hidden !bg-right" style="width:calc({{ sub 1 $fracDiff }} * 1em);"></span>
+        </span>
+      {{ else }}
+        <!-- Empty food icon -->
+        <span class="h-[1em] custom-icon icon-drumstick gray"></span>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+</div>
