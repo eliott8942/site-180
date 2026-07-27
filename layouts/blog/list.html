@@ -15,7 +15,7 @@
   <section class="section-sm pt-2">
     <div class="container relative">
       <!-- blog posts -->
-      <div class="relative grid sm:grid-cols-2 lg:grid-cols-3 gx-5 py-3 gap-5 z-0">
+      <div class="relative grid sm:grid-cols-2 lg:grid-cols-3 gx-5 mt-3 gap-5 z-0 mb-10">
         {{ $paginator:= .Paginate .RegularPages 6 }}
         {{ range $paginator.Pages }}
           {{ partial "components/blog/card" . }}
