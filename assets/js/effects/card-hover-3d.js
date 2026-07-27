@@ -10,8 +10,12 @@ function initHover3DEffect() {
     function handleMove(x, y) {
       const rect = container.getBoundingClientRect(); // was: wrap.getBoundingClientRect()
 
-      const px = (x - rect.left) / rect.width;
-      const py = (y - rect.top) / rect.height;
+      function clamp(x, a, b) {
+        return Math.min(Math.max(x, a), b)
+      }
+      
+      const px = clamp((x - rect.left) / rect.width, 0, 1);
+      const py = clamp((y - rect.top) / rect.height, 0, 1);
 
       innerCard.style.setProperty('--px', `${px}`);
       innerCard.style.setProperty('--py', `${py}`);
