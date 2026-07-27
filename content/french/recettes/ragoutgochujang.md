@@ -5,7 +5,10 @@ draft: false
 image: "images/fringale/volume3/avril24/ragoutgochujang.png"
 thumbnail: "images/fringale/volume3/avril24/ragoutgochujang.png"
 "recettes/order": ["Plat"]
-"recettes/copiosity": ["Copieux"]
+copiosityLevel: 3.5
+veganLevel: "vegetarian"
+intolerances: ["gluten", "soja_sauce", "nuts"]
+spicinessLevel: 1
 weight: 1
 hidden: false
 quantity: "2-3"

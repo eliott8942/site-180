@@ -6,7 +6,9 @@ image: "images/fringale/volume3/avril24/oeufbenedict.png"
 thumbnail: "images/fringale/volume3/avril24/oeufbenedict.png"
 "recettes/order": ["Plat"]
 "recettes/tags": ["Brunch"]
-"recettes/copiosity": ["Équilibré", "Copieux"]
+copiosityLevel: 2.5
+veganLevel: "vegetarian"
+intolerances: ["gluten", "lactose", "egg"]
 weight: 2
 hidden: false
 quantity: "1"

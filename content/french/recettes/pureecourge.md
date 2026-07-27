@@ -5,7 +5,9 @@ draft: false
 image: "images/fringale/volume3/novembre23/pureecourge.jpg"
 thumbnail: "images/fringale/volume3/novembre23/pureecourge.jpg"
 "recettes/order": ["Plat", "Accompagnement"]
-"recettes/copiosity": ["Léger", "Équilibré"]
+copiosityLevel: 1.5
+veganLevel: "vegetarian"
+intolerances: ["lactose"]
 weight: 1
 hidden: false
 quantity: "4"
