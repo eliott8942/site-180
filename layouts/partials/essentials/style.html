@@ -46,9 +46,9 @@
 {{ end }}
 {{ $styles := $styles | append (resources.Get "scss/main.scss" | toCSS) }}
 {{ $styles := $styles | resources.Concat "css/style.css" }}
-{{ $styles = $styles | css.PostCSS | minify | fingerprint }}
+{{ $styles = $styles | css.PostCSS }}
 {{ if hugo.IsProduction }}
-  {{ $styles = $styles | resources.PostProcess }}
+  {{ $styles = $styles | minify | fingerprint | resources.PostProcess }}
 {{ end }}
 
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}"></link>
