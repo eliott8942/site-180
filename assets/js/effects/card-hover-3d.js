@@ -33,21 +33,23 @@ function initHover3DEffect() {
         )
         scale3d(1.03, 1.03, 1.03)
         translateY(-4px)`;
+      container.classList.add('effect-active');
+    }
+
+    function handleExit() {
+      innerCard.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1,1,1) translateY(0px)';
+      container.classList.remove('effect-active');
     }
     
     container.addEventListener('mousemove', (e) => {
       handleMove(e.clientX, e.clientY)
     });
+    container.addEventListener('mouseleave', () => handleExit());
+
     container.addEventListener('touchmove', (e) => {
       handleMove(e.touches[0].clientX, e.touches[0].clientY)
     })
-
-    container.addEventListener('pointerleave', () => {
-      innerCard.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1,1,1) translateY(0px)';
-    });
-    container.addEventListener('touchend', () => {
-      innerCard.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1,1,1) translateY(0px)';
-    })
+    container.addEventListener('touchend', () => handleExit())
   }
 }
 document.addEventListener('DOMContentLoaded', initHover3DEffect);
