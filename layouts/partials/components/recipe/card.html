@@ -43,20 +43,20 @@
 
     <div class="flex flex-row flex-wrap justify-between items-center text-lg">
       <div class="flex flex-row flex-wrap">
-        {{ partial "components/recipe/indicators/intolerances-indicator" (dict "scope" . "intolerances" .Params.intolerances) }}
+        {{ partial "components/indicator/badges/list" (dict "scope" . "badges" .Params.intolerances "domain" hugo.Data.recettes.intolerances) }}
 
         {{ if .Params.spicinessLevel }}
-          {{ partial "components/recipe/indicators/spiciness-indicator" (dict "scope" . "spiciness" .Params.spicinessLevel) }}
+          {{ partial "components/indicator/levels/level" (dict "scope" . "value" .Params.spicinessLevel "domain" hugo.Data.recettes.spiciness) }}
         {{ end }}
       </div>
       <div class="flex flex-row flex-wrap">
-        {{ partial "components/recipe/indicators/copiosity-indicator" (dict "scope" . "copiosity" .Params.copiosityLevel) }}
+        {{ partial "components/indicator/levels/level" (dict "scope" . "value" .Params.copiosityLevel "domain" hugo.Data.recettes.copiosity) }}
       </div>
     </div>
 
     <div class="my-2">
-      {{ partial "components/blog/tag-list" ( dict "scope" . "group" "order" "icon" "custom-icon icon-dishes" "notFlaticon" "true" ) }}
-      {{ partial "components/blog/tag-list" ( dict "scope" . "group" "tags" "icon" "fa-tag" ) }}
+      {{ partial "components/indicator/tags/list" ( dict "scope" . "group" "order" "icon" "custom-icon icon-dishes" "notFlaticon" "true" ) }}
+      {{ partial "components/indicator/tags/list" ( dict "scope" . "group" "tags" "icon" "fa-tag" ) }}
     </div>
   </div>
 </div>

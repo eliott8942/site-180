@@ -1,0 +1,35 @@
+{{ $scope := .scope }}
+{{ $domain := .domain }}
+{{ if not $domain }}
+  {{ errorf "%s: $domain not provided" $scope }}
+  {{ return }}
+{{ end }}
+
+{{ $VALID_WORDS := slice }}
+{{ range $key, $_ := $domain }}
+  {{ $VALID_WORDS = $VALID_WORDS | append $key }}
+{{ end }}
+
+{{ $badges := .badges }}
+{{ if not $badges }}
+  {{ errorf "%s: $badges not provided" $scope }}
+{{ else }}
+  {{ $invalid_words := slice }}
+  {{ range $i := $badges }}
+    {{ if not (in $VALID_WORDS $i) }}
+      {{ $invalid_words = $invalid_words | append $i }}
+    {{ end }}
+  {{ end }}
+
+  {{ if ne (len $invalid_words) 0 }}
+    {{ errorf "%s: invalid badges words found : %s. The valid words should be one in " $scope $invalid_words $VALID_WORDS }}
+  {{ else }}
+    <div class="shrink-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 align-middle">
+      {{ range $i := $badges }}
+        {{ $badge_data := index $domain $i }}
+
+        {{ partial "components/indicator/badges/icon" (dict "data" $badge_data "label" $i ) }}
+      {{ end }}
+    </div>
+  {{ end }}
+{{ end }}

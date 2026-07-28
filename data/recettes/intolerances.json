@@ -1,0 +1,22 @@
+{
+  "gluten": {
+    "icon": "icon-wheat"
+  },
+  "lactose": {
+    "icon": "icon-milk"
+  },
+  "egg": {
+    "icon": "icon-egg"
+  },
+  "soja": {
+    "useFontAwesome": true,
+    "icon": "fa-seedling",
+    "color": "text-lime-500"
+  },
+  "soja_sauce": {
+    "icon": "icon-soja-sauce"
+  },
+  "nuts": {
+    "icon": "icon-nut" 
+  }
+}

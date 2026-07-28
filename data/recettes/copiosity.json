@@ -1,0 +1,24 @@
+{
+  "min": 1,
+  "max": 4,
+
+  "accept_floats": true,
+
+  "filled_class": "custom-icon icon-drumstick",
+  "empty_class": "custom-icon icon-drumstick gray",
+  
+  "breakpoints": {
+    "1": {
+      "name": "light"
+    },
+    "2": {
+      "name": "balanced"
+    },
+    "3": {
+      "name": "copious"
+    },
+    "4": {
+      "name": "very_copious"
+    }
+  }
+}
