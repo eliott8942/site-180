@@ -75,8 +75,8 @@
           <!-- Half-full food icon -->
           {{ $fracDiffPercent := mul $fracDiff 100 }}
           <span class="inline-flex align-middle">
-            <span class="h-[1em] {{ $domain.filled_class }} overflow-hidden !bg-left" style="width:calc({{ $fracDiff }} * 1em);"></span>
-            <span class="h-[1em] {{ $domain.empty_class }} overflow-hidden !bg-right" style="width:calc({{ sub 1 $fracDiff }} * 1em);"></span>
+            <span class="h-[1em] {{ $domain.filled_class }} !bg-cover overflow-hidden !bg-left" style="width:calc({{ $fracDiff }} * 1em);"></span>
+            <span class="h-[1em] {{ $domain.empty_class }} !bg-cover overflow-hidden !bg-right" style="width:calc({{ sub 1 $fracDiff }} * 1em);"></span>
           </span>
         {{ else }}
           <!-- Empty food icon -->
@@ -94,7 +94,7 @@
       {{ $frac := sub $value (math.Floor $value) }}
 
       {{ if ne $frac 0.0 }}
-        <span class="h-[1em] {{ $domain.filled_class }} overflow-hidden !bg-left" style="width:calc({{ $frac }} * 1em);"></span>
+        <span class="h-[1em] {{ $domain.filled_class }} !bg-cover overflow-hidden !bg-left" style="width:calc({{ $frac }} * 1em);"></span>
       {{ end }}
     {{ end }}
   {{ end }}
