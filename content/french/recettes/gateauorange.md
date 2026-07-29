@@ -6,6 +6,7 @@ image: "images/fringale/volume3/mars24/gateauorange.jpg"
 thumbnail: "images/fringale/volume3/mars24/gateauorange.jpg"
 "recettes/order": ["Dessert"]
 "recettes/tags": ["Gateau"]
+"recettes/copiosity": ["Equilibré"]
 copiosityLevel: 2
 veganLevel: "vegetarian"
 intolerances: ["gluten", "egg"]

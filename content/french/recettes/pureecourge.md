@@ -8,6 +8,7 @@ thumbnail: "images/fringale/volume3/novembre23/pureecourge.jpg"
 copiosityLevel: 1.5
 veganLevel: "vegetarian"
 intolerances: ["lactose"]
+"recettes/copiosity": ["Léger"]
 weight: 1
 hidden: false
 quantity: "4"

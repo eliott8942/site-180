@@ -5,6 +5,7 @@ draft: false
 image: "images/fringale/volume3/novembre23/quichepatate.jpg"
 thumbnail: "images/fringale/volume3/novembre23/quichepatate.jpg"
 "recettes/order": ["Entrée", "Plat"]
+"recettes/copiosity": ["Copieux"]
 copiosityLevel: 3
 veganLevel: "vegetarian"
 intolerances: ["gluten", "lactose", "egg"]

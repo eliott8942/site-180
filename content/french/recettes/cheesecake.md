@@ -6,6 +6,7 @@ image: "images/fringale/volume3/may24/cheesecake.png"
 thumbnail: "images/fringale/volume3/may24/cheesecake.png"
 "recettes/order": ["Dessert"]
 "recettes/tags": ["Gateau"]
+"recettes/copiosity": ["Copieux"]
 copiosityLevel: 3
 veganLevel: "vegetarian"
 intolerances: ["gluten", "lactose", "egg", "soja"]

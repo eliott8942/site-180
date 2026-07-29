@@ -6,6 +6,7 @@ image: "images/fringale/volume3/novembre23/pumpkinpie.jpg"
 thumbnail: "images/fringale/volume3/novembre23/pumpkinpie.jpg"
 "recettes/order": ["Dessert"]
 "recettes/tags": ["Gateau"]
+"recettes/copiosity": ["Equilibré", "Copieux"]
 copiosityLevel: 2.5
 veganLevel: "vegetarian"
 intolerances: ["gluten", "lactose", "egg", "nuts"]

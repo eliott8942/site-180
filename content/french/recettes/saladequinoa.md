@@ -6,6 +6,7 @@ image: "images/fringale/volume3/mars24/saladequinoa.jpg"
 thumbnail: "images/fringale/volume3/mars24/saladequinoa.jpg"
 "recettes/order": ["Plat", "Accompagnement"]
 "recettes/tags": ["Salade"]
+"recettes/copiosity": ["Léger"]
 copiosityLevel: 1
 veganLevel: "vegetarian"
 intolerances: ["lactose"]

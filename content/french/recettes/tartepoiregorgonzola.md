@@ -6,6 +6,7 @@ image: "images/fringale/volume3/mars24/tartepoiregorgonzola.jpg"
 thumbnail: "images/fringale/volume3/mars24/tartepoiregorgonzola.jpg"
 "recettes/order": ["Entrée", "Plat"]
 "recettes/tags": ["Tarte", "Salée/Sucrée"]
+"recettes/copiosity": ["Equilibré", "Copieux"]
 copiosityLevel: 2.5
 veganLevel: "vegetarian"
 intolerances: ["gluten", "lactose", "nuts"]

@@ -5,6 +5,7 @@ draft: false
 image: "images/fringale/volume3/avril24/ragoutgochujang.png"
 thumbnail: "images/fringale/volume3/avril24/ragoutgochujang.png"
 "recettes/order": ["Plat"]
+"recettes/copiosity": ["Copieux", "Tres copieux"]
 copiosityLevel: 3.5
 veganLevel: "vegetarian"
 intolerances: ["gluten", "soja_sauce", "nuts"]
