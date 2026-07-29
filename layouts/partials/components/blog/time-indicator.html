@@ -1,15 +1,24 @@
 {{ $scope := .scope }}
-{{ $timeMin := .timeMin }}
+{{ $timeMin := int .timeMin }}
 {{ $class := .class }}
+{{ $icon := .icon | default "fa-clock" }}
+{{ $maxTime := int .maxTime | default -1 }}
 
 <div class = "{{ $class }}">
-  <i class="fa-regular fa-clock"></i>
+  <i class="fa-regular {{ $icon }}"></i>
 
   {{ if not $timeMin }}
     {{ warnf "%s: $timeMin is not defined" $scope }}
     undefined
   {{ else }}
     {{ $duration := time.ParseDuration (print $timeMin "m") }}
+
+    {{ if and (ge $maxTime 0) (gt (int $timeMin) $maxTime) }}
+      {{ $duration = time.ParseDuration (print $maxTime "m") }}
+
+      >
+    {{ end }}
+    
     {{ $hour := int $duration.Hours }}
     {{ if gt $hour 0 }}
       {{ int $hour  }}

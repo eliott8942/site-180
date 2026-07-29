@@ -1,0 +1,19 @@
+{
+  "min": 15,
+  "max_showable_duration": 360,
+
+  "breakpoints": {
+    "15": {
+      "label": "very_fast"
+    },
+    "30": {
+      "label": "balanced"
+    },
+    "60": {
+      "label": "lengthy"
+    },
+    "180": {
+      "label": "very_lengthy"
+    }
+  }
+}

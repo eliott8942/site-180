@@ -1,0 +1,2 @@
+{{ $tmp := merge . (dict "maxTime" hugo.Data.recettes.duration.max_showable_duration) }}
+{{ partial "components/blog/time-indicator" $tmp }}
