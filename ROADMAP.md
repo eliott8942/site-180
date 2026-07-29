@@ -82,6 +82,8 @@
 
       - [X] 6 or above pictures
 
-  - [ ] 3D Rendering of the images
+  - [ ] 3D Rendering of the books
+
+- [ ] Events Schedule
 
 - [ ] Website documentation : Explain how to add content to it

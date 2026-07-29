@@ -13,6 +13,7 @@ hidden: false
 weight: 1
 quantity: "4"
 durationMin: "60"
+"recettes/duration": ["Long"]
 ---
 
 #### Ingrédients

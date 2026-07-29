@@ -24,6 +24,7 @@ defaultContentLanguage = "fr"
     recettes_order = "recettes/order"
     recettes_copiosity = "recettes/copiosity"
     recettes_tags = "recettes/tags"
+    recettes_duration = "recettes/duration"
 
 
 ########################## Permalinks ############################

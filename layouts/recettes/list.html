@@ -12,7 +12,7 @@
 
   <!-- Tag selection -->
   <!-- Note : That needs to be at the root of the "header" block to work. -->
-  {{ partial "components/indicator/tags/selector-in-header" ( dict "scope" . "class" "z-10" "selectorClass" "container" "allSections" (slice "tags" "order" "categories" "copiosity")) }}
+  {{ partial "components/indicator/tags/selector-in-header" ( dict "scope" . "class" "z-10" "selectorClass" "container" "allSections" (slice "tags" "order" "categories" "copiosity" "duration")) }}
 {{ end }}
 
 {{ define "main" }}

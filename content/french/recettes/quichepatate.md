@@ -11,6 +11,7 @@ intolerances: ["gluten", "lactose", "egg"]
 quantity: "2"
 hidden: false
 durationMin: "60"
+"recettes/duration": ["Long"]
 ---
 
 #### Ingrédients

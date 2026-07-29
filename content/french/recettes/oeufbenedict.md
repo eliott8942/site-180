@@ -13,6 +13,7 @@ weight: 2
 hidden: false
 quantity: "1"
 durationMin: "40"
+"recettes/duration": ["Modéré"]
 ---
 
 #### Ingrédients

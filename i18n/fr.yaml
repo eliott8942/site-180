@@ -58,6 +58,9 @@
 - id: recettes/tags
   translation: "Tags"
 
+- id: recettes/duration
+  translation: "Temps de préparation"
+
 - id: recettes/order
   translation: "Type de plat"
 

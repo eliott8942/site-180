@@ -12,6 +12,7 @@ intolerances: ["lactose"]
 weight: 3
 hidden: false
 durationMin: "15"
+"recettes/duration": ["Rapide"]
 quantity: "1"
 ---
 

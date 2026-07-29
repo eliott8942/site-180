@@ -13,6 +13,7 @@ weight: 1
 hidden: false
 quantity: "8"
 durationMin: "999"
+"recettes/duration": ["Tres long"]
 ---
 
 #### Ingrédients
