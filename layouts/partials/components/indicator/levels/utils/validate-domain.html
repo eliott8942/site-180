@@ -1,0 +1,36 @@
+{{ $scope := .scope }}
+{{ $domain := .domain }}
+{{ if not $domain }}
+  {{ errorf "%s: $domain not provided" $scope }}
+{{ end }}
+
+{{ $max_value := math.MaxInt64 }}
+{{ $min_value := math.MaxInt64 }}
+{{ if isset $domain "max" }}
+  {{ $max_value = int $domain.max }}
+{{ end }}
+{{ if isset $domain "min" }}
+  {{ $min_value = int $domain.min }}
+{{ else }}
+  {{ errorf "%s: $domain.min not defined" $scope }}
+{{ end }}
+
+{{ if lt $max_value 0 }}
+  {{ errorf "%s: Assertion error : $domain.max >= 0" $scope }}
+{{ end }}
+{{ if lt $min_value 0 }}
+  {{ errorf "%s: Assertion error : $domain.min >= 0" $scope }}
+{{ end }}
+{{ if le $max_value $min_value }}
+  {{ errorf "%s: Assertion error : $domain.min <d $domain.max" $scope }}
+{{ end }}
+
+{{ if not (isset $domain "filled_class") }}
+  {{ errorf "%s: Assertion error : $domain.filled_class undefined" $scope }}
+{{ end }}
+
+{{ if ne $max_value math.MaxInt64 }}
+  {{ if not (isset $domain "empty_class") }}
+    {{ errorf "%s: Assertion error : $domain.empty_class undefined" $scope }}
+  {{ end }}
+{{ end }}

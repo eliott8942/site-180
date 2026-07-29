@@ -1,0 +1,45 @@
+{{ $scope := .scope }}
+{{ $domain := .domain }}
+{{ $value := .value }}
+
+{{ if not $domain }}
+  {{ errorf "%s: $domain not provided" $scope }}
+{{ end }}
+{{ if not $value }}
+  {{ errorf "%s: $value is not provided" $scope }}
+{{ end }}
+
+{{ $max_value := math.MaxInt64 }}
+{{ $min_value := math.MaxInt64 }}
+{{ if isset $domain "max" }}
+  {{ $max_value = int $domain.max }}
+{{ end }}
+{{ if isset $domain "min" }}
+  {{ $min_value = int $domain.min }}
+{{ end }}
+
+{{ $value := .value }}
+{{ $scope := .scope }}
+{{ $class := .class }}
+{{ if not $value }}
+  {{ errorf "%s: $value is not provided" $scope }}
+  {{ return }}
+{{ else }}
+  {{ if or (lt $value $min_value) (gt $value $max_value) }}
+    {{ errorf "%s: $value is not between %s and %s, found %s" $scope $min_value $max_value $value}}
+    {{ return }}
+  {{ end }}
+
+  {{ if not $domain.accept_floats }}
+    {{ $value = float $value }}
+    {{ $frac := sub $value (math.Floor $value) }}
+  
+    {{ if ne $frac 0.0 }}
+      {{ warnf "%s: only integers are supported for value, found %s. The fractional part will be ignored." $scope $value }}
+    {{ end }}
+
+    {{ $value = int $value }}
+  {{ end }}
+{{ end }}
+
+{{ return $value }}

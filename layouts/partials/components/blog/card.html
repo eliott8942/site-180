@@ -44,8 +44,18 @@
     </div>
 
     <div>
-      {{ partial "components/indicator/tags/list" ( dict "scope" . "group" "tags" "icon" "fa-tag" ) }}
-      {{ partial "components/indicator/tags/list" ( dict "scope" . "group" "categories" "icon" "fa-folder" ) }}
+      {{ partial "components/indicator/tags/list" ( dict 
+        "scope" . 
+        "group" "tags" 
+        "icon" "fa-tag" 
+        "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2"
+      ) }}
+      {{ partial "components/indicator/tags/list" ( dict 
+        "scope" . 
+        "group" "categories" 
+        "icon" "fa-folder" 
+        "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2"
+      ) }}
     </div>
   </div>
 </div>

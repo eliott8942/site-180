@@ -1,9 +1,15 @@
 {{ $scope := .scope }}
 {{ $domain := .domain }}
+{{ $value := .value }}
+{{ $class := .class }}
+
 {{ if not $domain }}
   {{ errorf "%s: $domain not provided" $scope }}
   {{ return }}
 {{ end }}
+
+{{ partial "components/indicator/levels/utils/validate-domain" (dict "scope" $scope "domain" $domain) }}
+{{ $value := partial "components/indicator/levels/utils/validate-value" (dict "scope" $scope "domain" $domain "value" $value) }}
 
 {{ $max_value := math.MaxInt64 }}
 {{ $min_value := math.MaxInt64 }}
@@ -12,59 +18,10 @@
 {{ end }}
 {{ if isset $domain "min" }}
   {{ $min_value = int $domain.min }}
-{{ else }}
-  {{ errorf "%s: $domain.min not defined" $scope }}
-  {{ return }}
 {{ end }}
 
-{{ if lt $max_value 0 }}
-  {{ errorf "%s: Assertion error : $domain.max >= 0" $scope }}
-  {{ return }}
-{{ end }}
-{{ if lt $min_value 0 }}
-  {{ errorf "%s: Assertion error : $domain.min >= 0" $scope }}
-  {{ return }}
-{{ end }}
-{{ if le $max_value $min_value }}
-  {{ errorf "%s: Assertion error : $domain.min < $domain.max" $scope }}
-  {{ return }}
-{{ end }}
-
-{{ if not (isset $domain "filled_class") }}
-  {{ errorf "%s: Assertion error : $domain.filled_class undefined" $scope }}
-  {{ return }}
-{{ end }}
-
-{{ $value := .value }}
-{{ $scope := .scope }}
-{{ if not $value }}
-  {{ errorf "%s: $value is not provided" $scope }}
-  {{ return }}
-{{ else }}
-  {{ if or (lt $value $min_value) (gt $value $max_value) }}
-    {{ errorf "%s: $value is not between %s and %s" $scope $min_value $max_value}}
-    {{ return }}
-  {{ end }}
-
-  {{ if not $domain.accept_floats }}
-    {{ $value = float $value }}
-    {{ $frac := sub $value (math.Floor $value) }}
-  
-    {{ if ne $frac 0.0 }}
-      {{ warnf "%s: only integers are supported for value, found %s. The fractional part will be ignored." $scope $value }}
-    {{ end }}
-
-    {{ $value = int $value }}
-  {{ end }}
-{{ end }}
-
-<div class="shrink-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 align-middle">
+<span class="shrink-0 align-middle {{ $class }}">
   {{ if ne $max_value math.MaxInt64 }}
-    {{ if not (isset $domain "empty_class") }}
-      {{ errorf "%s: Assertion error : $domain.empty_class undefined" $scope }}
-      {{ return }}
-    {{ end }}
-
     {{ range $i := (seq $min_value $max_value) }}
       {{ if le $i $value }}
         <!-- Full food icons -->
@@ -89,13 +46,13 @@
       <!-- Full food icons -->
       <span class="h-[1em] {{ $domain.filled_class }}"></span>
     {{ end }}
-
+  
     {{ if $domain.accept_floats }}
       {{ $frac := sub $value (math.Floor $value) }}
-
+  
       {{ if ne $frac 0.0 }}
         <span class="h-[1em] {{ $domain.filled_class }} !bg-cover overflow-hidden !bg-left" style="width:calc({{ $frac }} * 1em);"></span>
       {{ end }}
     {{ end }}
   {{ end }}
-</div>
+</span>

@@ -2,10 +2,11 @@
 {{ $group := .group }}
 {{ $icon := .icon }}
 {{ $not_flaticon := .notFlaticon }}
+{{ $class := .class }}
 
 {{ $categories := $scope.Param (printf "%s/%s" $scope.Section $group) }}
 {{ if and $categories (ne (len $categories) 0) }}
-  <span class="inline-flex items-center [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 align-middle">
+  <span class="inline-flex items-center align-middle {{ $class }}">
     {{ if $not_flaticon }}
       <span class="h-[1em] {{ $icon }} opacity-75 align-middle"></span>
     {{ else }}

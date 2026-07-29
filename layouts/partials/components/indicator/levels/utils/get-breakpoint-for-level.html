@@ -1,0 +1,29 @@
+{{ $domain := .domain }}
+{{ $value := .value }}
+{{ $scope := .scope }}
+{{ $mode := .mode | default "min" }}
+
+{{ $labels := slice }}
+
+{{ if not (isset $domain "breakpoints") }}
+  {{ errorf "%s: `breakpoint` not found in $domain" $scope }}
+{{ else }}
+  {{ if eq $mode "min" }}
+    {{ $min_label := "" }}
+    {{ range $breakpoint, $breakpoint_data := $domain.breakpoints }}
+      {{ $breakpoint_val := int $breakpoint }}
+
+      {{ if gt $breakpoint_val $value }}
+        {{ break }}
+      {{ end }}
+
+      {{ $min_label = $breakpoint_data.label }}
+    {{ end }}
+
+    {{ $labels = slice $min_label }}
+  {{ else }}
+    {{ errorf "%s: Unknown mode `%s`" $scope $mode }}
+  {{ end }}
+{{ end }}
+
+{{ return $labels }}
