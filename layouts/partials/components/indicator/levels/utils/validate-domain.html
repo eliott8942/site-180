@@ -22,7 +22,7 @@
   {{ errorf "%s: Assertion error : $domain.min >= 0" $scope }}
 {{ end }}
 {{ if le $max_value $min_value }}
-  {{ errorf "%s: Assertion error : $domain.min <d $domain.max" $scope }}
+  {{ errorf "%s: Assertion error : $domain.min < $domain.max" $scope }}
 {{ end }}
 
 {{ if not (isset $domain "filled_class") }}
