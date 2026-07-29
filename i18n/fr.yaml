@@ -61,5 +61,32 @@
 - id: recettes/order
   translation: "Type de plat"
 
+- id: recipee/similar_posts
+  translation: "Recettes similaires"
+
 - id: recettes/copiosity
   translation: "Generosité du plat"
+
+- id: intolerances/gluten
+  translation: "Gluten"
+
+- id: intolerances/lactose
+  translation: "Lactose"
+
+- id: intolerances/egg
+  translation: "Oeufs"
+
+- id: intolerances/soja
+  translation: "Soja"
+
+- id: intolerances/soja_sauce
+  translation: "Sauce soja"
+
+- id: intolerances/nuts
+  translation: "Fruits a coque"
+
+- id: spiciness/level_1
+  translation: "Piquant"
+
+- id: spiciness/level_2
+  translation: "Tres piquant"
