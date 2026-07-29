@@ -2,5 +2,14 @@
   "min": 1,
   "accept_floats": false,
 
-  "filled_class": "custom-icon icon-pepper"
+  "filled_class": "custom-icon icon-pepper",
+
+  "breakpoints": {
+    "1": {
+      "label": "level_1"
+    },
+    "2": {
+      "label": "level_2"
+    }
+  }
 }

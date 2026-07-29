@@ -9,16 +9,16 @@
   
   "breakpoints": {
     "1": {
-      "name": "light"
+      "label": "light"
     },
     "2": {
-      "name": "balanced"
+      "label": "balanced"
     },
     "3": {
-      "name": "copious"
+      "label": "copious"
     },
     "4": {
-      "name": "very_copious"
+      "label": "very_copious"
     }
   }
 }
