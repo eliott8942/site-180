@@ -12,7 +12,7 @@ spicinessLevel: 1
 weight: 1
 hidden: false
 quantity: "2-3"
-durationMin: "35"
+durationMin: "45"
 ---
 
 #### Ingrédients

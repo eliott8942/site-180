@@ -1,3 +1,5 @@
+{{ $kind := .kind | default "blog" }}
+
 <div class="section-sm overflow-x-clip">
   <div class="container h-full">
     <div class="relative z-0 px-6 -mx-64 flex flex-col h-full overflow-x-clip">
@@ -12,7 +14,13 @@
         <div class="swiper-wrapper shrink">
           {{ range .Posts }}
             <div class="relative swiper-slide z-0 hover:z-10">
-              {{ partial "components/blog/card" . }}
+              {{ if eq $kind "blog" }}
+                {{ partial "components/blog/card" . }}
+              {{ else if eq $kind "recipe" }}
+                {{ partial "components/recipe/card" . }}
+              {{ else }}
+                {{ errorf "Unknown card kind : %s" $kind }}
+              {{ end }}
             </div>
           {{ end }}
         </div>

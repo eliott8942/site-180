@@ -12,7 +12,7 @@ intolerances: ["gluten", "lactose", "egg", "soja"]
 weight: 1
 hidden: false
 quantity: "8"
-durationMin: "120"
+durationMin: "999"
 ---
 
 #### Ingrédients

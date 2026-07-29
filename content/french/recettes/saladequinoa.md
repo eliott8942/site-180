@@ -11,7 +11,7 @@ veganLevel: "vegetarian"
 intolerances: ["lactose"]
 weight: 3
 hidden: false
-durationMin: "20"
+durationMin: "15"
 quantity: "1"
 ---
 

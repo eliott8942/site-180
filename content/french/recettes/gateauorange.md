@@ -12,7 +12,7 @@ intolerances: ["gluten", "egg"]
 weight: 2
 hidden: false
 quantity: "6"
-durationMin: "45"
+durationMin: "60"
 ---
 
 #### Ingrédients

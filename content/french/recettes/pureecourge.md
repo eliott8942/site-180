@@ -11,7 +11,7 @@ intolerances: ["lactose"]
 weight: 1
 hidden: false
 quantity: "4"
-durationMin: "45"
+durationMin: "60"
 ---
 
 #### Ingrédients
