@@ -6,17 +6,6 @@
 {{ end }}
 
 {{ define "main" }}
-  <!-- FIXME : That page has white chunks appearing when scrolling on iOS -->
-
-  <!-- <section>
-    <div class="container text-center">
-      <div
-        class="from-body to-theme-light dark:from-darkmode-body dark:to-darkmode-theme-light rounded-2xl bg-gradient-to-b px-8"
-      >
-        {{ partial "components/breadcrumb" (dict "Context" . "Class" "mt-6 mb-6") }}
-      </div>
-    </div>
-  </section> -->
   {{ $imagePath := .Params.image | absURL }}
 
   <section class="relative">
@@ -53,7 +42,7 @@
           </h1>
         
           <div class="flex items-center text-lg">
-            <div class="mr-1">
+            <div>
               <i class="fa-regular fa-circle-user mr-1"></i>
               {{ if .Params.author }}
                 {{ .Params.author }}
@@ -62,16 +51,15 @@
               {{ end }}
             </div>
       
-            ,
-      
-            <div class="mx-1">
+            <div class="[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25">
               <i class="fa-regular fa-calendar mr-1"></i>
               {{ time.Format ":date_short" .PublishDate }}
             </div>
 
-            ,
-
-            {{ partial "components/blog/time-indicator" (dict "timeMin" .Params.lectureTimeMin "class" "ml-1") }}
+            {{ partial "components/blog/time-indicator" (dict
+              "timeMin" .Params.lectureTimeMin 
+              "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25"
+            ) }}
           </div>
         </div>
       </div>
@@ -79,11 +67,11 @@
   </section>
 
   <section class="section-sm justify-center bg-gradient-reverse relative z-10">
-    <div class="container flex items-center justify-center">
+    <div class="container">
       <!-- Sticky header gradient -->
       <!-- <div class="sticky top-0 bg-gradient-to-b from-white section-sm pb-0 z-10"></div> -->
 
-      <article class="lg:col-10 z-0">
+      <article class="z-0">
         <div class="content mb-10">
           {{ .Content | safeHTML }}
         </div>
@@ -97,8 +85,9 @@
   </section>
 
   <!-- Related posts -->
-  {{ $related := (where site.RegularPages "Section" .Section) | intersect (where site.RegularPages ".Title" "!="
-    .Title)
+  {{ $related := 
+    (where site.RegularPages "Section" .Section) 
+    | intersect (where site.RegularPages ".Title" "!=" .Title)
   }}
   {{ $related = $related | shuffle | first 3 }}
   {{ with $related }}
