@@ -2,16 +2,17 @@
 title: "Tarte Poire & Gorgonzola"
 date: 2024-04-17T00:00:00+01:00
 draft: false
+hidden: false
+
 image: "images/fringale/volume3/mars24/tartepoiregorgonzola.jpg"
 thumbnail: "images/fringale/volume3/mars24/tartepoiregorgonzola.jpg"
+
 "recettes/order": ["Entrée", "Plat"]
 "recettes/tags": ["Tarte", "Salée/Sucrée"]
 "recettes/copiosity": ["Equilibré", "Copieux"]
 copiosityLevel: 2.5
 veganLevel: "vegetarian"
 intolerances: ["gluten", "lactose", "nuts"]
-hidden: false
-weight: 1
 quantity: "4"
 durationMin: "60"
 "recettes/duration": ["Long"]

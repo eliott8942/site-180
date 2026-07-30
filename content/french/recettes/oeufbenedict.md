@@ -2,16 +2,17 @@
 title: "Oeuf Benedict aux asperges"
 date: 2024-04-17T10:00:00+01:00
 draft: false
+hidden: false
+
 image: "images/fringale/volume3/avril24/oeufbenedict.png"
 thumbnail: "images/fringale/volume3/avril24/oeufbenedict.png"
+
 "recettes/order": ["Plat"]
 "recettes/tags": ["Brunch"]
 "recettes/copiosity": ["Equilibré", "Copieux"]
 copiosityLevel: 2.5
 veganLevel: "vegetarian"
 intolerances: ["gluten", "lactose", "egg"]
-weight: 2
-hidden: false
 quantity: "1"
 durationMin: "40"
 "recettes/duration": ["Modéré"]

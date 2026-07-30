@@ -2,16 +2,17 @@
 title: "Cheese Cake au Citron"
 date: 2024-04-17T10:00:00+01:00
 draft: false
+hidden: false
+
 image: "images/fringale/volume3/may24/cheesecake.png"
 thumbnail: "images/fringale/volume3/may24/cheesecake.png"
+
 "recettes/order": ["Dessert"]
 "recettes/tags": ["Gateau"]
 "recettes/copiosity": ["Copieux"]
 copiosityLevel: 3
 veganLevel: "vegetarian"
 intolerances: ["gluten", "lactose", "egg", "soja"]
-weight: 1
-hidden: false
 quantity: "8"
 durationMin: "999"
 "recettes/duration": ["Tres long"]

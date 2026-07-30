@@ -2,16 +2,17 @@
 title: "Gâteau imbibé à l'orange"
 date: 2024-04-17T12:00:00+01:00
 draft: false
+hidden: false
+
 image: "images/fringale/volume3/mars24/gateauorange.jpg"
 thumbnail: "images/fringale/volume3/mars24/gateauorange.jpg"
+
 "recettes/order": ["Dessert"]
 "recettes/tags": ["Gateau"]
 "recettes/copiosity": ["Equilibré"]
 copiosityLevel: 2
 veganLevel: "vegetarian"
 intolerances: ["gluten", "egg"]
-weight: 2
-hidden: false
 quantity: "6"
 durationMin: "60"
 "recettes/duration": ["Long"]

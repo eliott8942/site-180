@@ -2,15 +2,17 @@
 title: "Quiche de patates douces"
 date: 2023-11-06T12:00:00+01:00
 draft: false
+hidden: false
+
 image: "images/fringale/volume3/novembre23/quichepatate.jpg"
 thumbnail: "images/fringale/volume3/novembre23/quichepatate.jpg"
+
 "recettes/order": ["Entrée", "Plat"]
 "recettes/copiosity": ["Copieux"]
 copiosityLevel: 3
 veganLevel: "vegetarian"
 intolerances: ["gluten", "lactose", "egg"]
 quantity: "2"
-hidden: false
 durationMin: "60"
 "recettes/duration": ["Long"]
 ---

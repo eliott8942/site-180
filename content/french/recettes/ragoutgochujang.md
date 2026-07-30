@@ -2,16 +2,17 @@
 title: "Ragoût de Pommes de Terre au Gochujang"
 date: 2024-04-17T12:00:00+01:00
 draft: false
+hidden: false
+
 image: "images/fringale/volume3/avril24/ragoutgochujang.png"
 thumbnail: "images/fringale/volume3/avril24/ragoutgochujang.png"
+
 "recettes/order": ["Plat"]
 "recettes/copiosity": ["Copieux", "Tres copieux"]
 copiosityLevel: 3.5
 veganLevel: "vegetarian"
 intolerances: ["gluten", "soja_sauce", "nuts"]
 spicinessLevel: 1
-weight: 1
-hidden: false
 quantity: "2-3"
 durationMin: "45"
 "recettes/duration": ["Modéré"]

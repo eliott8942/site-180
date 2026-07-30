@@ -2,8 +2,11 @@
 title: "Pumpkin Pie"
 date: 2023-11-05T10:00:00+01:00
 draft: false
+hidden: false
+
 image: "images/fringale/volume3/novembre23/pumpkinpie.jpg"
 thumbnail: "images/fringale/volume3/novembre23/pumpkinpie.jpg"
+
 "recettes/order": ["Dessert"]
 "recettes/tags": ["Gateau"]
 "recettes/copiosity": ["Equilibré", "Copieux"]
@@ -11,8 +14,6 @@ copiosityLevel: 2.5
 veganLevel: "vegetarian"
 intolerances: ["gluten", "lactose", "egg", "nuts"]
 quantity: "4"
-weight: 2
-hidden: false
 durationMin: "75"
 "recettes/duration": ["Long"]
 ---

@@ -2,16 +2,17 @@
 title: "Salade de Quinoa"
 date: 2024-04-17T10:00:00+01:00
 draft: false
+hidden: false
+
 image: "images/fringale/volume3/mars24/saladequinoa.jpg"
 thumbnail: "images/fringale/volume3/mars24/saladequinoa.jpg"
+
 "recettes/order": ["Plat", "Accompagnement"]
 "recettes/tags": ["Salade"]
 "recettes/copiosity": ["Léger"]
 copiosityLevel: 1
 veganLevel: "vegetarian"
 intolerances: ["lactose"]
-weight: 3
-hidden: false
 durationMin: "15"
 "recettes/duration": ["Rapide"]
 quantity: "1"
