@@ -1,54 +1,134 @@
-{{ define "main" }}
-  <section>
-    <div class="container text-center">
-      <div
-        class="from-body to-theme-light dark:from-darkmode-body dark:to-darkmode-theme-light rounded-2xl bg-gradient-to-b px-8 overflow-hidden"
-      >
-        {{ partial "components/breadcrumb" (dict "Context" . "Class" "mt-6 mb-6") }}
-      </div>
-    </div>
-  </section>
+{{ define "headAttrs" }}
+  {{ partial "head-attr/recettes" }}
+  
+  {{ $imagePath := .Params.image | absURL }}
 
-  <section class="section pt-7">
-    <div class="container">
-      <div class="row justify-center">
-        <article class="lg:col-10">
+  <!-- Add here images that should be loaded as soon as possible -->
+  <link rel="preload" as="image" href="{{ $imagePath }}" fetchpriority="high">
+{{ end }}
+
+{{ define "main" }}
+  {{ $imagePath := .Params.image | absURL }}
+
+  <section class="relative">
+    <div class="section-sm relative z-10 flex max-md:flex-col items-center justify-center">
+      <!-- Tiled background -->
+      <div class="absolute w-full h-full overflow-hidden z-0 bg-gray-100">
+        <div class="
+          absolute 
+          translate-center 
+          bg-[url({{ $imagePath }})] bg-cover bg-center
+          saturate-0 opacity-15
+          blur-[2px]
+          h-full w-full"
+        ></div>
+        <div class="relative bg-gradient-to-b to-80% to-white/25 from-transparent w-full h-full z-10"></div>
+      </div>
+
+      <!-- Header -->
+      <div class="container flex max-md:flex-col items-center justify-center z-10">
+        <!-- 
+          FIXME : find a way for the image to have it full size before the image loads
+          because chrome lighthouse complaint about it
+        -->
+        <div class="flex items-center grow-0 shrink-0">
           {{ $image:= .Params.image }}
-          {{ if $image }}
-            <div class="mb-10">
-              {{ partial "image" (dict "Src" $image "Alt" .Title "Class" "w-full rounded") }}
-            </div>
-          {{ end }}
-          <h1 class="h2 mb-4">
+          <div class="max-md:max-w-80 max-w-96 w-full border-2 border-white rounded-xl overflow-hidden shadow-xl">
+            {{ partial "image" (dict "Src" $image "Alt" .Title "Class" "w-full aspect-square object-cover" "Loading" "eager" "FetchPriority" "high") }}
+          </div>
+        </div>
+  
+        <div class="flex flex-col items-start max-md:items-center max-md:mt-7 md:ml-7">
+          <h1 class="h2 pb-2 max-md:text-center">
             {{ .Title }}
           </h1>
+        
+          <div class="flex items-center text-lg pb-2">
+            <div>
+              <i class="fa-regular fa-circle-user mr-1"></i>
+              {{ if .Params.author }}
+                {{ .Params.author }}
+              {{ else }}
+                180°C
+              {{ end }}
+            </div>
+      
+            {{ partial "components/recipe/indicators/time-indicator" (dict
+              "timeMin" .Params.durationMin 
+              "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25"
+              "icon" "fa-hourglass-start"
+            ) }}
 
-          <ul class="flex gap-3 items-center">
-            {{ $categories:= .Param (printf "%s/%s" .Section "categories") }}
-            {{ if $categories }}
-              <li class="inline-block bg-primary rounded px-3 py-1 text-light">
-                <i class="fa-regular fa-folder mr-2"></i>
-                {{ range $i,$p:= $categories }}
-                  <a
-                    href="{{ (printf " %s/%s/" $.Section "categories" ) | relLangURL }}{{ . | urlize | lower }}/"
-                    class="ms-1"
-                    >{{ . | humanize }}{{ if ne $i (sub (len $categories) 1) }}
-                      {{ ", " }}
-                    {{ end }}
-                  </a>
-                {{ end }}
-              </li>
-            {{ end }}
-          </ul>
-
-          {{ partial "components/recipe/info-list" . }}
-
-
-          <div class="content mb-10">
-            {{ .Content }}
+            {{ partial "components/recipe/indicators/number-people-indicator" (dict 
+              "quantity" .Params.quantity 
+              "scope" . 
+              "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25"
+            ) }}
           </div>
-        </article>
+
+          {{ if or (ne (len .Params.intolerances) 0) (isset .Params "spicinessLevel") }}
+            <div class="flex items-center text-lg -mx-1">
+    
+              <div class="flex flex-row flex-wrap max-md:justify-center text-lg">
+                {{ partial "components/indicator/badges/utils/validate-words" (dict "domain" hugo.Data.recettes.intolerances "badges" .Params.intolerances "scope" .) }}
+                {{ range $i := .Params.intolerances }}
+                  {{ $badge_data := index hugo.Data.recettes.intolerances $i }}
+    
+                  <span class="flex flex-row flex-nowrap shrink-0 align-middle m-1 px-2 py-1 rounded-full bg-white border shadow-sm">
+                    {{ partial "components/indicator/badges/icon" (dict "data" $badge_data "label" $i ) }}
+                    <div class="ml-1 leading-none">
+                      {{ i18n (print "intolerances/" $i) }}
+                    </div>
+                  </span>
+                {{ end }}
+
+                {{ if .Params.spicinessLevel }}
+                  <span class="flex flex-row flex-nowrap shrink-0 align-middle m-1 px-2 py-1 rounded-full bg-white border shadow-sm leading-none">
+                    {{ $params := (dict 
+                      "scope" . 
+                      "value" .Params.spicinessLevel 
+                      "domain" hugo.Data.recettes.spiciness 
+                      "class" "leading-none mr-1"
+                    ) }}
+
+                    {{ partial "components/indicator/levels/level" $params }}
+                    {{ $labels := partial "components/indicator/levels/utils/get-breakpoint-for-level" $params }}
+                    {{ i18n (print "spiciness/" (index $labels 0)) }}
+                  </span>
+                {{ end }}
+              </div>
+            </div>
+          {{ end }}
+        </div>
       </div>
     </div>
   </section>
+
+  <section class="section-sm justify-center bg-gradient-reverse relative z-10">
+    <div class="container">
+      <!-- Sticky header gradient -->
+      <!-- <div class="sticky top-0 bg-gradient-to-b from-white section-sm pb-0 z-10"></div> -->
+
+      <article class="z-0">
+        <div class="content mb-10">
+          {{ .Content | safeHTML }}
+        </div>
+        
+        <!-- TODO : Remplement -->
+        <!-- <div class="lg:col-4 flex items-center">
+          {{ partial "social-share" (dict "Class" "share-icons" "Title" (i18n "share") "Reddit" false "Twitter" false) }}
+        </div> -->
+      </article>
+    </div>
+  </section>
+
+  <!-- Related posts -->
+  {{ $related := 
+    (where site.RegularPages "Section" .Section) 
+    | intersect (where site.RegularPages ".Title" "!=" .Title)
+  }}
+  {{ $related = $related | shuffle | first 3 }}
+  {{ with $related }}
+    {{ partial "components/posts-swipe" (dict "Title" (i18n "recipee/similar_posts") "Posts" $related "kind" "recipe") }}
+  {{ end }}
 {{ end }}
