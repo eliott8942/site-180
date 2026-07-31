@@ -27,7 +27,7 @@ durationMin: "60"
 - 3 oeufs
 - 80g de gruyère rapé
 
-#### Préparation
+{{<recettes/step-section step="1" >}} Préparation {{</recettes/step-section>}}
 
 1. Préchauffer le four à 180°C
 2. Déposer la pâte dans un moule à tarte préalablement beurré. Mettre la pâte à cuire dans le four chaud pour 10 min jusqu’à ce que la pâte soit dorée.

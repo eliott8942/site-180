@@ -28,7 +28,7 @@ Pour 4 personnes :
 - 1 gousse d’ail
 - 0.5L de lait
 
-#### Préparation
+{{<recettes/step-section step="1" >}} Préparation {{</recettes/step-section>}}
 
 1. Eplucher et couper en dés la courge butternut.
 2. Peler et couper les pommes de terre et les carottes en rondelles.

@@ -29,7 +29,7 @@ durationMin: "75"
 - ½ c. à c. de sel
 - 1 pâte à tarte
 
-#### Préparation
+{{<recettes/step-section step="1" >}} Préparation {{</recettes/step-section>}}
 
 1. Préchauffer le four à 180°C.
 2. Mettre la pâte à cuire à blanc pendant une dizaine de minutes. Ne pas oublier de la percer avec une fourchette.

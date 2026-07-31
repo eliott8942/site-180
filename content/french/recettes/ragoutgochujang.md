@@ -33,7 +33,7 @@ durationMin: "45"
 - 1 CàS de maïzena
 - Coriandre moulue
 
-#### Préparation
+{{<recettes/step-section step="1" >}} Préparation {{</recettes/step-section>}}
 
 1. Faire chauffer de l'huile dans une grande casserolle à feu moyen-vif.
 2. Faire revenir le gingembre et l'ail pendant 1 min.

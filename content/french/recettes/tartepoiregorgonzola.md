@@ -28,7 +28,7 @@ durationMin: "60"
 - Gorgonzola
 - Noix
 
-#### Préparation
+{{<recettes/step-section step="1" >}} Préparation {{</recettes/step-section>}}
 
 1. Laver et couper les poires en fines tranches dans leur longueur.
 2. Dans un plat à tarte, mettre un filet d'huile, un filet de miel, une pincée de sel et les herbes de provence.
