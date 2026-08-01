@@ -6,6 +6,7 @@
     <div class="h-px absolute left-0 top-1/2 -translate-y-1/2 w-full border-2 z-0 border-blue-900"></div>
   </span>
 
+  <!-- Note : we're splitting the text into many spans to emulate text wrap in flex box -->
   {{ $segments := split (strings.Trim .Inner " ") " " }}
   {{ range $i, $s := $segments }}
     {{ if eq $i 0 }}
