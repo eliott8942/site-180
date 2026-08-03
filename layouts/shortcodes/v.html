@@ -1,0 +1,22 @@
+{{ $value := .Get "value" | default 0 }}
+{{ $unit := .Get "unit" }}
+{{ $id := .Get "id" | default "r" }}
+
+{{ $valueConfigIdent := print $id "Config" }}
+
+{{ if not (.Page.Store.Get $valueConfigIdent) }}
+  {{ $registeredVSystemsIds := .Page.Store.Get "vSystems" | append $id }}
+  {{ .Page.Store.Set "vSystems" $registeredVSystemsIds }}
+
+  {{ .Page.Store.SetInMap $valueConfigIdent "numberOfValues" 0 }}
+  {{ .Page.Store.SetInMap $valueConfigIdent "idPrefix" $id }}
+{{ end }}
+
+{{ $number_of_values := int (index (.Page.Store.Get $valueConfigIdent) "numberOfValues") }}
+{{ .Page.Store.SetInMap $valueConfigIdent "numberOfValues" (add $number_of_values 1) }}
+
+{{ $id_prefix := (index (.Page.Store.Get $valueConfigIdent) "idPrefix") }}
+
+{{ $id_prefix_for_span := print $id_prefix "-" $number_of_values }}
+
+<span id="{{ $id_prefix_for_span }}" v-base-value="{{$value}}" class="shrink-0 text-nowrap -m-[2px] p-1 rounded-sm"><span id="label">{{ $value }}</span>{{ $unit }}</span>

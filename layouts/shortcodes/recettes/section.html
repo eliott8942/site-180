@@ -1,0 +1,25 @@
+{{ $icon := .Get "fa-icon" }}
+
+<div class="relative h4 z-10 font-secondary text-blue-900 flex flex-wrap">
+  <span class="inline-block relative mr-2 shrink-0 w-4">
+    <div class="h-px absolute left-0 top-1/2 -translate-y-1/2 w-full border-2 z-0 border-blue-900"></div>
+  </span>
+
+  {{ if $icon }}
+    <span class="flex items-center mr-2"><i class="fa-solid {{$icon}}"></i></span>
+  {{ end }}
+    
+  <!-- Note : we're splitting the text into many spans to emulate text wrap in flex box -->
+  {{ $segments := split (strings.Trim .Inner " ") " " }}
+  {{ range $i, $s := $segments }}
+    {{ if eq $i 0 }}
+      <span class="shrink-0"> {{ $s }} </span>
+    {{ else }}
+      <span class="shrink-0"> &nbsp;{{ $s }} </span>
+    {{ end }}
+  {{ end }}
+
+  <span class="inline-block relative ml-2 shrink-0 grow">
+    <div class="h-px absolute left-0 top-1/2 -translate-y-1/2 w-full border-2 z-0 border-blue-900"></div>
+  </span>
+</div>

@@ -1,0 +1,41 @@
+{{ $id := .Get "id" | default "r" }}
+{{ $icon := .Get "fa-icon" }}
+{{ $value := .Get "value" }}
+{{ $suffix := .Get "suffix" }}
+{{ $class := .Get "class" | default "w-fit" }}
+
+{{ $valueConfigIdent := print $id "Config" }}
+{{ $vSystemInfo := .Page.Store.Get $valueConfigIdent }}
+
+{{ $max := $vSystemInfo.max | default 9999 }}
+<!-- max_length = ceil(log10(max))-->
+{{ $max_length := int ( math.Ceil (div (math.Log (add (float $max) 1)) (math.Log 10))) }}
+
+{{ $input_id := print $id "_input" }}
+
+<div id="{{ $input_id }}" class="border flex flex-row items-center rounded-sm grow-0 leading-none h-10 {{ $class }}">
+  <button id="btn-dec" class="h-full aspect-square shrink-0 border-r bg-gray-100 hover:bg-gray-200 active:bg-gray-300 flex items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+  </button>
+
+  <label class="min-w-0 flex flex-row h-full items-center p-2 gap-2">
+    {{ if $icon }}
+      <div class="h-full shrink-0 flex items-center justify-center">
+        <i class="fa-regular {{ $icon }}"></i>
+      </div>
+    {{ end }}
+
+    <input
+      type="number" 
+      class="basis-[{{$max_length}}ch] min-w-0 shrink-0 outline-none border-0 focus:ring-0 pointer-events-auto z-0 text-black appearance-none hide-default-controls text-right max-h-full p-0"
+      {{ if $value }} value="{{ $value }}" {{ end }}
+    />
+
+    {{ if $suffix }}
+      <div>{{ $suffix }}</div>
+    {{ end }}
+  </label>
+  <button id="btn-inc" class="h-full aspect-square shrink-0 border-l bg-gray-100 hover:bg-gray-200 active:bg-gray-300 flex items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
+</div>

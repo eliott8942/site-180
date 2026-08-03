@@ -1,0 +1,13 @@
+@keyframes changedAnimation {
+  0% { background-color: rgb(247, 248, 253); }
+  15% { background-color: rgb(235, 238, 250); }
+  30% { background-color: rgb(223, 228, 247); }
+  50% { background-color: rgb(229, 233, 248); }
+  70% { background-color: rgb(223, 228, 247); }
+  85% { background-color: rgb(235, 238, 250); }
+  100% { background-color: rgba(255, 255, 255, 0); }
+}
+
+.value-changed {
+  animation: changedAnimation 1s ease-in-out 0s 1 normal forwards;
+}

@@ -1,0 +1,21 @@
+{{ $js := slice }}
+{{ $js = $js | append (resources.Get "js/recettes/v.js") }}
+{{ $js = $js | resources.Concat "recettes.js" }}
+{{ if hugo.IsProduction }}
+  {{ $js = $js | minify | fingerprint }}
+{{ end }}
+<!-- 
+  Note: we do not defer the js loading here because we need 
+  immediate access to the v API
+-->
+<script
+  crossorigin="anonymous"
+  integrity="{{ $js.Data.Integrity }}"
+  src="{{ $js.RelPermalink }}"
+></script>
+
+{{ $css := resources.Get "scss/recettes/v.css" }}
+{{ if hugo.IsProduction }}
+  {{ $css = $css | minify | fingerprint }}
+{{ end }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}"></link>

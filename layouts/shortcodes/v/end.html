@@ -1,0 +1,51 @@
+{{ $page := .Page }}
+{{ $allSystems := $page.Store.Get "vSystems" }}
+
+{{ if ne (len $allSystems) 0 }}
+<script defer>
+  {{ $vSystemIds := slice }}
+  {{ range $id := $page.Store.Get "vSystems" }}
+    {{ $valueConfigIdent := print $id "Config" }}
+    {{ $vSystemInfo := $page.Store.Get $valueConfigIdent }}
+
+    {{ $arrayName := print $vSystemInfo.idPrefix "_IDS" | upper }}
+    {{ $vSystemIds = $vSystemIds | append $vSystemInfo.idPrefix }}
+
+    const {{ $arrayName | safeJS }} = [
+      {{ range $i, $id := seq 0 (sub $vSystemInfo.numberOfValues 1) }}
+        {{ if ne $i 0 }}
+          ,
+        {{ end }}
+      
+        {{ print $vSystemInfo.idPrefix "-" $id }}
+      {{ end }}
+    ];
+  {{ end }}
+
+  registerVSystems([
+    {{ range $i, $id := $vSystemIds }}
+      {{ $arrayName := print $id "_IDS" | upper }}
+
+      {{ $valueConfigIdent := print $id "Config" }}
+      {{ $vSystemInfo := $page.Store.Get $valueConfigIdent }}
+
+      {{ if ne $i 0 }}
+        ,
+      {{ end }}
+
+      {
+        id: {{ $id }},
+        elements: {{ $arrayName | safeJS }},
+        baseValue: {{ $vSystemInfo.baseValue }},
+        min: {{ $vSystemInfo.min | safeJS }},
+
+        {{ with $vSystemInfo.max }}
+          max: {{ . | safeJS }},
+        {{ end }}
+      }
+    {{ end }}
+  ]);
+</script>
+{{ end }}
+
+{{ warnf "DEBUG %s registered v systems : %s" .Position (.Page.Store.Get "vSystems") }}

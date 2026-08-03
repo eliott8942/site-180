@@ -1,0 +1,20 @@
+{{ $value := int (.Get "default-value" | default 0) }}
+{{ $id := .Get "id" | default "r" }}
+{{ $min := int (.Get "min" | default 0) }}
+{{ $max := .Get "max" }}
+
+{{ $valueConfigIdent := print $id "Config" }}
+
+{{ if not (.Page.Store.Get $valueConfigIdent) }}
+  {{ $registeredVSystemsIds := .Page.Store.Get "vSystems" | append $id }}
+  {{ .Page.Store.Set "vSystems" $registeredVSystemsIds }}
+{{ end }}
+
+{{ .Page.Store.SetInMap $valueConfigIdent "numberOfValues" 0 }}
+{{ .Page.Store.SetInMap $valueConfigIdent "idPrefix" $id }}
+{{ .Page.Store.SetInMap $valueConfigIdent "min" $min }}
+{{ .Page.Store.SetInMap $valueConfigIdent "baseValue" $value }}
+
+{{ if $max }}
+  {{ .Page.Store.SetInMap $valueConfigIdent "max" $max }}
+{{ end }}

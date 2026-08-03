@@ -1,5 +1,6 @@
 {{ define "headAttrs" }}
   {{ partial "head-attr/recettes" }}
+  {{ partial "head-attr/recettes/v" (dict "numberOfPeople" .Params.quantity)}}
   
   {{ $imagePath := .Params.image | absURL }}
 
@@ -57,12 +58,6 @@
               "timeMin" .Params.durationMin 
               "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25"
               "icon" "fa-hourglass-start"
-            ) }}
-
-            {{ partial "components/recipe/indicators/number-people-indicator" (dict 
-              "quantity" .Params.quantity 
-              "scope" . 
-              "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25"
             ) }}
           </div>
 
