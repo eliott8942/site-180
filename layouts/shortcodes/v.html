@@ -20,10 +20,10 @@
 
 {{ $id_prefix_for_span := print $id_prefix "-" $number_of_values }}
 
-{{ if and (not $unit) (not $step) }}
+{{ if and (not (isset .Params "unit")) (not (isset .Params "step")) }}
   {{ warnf "%s: Values for v systems without a unit should have a step. Value n°%i for v system %s doesn't have either of them." .Position (add $number_of_values 1) $id }}
 {{ end }}
-{{ if $step }}
+{{ if (isset .Params "step")}}
   {{ if eq (float $step) 0.0 }}
     {{ errorf "%s: Value n°%i for v system %s has a step of 0." .Position (add $number_of_values 1) $id }}
   {{ end }}

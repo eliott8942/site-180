@@ -1,4 +1,11 @@
-{{ $value := int (.Get "default-value" | default 0) }}
+{{ if not (isset .Params "default-value") }}
+  {{ errorf "%s: $value isn't provided" .Position }}
+{{ end }}
+{{ $value := int (.Get "default-value") }}
+{{ if le $value 0 }}
+  {{ errorf "%s: $value should be above 0, found %s" .Position $value }}
+{{ end }}
+
 {{ $id := .Get "id" | default "r" }}
 {{ $min := int (.Get "min" | default 0) }}
 {{ $max := .Get "max" }}

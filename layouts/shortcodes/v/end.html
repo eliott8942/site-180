@@ -1,7 +1,7 @@
 {{ $page := .Page }}
 {{ $allSystems := $page.Store.Get "vSystems" }}
 
-{{ if ne (len $allSystems) 0 }}
+{{ if $allSystems }}
 <script defer>
   {{ $vSystemIds := slice }}
   {{ range $id := $page.Store.Get "vSystems" }}
