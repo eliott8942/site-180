@@ -1,7 +1,8 @@
-{{ $quantity := .quantity }}
+{{ $quantityMin := .quantityMin }}
+{{ $quantityMax := .quantityMax }}
 {{ $class := .class }}
 
 <div class = "{{ $class }}">
   <i class="fa-regular fa-users"></i>
-  {{ $quantity }}
+  {{ $quantityMin }} - {{ $quantityMax }}
 </div>

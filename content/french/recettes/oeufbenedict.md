@@ -13,7 +13,8 @@ thumbnail: "images/fringale/volume3/avril24/oeufbenedict.png"
 copiosityLevel: 2.5
 veganLevel: "vegetarian"
 intolerances: ["gluten", "lactose", "egg"]
-quantity: "1"
+quantityMin: "1"
+quantityMax: "4"
 durationMin: "40"
 "recettes/duration": ["Modéré"]
 ---

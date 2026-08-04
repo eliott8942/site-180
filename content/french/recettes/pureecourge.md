@@ -12,7 +12,8 @@ copiosityLevel: 1.5
 veganLevel: "vegetarian"
 intolerances: ["lactose"]
 "recettes/copiosity": ["Léger"]
-quantity: "4"
+quantityMin: "1"
+quantityMax: "6"
 durationMin: "60"
 "recettes/duration": ["Long"]
 ---

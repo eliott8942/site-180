@@ -12,7 +12,8 @@ thumbnail: "images/fringale/volume3/novembre23/quichepatate.jpg"
 copiosityLevel: 3
 veganLevel: "vegetarian"
 intolerances: ["gluten", "lactose", "egg"]
-quantity: "2"
+quantityMin: "2"
+quantityMax: "6"
 durationMin: "60"
 "recettes/duration": ["Long"]
 ---

@@ -15,7 +15,8 @@ veganLevel: "vegetarian"
 intolerances: ["lactose"]
 durationMin: "15"
 "recettes/duration": ["Rapide"]
-quantity: "1"
+quantityMin: "1"
+quantityMax: "4"
 ---
 
 #### Ingrédients

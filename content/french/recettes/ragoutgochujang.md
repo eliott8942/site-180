@@ -13,7 +13,8 @@ copiosityLevel: 3.5
 veganLevel: "vegetarian"
 intolerances: ["gluten", "soja_sauce", "nuts"]
 spicinessLevel: 1
-quantity: "2-3"
+quantityMin: "2"
+quantityMax: "6"
 durationMin: "45"
 "recettes/duration": ["Modéré"]
 ---

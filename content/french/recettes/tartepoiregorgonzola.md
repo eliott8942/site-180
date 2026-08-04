@@ -13,7 +13,8 @@ thumbnail: "images/fringale/volume3/mars24/tartepoiregorgonzola.jpg"
 copiosityLevel: 2.5
 veganLevel: "vegetarian"
 intolerances: ["gluten", "lactose", "nuts"]
-quantity: "4"
+quantityMin: "2"
+quantityMax: "8"
 durationMin: "60"
 "recettes/duration": ["Long"]
 ---

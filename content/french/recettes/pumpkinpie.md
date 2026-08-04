@@ -13,7 +13,8 @@ thumbnail: "images/fringale/volume3/novembre23/pumpkinpie.jpg"
 copiosityLevel: 2.5
 veganLevel: "vegetarian"
 intolerances: ["gluten", "lactose", "egg", "nuts"]
-quantity: "4"
+quantityMin: "2"
+quantityMax: "8"
 durationMin: "75"
 "recettes/duration": ["Long"]
 ---

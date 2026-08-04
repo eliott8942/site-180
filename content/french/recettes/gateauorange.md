@@ -13,7 +13,8 @@ thumbnail: "images/fringale/volume3/mars24/gateauorange.jpg"
 copiosityLevel: 2
 veganLevel: "vegetarian"
 intolerances: ["gluten", "egg"]
-quantity: "6"
+quantityMin: "4"
+quantityMax: "8"
 durationMin: "60"
 "recettes/duration": ["Long"]
 ---

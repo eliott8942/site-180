@@ -59,6 +59,13 @@
               "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25"
               "icon" "fa-hourglass-start"
             ) }}
+
+            {{ partial "components/recipe/indicators/number-people-indicator" (dict
+              "quantityMin" .Params.quantityMin
+              "quantityMax" .Params.quantityMax 
+              "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25"
+              "icon" "fa-users"
+            ) }}
           </div>
 
           {{ if or (ne (len .Params.intolerances) 0) (isset .Params "spicinessLevel") }}

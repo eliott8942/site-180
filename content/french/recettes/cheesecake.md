@@ -13,7 +13,8 @@ thumbnail: "images/fringale/volume3/may24/cheesecake.png"
 copiosityLevel: 3
 veganLevel: "vegetarian"
 intolerances: ["gluten", "lactose", "egg", "soja"]
-quantity: "8"
+quantityMin: "4"
+quantityMax: "12"
 durationMin: "999"
 "recettes/duration": ["Tres long"]
 ---
