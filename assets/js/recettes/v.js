@@ -40,10 +40,18 @@ function processElements(elements) {
       continue
     }
 
+    // We use nan to check if step is set
+    let step = parseFloat(element.getAttribute('v-step'))
+    if (step == 0.0) {
+      invalidElements.push(element)
+      continue
+    }
+
     processedElements.push({
       container: element, 
       element: labelElement,
       baseNumber: baseNumber,
+      step,
     })
   }
   if (invalidElements.length > 0) {
@@ -51,6 +59,23 @@ function processElements(elements) {
   }
 
   return processedElements
+}
+
+function formatNumberWithUnits(number) {
+  // round to two digits by default
+  const formattedVal = Math.round(number * 100) / 100
+  return formattedVal.toString()
+}
+
+function formatNumberWithStep(number, step) {
+  const formattedVal = step * Math.round(number / step);
+  return formattedVal.toString()
+}
+
+function gcd(a, b) {
+  a = Math.abs(a)
+  b = Math.abs(b)
+  return b === 0 ? (a || 1) : gcd(b, a % b)
 }
 
 function registerVSystem(config) {
@@ -93,10 +118,18 @@ function registerVSystem(config) {
     
     lastValidInput = newValue;
     for (const element of processedElements) {
-      const newElementValue = element.baseNumber * newValue / config.baseValue
+      let newElementValue = element.baseNumber * newValue / config.baseValue
 
-      if (element.element.innerText != newElementValue) {
-        element.element.innerText = newElementValue
+      let formattedValue;
+      // We use nan to check if step is set
+      if (!Number.isNaN(element.step)) {
+        formattedValue = formatNumberWithStep(newElementValue, element.step)
+      } else {
+        formattedValue = formatNumberWithUnits(newElementValue)
+      }
+      
+      if (element.element.innerText != formattedValue) {
+        element.element.innerText = formattedValue
   
         requestAnimationFrame(() => {
           element.container.classList.remove('value-changed')

@@ -1,6 +1,7 @@
 {{ $value := .Get "value" | default 0 }}
 {{ $unit := .Get "unit" }}
 {{ $id := .Get "id" | default "r" }}
+{{ $step := .Get "step" }}
 
 {{ $valueConfigIdent := print $id "Config" }}
 
@@ -19,4 +20,20 @@
 
 {{ $id_prefix_for_span := print $id_prefix "-" $number_of_values }}
 
-<span id="{{ $id_prefix_for_span }}" v-base-value="{{$value}}" class="shrink-0 text-nowrap -m-[2px] p-1 rounded-sm"><span id="label">{{ $value }}</span>{{ $unit }}</span>
+{{ if and (not $unit) (not $step) }}
+  {{ warnf "%s: Values for v systems without a unit should have a step. Value n°%i for v system %s doesn't have either of them." .Position (add $number_of_values 1) $id }}
+{{ end }}
+{{ if $step }}
+  {{ if eq (float $step) 0.0 }}
+    {{ errorf "%s: Value n°%i for v system %s has a step of 0." .Position (add $number_of_values 1) $id }}
+  {{ end }}
+{{ end }}
+
+<span 
+  id="{{ $id_prefix_for_span }}" 
+  v-base-value="{{$value}}" 
+  {{ with $step }}
+    v-step="{{.}}"
+  {{end}}
+  class="shrink-0 text-nowrap -m-[2px] p-1 rounded-sm"
+><span id="label">{{ $value }}</span>{{ $unit }}</span>
