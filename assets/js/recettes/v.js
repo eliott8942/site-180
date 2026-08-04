@@ -68,7 +68,12 @@ function formatNumberWithUnits(number) {
 }
 
 function formatNumberWithStep(number, step) {
-  const formattedVal = step * Math.round(number / step);
+  let round = Math.round(number / step)
+  if (round == 0.0) {
+    round = Math.ceil(number / step)
+  }
+  
+  const formattedVal = step * round;
   return formattedVal.toString()
 }
 
