@@ -2,6 +2,7 @@
 {{ $unit := .Get "unit" }}
 {{ $id := .Get "id" | default "r" }}
 {{ $step := .Get "step" }}
+{{ $round := .Get "round" }}
 
 {{ $valueConfigIdent := print $id "Config" }}
 
@@ -37,6 +38,17 @@
   {{ end }}
 {{ end }}
 
+{{ if (isset .Params "round") }}
+  {{ if not (isset .Params "step") }}
+    {{ errorf "%s: Value n°%i for v system %s has a rounding method but not a step to round around." .Position (add $number_of_values 1) $id }}
+  {{ end }}
+
+  {{ $valid_words := slice "default" "floor" "ceil" }}
+  {{ if not (in $valid_words (.Get "round")) }}
+    {{ errorf "%s: Value n°%i for v system %s has an unknown rounding method `%s`. Valids methods are %s." .Position (add $number_of_values 1) $id $round $valid_words }}
+  {{ end }}
+{{ end }}
+
 <span 
   id="{{ $id_prefix_for_span }}" 
   v-base-value="{{$value}}" 
@@ -45,6 +57,9 @@
   {{ end }}
   {{ if (isset .Params "min") }}
     v-min="{{.Get "min"}}"
+  {{ end }}
+  {{ if (isset .Params "round") }}
+    v-round="{{$round}}"
   {{ end }}
   class="shrink-0 text-nowrap -m-[2px] p-1 rounded-sm"
 ><span id="label">{{ $value }}</span>{{ $unit }}</span>

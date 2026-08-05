@@ -54,12 +54,30 @@ function processElements(elements) {
       continue
     }
 
+    const round = element.getAttribute('v-round') || "default"
+    let roundingMethod;
+    switch (round) {
+      case "default":
+        roundingMethod = Math.round
+        break
+      case "floor":
+        roundingMethod = Math.floor
+        break
+      case "ceil":
+        roundingMethod = Math.ceil
+        break
+      default:
+        invalidElements.push(element)
+        continue
+    }
+
     processedElements.push({
       container: element, 
       element: labelElement,
       baseNumber: baseNumber,
       step,
       min,
+      roundingMethod
     })
   }
   if (invalidElements.length > 0) {
@@ -71,7 +89,7 @@ function processElements(elements) {
 
 function formatNumberWithUnits(number, min) {
   // round to two digits by default
-  let formattedVal = Math.round(number * 100) / 100
+  let formattedVal = Math.round(number * 10) / 10
   if (!Number.isNaN(min)) {
     formattedVal = Math.max(min, formattedVal)
   }
@@ -79,8 +97,8 @@ function formatNumberWithUnits(number, min) {
   return formattedVal.toString()
 }
 
-function formatNumberWithStep(number, step, min) {
-  let round = Math.round(number / step)
+function formatNumberWithStep(number, step, min, roundFunction) {
+  let round = roundFunction(number / step)
   if (round == 0.0) {
     round = Math.ceil(number / step)
   }
@@ -143,7 +161,7 @@ function registerVSystem(config) {
       let formattedValue;
       // We use nan to check if step is set
       if (!Number.isNaN(element.step)) {
-        formattedValue = formatNumberWithStep(newElementValue, element.step, element.min)
+        formattedValue = formatNumberWithStep(newElementValue, element.step, element.min, element.roundingMethod)
       } else {
         formattedValue = formatNumberWithUnits(newElementValue, element.min)
       }
