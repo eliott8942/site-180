@@ -27,8 +27,9 @@
 
     <input
       type="number" 
-      class="basis-[{{$max_length}}ch] min-w-0 shrink-0 outline-none border-0 focus:ring-0 pointer-events-auto z-0 text-black appearance-none hide-default-controls text-right max-h-full p-0"
+      class="basis-[--num-char] min-w-0 shrink-0 outline-none border-0 focus:ring-0 pointer-events-auto z-0 text-black appearance-none hide-default-controls text-right max-h-full p-0"
       {{ if $value }} value="{{ $value }}" {{ end }}
+      style="--num-char:{{$max_length}}ch;"
     />
 
     {{ if $suffix }}
