@@ -32,9 +32,21 @@
   
       - [ ] Spiciness
 
-  - [ ] Recipe page
+  - [X] Recipe page
 
-    - [ ] Intolerance indicator
+    - [X] Recipe single page
+
+      - [X] Adapt to the number of people
+
+        - [X] Custom format
+
+        - [X] Rounding
+
+        - [X] Settings Container
+
+    - [X] Intolerance indicator
+
+    - [X] Spiciness indicator
 
 - [X] Redesign Crieur page
 
@@ -87,3 +99,5 @@
 - [ ] Events Schedule
 
 - [ ] Website documentation : Explain how to add content to it
+
+- [ ] Correct grammar mistakes on the content
