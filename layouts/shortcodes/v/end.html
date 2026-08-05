@@ -25,29 +25,31 @@
     {{ end }}
   {{ end }}
 
-  registerVSystems([
-    {{ range $i, $id := $vSystemIds }}
-      {{ $arrayName := print $id "_IDS" | upper }}
-
-      {{ $valueConfigIdent := print $id "Config" }}
-      {{ $vSystemInfo := $page.Store.Get $valueConfigIdent }}
-
-      {{ if ne $i 0 }}
-        ,
-      {{ end }}
-
-      {
-        id: {{ $id }},
-        elements: {{ $arrayName | safeJS }},
-        baseValue: {{ $vSystemInfo.baseValue }},
-        min: {{ $vSystemInfo.min | safeJS }},
-
-        {{ with $vSystemInfo.max }}
-          max: {{ . | safeJS }},
+  {{ if ne (len $vSystemIds) 0 }}
+    registerVSystems([
+      {{ range $i, $id := $vSystemIds }}
+        {{ $arrayName := print $id "_IDS" | upper }}
+  
+        {{ $valueConfigIdent := print $id "Config" }}
+        {{ $vSystemInfo := $page.Store.Get $valueConfigIdent }}
+  
+        {{ if ne $i 0 }}
+          ,
         {{ end }}
-      }
-    {{ end }}
-  ]);
+  
+        {
+          id: {{ $id }},
+          elements: {{ $arrayName | safeJS }},
+          baseValue: {{ $vSystemInfo.baseValue }},
+          min: {{ $vSystemInfo.min | safeJS }},
+  
+          {{ with $vSystemInfo.max }}
+            max: {{ . | safeJS }},
+          {{ end }}
+        }
+      {{ end }}
+    ]);
+  {{ end }}
 </script>
 {{ end }}
 
