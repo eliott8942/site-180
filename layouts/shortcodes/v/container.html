@@ -1,3 +1,12 @@
-<div class="w-full flex flex-row flex-wrap items-center justify-center">
+<div class="relative md:float-end p-2 bg-gray-50 border rounded-md shadow-md">
+  <div class="flex flex-row flex-wrap items-center mb-2">
+    <h5 class="my-0"> 
+      <i class="fa-solid fa-gear"></i> 
+      {{ i18n "v/settings_container_title" }}
+    </h5>
+    
+    <span class="ml-2 float-end -my-0.5 py-0.5 px-2 bg-primary leading-none h-fit -rotate-6 text-white font-secondary">BETA</span>
+  </div>
+  
   {{ .Inner }}
 </div>

@@ -93,3 +93,6 @@
 
 - id: spiciness/level_2
   translation: "Tres piquant"
+
+- id: v/settings_container_title
+  translation: "Parametres"
