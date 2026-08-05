@@ -19,15 +19,21 @@ durationMin: "75"
 "recettes/duration": ["Long"]
 ---
 
-#### Ingrédients
+{{<v/begin default-value="2" min="4" max="8">}}
 
-- 400g de purée de potimarron
-- 200g de lait condensé sucré
-- 2 oeufs
-- 1 c. à c. de cannelle
-- 1 c. à c. de gingembre
-- ½ c. à c. de noix de muscade
-- ½ c. à c. de sel
+{{<recettes/section fa-icon="fa-bowl-food">}} Ingrédients {{</recettes/section>}}
+
+{{<v/container>}}
+  {{<v/input fa-icon="fa-users" suffix="personne(s)">}}
+{{</v/container>}}
+
+- {{<v value="400" unit="g">}} de purée de potimarron
+- {{<v value="200" unit="g">}} de lait condensé sucré
+- {{<v value="2" step="1" round="ceil">}} oeufs
+- {{<v value="1" step="0.5" round="floor">}} c. à c. de cannelle
+- {{<v value="1" step="0.5" round="floor">}} c. à c. de gingembre
+- {{<v value="0.5" step="0.5" round="floor">}} c. à c. de noix de muscade
+- {{<v value="0.5" step="0.25" round="floor">}} c. à c. de sel
 - 1 pâte à tarte
 
 {{<recettes/step-section step="1" >}} Préparation {{</recettes/step-section>}}
@@ -38,3 +44,5 @@ durationMin: "75"
 4. Mélanger avec les oeufs et le lait condensé sucré.
 5. Ajouter les épices et ajuster au goût.
 6. Verser le mélange dans la pâte puis enfourner pendant 20 à 30 minutes.
+
+{{<v/end>}}

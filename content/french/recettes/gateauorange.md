@@ -19,21 +19,27 @@ durationMin: "60"
 "recettes/duration": ["Long"]
 ---
 
-#### Ingrédients
+{{<v/begin default-value="6" min="4" max="8">}}
+
+{{<recettes/section fa-icon="fa-bowl-food">}} Ingrédients {{</recettes/section>}}
+
+{{<v/container>}}
+  {{<v/input fa-icon="fa-users" suffix="personne(s)">}}
+{{</v/container>}}
 
 Pour le gâteau:
 
-- 150g de farine
-- 5g de levure chimique
-- 90g de sucre
-- 3 oeufs
-- Zestes de 3 oranges
+- {{<v value="150" unit="g">}} de farine
+- {{<v value="5" step="0.5" round="ceil" unit="g">}} de levure chimique
+- {{<v value="90" unit="g">}} de sucre
+- {{<v value="3" step="1" round="ceil">}} oeufs
+- Zestes de {{<v value="3" step="1" round="ceil">}} oranges
 
 Pour le sirop:
 
-- Jus de 3 oranges
-- 300g de sucre
-- 5-6 baies de genièvre concassées
+- Jus de {{<v value="3" step="1" round="ceil">}} oranges
+- {{<v value="300" unit="g">}} de sucre
+- {{<v value="5" step="0.5" round="floor">}} baies de genièvre concassées
 
 {{<recettes/step-section step="1" >}} Préparation du gateau {{</recettes/step-section>}}
 
@@ -46,3 +52,5 @@ Pour le sirop:
 
 1. Verser le jus d'orange, le cucre et les baies de genièvre dans une casserole et porter à ébullition. Arrêter la cuisson et réserver.
 2. Arroser le gâteau avec ce sirop, dès la sortie du four.
+
+{{<v/end>}}

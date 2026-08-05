@@ -19,19 +19,25 @@ durationMin: "45"
 "recettes/duration": ["Modéré"]
 ---
 
-#### Ingrédients
+{{<v/begin default-value="3" min="2" max="6">}}
 
-- 1 morceau de gingembre
-- 1 carotte
-- 2 à 3 pommes de terre coupées en petits cubes
-- 1 poivron coupé en julienne
-- 1-2 CàS de gochujang ou piment rouge
-- 6 gousses d'ail
-- 60mL de sauce soja
-- 2 CàS de miel
-- 300 mL de bouillon de légumes
-- 2 dL de lait de coco
-- 1 CàS de maïzena
+{{<recettes/section fa-icon="fa-bowl-food">}} Ingrédients {{</recettes/section>}}
+
+{{<v/container>}}
+  {{<v/input fa-icon="fa-users" suffix="personne(s)">}}
+{{</v/container>}}
+
+- {{<v value="4" step="0.5" round="ceil" unit="cm">}} de gingembre
+- {{<v value="1" step="0.25" round="ceil">}} carotte(s)
+- {{<v value="3" step="1" round="ceil">}} pommes de terre coupées en petits cubes
+- {{<v value="1" step="0.5" round="ceil">}} poivron coupé en julienne
+- {{<v value="2" step="0.5" round="floor">}} CàS de gochujang ou piment rouge
+- {{<v value="6" step="1" round="floor">}} gousses d'ail
+- {{<v value="60" unit="mL">}} de sauce soja
+- {{<v value="2" step="0.5">}} CàS de miel
+- {{<v value="300" unit="mL">}} de bouillon de légumes
+- {{<v value="2" unit="dL">}} de lait de coco
+- {{<v value="1" step="0.25">}} CàS de maïzena
 - Coriandre moulue
 
 {{<recettes/step-section step="1" >}} Préparation {{</recettes/step-section>}}
@@ -44,3 +50,5 @@ durationMin: "45"
 6. Ajouter le lait de coco et un peu de maïzena pour épaissir.
 7. Laisser cuire jusqu'à ce que les pommes de terre soient tendres.
 8. Saler et poivrer à volonté, peut être servi avec du riz comme un accompagnement et un trait de citron.
+
+{{<v/end>}}

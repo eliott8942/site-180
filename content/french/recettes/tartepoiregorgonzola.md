@@ -19,10 +19,16 @@ durationMin: "60"
 "recettes/duration": ["Long"]
 ---
 
-#### Ingrédients
+{{<v/begin default-value="4" min="2" max="8">}}
+
+{{<recettes/section fa-icon="fa-bowl-food">}} Ingrédients {{</recettes/section>}}
+
+{{<v/container>}}
+  {{<v/input fa-icon="fa-users" suffix="personne(s)">}}
+{{</v/container>}}
 
 - 1 rouleau de pâte feuilletée
-- 2 poires
+- {{<v value="2" step="0.5">}} poires
 - Miel
 - Herbes de provence
 - Sel et huile
@@ -39,3 +45,5 @@ durationMin: "60"
 6. Sortir du four et laisser redescendre en température.
 7. Emietter le gorgonzola puis les noix à la main sur la tarte tiède.
 8. Ajouter un filet de miel au moment de servir.
+
+{{<v/end>}}

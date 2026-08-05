@@ -19,13 +19,19 @@ durationMin: "40"
 "recettes/duration": ["Modéré"]
 ---
 
-#### Ingrédients
+{{<v/begin default-value="1" min="1" max="4">}}
 
-- 50g de beurre
-- 2 oeufs
-- 1/2 citron
-- 6 asperges
-- 1 tranche de pain
+{{<recettes/section fa-icon="fa-bowl-food">}} Ingrédients {{</recettes/section>}}
+
+{{<v/container>}}
+  {{<v/input fa-icon="fa-users" suffix="personne(s)">}}
+{{</v/container>}}
+
+- {{<v value="50" unit="g">}} de beurre
+- {{<v value="2" step="1">}} oeufs
+- {{<v value="0.5" step="0.5" round="floor">}} citron
+- {{<v value="6" step="1" round="ceil">}} asperges
+- {{<v value="1" step="1" round="ceil">}} tranche de pain
 
 {{<recettes/step-section step="1" >}} Préparation des asperges {{</recettes/step-section>}}
 
@@ -44,3 +50,5 @@ Faire sauter 6 asperges quelques minutes dans du beurre jusqu'à ce qu'elles aie
 1. Faire frémir de l'eau dans une casserolle avec une cuillère à café de vinaigre. Important: ne pas avoir une ébullition torp forte !
 2. Déposer délicatement l'oeuf avec un ustensile afin qu'il ne touche pas le fond.
 3. Faire toaster une tranche de baguette, avec potentiellement un trait d'huile d'olive.
+
+{{<v/end>}}

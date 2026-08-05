@@ -19,32 +19,38 @@ durationMin: "999"
 "recettes/duration": ["Tres long"]
 ---
 
-#### Ingrédients
+{{<v/begin default-value="8" min="4" max="12">}}
+
+{{<recettes/section fa-icon="fa-bowl-food">}} Ingrédients {{</recettes/section>}}
+
+{{<v/container>}}
+  {{<v/input fa-icon="fa-users" suffix="personne(s)">}}
+{{</v/container>}}
 
 ##### La base
 
-- 220g de biscuits (Petit-beurre, Digestiv et/ou Spéculoos)
-- 100g de beurre fondu
+- {{<v value="200" unit="g">}} de biscuits (Petit-beurre, Digestiv et/ou Spéculoos)
+- {{<v value="100" unit="g">}} de beurre fondu
 
 ##### Le curd
 
-- 4 citrons bio
-- 2 cuillères à café de maïzena
-- 100g de beurre
-- 120g de sucre
-- 2 oeufs frais
+- {{<v value="4" step="1" round="ceil">}} citrons bio
+- {{<v value="2" step="0.5">}} cuillères à café de maïzena
+- {{<v value="100" unit="g">}} de beurre
+- {{<v value="120" unit="g">}} de sucre
+- {{<v value="2" step="1" round="ceil">}} oeufs frais
 
 ##### L'appareil
 
-- 600g de Philadelphia
-- 200g de sucre
-- 2 sachets de sucre vanillé
-- 2 cuillères à soupe de maïzena
-- 4 oeufs et 2 jaunes à température ambiente
-- 200g de crème acidulée
-- 1 jus de citron
+- {{<v value="600" unit="g">}} de Philadelphia
+- {{<v value="200" unit="g">}} de sucre
+- {{<v value="2" step="0.5">}} sachets de sucre vanillé
+- {{<v value="2" step="0.5">}} cuillères à soupe de maïzena
+- {{<v value="4" step="1" round="ceil">}} oeufs et {{<v value="2" step="1" round="ceil">}} jaunes à température ambiente
+- {{<v value="200" unit="g">}} de crème acidulée
+- Jus de {{<v value="1" step="0.5" round="ceil">}} citron
 
-{{<recettes/step-section step="1" >}} Préparation de la base {{</recettes/step-section>}}
+{{<recettes/step-section step="1">}} Préparation de la base {{</recettes/step-section>}}
 
 1. Préchauffer le four à 180°C.
 2. Écraser les biscuits jusqu'à avoir une poudre.
@@ -73,3 +79,5 @@ durationMin: "999"
 {{<recettes/night-separator >}}
 
 9. Démouler le lendemain et déguster.
+
+{{<v/end>}}

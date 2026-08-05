@@ -18,16 +18,20 @@ durationMin: "60"
 "recettes/duration": ["Long"]
 ---
 
-#### Ingrédients
+{{<v/begin default-value="1" min="4" max="6">}}
 
-Pour 4 personnes :
+{{<recettes/section fa-icon="fa-bowl-food">}} Ingrédients {{</recettes/section>}}
 
-- 1 oignon
-- 2 pommes de terre
-- Une courge butternut (1kg)
-- 500g de carotte
-- 1 gousse d’ail
-- 0.5L de lait
+{{<v/container>}}
+  {{<v/input fa-icon="fa-users" suffix="personne(s)">}}
+{{</v/container>}}
+
+- {{<v value="1" step="0.5" round="floor">}} oignon
+- {{<v value="2" step="0.5">}} pommes de terre
+- {{<v value="1" step="0.25" round="ceil" unit="kg">}} courge butternut
+- {{<v value="500" unit="g">}} de carotte
+- {{<v value="1" step="1" round="floor">}} gousse d’ail
+- {{<v value="0.5" unit="L">}} de lait
 
 {{<recettes/step-section step="1" >}} Préparation {{</recettes/step-section>}}
 
@@ -38,3 +42,5 @@ Pour 4 personnes :
 5. Ajouter tous les légumes et l’ail puis verser le bouillon et le lait
 6. Saler, poivrer, ajouter la muscade et laisser cuire environ **30min**
 7. Mixer la préparation et rectifier l’assaisonnement si nécessaire.
+
+{{<v/end>}}
