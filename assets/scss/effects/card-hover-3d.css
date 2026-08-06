@@ -1,4 +1,4 @@
-.card-hover-3d.cell-shading.effect-active {
+.card-hover-3d.cell-shading {
   filter: drop-shadow(0px 0px 0px rgba(0,0,0,0));
   transition: filter 0.15s ease-out;
 }
