@@ -29,7 +29,7 @@ function processElements(elements) {
       invalidElements.push(element)
       continue
     }
-    const baseNumber = parseInt(baseNumberStr)
+    const baseNumber = parseFloat(baseNumberStr)
     if (baseNumber == NaN) {
       invalidElements.push(element)
       continue
@@ -157,6 +157,7 @@ function registerVSystem(config) {
     lastValidInput = newValue;
     for (const element of processedElements) {
       let newElementValue = element.baseNumber * newValue / config.baseValue
+      console.log(newElementValue, element.baseNumber, newValue, config.baseValue)
 
       let formattedValue;
       // We use nan to check if step is set
