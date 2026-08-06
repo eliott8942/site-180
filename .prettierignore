@@ -1,1 +1,13 @@
-**/shortcodes/*.html
+# Hugo build/generated output
+public/
+resources/
+
+# Dependencies
+node_modules/
+
+# Lockfiles
+package-lock.json
+bun.lock
+
+# libraries we use
+assets/libs/
