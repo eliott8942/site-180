@@ -14,7 +14,7 @@
   src="{{ $js.RelPermalink }}"
 ></script>
 
-{{ $css := resources.Get "scss/recettes/v.css" }}
+{{ $css := resources.Get "css/recettes/v.css" }}
 {{ if hugo.IsProduction }}
   {{ $css = $css | minify | fingerprint }}
 {{ end }}

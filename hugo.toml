@@ -124,9 +124,7 @@ notAlternative = true
 
 # CSS Plugins
 [[params.plugins.css]]
-link = "plugins/swiper/swiper-bundle.css"
-# Glightbox loaded conditionally on gallery pages
-# link = "plugins/glightbox/glightbox.css"
+link = "libs/swiper/swiper-bundle.css"
 # Font Awesome - only solid.css needed (brands and icons unused)
 [[params.plugins.css]]
 link = "plugins/font-awesome/v6/solid.css"
@@ -135,14 +133,14 @@ link = "plugins/font-awesome/v6/icons.css"
 [[params.plugins.css]]
 link = "plugins/font-awesome/v6/brands.css"
 [[params.plugins.css]]
-link = "plugins/normalize/normalize.css"
+link = "libs/normalize/normalize.css"
 
 # JS Plugins
 [[params.plugins.js]]
 link = "js/search.js"
 # Swiper - always loaded (needed for testimonials on homepage)
 [[params.plugins.js]]
-link = "plugins/swiper/swiper-bundle.js"
+link = "libs/swiper/swiper-bundle.js"
 
 # Glightbox - loaded conditionally for image galleries
 # link = "plugins/glightbox/glightbox.js"

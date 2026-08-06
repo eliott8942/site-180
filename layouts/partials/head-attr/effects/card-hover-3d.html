@@ -9,7 +9,7 @@
   src="{{ $script.RelPermalink }}"
 ></script>
 
-{{ $css := resources.Get "scss/effects/card-hover-3d.css" }}
+{{ $css := resources.Get "css/effects/card-hover-3d.css" }}
 {{ if hugo.IsProduction }}
   {{ $css = $css | minify | fingerprint }}
 {{ end }}
