@@ -14,3 +14,6 @@ assets/libs/
 
 # base theme
 themes/
+
+# disable for roadmap because we need it formatted in a certain way
+ROADMAP.md
