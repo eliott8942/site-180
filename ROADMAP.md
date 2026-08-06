@@ -10,6 +10,8 @@
 
   - [X] Make the post-swipe widget adapt to the height of the screen
 
+  - [ ] Redirect to recipees when for the recipe of the month
+
 - [ ] Redesign Recipee page
 
   - [ ] Create an ingredient widget
@@ -36,6 +38,8 @@
 
     - [X] Recipe single page
 
+      - [ ] Ability to share
+
       - [X] Adapt to the number of people
 
         - [X] Custom format
@@ -43,6 +47,8 @@
         - [X] Rounding
 
         - [X] Settings Container
+
+        - [ ] Ability to modify the quantities and submit them to the association
 
     - [X] Intolerance indicator
 
