@@ -1,0 +1,32 @@
+main:
+  - name: "Acceuil"
+    url: "/"
+    weight: 1
+  - name: "Le Crieur"
+    url: "crieur/"
+    weight: 2
+  - name: "Fringale"
+    url: "fringale"
+    weight: 3
+  - name: "Recettes"
+    url: "recettes/"
+    weight: 4
+  - name: "Blog"
+    url: "blog/"
+    weight: 5
+  - name: "L'association"
+    url: "association/"
+    weight: 6
+
+footer:
+  - name: "A propos"
+    url: "association/"
+    weight: 1
+  - name: "Contact"
+    url: mailto:epfl180c@gmail.com
+    weight: 2
+
+    # FIXME:set it to the 180c repo when merged
+  - name: "Github"
+    url: https://github.com/eliott8942/site-180
+    weight: 3
