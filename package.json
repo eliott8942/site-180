@@ -6,9 +6,9 @@
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/typography": "^0.5.19",
-    "autoprefixer": "^10.4.23",
+    "autoprefixer": "^10.5.4",
     "markdownlint-cli2": "^0.18.1",
-    "postcss": "^8.5.6",
+    "postcss": "^8.5.26",
     "postcss-cli": "^10.1.0",
     "prettier": "^3.7.4",
     "prettier-plugin-go-template": "0.0.15",
@@ -33,5 +33,9 @@
     "content-lint": "markdownlint-cli2 '**/*.md' '#node_modules'",
     "style-lint": "stylelint \"**/*.{css,scss,sass}\"",
     "update-members": "bun ./scripts/updateMembersList.js"
+  },
+  "dependencies": {
+    "baseline-browser-mapping": "^2.11.12",
+    "caniuse-lite": "^1.0.30001806"
   }
 }
