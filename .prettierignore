@@ -11,3 +11,6 @@ bun.lock
 
 # libraries we use
 assets/libs/
+
+# base theme
+themes/
