@@ -1,11 +1,15 @@
-<div class="relative md:float-end p-2 bg-gray-50 border rounded-md shadow-md">
-  <div class="flex flex-row flex-wrap items-center mb-2">
-    <h5 class="my-0"> 
+<div class="relative p-2 bg-gray-50 border rounded-md z-10 shadow-md md:float-end md:w-80">
+  <div class="mb-2">
+    <a href="/blog/recette-v2/" class="float-right toggle w-fit aspect-square pointer-events-auto">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info-icon lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    </a>
+    
+    <h5 class="inline-block my-0 w-fit"> 
       <i class="fa-solid fa-gear"></i> 
       {{ i18n "v/settings_container_title" }}
     </h5>
     
-    <span class="ml-2 float-end -my-0.5 py-0.5 px-2 bg-primary leading-none h-fit -rotate-6 text-white font-secondary">BETA</span>
+    <span class="inline-block ml-2 -my-0.5 py-0.5 px-2 bg-primary leading-none h-fit -rotate-6 text-white font-secondary">BETA</span>
   </div>
   
   {{ .Inner }}
