@@ -11,4 +11,3 @@ const clearModules = (filePath) => {
 };
 
 clearModules("go.mod");
-clearModules("exampleSite/go.mod");
