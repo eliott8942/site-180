@@ -4,8 +4,8 @@ date: 2023-11-06T12:00:00+01:00
 draft: false
 hidden: false
 
-image: "images/fringale/volume3/novembre23/quichepatate.jpg"
-thumbnail: "images/fringale/volume3/novembre23/quichepatate.jpg"
+image: "images/recettes/2023/quichepatate.jpg"
+thumbnail: "images/recettes/2023/quichepatate.jpg"
 
 "recettes/order": ["Entrée", "Plat"]
 "recettes/copiosity": ["Copieux"]

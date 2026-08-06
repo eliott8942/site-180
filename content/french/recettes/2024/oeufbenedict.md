@@ -4,8 +4,8 @@ date: 2024-04-17T10:00:00+01:00
 draft: false
 hidden: false
 
-image: "images/fringale/volume3/avril24/oeufbenedict.png"
-thumbnail: "images/fringale/volume3/avril24/oeufbenedict.png"
+image: "images/recettes/2024/oeufbenedict.png"
+thumbnail: "images/recettes/2024/oeufbenedict.png"
 
 "recettes/order": ["Plat"]
 "recettes/tags": ["Brunch"]

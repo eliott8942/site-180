@@ -4,8 +4,8 @@ date: 2024-04-17T12:00:00+01:00
 draft: false
 hidden: false
 
-image: "images/fringale/volume3/mars24/gateauorange.jpg"
-thumbnail: "images/fringale/volume3/mars24/gateauorange.jpg"
+image: "images/recettes/2024/gateauorange.jpg"
+thumbnail: "images/recettes/2024/gateauorange.jpg"
 
 "recettes/order": ["Dessert"]
 "recettes/tags": ["Gateau"]

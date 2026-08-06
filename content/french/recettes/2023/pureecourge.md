@@ -4,8 +4,8 @@ date: 2023-11-06T00:00:00+01:00
 draft: false
 hidden: false
 
-image: "images/fringale/volume3/novembre23/pureecourge.jpg"
-thumbnail: "images/fringale/volume3/novembre23/pureecourge.jpg"
+image: "images/recettes/2023/pureecourge.jpg"
+thumbnail: "images/recettes/2023/pureecourge.jpg"
 
 "recettes/order": ["Plat", "Accompagnement"]
 copiosityLevel: 1.5

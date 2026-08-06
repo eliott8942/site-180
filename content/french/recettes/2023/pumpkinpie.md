@@ -4,8 +4,8 @@ date: 2023-11-05T10:00:00+01:00
 draft: false
 hidden: false
 
-image: "images/fringale/volume3/novembre23/pumpkinpie.jpg"
-thumbnail: "images/fringale/volume3/novembre23/pumpkinpie.jpg"
+image: "images/recettes/2023/pumpkinpie.jpg"
+thumbnail: "images/recettes/2023/pumpkinpie.jpg"
 
 "recettes/order": ["Dessert"]
 "recettes/tags": ["Gateau"]
