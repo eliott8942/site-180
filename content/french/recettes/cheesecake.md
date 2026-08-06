@@ -75,9 +75,7 @@ durationMin: "999"
 6. Verser l'eau bouillante dans une plaque de cuisson et cuire le cheesecake au four à 150°C, pendant 1h30, sur une grille juste au dessus de l'eau.
 7. Après la cuisson, laisser le cheesecake dans le four avec la porte ouverte pendant environ 45 minutes.
 8. Laisser complètement refroidir avant de le mettre au frigo toute une nuit.
-
 {{<recettes/night-separator >}}
-
 9. Démouler le lendemain et déguster.
 
 {{<v/end>}}
