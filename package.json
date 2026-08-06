@@ -30,7 +30,7 @@
     "clean": "rm -rf public/ && hugo mod clean",
     "update-modules": "node ./scripts/clearModules.js && hugo mod clean --all && hugo mod get -u ./... && hugo mod tidy",
     "format": "prettier -w .",
-    "content-lint": "markdownlint-cli2 '**/*.md' '#node_modules'",
+    "content-lint": "markdownlint-cli2",
     "style-lint": "stylelint \"**/*.{css,scss,sass}\"",
     "update-members": "bun ./scripts/updateMembersList.js"
   },
