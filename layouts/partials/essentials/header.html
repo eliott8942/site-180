@@ -74,7 +74,6 @@
       {{ range site.Menus.main }}
         {{ $menuURL := .URL | relLangURL }}
         {{ $pageURL:= $currentPage.RelPermalink | relLangURL }}
-        {{ warnf "%s %s %s" .URL $menuURL $pageURL }}
 
         {{ $active := hasPrefix $pageURL $menuURL }}
         <!-- If the menu url is the home url ("/") check for strict equality -->
