@@ -66,6 +66,7 @@ jobs:
         run: npm install
 
       - name: Build with Hugo
+        # Note : we need the full url with the domain for --baseURL for the share socials links to be generated correctly.
         run: |
           hugo \
             --gc \
@@ -73,7 +74,7 @@ jobs:
             --templateMetrics \
             --templateMetricsHints \
             --forceSyncStatic \
-            --baseURL "/${{ github.event.repository.name }}/"
+            --baseURL "${{ github.event.repository.owner.name }}.github.io/${{ github.event.repository.name }}/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
