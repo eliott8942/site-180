@@ -5,7 +5,7 @@
   license: MIT
 -->
 
-{{ $url := printf "%s" .Permalink | absLangURL }}
+{{ $url := printf "%s" .Permalink }}
 {{ if not $url }}
   {{ errorf "%s: Could not call .Permalink" . }}
 {{ end }}
