@@ -102,15 +102,37 @@ function init(placeData, decoData, style) {
   uiInit(placeData)
   initSearch(placeData)
 
-  // fold the search menu on mobile to make the attribution visible on first view
-  if (document.documentElement.clientWidth <= 520) {
-    let showMenuToggle = document.getElementById("searchmenu-toggle-inner")
-    if (showMenuToggle == undefined) {
-      console.log("Warning : searchmenu-menu-toggle is linked to nothing")
-    } else if (showMenuToggle.tagName?.toLowerCase() != "input"){
-      console.log("Warning : searchmenu-menu-toggle is not linked to an input")
-    } else {
-      showMenuToggle.checked = false
+  // return true if the url points to a specific place
+  // and false otherwise
+  function handleUrl() {
+    let str_id = getURLFile()
+    if (str_id !== null) {
+      const placeData = getPlaceFromStrId(str_id, PLACE_DATA)
+      if (placeData) {
+        showPlace(placeData.id)
+        return true
+      } else {
+        // can't return anything from this point
+        redirectWithReplace("/404")
+      }
+    }
+
+    return false
+  }
+  
+  registerURLHashHook(() => handleUrl())
+  
+  if (!handleUrl()) {
+    // fold the search menu on mobile to make the attribution visible on first view
+    if (document.documentElement.clientWidth <= 520) {
+      let showMenuToggle = document.getElementById("searchmenu-toggle-inner")
+      if (showMenuToggle == undefined) {
+        console.log("Warning : searchmenu-menu-toggle is linked to nothing")
+      } else if (showMenuToggle.tagName?.toLowerCase() != "input"){
+        console.log("Warning : searchmenu-menu-toggle is not linked to an input")
+      } else {
+        showMenuToggle.checked = false
+      }
     }
   }
 }
@@ -127,10 +149,14 @@ function showPlace(id, mode) {
     return
   }
 
-  console.log(placeData)
-
   showPlaceInfo(placeData)
   exitSearchMode()
-  selectPlaceOnMap(placeData, id, mode)
+  selectPlaceOnMap(placeData, mode)
+  setURLFile(placeData.str_id)
+}
+
+function closePlace() {
+  closePanelInfo()
+  clearURLFile()
 }
 

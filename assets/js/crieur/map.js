@@ -343,21 +343,11 @@ class FullscreenControl {
   }
 }
 
-function selectPlaceOnMap(placeData, id, mode) {
+function selectPlaceOnMap(placeData, mode) {
   if (MAP == undefined) {
     console.warn("Warning : map has not been loaded.")
   } else {
     switch (mode) {
-      case 'fromCard':
-        MAP.flyTo({
-          center: [placeData.location.longitude, placeData.location.latitude],
-          // the zoom offset we add should avoid us zooming to a number exactly where one cluster is about to split into smaller ones, otherwise there is a possibility of seeing both a cluster and it's children
-          // For now, the +0.5 seems to do the trick
-          zoom: 17.5,
-        })
-        
-        break;
-
       case 'fromPlace':
         MAP.flyTo({
           center: [placeData.location.longitude, placeData.location.latitude],
@@ -366,8 +356,12 @@ function selectPlaceOnMap(placeData, id, mode) {
         break;
     
       default:
-        console.warn(`Warning : unknown mode ${mode}`)
-
+        MAP.flyTo({
+          center: [placeData.location.longitude, placeData.location.latitude],
+          // the zoom offset we add should avoid us zooming to a number exactly where one cluster is about to split into smaller ones, otherwise there is a possibility of seeing both a cluster and it's children
+          // For now, the +0.5 seems to do the trick
+          zoom: 17.5,
+        })
         break;
     }
   }

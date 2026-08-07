@@ -74,6 +74,10 @@
 
     <!-- Assign an id to the place -->
     {{ $place = merge $place (dict "id" $i) }}
+
+    <!-- Assign an str id to be used in url processing -->
+    {{ $str_id := print $i "-" .File.BaseFileName }}
+    {{ $place = merge $place (dict "str_id" $str_id) }}
     
     {{ $data = $data | append $place }}
   {{ end }}

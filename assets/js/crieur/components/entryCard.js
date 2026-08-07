@@ -36,7 +36,7 @@ const entryCardElement = (placeInfo, hints = {}) => {
   return Lit.html`
     <div 
       class="min-h-28 w-full flex shrink-0 flex-row overflow-hidden first:border-0 border-t hover:bg-gray-100 cursor-pointer unselectable"
-      @click=${() => showPlace(placeInfo.id, 'fromCard')}
+      @click=${() => showPlace(placeInfo.id)}
     >
       <div class="w-28 overflow-hidden p-3 shrink-0">
         <img src="${placeInfo.thumbnail}" class="w-full aspect-square object-cover rounded-md"/>
