@@ -113,7 +113,7 @@ function init(placeData, decoData, style) {
         return true
       } else {
         // can't return anything from this point
-        redirectWithReplace("/404")
+        redirectWithReplace(_404_URL)
       }
     }
 
