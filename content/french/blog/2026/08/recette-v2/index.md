@@ -1,7 +1,7 @@
 ---
 title: "Modifier le nombre de personne en recettes !"
 meta_title: ""
-image: "images/blog/2026/recettes-v2/thumbnail.png"
+image: "thumbnail.png"
 description: "Nos recettes peuvent maintenant etre adapté à plusieurs quantités de personnes !"
 "blog/categories": ["Recettes"]
 "blog/tags": ["Nouveautés", "Beta testing"]

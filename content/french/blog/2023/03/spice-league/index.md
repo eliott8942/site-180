@@ -2,7 +2,7 @@
 title: "Spice League 2023"
 meta_title: ""
 description: "Concours de cuisine Spice League"
-image: "images/events/spice-league.jpg"
+image: "thumbnail.jpg"
 "blog/categories": ["Spice League"]
 "blog/tags": ["cuisine", "evenement"]
 author: "Pôle Event"

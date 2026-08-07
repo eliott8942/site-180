@@ -2,7 +2,7 @@
 title: "Recette du mois - Février 2023"
 subtitle: ""
 date: 2023-02-05T17:26:00Z
-image: "images/blog/2023/recette-mois-02.jpeg"
+image: "thumbnail.jpeg"
 "blog/categories": ["Recettes du mois"]
 draft: false
 summary: "Conchiglionis ricotta et épinard"
