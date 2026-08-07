@@ -10,6 +10,8 @@
 
   - [X] Make the post-swipe widget adapt to the height of the screen
 
+  - [X] Ability to share
+
   - [ ] Redirect to recipees when for the recipe of the month
 
 - [ ] Redesign Recipee page
@@ -38,7 +40,7 @@
 
     - [X] Recipe single page
 
-      - [ ] Ability to share
+      - [X] Ability to share
 
       - [X] Adapt to the number of people
 
@@ -81,6 +83,8 @@
     - [ ] Filter by tags and types
 
   - [ ] Ability to share a place
+
+    - [X] URL Routing
 
   - [ ] Avility to refresh the open statuses and the calendars
 
