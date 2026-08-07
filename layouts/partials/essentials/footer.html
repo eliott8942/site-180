@@ -2,10 +2,10 @@
   <div class="container">
     <div class="row items-center py-10">
       <!-- navbar brand/logo -->
-      <div class="lg:col-3"></div>
+      <div class="md:col-3"></div>
 
       <!-- Links -->
-      <div class="lg:col-6 mb-8 text-center lg:mb-0">
+      <div class="md:col-6 mb-8 text-center md:mb-0">
         <ul>
           {{ range site.Menus.footer }}
             <li class="m-3 inline-block">
@@ -28,21 +28,16 @@
       </div>
 
       <!-- Social medias -->
-      <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 lg:text-right">
-        <ul class="social-icons">
-          {{ range hugo.Data.social.main }}
-            <li>
-              <a
-                target="_blank"
-                aria-label="{{ .name }}"
-                rel="nofollow noopener"
-                href="{{ .link | safeURL }}"
-              >
-                <i class="{{ .icon }}"></i>
-              </a>
-            </li>
+      <div class="md:col-3 mb-8 flex items-center justify-center gap-2 md:mb-0 md:mt-0 md:text-right">
+        <div class="flex flex-row w-min gap-2">
+          {{ range $social := hugo.Data.social.main }}
+            {{ partial "components/social/single" (dict 
+              "scope" .
+              "network" $social.name
+              "href" $social.link
+            )}}
           {{ end }}
-        </ul>
+        </div>
       </div>
     </div>
   </div>

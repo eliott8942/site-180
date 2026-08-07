@@ -75,11 +75,10 @@
         <div class="content mb-10">
           {{ .Content | safeHTML }}
         </div>
-        
-        <!-- TODO : Remplement -->
-        <!-- <div class="lg:col-4 flex items-center">
-          {{ partial "social-share" (dict "Class" "share-icons" "Title" (i18n "share") "Reddit" false "Twitter" false) }}
-        </div> -->
+
+        <div class="flex flex-row justify-center">
+          {{ partial "components/social/post-share" . }}
+        </div>
       </article>
     </div>
   </section>
