@@ -66,12 +66,8 @@ function updateSearch() {
   if (searchQuery.length == 0) {
     showAllCards(results.map(entry => entry.item))
   } else {
-    // fore some reason Fuse.js returns results with score higher than that threshold,
-    // so what i did was i will filter those results out here
-    const resultsToShow = results.filter(place => place.score <= SEARCH_THRESHOLD)
-
-    const places = resultsToShow.map(entry => entry.item)
-    const hints = resultsToShow.map(entry => {
+    const places = results.map(entry => entry.item)
+    const hints = results.map(entry => {
       const hintPlace = {
         title: undefined,
         types: new Array(entry.item.types.length).fill(undefined),
