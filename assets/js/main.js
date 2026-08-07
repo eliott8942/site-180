@@ -29,13 +29,18 @@
     centeredSlides: false,
     breakpoints: {
       520: {
+        slidesPerView: 1,
+        slidesPerGroup: 1,
+      },
+      768: {
         slidesPerView: 2,
-        slidesPerGroup: 2,
+        slidesPerGroup: 1,
       },
-      992: {
+      1024: {
         slidesPerView: 3,
-        slidesPerGroup: 3,
+        slidesPerGroup: 1,
       },
+      
     },
   });
 
