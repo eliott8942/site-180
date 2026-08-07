@@ -1,6 +1,6 @@
 main:
   - name: "Acceuil"
-    url: "/"
+    url: ""
     weight: 1
   - name: "Le Crieur"
     url: "crieur/"

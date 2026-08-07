@@ -72,12 +72,13 @@
     >
       {{ $currentPage := . }}
       {{ range site.Menus.main }}
-        {{ $menuURL := .URL | absLangURL }}
-        {{ $pageURL:= $currentPage.Permalink | absLangURL }}
+        {{ $menuURL := .URL | relLangURL }}
+        {{ $pageURL:= $currentPage.RelPermalink | relLangURL }}
+        {{ warnf "%s %s %s" .URL $menuURL $pageURL }}
 
         {{ $active := hasPrefix $pageURL $menuURL }}
         <!-- If the menu url is the home url ("/") check for strict equality -->
-        {{ $baseURL := "" | absLangURL }}
+        {{ $baseURL := "" | relLangURL }}
         {{ if eq $menuURL $baseURL  }}
           {{ $active = eq $pageURL $menuURL }}
         {{ end }}
