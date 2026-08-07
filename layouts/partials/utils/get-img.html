@@ -1,0 +1,13 @@
+{{ $img := .img }}
+{{ $context := .context }}
+
+{{ $image := $context.Resources.GetMatch $img }}
+{{ if not $image }}
+  {{ $image = resources.Get $img}}
+{{ end }}
+
+{{ if not $image }}
+  {{ errorf "%s: image `%s` not found" $context $img }}
+{{ end }}
+
+{{ return $image }}

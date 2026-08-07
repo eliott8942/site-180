@@ -14,9 +14,8 @@
   "
   onclick="window.location.href='{{ .RelPermalink }}'"
 >
-  {{ $image:= .Params.image }}
   <div class="shrink overflow-hidden">
-    {{ partial "image" (dict "Src" $image "Alt" .Title "Class" "aspect-square object-cover") }}
+    {{ partial "image" (dict "Src" .Params.image "Alt" .Title "Class" "aspect-square object-cover" "Context" .) }}
   </div>
   
   <div class="flex flex-col p-4 border-t shrink-0 grow">
