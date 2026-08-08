@@ -44,13 +44,9 @@
           </h1>
         
           <div class="flex items-center text-lg pb-2">
+            <!-- Note : the text are on the same line of as the icons because otherwise hugo put a space between them -->
             <div>
-              <i class="fa-regular fa-circle-user mr-1"></i>
-              {{ if .Params.author }}
-                {{ .Params.author }}
-              {{ else }}
-                180°C
-              {{ end }}
+              <i class="fa-solid fa-circle-user mr-1"></i>{{ strings.Trim (.Params.author | default "180°C") " " }}
             </div>
       
             {{ partial "components/recipe/indicators/time-indicator" (dict

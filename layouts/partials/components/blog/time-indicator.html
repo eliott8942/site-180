@@ -5,7 +5,8 @@
 {{ $maxTime := int .maxTime | default -1 }}
 
 <div class = "{{ $class }}">
-  <i class="fa-regular {{ $icon }}"></i>
+  <!-- Note : by default hugo put a space between elements that aren't on the same line. We're exploiting this here. -->
+  <i class="fa-solid {{ $icon }}"></i>
 
   {{ if not $timeMin }}
     {{ warnf "%s: $timeMin is not defined" $scope }}

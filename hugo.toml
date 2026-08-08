@@ -125,13 +125,8 @@ notAlternative = true
 # CSS Plugins
 [[params.plugins.css]]
 link = "libs/swiper/swiper-bundle.css"
-# Font Awesome - only solid.css needed (brands and icons unused)
 [[params.plugins.css]]
-link = "plugins/font-awesome/v6/solid.css"
-[[params.plugins.css]]
-link = "plugins/font-awesome/v6/icons.css"
-[[params.plugins.css]]
-link = "plugins/font-awesome/v6/brands.css"
+link = "libs/font-awesome/all.css"
 [[params.plugins.css]]
 link = "libs/normalize/normalize.css"
 

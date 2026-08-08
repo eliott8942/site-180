@@ -41,18 +41,13 @@
           </h1>
         
           <div class="flex items-center text-lg">
+            <!-- Note : the text are on the same line of as the icons because otherwise hugo put a space between them -->
             <div>
-              <i class="fa-regular fa-circle-user mr-1"></i>
-              {{ if .Params.author }}
-                {{ .Params.author }}
-              {{ else }}
-                180°C
-              {{ end }}
+              <i class="fa-solid fa-circle-user mr-1"></i>{{ strings.Trim (.Params.author | default "180°C") " " }}
             </div>
       
             <div class="[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25">
-              <i class="fa-regular fa-calendar mr-1"></i>
-              {{ time.Format ":date_short" .PublishDate }}
+              <i class="fa-solid fa-calendar mr-1"></i>{{ time.Format ":date_short" .PublishDate }}
             </div>
 
             {{ partial "components/blog/time-indicator" (dict
