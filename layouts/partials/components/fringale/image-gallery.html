@@ -1,7 +1,6 @@
 {{ $gallery := .gallery }}
 {{ $gallery := partial "utils/iter/chunk.html" (dict "items" $gallery "size" 2) }}
 {{ $context := .context }}
-{{ warnf "%s" $gallery }}
 
 <div class="swiper fringale-slider lg:p-1">
   <!-- In swiper css, flex of swiper-wrapper is nowrap by default. We override this for bigger screens where we disable swiper js entirely -->
