@@ -12,8 +12,9 @@
     cursor-pointer
     duration-100
   "
-  onclick="window.location.href='{{ .RelPermalink }}'"
 >
+  <a href="{{ .RelPermalink }}" class="absolute w-full h-full z-10"></a>
+
   <div class="shrink overflow-hidden">
     {{ partial "image" (dict "Src" .Params.image "Alt" .Title "Class" "aspect-square object-cover" "Context" .) }}
   </div>
@@ -47,13 +48,13 @@
         "scope" . 
         "group" "tags" 
         "icon" "fa-tag" 
-        "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2"
+        "class" "relative [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 z-20"
       ) }}
       {{ partial "components/indicator/tags/list" ( dict 
         "scope" . 
         "group" "categories" 
         "icon" "fa-folder" 
-        "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2"
+        "class" "relative [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 z-20"
       ) }}
     </div>
   </div>
