@@ -1,4 +1,7 @@
 {{ define "headAttrs" }}
+  {{ partial "head-attr/recettes" }}
+  {{ partial "head-attr/recettes/v" (dict "numberOfPeople" .Params.quantity)}}
+  
   {{ $image := partial "utils/get-img" (dict "img" .Params.image "context" .) }}
 
   <!-- Add here images that should be loaded as soon as possible -->
