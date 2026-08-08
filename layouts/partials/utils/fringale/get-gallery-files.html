@@ -12,7 +12,7 @@
 {{ end }}
 {{ $gallery = print $gallery "*" }}
 
-{{ $matchedImgs := resources.Match $gallery }}
+{{ $matchedImgs := .Resources.Match $gallery }}
 {{ if eq (len $matchedImgs) 0 }}
   {{ warnf "%s:`%s` match no images" .File.Path $gallery }}
 {{ end }}

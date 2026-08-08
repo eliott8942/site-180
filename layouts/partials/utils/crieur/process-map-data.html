@@ -1,4 +1,6 @@
 {{ $path := .path }}
+{{ $scope := .scope }}
+
 {{ $data := slice }}
 
 {{ with .scope.Site.GetPage $path }}
@@ -12,13 +14,14 @@
     {{ range $name := $imageNames }}
       {{ $variable := $place.Param $name }}
 
-      <!-- Make sure the images are included in the build -->
-      {{ with resources.Get $variable }}
-        {{ .Publish }}
-      {{ end }}
-
       {{ if $variable }}
-        {{ $originalPlace = merge $originalPlace (dict $name ($variable | absURL)) }}
+        {{ $image := partial "utils/get-img" (dict "img" $variable "context" $place) }}
+        <!-- Make sure the images are included in the build -->
+        {{ with $image }}
+          {{ .Publish }}
+        {{ end }}
+        
+        {{ $originalPlace = merge $originalPlace (dict $name $image.RelPermalink) }}
       {{ end }}
     {{ end }}
     
@@ -27,14 +30,13 @@
     {{ if $tops }}
       {{ $processedTops := slice }}
       {{ range $top := $tops }}
-        {{ $imageURL := $top.photo | relURL }}
-
+        {{ $image := partial "utils/get-img" (dict "img" $top.photo "context" $place) }}
         <!-- Make sure the images are included in the build -->
-        {{ with resources.Get $top.photo }}
+        {{ with $image }}
           {{ .Publish }}
         {{ end }}
 
-        {{ $top = merge $top (dict "photo" $imageURL) }}
+        {{ $top = merge $top (dict "photo" $image.RelPermalink) }}
         {{ $processedTops = $processedTops | append $top }}
       {{ end }}
       {{ $originalPlace = merge $originalPlace (dict "tops" $processedTops) }}
@@ -43,9 +45,10 @@
 
     <!-- Traverse Galery and extract all the images paths in it, except for the thumbnail -->
     {{ $gallery := $place.Param "gallery" }}
-    {{ if $gallery }}
+    {{ warnf "%s" $gallery }}
+    {{ if isset $place.Params "gallery" }}
       {{ $imagePath := slice }}
-      {{ range resources.Match (printf "%s/*" $gallery) }}
+      {{ range $place.Resources.Match (printf "%s*" $gallery) }}
         {{ $imagePath = $imagePath | append (.Permalink) }}
       {{ end }}
       {{ $originalPlace = merge $originalPlace (dict "gallery" $imagePath) }}

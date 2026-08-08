@@ -17,7 +17,7 @@
   <div class="flex flex-col lg:flex-row w-full lg:min-h-full">
     <!-- Image gallery -->
     <div class="relative bg-gradient-reverse">
-      {{ partial "components/fringale/image-gallery" (dict "gallery" $gallery) }}
+      {{ partial "components/fringale/image-gallery" (dict "gallery" $gallery "context" .) }}
     </div>
 
     <!-- Info panel -->
