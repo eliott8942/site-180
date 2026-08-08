@@ -45,7 +45,6 @@
 
     <!-- Traverse Galery and extract all the images paths in it, except for the thumbnail -->
     {{ $gallery := $place.Param "gallery" }}
-    {{ warnf "%s" $gallery }}
     {{ if isset $place.Params "gallery" }}
       {{ $imagePath := slice }}
       {{ range $place.Resources.Match (printf "%s*" $gallery) }}
