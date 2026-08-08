@@ -7,22 +7,33 @@
 {{ $categories := $scope.Param (printf "%s/%s" $scope.Section $group) }}
 {{ if and $categories (ne (len $categories) 0) }}
   <span class="{{ $class }}">
-    {{ if $not_flaticon }}
-      <span class="h-[1em] {{ $icon }} opacity-75 align-middle"></span>
-    {{ else }}
-      <i class="fa-solid {{ $icon }} opacity-75"></i>
-    {{ end }}
     {{ range $i,$p := $categories }}
       {{ if $i }}
         ,
+
+        <a
+          href="{{ (printf "%s/%s" $scope.Section $group) | relLangURL }}/{{ . | urlize | lower }}"
+          class="ml-1 opacity-75 hover:opacity-100 hover:text-black duration-75 m-0"
+        >
+          {{ . | humanize }}
+        </a>
+      {{ else }}
+        <span class="text-nowrap">
+          {{ if $not_flaticon }}
+            <span class="h-[1em] {{ $icon }} opacity-75 align-middle"></span>
+          {{ else }}
+            <i class="fa-solid {{ $icon }} opacity-75"></i>
+          {{ end }}
+          
+          <a
+            href="{{ (printf "%s/%s" $scope.Section $group) | relLangURL }}/{{ . | urlize | lower }}"
+            class="ml-1 opacity-75 hover:opacity-100 hover:text-black duration-75 m-0"
+          >
+            {{ . | humanize }}
+          </a>
+        </span>
       {{ end }}
-      
-      <a
-        href="{{ (printf "%s/%s" $scope.Section $group) | relLangURL }}/{{ . | urlize | lower }}"
-        class="ml-1 opacity-75 hover:opacity-100 hover:text-black duration-75 m-0"
-      >
-        {{ . | humanize }}
-      </a>
+
     {{ end }}
   </span>
 {{ end }}
