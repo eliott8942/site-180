@@ -2,10 +2,9 @@
 title: "Modifier le nombre de personne en recettes !"
 meta_title: ""
 image: "thumbnail.png"
-description: "Nos recettes peuvent maintenant etre adapté à plusieurs quantités de personnes !"
 "blog/categories": ["Recettes"]
 "blog/tags": ["Nouveautés", "Beta testing"]
-summary: "La deuxième édition du livre de recettes 180°C est maintenant disponible !"
+summary: "Nos recettes peuvent maintenant etre adapté à plusieurs quantités de personnes !"
 draft: false
 date: 2026-08-07
 lectureTimeMin: 5

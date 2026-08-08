@@ -6,7 +6,6 @@ image: "thumbnail.png"
 "blog/categories": ["Recettes du mois"]
 draft: false
 summary: "Carrot Cake (pour 4 personnes)"
-description: "Carrot Cake (pour 4 personnes)"
 lectureTimeMin: 10
 ---
 

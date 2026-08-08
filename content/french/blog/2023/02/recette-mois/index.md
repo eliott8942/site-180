@@ -6,7 +6,6 @@ image: "thumbnail.jpeg"
 "blog/categories": ["Recettes du mois"]
 draft: false
 summary: "Conchiglionis ricotta et épinard"
-description: "Conchiglionis ricotta et épinard"
 lectureTimeMin: 15
 ---
 
