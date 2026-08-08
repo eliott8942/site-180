@@ -5,10 +5,7 @@
   license: MIT
 -->
 
-{{ $url := printf "%s" .Permalink }}
-{{ if not $url }}
-  {{ errorf "%s: Could not call .Permalink" . }}
-{{ end }}
+{{ $url := partial "utils/get-url-with-host" .RelPermalink }}
 
 <div class="relative flex flex-row flex-wrap gap-2 p-2 rounded-xl bg-sky-200 border border-sky-300 shadow-md w-96 pt-6">
   <div class="absolute top-0 left-0 ml-4 -translate-y-1/2 px-2 py-1 bg-sky-500 rounded-full">

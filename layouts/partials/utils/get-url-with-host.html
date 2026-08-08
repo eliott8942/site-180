@@ -1,0 +1,8 @@
+{{ $rel_permalink := . }}
+
+{{ $host := getenv "HUGO_HOST_DOMAIN" }}
+{{ if not $host }}
+  {{ warnf "Warning, environment HUGO_HOST_DOMAIN is not set" }}
+{{ end }}
+
+{{ return (print $host $rel_permalink) }}

@@ -26,6 +26,7 @@ concurrency:
 env:
   HUGO_ENV: production
   HUGO_ENVIRONMENT: production
+  HUGO_HOST_DOMAIN: https://${{ github.event.repository.owner.name }}.github.io
   HUGO_VERSION: "0.162.1"
   GO_VERSION: "1.25.12"
   NODE_VERSION: "24.19.0"
@@ -66,7 +67,8 @@ jobs:
         run: npm install
 
       - name: Build with Hugo
-        # Note : we need the full url with the domain for --baseURL for the share socials links to be generated correctly.
+        # Note : do not insert a full domain url in the baseURL config. It breaks everything.
+        # If you want a .Permalink with host included, concat a .RelPermalink with the HUGO_HOST_DOMAIN environment variable.
         run: |
           hugo \
             --gc \
