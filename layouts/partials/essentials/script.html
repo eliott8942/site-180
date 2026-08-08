@@ -9,16 +9,23 @@
 {{ end }}
 
 <!-- Load core plugins (minified) -->
-{{ with $scripts | resources.Concat "js/plugins-concat.js" | resources.Minify | fingerprint }}
+{{ with $scripts | resources.Concat "js/plugins-concat.js" }}
   <script src="{{ .RelPermalink }}"></script>
 {{ end }}
 
-<!-- main script - minified with esbuild -->
-{{ with resources.Get "js/main.js" | js.Build (dict "minify" true) | fingerprint }}
-  <script
-    crossorigin="anonymous"
-    integrity="{{ .Data.Integrity }}"
-    src="{{ .RelPermalink }}"
-    defer
-  ></script>
+<!-- Load main js script -->
+{{ $mainJS := slice }}
+{{ $mainJS = $mainJS | append (resources.Match "js/main/*") }}
+{{ $mainJS = $mainJS | resources.Concat "main.js" }}
+
+{{ if hugo.IsProduction }}
+  {{ $mainJS = $mainJS | minify | fingerprint }}
 {{ end }}
+
+<!-- main scripts -->
+<script
+  crossorigin="anonymous"
+  integrity="{{ $mainJS.Data.Integrity }}"
+  src="{{ $mainJS.RelPermalink }}"
+  defer
+></script>

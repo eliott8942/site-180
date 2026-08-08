@@ -77,3 +77,14 @@
     @apply dark:bg-primary dark:text-light dark:hover:text-secondary no-underline hover:text-secondary #{!important};
   }
 }
+
+.copy-btn .clicked-svg {
+  display: none;
+}
+
+.copy-btn.clicked .clicked-svg {
+  display: block;
+}
+.copy-btn.clicked .default-svg {
+  display: none;
+}

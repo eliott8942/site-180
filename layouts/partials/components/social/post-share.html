@@ -37,76 +37,9 @@
 
   <!-- Copy Link -->
   <button
-    class="h-10 aspect-square p-2 bg-transparent text-black rounded-md hover:bg-black/10 active:bg-black/20"
+    class="copy-btn h-10 aspect-square p-2 bg-transparent text-black rounded-md hover:bg-black/10 active:bg-black/20"
     onclick="copyToClipboard(this, '{{ $url }}')">
-      <svg
-         viewBox="0 0 24 27.429001"
-         class="fill-current w-full h-full object-contain"
-         version="1.1"
-         id="svg1"
-         sodipodi:docname="a.svg"
-         width="24"
-         height="27.429001"
-         inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
-         xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-         xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-         xmlns="http://www.w3.org/2000/svg"
-         xmlns:svg="http://www.w3.org/2000/svg">
-        <defs
-           id="defs1" />
-        <sodipodi:namedview
-           id="namedview1"
-           pagecolor="#ffffff"
-           bordercolor="#000000"
-           borderopacity="0.25"
-           inkscape:showpageshadow="2"
-           inkscape:pageopacity="0.0"
-           inkscape:pagecheckerboard="0"
-           inkscape:deskcolor="#d1d1d1"
-           inkscape:zoom="10.42688"
-           inkscape:cx="10.645562"
-           inkscape:cy="21.626795"
-           inkscape:window-width="1920"
-           inkscape:window-height="1008"
-           inkscape:window-x="0"
-           inkscape:window-y="0"
-           inkscape:window-maximized="1"
-           inkscape:current-layer="svg1" />
-        <!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
-        <path
-           d="M 10.285714,0 C 8.3946429,0 6.8571429,1.5375 6.8571429,3.4285714 V 17.142857 c 0,1.891072 1.5375,3.428572 3.4285711,3.428572 H 20.571429 C 22.4625,20.571429 24,19.033929 24,17.142857 V 6.3964286 c 0,-0.9321429 -0.380357,-1.8267857 -1.055357,-2.475 L 19.853571,0.95357143 C 19.216071,0.34285714 18.364286,0 17.480357,0 Z M 3.4285714,6.8571429 C 1.5375,6.8571429 0,8.3946429 0,10.285714 V 24 c 0,1.891071 1.5375,3.428571 3.4285714,3.428571 H 13.714286 c 1.891071,0 3.428571,-1.5375 3.428571,-3.428571 V 23.142857 H 13.714286 V 24 H 3.4285714 V 10.285714 H 4.2857143 V 6.8571429 Z"
-           id="path1"
-           style="stroke-width:0.0535714" />
-      </svg>
-    </button>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-icon lucide-clipboard default-svg"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check clicked-svg"><path d="M20 6 9 17l-5-5"/></svg>
+  </button>
 </div>
-
-<script>
-  // This script handles the Fediverse share functionality
-  function toggleFediverseInput(element) {
-    const container = element.closest(".fediverse-share");
-    const inputContainer = container.querySelector(".fediverse-input-wrapper");
-    inputContainer.style.display =
-      inputContainer.style.display === "none" ? "block" : "none";
-  }
-
-
-  // This function handles the copy to clipboard functionality
-  function copyToClipboard(button, text) {
-    navigator.clipboard.writeText(text).then(() => {
-      const icon = button.querySelector("svg path");
-      const originalIconPath =
-        "M 10.285714,0 C 8.3946429,0 6.8571429,1.5375 6.8571429,3.4285714 V 17.142857 c 0,1.891072 1.5375,3.428572 3.4285711,3.428572 H 20.571429 C 22.4625,20.571429 24,19.033929 24,17.142857 V 6.3964286 c 0,-0.9321429 -0.380357,-1.8267857 -1.055357,-2.475 L 19.853571,0.95357143 C 19.216071,0.34285714 18.364286,0 17.480357,0 Z M 3.4285714,6.8571429 C 1.5375,6.8571429 0,8.3946429 0,10.285714 V 24 c 0,1.891071 1.5375,3.428571 3.4285714,3.428571 H 13.714286 c 1.891071,0 3.428571,-1.5375 3.428571,-3.428571 V 23.142857 H 13.714286 V 24 H 3.4285714 V 10.285714 H 4.2857143 V 6.8571429 Z";
-      const checkIconPath =
-        "M9 16.2l-3.5-3.5-1.4 1.4L9 19 20 8l-1.4-1.4L9 16.2z";
-
-      // Change to check mark icon
-      icon.setAttribute("d", checkIconPath);
-
-      // Revert back to original icon after 1 second
-      setTimeout(() => {
-        icon.setAttribute("d", originalIconPath);
-      }, 1000);
-    });
-  }
-</script>
