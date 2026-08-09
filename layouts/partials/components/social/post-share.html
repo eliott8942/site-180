@@ -6,6 +6,7 @@
 -->
 
 {{ $url := partial "utils/get-url-with-host" .RelPermalink }}
+{{ $encodedUrl := $url | urls.PathEscape }}
 
 <div class="relative flex flex-row flex-wrap gap-2 p-2 rounded-xl bg-sky-200 border border-sky-300 shadow-md w-96 pt-6">
   <div class="absolute top-0 left-0 ml-4 -translate-y-1/2 px-2 py-1 bg-sky-500 rounded-full">
@@ -18,19 +19,19 @@
   {{ partial "components/social/single" (dict 
     "scope" .
     "network" "x"
-    "href" (print "https://x.com/intent/tweet/?text=" .Title "&amp;url=" $url ) 
+    "href" (print "https://x.com/intent/tweet/?text=" .Title "&amp;url=" $encodedUrl ) 
   )}}
   
   {{ partial "components/social/single" (dict 
     "scope" .
     "network" "reddit"
-    "href" (print "https://reddit.com/submit/?url=" $url "&amp;resubmit=true&amp;title=" .Title ) 
+    "href" (print "https://reddit.com/submit/?url=" $encodedUrl "&amp;resubmit=true&amp;title=" .Title ) 
   )}}
 
   {{ partial "components/social/single" (dict 
     "scope" .
     "network" "telegram"
-    "href" (print "https://t.me/share/url?url=" $url "&amp;text=" .Title ) 
+    "href" (print "https://t.me/share/url?url=" $encodedUrl "&amp;text=" .Title ) 
   )}}
 
   <div class="grow border-r border-black/20"></div>
