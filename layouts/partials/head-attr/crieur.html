@@ -28,6 +28,12 @@
   {{ $crieur = $crieur | minify | fingerprint }}
 {{ end }}
 
+<script>
+  const BASE_URL = {{ "" | absLangURL }};
+  const MAP_URL = {{ .RelPermalink }};
+  const _404_URL = BASE_URL + "404";
+</script>
+
 <script
   crossorigin="anonymous"
   integrity="{{ $crieur.Data.Integrity }}"
@@ -35,10 +41,6 @@
 ></script>
 
 <script>
-  const BASE_URL = {{ "" | absLangURL }};
-  const MAP_URL = {{ .RelPermalink }};
-  const _404_URL = BASE_URL + "404";
-
   // avoid print partials input
   {{ $_:= partial "utils/crieur/validate-map-data.html" . }}
   {{ $_:= partial "utils/crieur/validate-deco-data.html" . }}

@@ -36,7 +36,7 @@
         {{ end }}
 
         {{ if .links }}
-          {{ $supportedIcons := slice "instagram" "twitter" "facebook" "tiktok" "tripadvisor" "site" }}
+          {{ $supportedIcons := slice "instagram" "x" "facebook" "tiktok" "tripadvisor" "site" }}
           {{ range $i, $link := .links }}
             {{ if not $link.social }}
               {{ errorf "%s:%s [%s]" $place "Missing links.social" $i }}

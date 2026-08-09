@@ -15,8 +15,8 @@ links:
   url: https://www.tripadvisor.ch/Restaurant_Review-g188107-d15246317-Reviews-Tibits_Lausanne-Lausanne_Canton_of_Vaud.html
 - social: facebook
   url: https://www.facebook.com/tibitsLausanne/
-- social: twitter
-  url: https://twitter.com/tibitsCH
+- social: x
+  url: https://x.com/tibitsCH
 location:
   address:
     address: Place de la Gare 11

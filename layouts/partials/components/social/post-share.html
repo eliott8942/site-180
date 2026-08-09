@@ -6,39 +6,47 @@
 -->
 
 {{ $url := partial "utils/get-url-with-host" .RelPermalink }}
+
 {{ $encodedUrl := $url | urls.PathEscape }}
+{{ $encodedTitle := .Title | urls.PathEscape }}
 
 <div class="relative flex flex-row flex-wrap gap-2 p-2 rounded-xl bg-sky-200 border border-sky-300 shadow-md w-96 pt-6">
   <div class="absolute top-0 left-0 ml-4 -translate-y-1/2 px-2 py-1 bg-sky-500 rounded-full">
     <h5 class="text-white">
       <i class="fa-solid fa-paper-plane"></i>
-      Partager
+      {{ i18n "share" }}
     </h5>
   </div>
+
+  {{ partial "components/social/single" (dict 
+    "scope" .
+    "network" "facebook"
+    "href" (print "https://www.facebook.com/sharer/sharer.php?quote=" $encodedTitle "&amp;u=" $encodedUrl ) 
+  )}}
   
   {{ partial "components/social/single" (dict 
     "scope" .
     "network" "x"
-    "href" (print "https://x.com/intent/tweet/?text=" .Title "&amp;url=" $encodedUrl ) 
+    "href" (print "https://x.com/intent/tweet/?text=" $encodedTitle  "&amp;url=" $encodedUrl ) 
   )}}
   
   {{ partial "components/social/single" (dict 
     "scope" .
     "network" "reddit"
-    "href" (print "https://reddit.com/submit/?url=" $encodedUrl "&amp;resubmit=true&amp;title=" .Title ) 
+    "href" (print "https://reddit.com/submit/?url=" $encodedUrl "&amp;resubmit=true&amp;title=" $encodedTitle  ) 
   )}}
 
   {{ partial "components/social/single" (dict 
     "scope" .
     "network" "telegram"
-    "href" (print "https://t.me/share/url?url=" $encodedUrl "&amp;text=" .Title ) 
+    "href" (print "https://t.me/share/url?url=" $encodedUrl "&amp;text=" $encodedTitle  ) 
   )}}
 
-  <div class="grow border-r border-black/20"></div>
+  <div class="grow"></div>
 
   <!-- Copy Link -->
   <button
-    class="copy-btn h-10 aspect-square p-2 bg-transparent text-black rounded-md hover:bg-black/10 active:bg-black/20"
+    class="copy-btn h-full aspect-square grow-0 shrink-0 border border-black/20 rounded-md overflow-hidden bg-gray-100 hover:bg-gray-200 active:bg-gray-300 flex items-center justify-center"
     onclick="copyToClipboard(this, '{{ $url }}')">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-icon lucide-clipboard default-svg"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check clicked-svg"><path d="M20 6 9 17l-5-5"/></svg>

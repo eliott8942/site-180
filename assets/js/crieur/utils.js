@@ -87,3 +87,22 @@ function getDayInUTCTimeZone(timeOffset, timeOffsetInDST) {
 function zip(arr1, arr2) {
   return arr1.map((item, i) => [item, arr2[i]]);
 }
+
+// append BASE_URL constant to url if it's relative
+function absolutizeURL(url) {
+  if (!url.startsWith("/")) {
+    return BASE_URL + url
+  } else {
+    return url
+  }
+}
+
+function absolutizeURLMap(urlMap) {
+  let newMap = {}
+  
+  for (const key in urlMap) {
+    newMap[key] = absolutizeURL(urlMap[key])
+  }
+
+  return newMap
+}

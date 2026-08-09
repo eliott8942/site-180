@@ -27,12 +27,6 @@ function uiInit(placeData) {
   console.log("Done")
 }
 
-const socialLinkElement = (link) => Lit.html`
-  <a class="crieur-social-links" href="${link.url}">
-    <span class="crieur-icon crieur-icon-${link.social}"></span>
-  </a>
-`
-
 function updateLinks(linksContainer, linksList) {
   Lit.render(
     linksList.map(link => socialLinkElement(link)),
@@ -100,7 +94,11 @@ const _panelAddressElement = (data) => {
   if (data.location.map) {
     return Lit.html`
       <a href="${data.location.map}">
-        <span class="crieur-icon crieur-icon-google-map"></span>
+        <div class="h-[1lh] inline-block align-middle">
+          <div class="h-full aspect-square flex justify-center items-center overflow-visible">
+            <img src="${absolutizeURL("images/icons/thirdparty/google-maps.svg")}" class="h-full object-contain scale-[1.75]"/>
+          </div>
+        </div>
         ${formatLongAddress(data.location.address)}
       </a>
     `
