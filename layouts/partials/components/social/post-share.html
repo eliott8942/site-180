@@ -38,6 +38,12 @@
 
   {{ partial "components/social/single" (dict 
     "scope" .
+    "network" "whatsapp"
+    "href" (print "https://wa.me/?text=" $encodedUrl  ) 
+  )}}
+
+  {{ partial "components/social/single" (dict 
+    "scope" .
     "network" "telegram"
     "href" (print "https://t.me/share/url?url=" $encodedUrl "&amp;text=" $encodedTitle  ) 
   )}}
