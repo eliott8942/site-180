@@ -1,65 +1,15 @@
-{{ $value := .Get "value" | default 0 }}
-{{ $unit := .Get "unit" }}
-{{ $id := .Get "id" | default "r" }}
-{{ $step := .Get "step" }}
-{{ $round := .Get "round" }}
+<!-- 
+  To explain a little what's going on : We need to rerender in order
+  all the shortcodes related to the v system to maintain data consistency,
+  but logically, when we modify one of it's shortcode, it will only
+  rerender that one, not everything.
 
-{{ $valueConfigIdent := print $id "Config" }}
+  So we need to make them call a dispatch partial, that in turns call
+  the specific partial associated to the command we want to do. That
+  way, if we need to modify the logic of one of the commands, we
+  force all the shortcodes that depend on the dispatch to be rerendered.
 
-{{ if not (.Page.Store.Get $valueConfigIdent) }}
-  {{ $registeredVSystemsIds := .Page.Store.Get "vSystems" | append $id }}
-  {{ .Page.Store.Set "vSystems" $registeredVSystemsIds }}
-
-  {{ .Page.Store.SetInMap $valueConfigIdent "numberOfValues" 0 }}
-  {{ .Page.Store.SetInMap $valueConfigIdent "idPrefix" $id }}
-{{ end }}
-
-{{ $number_of_values := int (index (.Page.Store.Get $valueConfigIdent) "numberOfValues") }}
-{{ .Page.Store.SetInMap $valueConfigIdent "numberOfValues" (add $number_of_values 1) }}
-
-{{ $id_prefix := (index (.Page.Store.Get $valueConfigIdent) "idPrefix") }}
-
-{{ $id_prefix_for_span := print $id_prefix "-" $number_of_values }}
-
-{{ if and (not (isset .Params "unit")) (not (isset .Params "step")) }}
-  {{ warnf "%s: Values for v systems without a unit should have a step. Value n°%i for v system %s doesn't have either of them." .Position (add $number_of_values 1) $id }}
-{{ end }}
-
-{{ if (isset .Params "step")}}
-  {{ if eq (float $step) 0.0 }}
-    {{ errorf "%s: Value n°%i for v system %s has a step of 0." .Position (add $number_of_values 1) $id }}
-  {{ end }}
-{{ end }}
-
-{{ if (isset .Params "min")}}
-  {{ $min := .Get "min" }}
-  {{ if le (float $min) 0.0 }}
-    {{ errorf "%s: Value n°%i for v system %s has a min value less or equal to 0.0" .Position (add $number_of_values 1) $min }}
-  {{ end }}
-{{ end }}
-
-{{ if (isset .Params "round") }}
-  {{ if not (isset .Params "step") }}
-    {{ errorf "%s: Value n°%i for v system %s has a rounding method but not a step to round around." .Position (add $number_of_values 1) $id }}
-  {{ end }}
-
-  {{ $valid_words := slice "default" "floor" "ceil" }}
-  {{ if not (in $valid_words (.Get "round")) }}
-    {{ errorf "%s: Value n°%i for v system %s has an unknown rounding method `%s`. Valids methods are %s." .Position (add $number_of_values 1) $id $round $valid_words }}
-  {{ end }}
-{{ end }}
-
-<span 
-  id="{{ $id_prefix_for_span }}" 
-  v-base-value="{{$value}}" 
-  {{ if (isset .Params "step") }}
-    v-step="{{$step}}"
-  {{ end }}
-  {{ if (isset .Params "min") }}
-    v-min="{{.Get "min"}}"
-  {{ end }}
-  {{ if (isset .Params "round") }}
-    v-round="{{$round}}"
-  {{ end }}
-  class="shrink-0 text-nowrap -m-[2px] p-1 rounded-sm"
-><span id="label">{{ $value }}</span>{{ $unit }}</span>
+  Combined with the fact that currently hugo renders shortcode in order,
+  we garantee that the commands are rexecuted in order consistently.
+-->
+{{ partial "utils/recettes/v" (dict "command" "add" "context" .) }}

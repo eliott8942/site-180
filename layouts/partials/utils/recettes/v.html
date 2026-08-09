@@ -1,0 +1,12 @@
+{{ $command := .command }}
+{{ $context := .context }}
+
+{{ if eq $command "add" }}
+  {{ partial "utils/recettes/v/_v" $context }}
+{{ else if eq $command "begin" }}
+  {{ partial "utils/recettes/v/_begin" $context }}
+{{ else if eq $command "end" }}
+  {{ partial "utils/recettes/v/_end" $context }}
+{{ else }}
+  {{ errorf "unknown command `%s`" $command }}
+{{ end }}
