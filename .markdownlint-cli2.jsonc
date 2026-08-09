@@ -1,18 +1,16 @@
 {
   "config": {
+    // allow inline html
     "MD033": false,
-    "MD034": false,
-    "MD013": false,
-    "MD024": false
+
+    // FIXME: remove that skip later
+    "MD013": false
   },
   "globs": ["**/*.md"],
   "ignores": [
     "**/node_modules/**", 
     "public/**", 
     "resources/**", 
-    "README.md",
-    "MAINTAINING.md",
-    "DEVELOPMENT.md",
     "ROADMAP.md",
   ]
 }
