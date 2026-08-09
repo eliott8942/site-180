@@ -16,7 +16,7 @@
 <!-- Load main js script -->
 {{ $mainJS := slice }}
 {{ $mainJS = $mainJS | append (resources.Match "js/main/*") }}
-{{ $mainJS = $mainJS | resources.Concat "main.js" }}
+{{ $mainJS = $mainJS | resources.Concat "js/main.js" }}
 
 {{ if hugo.IsProduction }}
   {{ $mainJS = $mainJS | minify | fingerprint }}

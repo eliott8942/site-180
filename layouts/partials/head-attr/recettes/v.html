@@ -1,6 +1,6 @@
 {{ $js := slice }}
 {{ $js = $js | append (resources.Get "js/recettes/v.js") }}
-{{ $js = $js | resources.Concat "recettes.js" }}
+{{ $js = $js | resources.Concat "js/recettes/v.js" }}
 {{ if hugo.IsProduction }}
   {{ $js = $js | minify | fingerprint }}
 {{ end }}
