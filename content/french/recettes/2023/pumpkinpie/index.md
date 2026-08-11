@@ -19,7 +19,7 @@ durationMin: "75"
 "recettes/duration": ["Long"]
 ---
 
-{{<v/begin default-value="2" min="4" max="8">}}
+{{<v/begin default-value="4" min="2" max="8">}}
 
 {{<recettes/section fa-icon="fa-bowl-food">}} Ingrédients {{</recettes/section>}}
 
