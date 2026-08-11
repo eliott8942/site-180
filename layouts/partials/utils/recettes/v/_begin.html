@@ -6,7 +6,7 @@
   {{ errorf "%s: $value should be above 0, found %s" .Position $value }}
 {{ end }}
 
-{{ $id := .Get "id" | default "r" }}
+{{ $id := .Get "id" | default "default" }}
 {{ $min := int (.Get "min" | default 1) }}
 {{ $max := .Get "max" }}
 
