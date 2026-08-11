@@ -13,9 +13,16 @@
 {{ if le $min 0 }}
   {{ errorf "%s: $min should be above 0, found %s" .Position $min }}
 {{ end }}
+{{ if lt $value $min }}
+  {{ errorf "%s: $default-value (%s) is below $min (%s)" .Position $value $min }}
+{{ end }}
 {{ if (isset .Params "max") }}
   {{ if (lt $max $min) }}
     {{ errorf "%s: $max (%s) is below $min (%s)" .Position $max $min }}
+  {{ end }}
+
+  {{ if lt $max $value }}
+    {{ errorf "%s: $default-value (%s) is above $max (%s)" .Position $value $max }}
   {{ end }}
 {{ end }}
 
