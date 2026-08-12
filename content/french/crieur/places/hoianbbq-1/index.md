@@ -2,7 +2,7 @@
 banner: hoianbbq-banner.jpg
 description: VRAI restaurant vietnamien. Plats traditionnels et cuisine authentique.
 draft: false
-gallery: .
+gallery: ""
 links:
 - social: site
   url: https://hoianbbq.com/
