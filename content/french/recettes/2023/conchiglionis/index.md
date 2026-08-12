@@ -30,7 +30,7 @@ durationMin: "50"
 
 {{<v/container>}}
   {{<v/input id="person" fa-icon="fa-users" suffix="personnes">}}
-  {{<v/input id="piece" fa-icon="fa-users" suffix="pièces / personnes">}}
+  {{<v/input id="piece" fa-icon="fa-spoon" suffix="pièces / personnes">}}
 {{</v/container>}}
 
 - {{<v value="20" step="1">}} conchiglionis
