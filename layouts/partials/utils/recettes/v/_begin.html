@@ -37,6 +37,7 @@
 {{ .Page.Store.SetInMap $valueConfigIdent "idPrefix" $id }}
 {{ .Page.Store.SetInMap $valueConfigIdent "min" $min }}
 {{ .Page.Store.SetInMap $valueConfigIdent "baseValue" $value }}
+{{ .Page.Store.SetInMap $valueConfigIdent "dependents" slice }}
 
 {{ if $max }}
   {{ .Page.Store.SetInMap $valueConfigIdent "max" $max }}

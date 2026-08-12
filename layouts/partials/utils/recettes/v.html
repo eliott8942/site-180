@@ -7,6 +7,8 @@
   {{ partial "utils/recettes/v/_begin" $context }}
 {{ else if eq $command "end" }}
   {{ partial "utils/recettes/v/_end" $context }}
+{{ else if eq $command "expr" }}
+  {{ partial "utils/recettes/v/_expr" $context }}
 {{ else }}
   {{ errorf "unknown command `%s`" $command }}
 {{ end }}

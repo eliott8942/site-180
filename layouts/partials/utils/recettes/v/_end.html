@@ -1,9 +1,10 @@
+{{ warnf "%s %s" .Position .Page.Store }}
+
 {{ $page := .Page }}
 {{ $allSystems := $page.Store.Get "vSystems" }}
 
 {{ if $allSystems }}
 <script defer>
-  {{ $vSystemIds := slice }}
   {{ range $id := $page.Store.Get "vSystems" }}
     {{ $valueConfigIdent := print $id "Config" }}
     {{ $vSystemInfo := $page.Store.Get $valueConfigIdent }}
@@ -11,8 +12,6 @@
     {{ $arrayName := print $vSystemInfo.idPrefix "_IDS" | upper }}
 
     {{ if ne $vSystemInfo.numberOfValues 0 }}
-      {{ $vSystemIds = $vSystemIds | append $vSystemInfo.idPrefix }}
-
       const {{ $arrayName | safeJS }} = [
         {{ range $i, $id := seq 0 (sub $vSystemInfo.numberOfValues 1) }}
           {{ if ne $i 0 }}
@@ -25,9 +24,28 @@
     {{ end }}
   {{ end }}
 
-  {{ if ne (len $vSystemIds) 0 }}
-    registerVSystems([
-      {{ range $i, $id := $vSystemIds }}
+  {{ range $id := $page.Store.Get "vExpr" }}
+    {{ $valueConfigIdent := print $id "Config" }}
+    {{ $vSystemInfo := $page.Store.Get $valueConfigIdent }}
+
+    {{ $arrayName := print $vSystemInfo.idPrefix "_IDS" | upper }}
+
+    {{ if ne $vSystemInfo.numberOfValues 0 }}
+      const {{ $arrayName | safeJS }} = [
+        {{ range $i, $id := seq 0 (sub $vSystemInfo.numberOfValues 1) }}
+          {{ if ne $i 0 }}
+            ,
+          {{ end }}
+        
+          {{ print $vSystemInfo.idPrefix "-" $id }}
+        {{ end }}
+      ];
+    {{ end }}
+  {{ end }}
+
+  registerVSystems(
+    {
+      {{ range $i, $id := $page.Store.Get "vSystems" }}
         {{ $arrayName := print $id "_IDS" | upper }}
   
         {{ $valueConfigIdent := print $id "Config" }}
@@ -37,19 +55,68 @@
           ,
         {{ end }}
   
-        {
-          id: {{ $id }},
-          elements: {{ $arrayName | safeJS }},
-          baseValue: {{ $vSystemInfo.baseValue }},
-          min: {{ $vSystemInfo.min | safeJS }},
+        {{ $id }}: {
+          {{ if ne $vSystemInfo.numberOfValues 0 }}
+            elements: {{ $arrayName | safeJS }},
+          {{ end }}
+
+          {{ with $vSystemInfo.baseValue }}
+            baseValue: {{ . | safeJS }},
+          {{ end }}
+
+          {{ with $vSystemInfo.min }}
+            min: {{ . | safeJS }},
+          {{ end }}
   
           {{ with $vSystemInfo.max }}
             max: {{ . | safeJS }},
           {{ end }}
+          
+          {{ with $vSystemInfo.dependents }}
+            {{ if ne (len . ) 0 }}
+              dependents: [
+                {{ range $i, $id := . }}
+                  {{ if ne $i 0 }}
+                    ,
+                  {{ end }}
+                
+                  {{ . }}
+                {{ end }}
+              ]
+            {{ end }}
+          {{ end }}
+
+          {{ with $vSystemInfo.dependencies }}
+            {{ if ne (len . ) 0 }}
+              dependencies: [
+                {{ range $i, $id := . }}
+                  {{ if ne $i 0 }}
+                    ,
+                  {{ end }}
+                
+                  {{ . }}
+                {{ end }}
+              ],
+            
+              expressionVariables: [
+                {{ range $i, $id := . }}
+                  {{ if ne $i 0 }}
+                    ,
+                  {{ end }}
+                
+                  {{ partial "utils/strings/kebab-to-camel-case" . }}
+                {{ end }}
+              ],
+            {{ end }}
+          {{ end }}
+
+          {{ with $vSystemInfo.code }}
+            expression: {{ . }},
+          {{ end }}
         }
       {{ end }}
-    ]);
-  {{ end }}
+    }
+  );
 </script>
 {{ end }}
 

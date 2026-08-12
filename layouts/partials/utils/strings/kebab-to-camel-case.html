@@ -1,0 +1,17 @@
+{{- $input := . -}}
+{{- $parts := split $input "-" -}}
+{{- $result := "" -}}
+
+{{- range $i, $part := $parts -}}
+  {{- if eq $i 0 -}}
+    {{/* Keep the first part as is (lowercase) */}}
+    {{- $result = printf "%s%s" $result $part -}}
+  {{- else -}}
+    {{/* Capitalize the first letter of subsequent parts */}}
+    {{- $first := upper (substr $part 0 1) -}}
+    {{- $rest := substr $part 1 -}}
+    {{- $result = printf "%s%s%s" $result $first $rest -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $result -}}

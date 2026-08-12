@@ -1,0 +1,32 @@
+{{ $id := .Get "id" | default "default" }}
+
+{{ if not (isset .Params "link-to") }}
+  {{ errorf "%s: $link-to not given" .Position }}
+{{ end }}
+
+{{ $dependencies := split (.Get "link-to") "," }}
+{{ $context := . }}
+{{ range $dependentId := $dependencies }}
+  {{ $valueConfigIdent := print $dependentId "Config" }}
+
+  {{ if not ($context.Page.Store.Get $valueConfigIdent) }}
+    {{ errorf "%s: dependency v system `%s` not defined" .Position $id }}
+  {{ else }}
+    {{ $dependentsIds := index ($context.Page.Store.Get $valueConfigIdent) "dependents" | append $id }}
+    {{ $context.Page.Store.SetInMap $valueConfigIdent "dependents" $dependentsIds }}
+  {{ end }}
+{{ end }}
+
+{{ $valueConfigIdent := print $id "Config" }}
+
+<!-- Note: we're doing the allocation in an else block because otherwise the content of vSystem might get buggy -->
+{{ if not (.Page.Store.Get $valueConfigIdent) }}
+  {{ $registeredVSystemsIds := .Page.Store.Get "vSystems" | append $id }}
+  {{ .Page.Store.Set "vSystems" $registeredVSystemsIds }}
+{{ end }}
+
+{{ .Page.Store.SetInMap $valueConfigIdent "idPrefix" $id }}
+{{ .Page.Store.SetInMap $valueConfigIdent "dependencies" $dependencies }}
+{{ .Page.Store.SetInMap $valueConfigIdent "code" (strings.Trim .Inner " \n") }}
+
+{{ warnf "%s" .Page.Store }}

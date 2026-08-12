@@ -1,5 +1,10 @@
+{{ with resources.Get "libs/expr-eval.js" }}
+  <!-- Enable defer here because it's not a module -->
+  <script src="{{ .RelPermalink }}" fetchpriority="high"></script>
+{{ end }}
+
 {{ $js := slice }}
-{{ $js = $js | append (resources.Get "js/recettes/v.js") }}
+{{ $js = $js | append (resources.Match "js/recettes/v/*.js") }}
 {{ $js = $js | resources.Concat "js/recettes/v.js" }}
 {{ if hugo.IsProduction }}
   {{ $js = $js | minify | fingerprint }}
