@@ -17,7 +17,7 @@
 
       {{ if $variable }}
         {{ $image := partial "utils/get-img" (dict "img" $variable "context" $place) }}
-        {{ $image = $image.Process (print (index $imageSize $i) " " hugo.Data.image.defaultEncoding " " "fill Center") }}
+        {{ $image = $image.Process (print (index $imageSize $i) " " hugo.Data.image.defaultEncoding " " "fill Smart") }}
         
         <!-- Make sure the images are included in the build -->
         {{ with $image }}
@@ -34,7 +34,7 @@
       {{ $processedTops := slice }}
       {{ range $top := $tops }}
         {{ $image := partial "utils/get-img" (dict "img" $top.photo "context" $place) }}
-        {{ $image = $image.Process (print hugo.Data.crieur.topsImageSize " " hugo.Data.image.defaultEncoding " " "fill Center") }}
+        {{ $image = $image.Process (print hugo.Data.crieur.topsImageSize " " hugo.Data.image.defaultEncoding " " "fill Smart") }}
 
         {{ $top = merge $top (dict "photo" $image.RelPermalink) }}
         {{ $processedTops = $processedTops | append $top }}
