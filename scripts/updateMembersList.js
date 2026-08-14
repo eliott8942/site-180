@@ -37,7 +37,7 @@ const IMAGE_WEB_BASE  = '/image/members';
 /** Local filesystem root used for image existence verification. */
 const IMAGE_LOCAL_DIR = './image/members';
 /** File extensions accepted when checking local images. */
-const IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+const IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'avif', 'gif'];
 
 /**
  * Known universities whose members may appear in the CSV.
