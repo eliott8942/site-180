@@ -28,5 +28,3 @@
 {{ .Page.Store.SetInMap $valueConfigIdent "idPrefix" $id }}
 {{ .Page.Store.SetInMap $valueConfigIdent "dependencies" $dependencies }}
 {{ .Page.Store.SetInMap $valueConfigIdent "code" (strings.Trim .Inner " \n") }}
-
-{{ warnf "%s" .Page.Store }}
