@@ -17,7 +17,7 @@ const _priceTagElement = (price) => Lit.html`
 
 const topElement = (top) => Lit.html`
   <div class="crieur-tops">
-    <img class="image" src="${top.photo}"/>
+    <img class="image" src="${top.photo}" alt="top image"/>
     <div class="metadata">
       ${_priceTagElement(top.price)}
 

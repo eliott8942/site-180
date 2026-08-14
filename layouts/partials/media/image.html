@@ -45,6 +45,10 @@
   {{ warnf "%s : '%s' is also in static folder, but that file will be ignored." $context $imagePath }}
 {{ end }}
 
+{{ if not $alt }}
+  {{ errorf "%s : '%s' doesn't have alts." $context $imagePath }}
+{{ end }}
+
 <!-- Load image from static folder (only when not found in assets/page bundles) or remote  -->
 {{ $load_original_image := and (not $assetImage) (not $contentImage) }}
 {{ if and (or $is_static $is_remote) $load_original_image }}

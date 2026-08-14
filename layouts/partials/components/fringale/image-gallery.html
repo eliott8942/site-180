@@ -17,14 +17,14 @@
           <div class="swiper-slide max-lg:p-2 lg:p-1">
             <div class="h-full overflow-hidden rounded-lg border shadow-inner-xl z-1 shadow-black/30">
               <div class="relative left-1/2 -translate-x-1/2 h-full overflow-hidden lg:aspect-[var(--aspect-ratio)]" style="--aspect-ratio: {{$aspect_ratio}};">
-                {{ partial "media/image" (dict "Src" (strings.TrimPrefix "/" $img1) "Class" "w-full h-full min-h-80 relative lg:top-1/2 lg:-translate-y-1/2 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high" "Context" $context) }}
+                {{ partial "media/image" (dict "Src" (strings.TrimPrefix "/" $img1) "Class" "w-full h-full min-h-80 relative lg:top-1/2 lg:-translate-y-1/2 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high" "Context" $context "Alt" "a picture of the book inside the gallery") }}
               </div>
             </div>
           </div>
 
           <div class="swiper-slide max-lg:p-2 lg:p-1">
             <div class="h-full overflow-hidden rounded-lg border shadow-inner-xl z-1 shadow-black/30">
-              {{ partial "media/image" (dict "Src" (strings.TrimPrefix "/" $img2) "Class" "w-full h-full min-h-80 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high" "Context" $context) }}
+              {{ partial "media/image" (dict "Src" (strings.TrimPrefix "/" $img2) "Class" "w-full h-full min-h-80 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high" "Context" $context "Alt" "a picture of the book inside the gallery") }}
             </div>
           </div>
         {{ else }}
@@ -32,14 +32,14 @@
 
           <div class="swiper-slide max-lg:p-2 lg:p-1">
             <div class="h-full overflow-hidden rounded-lg border shadow-inner-xl z-1 shadow-black/30">
-              {{ partial "media/image" (dict "Src" (strings.TrimPrefix "/" $img1) "Class" "w-full h-full min-h-80 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high" "Context" $context) }}
+              {{ partial "media/image" (dict "Src" (strings.TrimPrefix "/" $img1) "Class" "w-full h-full min-h-80 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high" "Context" $context "Alt" "a picture of the book inside the gallery") }}
             </div>
           </div>
 
           <div class="swiper-slide max-lg:p-2 lg:p-1">
             <div class="h-full overflow-hidden rounded-lg border shadow-inner-xl z-1 shadow-black/30">
               <div class="relative left-1/2 -translate-x-1/2 h-full overflow-hidden lg:aspect-[var(--aspect-ratio)]" style="--aspect-ratio: {{$aspect_ratio}};">
-                {{ partial "media/image" (dict "Src" (strings.TrimPrefix "/" $img2) "Class" "w-full h-full min-h-80 relative lg:top-1/2 lg:-translate-y-1/2 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high" "Context" $context) }}
+                {{ partial "media/image" (dict "Src" (strings.TrimPrefix "/" $img2) "Class" "w-full h-full min-h-80 relative lg:top-1/2 lg:-translate-y-1/2 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high" "Context" $context "Alt" "a picture of the book inside the gallery") }}
               </div>
             </div>
           </div>
@@ -49,7 +49,7 @@
       
         <div class="swiper-slide max-lg:p-2 lg:p-1">
           <div class="h-full overflow-hidden rounded-lg border shadow-inner-xl z-1 shadow-black/30">
-            {{ partial "media/image" (dict "Src" (strings.TrimPrefix "/" $img1) "Class" "w-full h-full min-h-80 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high" "Context" $context) }}
+            {{ partial "media/image" (dict "Src" (strings.TrimPrefix "/" $img1) "Class" "w-full h-full min-h-80 max-lg:aspect-video object-cover object-center relative -z-10" "Loading" "eager" "FetchPriority" "high" "Context" $context "Alt" "a picture of the book inside the gallery") }}
           </div>
         </div>
       {{ end }}

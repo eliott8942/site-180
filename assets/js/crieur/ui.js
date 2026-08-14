@@ -36,7 +36,7 @@ function updateLinks(linksContainer, linksList) {
 
 function updateGallery(container, galeryData) {
   Lit.render(
-    galeryData.map(srcURL => Lit.html`<img src=${srcURL} class="h-full w-auto"/>`),
+    galeryData.map(srcURL => Lit.html`<img src=${srcURL} class="h-full w-auto" alt="An image in the restaurant gallery"/>`),
     container
   )
   
@@ -96,7 +96,7 @@ const _panelAddressElement = (data) => {
       <a href="${data.location.map}">
         <div class="h-[1lh] inline-block align-middle">
           <div class="h-full aspect-square flex justify-center items-center overflow-visible">
-            <img src="${absolutizeURL("images/icons/thirdparty/google-maps.svg")}" class="h-full object-contain scale-[1.75]"/>
+            <img src="${absolutizeURL("images/icons/thirdparty/google-maps.svg")}" class="h-full object-contain scale-[1.75]" alt="google map icon"/>
           </div>
         </div>
         ${formatLongAddress(data.location.address)}

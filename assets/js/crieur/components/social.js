@@ -8,18 +8,18 @@ const PATHS = absolutizeURLMap({
 })
 
 const defaultSocial = (social) => Lit.html`
-  <img src="${PATHS[social]}" class="h-full object-cover"/>
+  <img src="${PATHS[social]}" class="h-full object-cover" alt="${social} icon image"/>
 `
 
 const xSocial = () => Lit.html`
   <div class="h-full aspect-square p-2 rounded-md bg-black text-white overflow-hidden">
-    <img src="${PATHS.x}" class="h-full aspect-square object-cover"/>
+    <img src="${PATHS.x}" class="h-full aspect-square object-cover" alt="x icon image"/>
   </div>
 `
 
 const tripadvisorSocial = () => Lit.html`
   <div class="h-full aspect-square rounded-md overflow-hidden">
-    <img src="${PATHS.tripadvisor}" class="h-full aspect-square object-cover"/>
+    <img src="${PATHS.tripadvisor}" class="h-full aspect-square object-cover" alt="tripadvisor icon image"/>
   </div>
 `
 

@@ -39,7 +39,7 @@ const entryCardElement = (placeInfo, hints = {}) => {
       @click=${() => showPlace(placeInfo.id)}
     >
       <div class="w-28 overflow-hidden p-3 shrink-0">
-        <img src="${placeInfo.thumbnail}" class="w-full aspect-square object-cover rounded-md"/>
+        <img src="${placeInfo.thumbnail}" class="w-full aspect-square object-cover rounded-md" alt="Restaurant thumbnail"/>
       </div>
       <div class="py-3 pr-2 leading-6">
         <h5>${_applyHintsOnString(placeInfo.title, hints["title"])}</h5>
