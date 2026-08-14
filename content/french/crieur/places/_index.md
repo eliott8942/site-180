@@ -8,4 +8,5 @@ draft: false
 cascade:
   build:
     render: "never"
+    publishResources: false
 ---

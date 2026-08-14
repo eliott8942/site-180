@@ -15,9 +15,9 @@
           {{ range .Posts }}
             <div class="relative swiper-slide z-0 hover:z-10">
               {{ if eq $kind "blog" }}
-                {{ partial "components/blog/card" . }}
+                {{ partial "components/blog/card" (dict "page" . "width" "395") }}
               {{ else if eq $kind "recipe" }}
-                {{ partial "components/recipe/card" . }}
+                {{ partial "components/recipe/card" (dict "page" . "width" "395") }}
               {{ else }}
                 {{ errorf "Unknown card kind : %s" $kind }}
               {{ end }}

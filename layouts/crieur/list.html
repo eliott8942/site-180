@@ -39,7 +39,7 @@
                       md:order-2
                     {{ end }} md:col-5 mb-6"
                   >
-                    {{ partial "image" (dict "Src" .image "Alt" .imagealt) }}
+                    {{ partial "media/image" (dict "Src" .image "Alt" .imagealt) }}
                   </div>
                   <div
                     class="content {{ if not (modBool $i 2) }}

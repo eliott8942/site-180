@@ -23,7 +23,7 @@
     "dev": "HUGO_HOST_DOMAIN=localhost:1313 hugo server",
     "build": "HUGO_HOST_DOMAIN=localhost:1313 hugo --gc --minify --templateMetrics --templateMetricsHints --forceSyncStatic",
     "prod": "HUGO_HOST_DOMAIN=localhost:1313 hugo server --disableFastRender --navigateToChanged --templateMetrics --templateMetricsHints --watch --forceSyncStatic -e production --minify",
-    "clean": "rm -rf public/ && hugo mod clean",
+    "clean": "rm -rf public/ resources/_gen && hugo mod clean",
     "update-modules": "node ./scripts/clearModules.js && hugo mod clean --all && hugo mod get -u ./... && hugo mod tidy",
     "format": "prettier -w .",
     "content-lint": "markdownlint-cli2",

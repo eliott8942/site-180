@@ -1,0 +1,17 @@
+{
+  "supportedSocialIcons": {
+    "instagram": "images/icons/thirdparty/instagram.png",
+    "x": "images/icons/thirdparty/x-white.svg",
+    "facebook": "images/icons/thirdparty/facebook.png",
+    "tiktok": "images/icons/thirdparty/tiktok.png",
+    "tripadvisor": "images/icons/thirdparty/tripadvisor.png", 
+    "site": "images/icons/www.svg"
+  },
+  "otherIcons": {
+    "google-maps": "images/icons/thirdparty/google-maps.svg"
+  },
+  "iconSocialSize": "40x",
+  "entryThumbnailSize": "88x88",
+  "entryBannerSize": "520x144",
+  "topsImageSize": "96x96"
+}

@@ -1,0 +1,5 @@
+{{ $keys := slice }}
+{{ range $k, $_ := . }}
+  {{ $keys = $keys | append $k }}
+{{ end }}
+{{ return $keys }}

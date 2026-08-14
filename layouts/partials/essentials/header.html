@@ -7,7 +7,13 @@
     <!-- left side container -->
     <div class="min-w-[100px] flex flex-row items-center justify-start lg:justify-center order-0">
       <!-- navbar brand/logo -->
-      <a class="navbar-brand block scale-none hover:scale-110 duration-75 logo-container" href="{{ site.BaseURL | relLangURL }}">
+      {{ $bg_logo := resources.Get .Site.Params.logo }}
+      {{ $bg_logo = $bg_logo.Resize .Site.Params.logo_width }}
+      {{ if .Site.Params.logo_webp }}
+        {{ $bg_logo = $bg_logo.Process "webp" }}
+      {{ end }}
+      
+      <a class="navbar-brand block scale-none hover:scale-110 duration-75 logo-container" href="{{ site.BaseURL | relLangURL }}" style="--bg-logo-url:url({{ $bg_logo.RelPermalink }})">
         <div class="logo">
           {{ partial "logo" }}
         </div>

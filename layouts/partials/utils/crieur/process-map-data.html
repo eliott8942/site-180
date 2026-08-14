@@ -10,12 +10,15 @@
     {{ $placeWithUrl := dict "url" ($place.RelPermalink | relURL ) }}
 
     <!-- Replace images path by absolute ones -->
-    {{ $imageNames := slice "thumbnail" "banner" "image" }}
-    {{ range $name := $imageNames }}
+    {{ $imageNames := slice "thumbnail" "banner" }}
+    {{ $imageSize := slice hugo.Data.crieur.entryThumbnailSize hugo.Data.crieur.entryBannerSize }}
+    {{ range $i, $name := $imageNames }}
       {{ $variable := $place.Param $name }}
 
       {{ if $variable }}
         {{ $image := partial "utils/get-img" (dict "img" $variable "context" $place) }}
+        {{ $image = $image.Process (print (index $imageSize $i) " " hugo.Data.image.defaultEncoding " " "fill Center") }}
+        
         <!-- Make sure the images are included in the build -->
         {{ with $image }}
           {{ .Publish }}
@@ -31,10 +34,7 @@
       {{ $processedTops := slice }}
       {{ range $top := $tops }}
         {{ $image := partial "utils/get-img" (dict "img" $top.photo "context" $place) }}
-        <!-- Make sure the images are included in the build -->
-        {{ with $image }}
-          {{ .Publish }}
-        {{ end }}
+        {{ $image = $image.Process (print hugo.Data.crieur.topsImageSize " " hugo.Data.image.defaultEncoding " " "fill Center") }}
 
         {{ $top = merge $top (dict "photo" $image.RelPermalink) }}
         {{ $processedTops = $processedTops | append $top }}
@@ -48,7 +48,8 @@
     {{ if isset $place.Params "gallery" }}
       {{ $imagePath := slice }}
       {{ range $place.Resources.Match (printf "%s*" $gallery) }}
-        {{ $imagePath = $imagePath | append (.Permalink) }}
+        {{ $image := .Process hugo.Data.image.defaultEncoding }}
+        {{ $imagePath = $imagePath | append ($image.Permalink) }}
       {{ end }}
       {{ $originalPlace = merge $originalPlace (dict "gallery" $imagePath) }}
     {{ end }}

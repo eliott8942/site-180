@@ -1,61 +1,85 @@
-<div 
-  class="
-    relative
-    border
-    flex flex-col 
-    h-full
-    bg-body
-    shadow-md hover:shadow-2xl
-    hover:scale-[103%]
-    z-0 hover:z-10
-    rounded-xl overflow-hidden 
-    cursor-pointer
-    duration-100
-  "
->
-  <a href="{{ .RelPermalink }}" class="absolute w-full h-full z-10"></a>
+{{ $page := .page }}
+{{ $width := .width }}
 
-  <div class="shrink overflow-hidden">
-    {{ partial "image" (dict "Src" .Params.image "Alt" .Title "Class" "aspect-square object-cover" "Context" .) }}
-  </div>
+{{ with $page }}
+  <div 
+    class="
+      relative
+      border
+      flex flex-col 
+      h-full
+      bg-body
+      shadow-md hover:shadow-2xl
+      hover:scale-[103%]
+      z-0 hover:z-10
+      rounded-xl overflow-hidden 
+      cursor-pointer
+      duration-100
+    "
+  >
+    <a href="{{ .RelPermalink }}" class="absolute w-full h-full z-10"></a>
   
-  <div class="flex flex-col p-4 border-t shrink-0 grow">
-    <div class="flex flex-row justify-between">
-      <div class="opacity-50">
-        {{ time.Format ":date_long" .PublishDate }}
-      </div>
+    <div class="shrink overflow-hidden">
+      {{ $sizeStr := "" }}
+      {{ if $width }}
+        {{ $containerWidth := int ($width) }}
+        {{ $borderWidth := 1 }}
+  
+        <!-- Subtract the size of the border, then scale up by two -->
+        {{ $width := mul (sub $containerWidth (mul $borderWidth 2)) 2 }}
+        {{ $sizeStr = print $width "x" $width }}
+      {{ end }}
 
-      <!-- 
-        Metadata container
-        We need it because we have some css rules which activates when we're not the first 
-        child of the container
-      -->
+      {{ partial "media/image" (dict 
+        "Src" .Params.image
+        "Alt" .Title 
+        "Class" "w-full aspect-square object-cover" 
+        "Loading" "eager" 
+        "FetchPriority" "high" 
+        "Context" .
+        "Size" $sizeStr
+        "Command" "Fill"
+      ) }}
+    </div>
+    
+    <div class="flex flex-col p-4 border-t shrink-0 grow">
+      <div class="flex flex-row justify-between">
+        <div class="opacity-50">
+          {{ time.Format ":date_long" .PublishDate }}
+        </div>
+  
+        <!-- 
+          Metadata container
+          We need it because we have some css rules which activates when we're not the first 
+          child of the container
+        -->
+        <div>
+          {{ partial "components/blog/time-indicator" (dict "timeMin" .Params.lectureTimeMin "class" "opacity-50" "scope" .) }}
+        </div>
+      </div>
+  
+      <!-- TODO : make it expand into the card, so the description can be only shown when hovered -->
+      <div class="my-2 flex flex-col grow">
+        <h4> {{ .Title }} </h4>
+        <div class="grow">
+          <p> {{ .Params.Summary }} </p>
+        </div>
+      </div>
+  
       <div>
-        {{ partial "components/blog/time-indicator" (dict "timeMin" .Params.lectureTimeMin "class" "opacity-50" "scope" .) }}
+        {{ partial "components/indicator/tags/list" ( dict 
+          "scope" . 
+          "group" "tags" 
+          "icon" "fa-tag" 
+          "class" "relative [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 z-20"
+        ) }}
+        {{ partial "components/indicator/tags/list" ( dict 
+          "scope" . 
+          "group" "categories" 
+          "icon" "fa-folder" 
+          "class" "relative [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 z-20"
+        ) }}
       </div>
-    </div>
-
-    <!-- TODO : make it expand into the card, so the description can be only shown when hovered -->
-    <div class="my-2 flex flex-col grow">
-      <h4> {{ .Title }} </h4>
-      <div class="grow">
-        <p> {{ .Params.Summary }} </p>
-      </div>
-    </div>
-
-    <div>
-      {{ partial "components/indicator/tags/list" ( dict 
-        "scope" . 
-        "group" "tags" 
-        "icon" "fa-tag" 
-        "class" "relative [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 z-20"
-      ) }}
-      {{ partial "components/indicator/tags/list" ( dict 
-        "scope" . 
-        "group" "categories" 
-        "icon" "fa-folder" 
-        "class" "relative [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 z-20"
-      ) }}
     </div>
   </div>
-</div>
+{{ end }}

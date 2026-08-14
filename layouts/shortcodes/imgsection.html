@@ -12,7 +12,7 @@
         class="m-0 {{ if eq $side "right" }}
           md:order-2
         {{ end }} md:col-5">
-        {{ partial "image" (dict "Src" $image "Alt" "feature image" "Class" $imgclass "Context" .Page) }}
+        {{ partial "media/image" (dict "Src" $image "Alt" "feature image" "Class" $imgclass "Context" .Page) }}
       </div>
       <div
         class="m-0 {{ if eq $side "right" }}

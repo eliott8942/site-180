@@ -1,15 +1,13 @@
 {{ define "headAttrs" }}
   {{ partial "head-attr/recettes" }}
   {{ partial "head-attr/recettes/v" (dict "numberOfPeople" .Params.quantity)}}
-  
-  {{ $image := partial "utils/get-img" (dict "img" .Params.image "context" .) }}
-
-  <!-- Add here images that should be loaded as soon as possible -->
-  <link rel="preload" as="image" href="{{ $image.RelPermalink }}" fetchpriority="high">
 {{ end }}
 
 {{ define "main" }}
   {{ $image := partial "utils/get-img" (dict "img" .Params.image "context" .) }}
+
+  {{ $bg_image := $image.Filter images.Grayscale }}
+  {{ $bg_image = $bg_image.Process (print hugo.Data.image.defaultEncoding " " "q50") }}
 
   <section class="relative">
     <div class="section-sm relative z-10 flex max-md:flex-col items-center justify-center">
@@ -18,7 +16,7 @@
         <div class="
           absolute 
           translate-center 
-          bg-[url({{ $image.RelPermalink }})] bg-cover bg-center
+          bg-[url({{ $bg_image.RelPermalink }})] bg-cover bg-center
           saturate-0 opacity-15
           blur-[2px]
           h-full w-full"
@@ -34,7 +32,22 @@
         -->
         <div class="flex items-center grow-0 shrink-0">
           <div class="max-md:max-w-80 max-w-96 w-full border-2 border-white rounded-xl overflow-hidden shadow-xl">
-            {{ partial "image" (dict "Src" .Params.image "Alt" .Title "Class" "w-full aspect-square object-cover" "Loading" "eager" "FetchPriority" "high" "Context" .) }}
+            {{ $containerWidth := 384 }}
+            {{ $borderWidth := 2 }}
+
+            <!-- Subtract the size of the border, then scale up by two -->
+            {{ $width := mul (sub $containerWidth (mul $borderWidth 2)) 2 }}
+            
+            {{ partial "media/image" (dict 
+              "Src" .Params.image 
+              "Alt" .Title 
+              "Class" "w-full aspect-square object-cover" 
+              "Loading" "eager" 
+              "FetchPriority" "high" 
+              "Context" .
+              "Size" (print $width "x" $width)
+              "Command" "Fill"
+            ) }}
           </div>
         </div>
   

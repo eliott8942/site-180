@@ -1,0 +1,251 @@
+<!-- 
+  Original: https://github.com/gethugothemes/hugo-modules/blob/master/images/layouts/partials/image.html
+  License: MIT
+-->
+
+{{ $image:= . }}
+{{ $imagePath:= .Src }}
+{{ $class:= .Class }}
+{{ $size:= .Size }}
+{{ $alt:= .Alt }}
+{{ $displayXL:= .DisplayXL | default "1280x" }}
+{{ $displayLG:= .DisplayLG | default "1024x" }}
+{{ $displayMD:= .DisplayMD | default "768x" }}
+{{ $displaySM:= .DisplaySM | default "520x" }}
+{{ $loading:= .Loading | default "lazy" }}
+{{ $fetchpriority:= .FetchPriority | default "" }}
+{{ $context:= .Context | default . }}
+{{ $encoding := .Encoding | default hugo.Data.image.defaultEncoding }}
+{{ $anchor := .Anchor | default "Center" }}
+
+{{ $contentImage := false }}
+{{ $assetImage := false }}
+{{ $remoteImage := false }}
+
+{{ $sizeValue:= index (split $size ` `) 0 }}
+{{ $height:= index (split $sizeValue `x`) 1 }}
+{{ $width:= index (split $sizeValue `x`) 0 }}
+{{ $command:= .Command }}
+{{ $placeholder:= .Placeholder | default false }}
+{{ $placeholderQuality:= "40x q20" }}
+
+{{ with $context.Resources.GetMatch $imagePath }}
+  {{ $contentImage = true }}
+{{ end }}
+
+{{ $assetImage := and (not (strings.HasPrefix $imagePath "http")) (fileExists (add `assets/` (string $imagePath))) }}
+{{ $is_remote := hasPrefix $imagePath "http" }}
+{{ $is_static := fileExists (add `static/` (string $imagePath)) }}
+
+{{ if and (not $contentImage) (not $assetImage) (not $is_remote) (not $is_static) }}
+  {{ errorf "%s : Couldn't find '%s'." $context $imagePath }}
+{{ end }}
+
+{{ if and $is_static (or $contentImage $assetImage) }}
+  {{ warnf "%s : '%s' is also in static folder, but that file will be ignored." $context $imagePath }}
+{{ end }}
+
+<!-- Load image from static folder (only when not found in assets/page bundles) or remote  -->
+{{ $load_original_image := and (not $assetImage) (not $contentImage) }}
+{{ if and (or $is_static $is_remote) $load_original_image }}
+  <img
+    loading="{{ .Loading }}"
+    decoding="async"
+    {{ if $fetchpriority }}fetchpriority="{{ $fetchpriority }}"{{ end }}
+    src="{{ $imagePath | absURL }}"
+    alt="{{ .Alt }}"
+    class="{{ $class }} img"
+    height="{{ $height }}"
+    width="{{ $width }}" 
+  />
+{{ else }}
+  <!-- /image cdn -->
+
+  <!-- check file existence -->
+  {{ if or $assetImage $contentImage }}
+    {{ if $assetImage }}
+      {{ $image = resources.Get $imagePath }}
+    {{ else if $contentImage }}
+      {{ $image = $context.Resources.GetMatch $imagePath }}
+    {{ end }}
+
+    <!-- image extension -->
+    {{ $imageExt := path.Ext $imagePath }}
+
+    <!-- image height, width (if not svg) -->
+    {{ if eq $imageExt `.svg` }}
+      {{ .Scratch.Set "image-height" "" }}
+      {{ .Scratch.Set "image-width" "" }}
+    {{ else }}
+      {{ .Scratch.Set "image-height" $image.Height }}
+      {{ .Scratch.Set "image-width" $image.Width }}
+    {{ end }}
+    {{ $imageHeight:= .Scratch.Get "image-height" }}
+    {{ $imageWidth:= .Scratch.Get "image-width" }}
+
+    <!-- gif/svg image -->
+    {{ if or (eq $imageExt `.gif`) (eq $imageExt `.svg`) }}
+      <img
+        src="{{ $image.RelPermalink }}"
+        loading="{{ $loading }}"
+        decoding="async"
+        {{ if $fetchpriority }}fetchpriority="{{ $fetchpriority }}"{{ end }}
+        alt="{{ .Alt }}"
+        class="{{ $class }} img"
+        width="{{ $width }}"
+        height="{{ $height }}"
+      />
+    {{ else }}
+      <!-- Resize image -->
+      {{ if $size }}
+        {{ if eq $command "Fit" }}
+          {{ $image = $image.Fit (print $size " " $anchor) }}
+        {{ else if eq $command "Fill" }}
+          {{ $image = $image.Fill (print $size " " $anchor) }}
+        {{ else if eq $command "Crop" }}
+          {{ $image = $image.Crop (print $size " " $anchor) }}
+        {{ else }}
+          {{ if $command }}
+            {{ warnf "%s: Unknown command '%s'" $context $command }}
+          {{ end }}
+        
+          {{ $image = $image.Resize (print $size " " $anchor) }}
+        {{ end }}
+      {{ end }}
+
+      {{ if and (not $size) (eq $encoding "avif") }}
+        {{ warnf "Warning : using avif without specifying a size can make hugo crash !" }}
+      {{ end }}
+      
+      <!-- Apply enconding -->
+      {{ warnf "INFO : Processing `%s`" $image }}
+      {{ $image = $image.Process $encoding }}
+
+      <!-- If the image is small enough, generate only one variant -->
+      {{ if or (lt ($image.Width) 500) }}
+        <!-- placeholder -->
+        {{ $placeholderImage := ($image.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
+
+        <img
+          {{ if $placeholder }}
+            src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
+            data-src={{ $image.RelPermalink }} alt="placeholder"
+          {{ else }}
+            src="{{ $image.RelPermalink }}" loading="{{ $loading }}"
+            decoding="async" alt="{{ .Alt }}"
+          {{ end }}
+          {{ if $fetchpriority }}fetchpriority="{{ $fetchpriority }}"{{ end }}
+          class="{{ if $placeholder }}lazy{{ end }} {{ $class }} img"
+          width="{{- with $width -}}
+            {{- . -}}
+          {{- else -}}
+            {{- $image.Width -}}
+          {{- end -}}
+          "
+          height="{{- with $height -}}
+            {{- . -}}
+          {{- else -}}
+            {{- $image.Height -}}
+          {{- end -}}
+          "
+          onerror="this.onerror='null';this.src='{{ $image.RelPermalink }}';" />
+      {{ else }}
+        <!-- /if image size less then 500x and size not defined -->
+
+        {{ $imageFallback := $image.Resize $displayXL }}
+
+        {{ $imageXL := $image.Resize $displayXL }}
+        {{ $imageLG := $image.Resize $displayLG }}
+        {{ $imageMD := $image.Resize $displayMD }}
+        {{ $imageSM := $image.Resize $displaySM }}
+
+        <!-- Do not use image larger than the set size -->
+        {{ if $size }}
+          {{ if or (gt $imageFallback.Width $image.Width) (gt $imageFallback.Height $image.Height) }}
+            {{ $imageFallback = $image }}
+          {{ end }}
+        
+          {{ if or (gt $imageXL.Width $image.Width) (gt $imageXL.Height $image.Height) }}
+            {{ $imageXL = false }}
+          {{ end }}
+          {{ if or (gt $imageLG.Width $image.Width) (gt $imageLG.Height $image.Height) }}
+            {{ $imageLG = false }}
+          {{ end }}
+          {{ if or (gt $imageMD.Width $image.Width) (gt $imageMD.Height $image.Height) }}
+            {{ $imageMD = false }}
+          {{ end }}
+          {{ if or (gt $imageSM.Width $image.Width) (gt $imageSM.Height $image.Height) }}
+            {{ $imageSM = false }}
+          {{ end }}
+        {{ end }}
+
+        <!-- placeholder -->
+        {{ $placeholderImage := ($imageFallback.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
+
+        <picture>
+          {{ if $imageSM }}
+            <source
+              {{ if $placeholder }}
+                src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
+                data-srcset={{ $imageFallback.RelPermalink }}
+              {{ else }}
+                srcset="{{ $imageSM.RelPermalink }}"
+              {{ end }}
+              media="(max-width: {{ $displaySM }}px)" 
+            />
+          {{ end }}
+          {{ if $imageMD }}
+            <source
+              {{ if $placeholder }}
+                src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
+                data-srcset={{ $imageFallback.RelPermalink }}
+              {{ else }}
+                srcset="{{ $imageMD.RelPermalink }}"
+              {{ end }}
+              media="(max-width: {{ $displayMD }}px)" 
+            />
+          {{ end }}
+          {{ if $imageLG }}
+            <source
+              {{ if $placeholder }}
+                src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
+                data-srcset={{ $imageFallback.RelPermalink }}
+              {{ else }}
+                srcset="{{ $imageLG.RelPermalink }}"
+              {{ end }}
+              media="(max-width: {{ $displayLG }}px)" 
+            />
+          {{ end }}
+          {{ if $imageXL }}
+            <source
+              {{ if $placeholder }}
+                src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
+                data-srcset={{ $imageFallback.RelPermalink }}
+              {{ else }}
+                srcset="{{ $imageXL.RelPermalink }}"
+              {{ end }} 
+            />
+          {{ end }}
+          <img
+            {{ if $placeholder }}
+              src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
+              data-src={{ $imageFallback.RelPermalink }}
+            {{ else }}
+              loading="{{ $loading }}" decoding="async"
+              src="{{ $imageFallback.RelPermalink }}"
+            {{ end }}
+
+            {{ if $fetchpriority }}
+              fetchpriority="{{ $fetchpriority }}"
+            {{ end }}
+            class="{{ if $placeholder }}
+              lazy
+            {{ end }} {{ $class }} img"
+            alt="{{ .Alt }}"
+            width="{{ $image.Width }}"
+            height="{{ $image.Height }}" />
+        </picture>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}

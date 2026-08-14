@@ -1,3 +1,38 @@
+<!-- load social icons -->
+{{ range $key, $path := hugo.Data.crieur.supportedSocialIcons }}
+  {{ $img := resources.Get $path }}
+  {{ if not $img }}
+    {{ errorf "%s doesn't exists" $path }}
+  {{ else }}
+    {{ $imageExt := path.Ext $path }}
+    {{ $resizableFormats := slice ".png" ".jpg" ".jpeg" }}
+    {{ if in $resizableFormats $imageExt }}
+      {{ $img = $img.Resize hugo.Data.crieur.iconSocialSize }}
+    {{ end }}
+
+    {{ with resources.Copy $path $img }}
+      {{ .Publish }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ range $key, $path := hugo.Data.crieur.otherIcons }}
+  {{ $img := resources.Get $path }}
+  {{ if not $img }}
+    {{ errorf "%s doesn't exists" $path }}
+  {{ else }}
+    {{ $imageExt := path.Ext $path }}
+    {{ $resizableFormats := slice ".png" ".jpg" ".jpeg" }}
+    {{ if in $resizableFormats $imageExt }}
+      {{ $img = $img.Resize hugo.Data.crieur.iconSize }}
+    {{ end }}
+
+    {{ with resources.Copy $path $img }}
+      {{ .Publish }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
 <!-- libraries -->
 {{ with resources.Get "libs/maplibregl/maplibregl.js" }}
   <!-- Enable defer here because it's not a module -->
@@ -17,7 +52,9 @@
 
 <!-- main application logic -->
 {{ with (resources.Get "scss/crieur/crieur.scss" | toCSS | css.PostCSS | minify | fingerprint) }}
-  <link rel="stylesheet" href="{{ .RelPermalink }}"></link>
+  {{ with resources.Copy "css/crieur.css" . }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}"></link>
+  {{ end }}
 {{ end }}
 
 {{ $crieur := slice }}

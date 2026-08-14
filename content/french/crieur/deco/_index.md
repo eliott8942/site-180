@@ -9,4 +9,5 @@ disableFooter: true
 cascade:
   build:
     render: "never"
+    publishResources: false
 ---

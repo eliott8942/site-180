@@ -21,4 +21,8 @@ sections:
     image: "/images/crieur.png"
     imagealt: "Crieur logo"
     content: "Pour l'anecdote, ce carnet d'adresses est nommé en honneur du·de la guet·te de la Cathédrale de Lausanne, célèbre pour crier les heures de 22h00 à 02h00, 365 jours par an depuis le haut de cette dernière."
+
+cascade:
+  build:
+    publishResources: false
 ---

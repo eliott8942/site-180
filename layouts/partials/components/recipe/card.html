@@ -1,87 +1,111 @@
-<div 
-  class="
-    relative
-    border
-    flex flex-col 
-    h-full
-    bg-body
-    shadow-md hover:shadow-2xl
-    hover:scale-[103%]
-    z-0 hover:z-10
-    rounded-xl overflow-hidden 
-    cursor-pointer
-    duration-100
-  "
->
-  <a href="{{ .RelPermalink }}" class="absolute w-full h-full z-10"></a>
+{{ $page := .page }}
+{{ $width := .width }}
 
-  <div class="shrink overflow-hidden">
-    {{ partial "image" (dict "Src" .Params.image "Alt" .Title "Class" "aspect-square object-cover" "Context" .) }}
-  </div>
+{{ with $page }}
+  <div 
+    class="
+      relative
+      border
+      flex flex-col 
+      h-full
+      bg-body
+      shadow-md hover:shadow-2xl
+      hover:scale-[103%]
+      z-0 hover:z-10
+      rounded-xl overflow-hidden 
+      cursor-pointer
+      duration-100
+    "
+  >
+    <a href="{{ .RelPermalink }}" class="absolute w-full h-full z-10"></a>
   
-  <div class="flex flex-col p-4 border-t shrink-0 grow">
-    <div class="flex flex-row justify-between flex-wrap">
-      <!-- 
-        Metadata containers
-        We need it because we have some css rules which activates when we're not the first 
-        child of a container
-      -->
-
-      <div>
-        {{ partial "components/recipe/indicators/time-indicator" (dict "timeMin" .Params.durationMin "class" "opacity-50" "scope" . "icon" "fa-hourglass-start") }}
-      </div>
-      <div>
-        {{ partial "components/recipe/indicators/number-people-indicator" (dict
-          "quantityMin" .Params.quantityMin
-          "quantityMax" .Params.quantityMax 
-          "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25 opacity-75"
-          "icon" "fa-users"
-        ) }}
-      </div>
+    <div class="shrink overflow-hidden">
+      {{ $sizeStr := "" }}
+      {{ if $width }}
+        {{ $containerWidth := int ($width) }}
+        {{ $borderWidth := 1 }}
+  
+        <!-- Subtract the size of the border, then scale up by two -->
+        {{ $width := mul (sub $containerWidth (mul $borderWidth 2)) 2 }}
+        {{ $sizeStr = print $width "x" $width }}
+      {{ end }}
+      
+      {{ partial "media/image" (dict 
+        "Src" .Params.image
+        "Alt" .Title 
+        "Class" "w-full aspect-square object-cover" 
+        "Loading" "eager" 
+        "FetchPriority" "high" 
+        "Context" .
+        "Size" $sizeStr
+        "Command" "Fill"
+      ) }}
     </div>
-
-    <!-- TODO : make it expand into the card, so the description can be only shown when hovered -->
-    <div class="my-2 flex flex-col grow">
-      <h4> {{ .Title }} </h4>
-    </div>
-
-    <div class="flex flex-row flex-wrap justify-between items-center text-lg">
-      <div class="flex flex-row flex-wrap">
-        {{ partial "components/indicator/badges/list" (dict 
-          "scope" . 
-          "badges" .Params.intolerances 
-          "domain" hugo.Data.recettes.intolerances
-          "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2"
-        ) }}
-
-        {{ if .Params.spicinessLevel }}
-          {{ partial "components/indicator/levels/level" (dict 
+    
+    <div class="flex flex-col p-4 border-t shrink-0 grow">
+      <div class="flex flex-row justify-between flex-wrap">
+        <!-- 
+          Metadata containers
+          We need it because we have some css rules which activates when we're not the first 
+          child of a container
+        -->
+  
+        <div>
+          {{ partial "components/recipe/indicators/time-indicator" (dict "timeMin" .Params.durationMin "class" "opacity-50" "scope" . "icon" "fa-hourglass-start") }}
+        </div>
+        <div>
+          {{ partial "components/recipe/indicators/number-people-indicator" (dict
+            "quantityMin" .Params.quantityMin
+            "quantityMax" .Params.quantityMax 
+            "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25 opacity-75"
+            "icon" "fa-users"
+          ) }}
+        </div>
+      </div>
+  
+      <!-- TODO : make it expand into the card, so the description can be only shown when hovered -->
+      <div class="my-2 flex flex-col grow">
+        <h4> {{ .Title }} </h4>
+      </div>
+  
+      <div class="flex flex-row flex-wrap justify-between items-center text-lg">
+        <div class="flex flex-row flex-wrap">
+          {{ partial "components/indicator/badges/list" (dict 
             "scope" . 
-            "value" .Params.spicinessLevel 
-            "domain" hugo.Data.recettes.spiciness
+            "badges" .Params.intolerances 
+            "domain" hugo.Data.recettes.intolerances
             "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2"
           ) }}
-        {{ end }}
+  
+          {{ if .Params.spicinessLevel }}
+            {{ partial "components/indicator/levels/level" (dict 
+              "scope" . 
+              "value" .Params.spicinessLevel 
+              "domain" hugo.Data.recettes.spiciness
+              "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2"
+            ) }}
+          {{ end }}
+        </div>
+        <div class="flex flex-row flex-wrap">
+          {{ partial "components/indicator/levels/level" (dict "scope" . "value" .Params.copiosityLevel "domain" hugo.Data.recettes.copiosity) }}
+        </div>
       </div>
-      <div class="flex flex-row flex-wrap">
-        {{ partial "components/indicator/levels/level" (dict "scope" . "value" .Params.copiosityLevel "domain" hugo.Data.recettes.copiosity) }}
+  
+      <div class="my-2">
+        {{ partial "components/indicator/tags/list" ( dict 
+          "scope" . 
+          "group" "order" 
+          "icon" "custom-icon icon-dishes" 
+          "notFlaticon" "true"
+          "class" "relative [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 z-20"
+        ) }}
+        {{ partial "components/indicator/tags/list" ( dict 
+          "scope" . 
+          "group" "tags" 
+          "icon" "fa-tag"
+          "class" "relative [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 z-20"
+        ) }}
       </div>
-    </div>
-
-    <div class="my-2">
-      {{ partial "components/indicator/tags/list" ( dict 
-        "scope" . 
-        "group" "order" 
-        "icon" "custom-icon icon-dishes" 
-        "notFlaticon" "true"
-        "class" "relative [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 z-20"
-      ) }}
-      {{ partial "components/indicator/tags/list" ( dict 
-        "scope" . 
-        "group" "tags" 
-        "icon" "fa-tag"
-        "class" "relative [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 z-20"
-      ) }}
     </div>
   </div>
-</div>
+{{ end }}

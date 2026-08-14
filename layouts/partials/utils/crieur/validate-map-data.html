@@ -36,7 +36,8 @@
         {{ end }}
 
         {{ if .links }}
-          {{ $supportedIcons := slice "instagram" "x" "facebook" "tiktok" "tripadvisor" "site" }}
+          {{ $supportedIcons := partial "utils/map/keys" hugo.Data.crieur.supportedSocialIcons }}
+        
           {{ range $i, $link := .links }}
             {{ if not $link.social }}
               {{ errorf "%s:%s [%s]" $place "Missing links.social" $i }}
