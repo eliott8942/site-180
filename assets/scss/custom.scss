@@ -26,7 +26,7 @@
     aspect-ratio: 1/1;
     border-radius: 0;
 
-    @apply max-sm:hidden max-md:h-32 max-md:min-w-32 max-sm:h-full md:w-full;
+    @apply max-sm:hidden max-md:w-32 md:w-full;
   }
 
   // Name
