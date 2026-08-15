@@ -1,17 +1,13 @@
-{{ define "headAttrs" }}
-  {{ with site.GetPage "homepage" }}
-    <!-- Add here images that should be loaded as soon as possible -->
-    <link rel="preload" as="image" href="{{ .Params.banner.image | relURL }}" fetchpriority="high">
-  {{ end }}
-{{ end }}
-
 {{ define "main" }}
     <!-- Banner -->
     {{ with .Params.banner }}
+      {{ $banner := partial "utils/get-img" (dict "img" .image "context" .) }}
+      {{ $banner = $banner.Process hugo.Data.image.defaultEncoding }}
+    
       <section class="p-0 m-0">
         <div
-          class="row justify-center banner flex flex-col m-0 p-0"
-          style="background-image: url({{ .image | relURL }})"
+          class="row justify-center banner flex flex-col m-0 p-0 min-h-60 sm:min-h-80"
+          style="background-image: url({{ $banner.RelPermalink | relURL }})"
         >
           <div
             class="grow flex flex-col items-center text-center justify-center m-0 p-0 px-4"
