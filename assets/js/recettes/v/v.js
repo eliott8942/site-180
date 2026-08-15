@@ -33,11 +33,11 @@ function processElements(elements) {
       continue
     }
     const baseNumber = parseFloat(baseNumberStr)
-    if (baseNumber == NaN) {
+    if (Number.isNaN(baseNumber)) {
       invalidElements.push(element)
       continue
     }
-    const labelElement = element.querySelector('#label')
+    const labelElement = element.querySelector('.label')
     if (!labelElement) {
       invalidElements.push(element)
       continue
@@ -84,14 +84,14 @@ function processElements(elements) {
     })
   }
   if (invalidElements.length > 0) {
-    throw `Internal Error : V system with id ${vId} contains invalid elements : ${invalidElements}`
+    throw `Internal Error : V system contains invalid elements : ${invalidElements}`
   }
 
   return processedElements
 }
 
 function formatNumberWithUnits(number, min) {
-  // round to two digits by default
+  // round to one digit by default
   let formattedVal = Math.round(number * 10) / 10
   if (!Number.isNaN(min)) {
     formattedVal = Math.max(min, formattedVal)
@@ -111,12 +111,6 @@ function formatNumberWithStep(number, step, min, roundFunction) {
     formattedVal = Math.max(min, formattedVal)
   }
   return formattedVal.toString()
-}
-
-function gcd(a, b) {
-  a = Math.abs(a)
-  b = Math.abs(b)
-  return b === 0 ? (a || 1) : gcd(b, a % b)
 }
 
 function updateElement(element, newRatio) {
@@ -162,8 +156,8 @@ function registerVSystem(id, system, position, sortedSystemIds, systems) {
     return
   }
   
-  const btnIncElement = container.querySelector('#btn-inc')
-  const btnDecElement = container.querySelector('#btn-dec')
+  const btnIncElement = container.querySelector('.btn-inc')
+  const btnDecElement = container.querySelector('.btn-dec')
 
   let lastValidInput = system.baseValue;
   input.value = system.baseValue;
@@ -222,8 +216,8 @@ function registerVSystem(id, system, position, sortedSystemIds, systems) {
 
   input.addEventListener('input', () => updateValue(input.value))
   input.addEventListener('blur', () => {
-    if (!updateValue(container.value)) {
-      container.value = lastValidInput
+    if (!updateValue(input.value)) {
+      input.value = lastValidInput
       updateValue(lastValidInput)
     }
   })
@@ -256,7 +250,8 @@ function validateExpression(systemId, system, expressionStr, parser) {
   const expressionVariables = new Set(expression.variables())
   const dependencySet = new Set(system.expressionVariables)
 
-  if (!expressionVariables.isSubsetOf(dependencySet)) {
+  // Note : technically Set.isSubsetOf exists, but for the moment it's far too new
+  if (!isSubsetOf(expressionVariables, dependencySet)) {
     const unknownVariables = expression.variables().filter(x => !dependencySet.has(x))
 
     console.error(`v system ${systemId} has unknown variables '${unknownVariables}'`)
@@ -290,7 +285,7 @@ function registerVSystems(vSystems) {
       
       const elements = getElementForEachId(...system.elements || [])
       if (elements == undefined) {
-        return;
+        continue;
       }
       const processedElements = processElements(elements)
       system.elements = processedElements;

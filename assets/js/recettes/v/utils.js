@@ -59,3 +59,10 @@ function arrayDiff(arr1, arr2) {
     ...arr2.filter(x => !set1.has(x))
   ];
 }
+
+function isSubsetOf(subset, superset) {
+  for (const item of subset) {
+    if (!superset.has(item)) return false
+  }
+  return true
+}
