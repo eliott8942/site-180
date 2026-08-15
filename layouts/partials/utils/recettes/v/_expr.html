@@ -10,7 +10,7 @@
   {{ $valueConfigIdent := print $dependentId "Config" }}
 
   {{ if not ($context.Page.Store.Get $valueConfigIdent) }}
-    {{ errorf "%s: dependency v system `%s` not defined" .Position $id }}
+    {{ errorf "%s: dependency v system `%s` not defined" $context.Position $dependentId }}
   {{ else }}
     {{ $dependentsIds := index ($context.Page.Store.Get $valueConfigIdent) "dependents" | append $id }}
     {{ $context.Page.Store.SetInMap $valueConfigIdent "dependents" $dependentsIds }}
