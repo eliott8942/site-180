@@ -1,5 +1,4 @@
 <!-- Force the use of .Inner because hugo complains otherwise -->
 {{ $_ := .InnerDeindent }}
-
 <!-- Note : See the comment on shortcodes/v -->
-{{ partial "utils/recettes/v" (dict "command" "expr" "context" .) }}
+{{ $_ := partial "utils/recettes/v" (dict "command" "expr" "context" .) }}
