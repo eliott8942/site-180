@@ -40,8 +40,8 @@ durationMin: "50"
 - {{<v value="500" unit="g">}} d'épinards _(frais de préférence)_
 - {{<v value="300" unit="g">}} de ricotta
 - {{<v value="300" unit="g">}} grammes de parmesan
-- Noix de muscade (optionnel)
 - {{<v value="1" step="1">}} oeuf
+- {{<label text="Optionnel">}} Noix de muscade
 
 #### Pour la sauce
 

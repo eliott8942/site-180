@@ -32,7 +32,7 @@ durationMin: "40"
 - {{<v value="0.5" step="0.5" round="floor">}} citron
 - {{<v value="6" step="1" round="ceil">}} asperges
 - {{<v value="1" step="1" round="ceil">}} tranche de pain
-- {{<label text="Optionel">}} Des tomates séchées et de la sauce piquante
+- {{<label text="Optionnel">}} Des tomates séchées et de la sauce piquante
 
 {{<recettes/step-section step="1" >}} Préparation des asperges {{</recettes/step-section>}}
 
@@ -44,7 +44,7 @@ Faire sauter 6 asperges quelques minutes dans du beurre jusqu'à ce qu'elles aie
 2. Placez dans un bain-marie chaud et fouettez jusqu'à l'obtention d'une crème mousseuse et légère.
 3. Lentement, ajouter le beurre, préalablement coubé en cubes. Fouettez après chaque cube.
 4. Saler, poivrer et incorporer le jus de citron avant de servir.
-5. {{<label text="Optionel">}} Ajouter les tomates séchées coupées finement et de la sauce piquante.
+5. {{<label text="Optionnel">}} Ajouter les tomates séchées coupées finement et de la sauce piquante.
 
 {{<recettes/step-section step="3" >}} Préparation des oeufs pochés {{</recettes/step-section>}}
 
