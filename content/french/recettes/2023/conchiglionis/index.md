@@ -26,7 +26,7 @@ durationMin: "50"
   person * piece
 {{</v/expr>}}
 
-{{<recettes/section fa-icon="fa-bowl-food">}} Ingrédients {{</recettes/section>}}
+{{<recettes/section fa-icon="fa-list-check">}} Ingrédients {{</recettes/section>}}
 
 {{<v/container>}}
   {{<v/input id="person" fa-icon="fa-users" suffix="personnes">}}

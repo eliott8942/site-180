@@ -21,7 +21,7 @@ durationMin: "40"
 
 {{<v/begin default-value="1" min="1" max="4">}}
 
-{{<recettes/section fa-icon="fa-bowl-food">}} Ingrédients {{</recettes/section>}}
+{{<recettes/section fa-icon="fa-list-check">}} Ingrédients {{</recettes/section>}}
 
 {{<v/container>}}
   {{<v/input fa-icon="fa-users" suffix="personne(s)">}}
