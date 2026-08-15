@@ -11,3 +11,12 @@
 .value-changed {
   animation: changedAnimation 1s ease-in-out 0s 1 normal forwards;
 }
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+.reset-animation {
+  animation: rotate 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0s 1 normal forwards;
+}

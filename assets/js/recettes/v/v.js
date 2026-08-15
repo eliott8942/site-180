@@ -1,3 +1,6 @@
+let SORTED_SYSTEMS_ID = null
+let V_SYSTEMS = null
+
 function getElementForEachId(...ids) {
   let array = []
   let notFound = false
@@ -165,6 +168,8 @@ function registerVSystem(id, system, position, sortedSystemIds, systems) {
   let lastValidInput = system.baseValue;
   input.value = system.baseValue;
   system.value = system.baseValue;
+  system.input = input;
+  system.elements = processedElements;
   
   function updateValue(inputValue) {
     let newValue = parseInt(inputValue)
@@ -205,7 +210,7 @@ function registerVSystem(id, system, position, sortedSystemIds, systems) {
 
       if (system.value != newValue) {
         system.value = newValue;
-        
+
         for (const element of system.elements) {
           updateElement(element, system.value / system.baseValue)
         }
@@ -262,7 +267,14 @@ function validateExpression(systemId, system, expressionStr, parser) {
 }
 
 function registerVSystems(vSystems) {
+  if (SORTED_SYSTEMS_ID) {
+    throw 'V systems were already registered'
+  }
+  
   const sortedVSystems = topologicalSort(vSystems, (system) => system.dependents || [])
+  SORTED_SYSTEMS_ID = sortedVSystems;
+  V_SYSTEMS = vSystems;
+
   const parser = new exprEval.Parser()
   
   for (let i = 0; i < sortedVSystems.length; i += 1) {
@@ -295,6 +307,46 @@ function registerVSystems(vSystems) {
       }
     } else {
       registerVSystem(systemId, system, i, sortedVSystems, vSystems)
+    }
+  }
+}
+
+function resetVSystems(btn) {
+  requestAnimationFrame(() => {
+    btn.classList.remove('reset-animation')
+
+    requestAnimationFrame(() => {
+      btn.classList.add('reset-animation')
+    })
+  })
+  
+  for (let i = 0; i < SORTED_SYSTEMS_ID.length; i += 1) {
+    const system = V_SYSTEMS[SORTED_SYSTEMS_ID[i]];
+
+    // reset leafs
+    if (!system.dependencies) {
+      if (system.value != system.baseValue) {
+        system.value = system.baseValue;
+        system.input.value = system.baseValue;
+        
+        for (const element of system.elements) {
+          updateElement(element, system.value / system.baseValue)
+        }
+      }
+    } else {
+      const dependencyVariables = {};
+      for (const id of system.dependencies) {
+        dependencyVariables[id] = V_SYSTEMS[id].value
+      }
+      const newValue = system.expression.evaluate(dependencyVariables);
+  
+      if (system.value != newValue) {
+        system.value = newValue;
+        
+        for (const element of system.elements) {
+          updateElement(element, system.value / system.baseValue)
+        }
+      }
     }
   }
 }

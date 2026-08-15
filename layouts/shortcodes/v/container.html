@@ -1,8 +1,14 @@
 <div class="relative p-2 bg-gray-50 border rounded-md z-10 shadow-md md:float-end md:w-80">
   <div class="mb-2">
-    <a href="{{ relURL "blog/2026/08/recette-v2/" }}" class="float-right toggle w-fit aspect-square pointer-events-auto">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info-icon lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-    </a>
+    <div class="float-right flex flex-row">
+      <button class="h-full aspect-square text-lg mr-2 -m-1 p-1 flex items-center justify-center" onclick="resetVSystems(this)">
+        <i class="fa-solid fa-arrow-rotate-left"></i>
+      </button>
+      
+      <a href="{{ relURL "blog/2026/08/recette-v2/" }}" class="w-fit aspect-square">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info-icon lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      </a>
+    </div>
     
     <h5 class="inline-block my-0 w-fit"> 
       <i class="fa-solid fa-gear"></i> 
