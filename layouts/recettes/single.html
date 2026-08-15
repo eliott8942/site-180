@@ -121,7 +121,7 @@
 
       <article class="z-0">
         <div class="content mb-10">
-          {{ .Content | safeHTML }}
+          {{ partial "utils/render-content" . }}
         </div>
         
         <div class="flex flex-row justify-center">

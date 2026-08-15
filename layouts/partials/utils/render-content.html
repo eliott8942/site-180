@@ -1,0 +1,6 @@
+<!-- 
+  Hugo markdown renderer puts empty paragraphs wihtout reason, 
+  so we're stripping them here.
+-->
+{{/* layouts/partials/render-content.html */}}
+{{ .Content | replaceRE `<p>\s*</p>` "" | safeHTML }}
