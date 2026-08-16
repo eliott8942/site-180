@@ -15,8 +15,12 @@ function setURLFile(str, params = {}) {
   if (paramsPresent) {
     str += '?' + new URLSearchParams(params).toString()
   }
-  
-  window.history.replaceState({}, "", PAGE_URL + "#" + str)
+
+  if (str != "") {
+    window.history.replaceState({}, "", PAGE_URL + "#" + str)
+  } else {
+    clearURLFile()
+  }
 }
 
 function clearURLFile() {
