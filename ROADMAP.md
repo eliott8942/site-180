@@ -108,6 +108,12 @@
 
 - [ ] Events Schedule
 
+- [ ] Optimization
+
+  - [X] Optimized image delivery
+
+  - [ ] Optimized JS builds
+
 - [ ] Website documentation : Explain how to add content to it
 
 - [ ] Correct grammar mistakes on the content
