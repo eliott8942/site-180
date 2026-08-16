@@ -112,8 +112,7 @@ function init(placeData, decoData, style) {
         showPlace(placeData.id)
         return true
       } else {
-        // can't return anything from this point
-        redirectWithReplace(_404_URL)
+        clearURLFile()
       }
     }
 

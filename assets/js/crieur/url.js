@@ -15,10 +15,4 @@ function getURLFile() {
   }
 }
 
-function redirectWithReplace(url) {
-  window.location.replace(url)
-}
 
-function registerURLHashHook(fun) {
-  window.addEventListener('hashchange', fun)
-}
