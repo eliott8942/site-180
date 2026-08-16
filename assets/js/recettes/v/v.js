@@ -42,6 +42,69 @@ function getElementForEachId(...ids) {
   }
 }
 
+function processUnit(unit) {
+  const DEFAULT_SCALE = 1000
+  const META_UNITS = {
+    'm': 1,
+    'c': 10,
+    'd': 100,
+    'k': 1000000
+  }
+
+  const meta = unit.length > 1
+    ? Object.keys(META_UNITS).find(meta => unit.startsWith(meta))
+    : null
+  const metaFactor = meta
+    ? META_UNITS[meta]
+    : DEFAULT_SCALE
+
+  if (meta) {
+    unit = unit.slice(meta.length)
+  }
+
+  switch (unit) {
+    case 'm':
+      return (value) => {
+        let normalized = value * metaFactor
+  
+        if (normalized < 25) {
+          return [normalized, 'mm']
+        } else {
+          return [normalized / 10, 'cm']
+        }
+      } 
+
+    case 'g':
+      return (value) => {
+        let normalized = value * metaFactor
+
+        if (normalized < 1000) {
+          return [normalized, 'mg']
+        } else if (normalized < 1000000) {
+          return [normalized / 1000, 'g']
+        } else {
+          return [normalized / 1000000, 'kg']
+        }
+      } 
+
+    case 'L':
+      return (value) => {
+        let normalized = value * metaFactor
+  
+        if (normalized < 100) {
+          return [normalized, 'mL']
+        } else if (normalized < 1000) {
+          return [normalized / 10, 'cL']
+        } else {
+          return [normalized / 1000, 'L']
+        }
+      } 
+
+    default:
+      break
+  }
+}
+
 function processElements(elements) {
   const invalidElements = []
   const processedElements = []
@@ -58,6 +121,11 @@ function processElements(elements) {
       invalidElements.push(element)
       continue
     }
+
+    const unitElement = element.querySelector('.unit')
+    const formatWithUnit = unitElement
+      ? processUnit(unitElement.innerText)
+      : null
 
     // We use nan to check later if step is set
     let step = parseFloat(element.getAttribute('v-step'))
@@ -99,7 +167,9 @@ function processElements(elements) {
     processedElements.push({
       container: element, 
       element: labelElement,
+      unitElement: unitElement,
       baseValue,
+      formatWithUnit,
       step,
       min,
       div,
@@ -168,13 +238,27 @@ function formatNumberWithStep(number, step, min, roundFunction) {
 
 function updateElement(element, newRatio, newRawValue) {
   let newElementValue = !Number.isNaN(element.baseValue) ? element.baseValue * newRatio : newRawValue;
-
+  
   let formattedValue;
   if (!Number.isNaN(element.div)) {
     formattedValue = formatNumberWithDiv(newElementValue, element.div, element.min, element.roundingMethod)
   } else if (!Number.isNaN(element.step)) {
+    if (element.formatWithUnit) {
+      let unit;
+      [newElementValue, unit] = element.formatWithUnit(newElementValue)
+  
+      element.unitElement.innerText = unit;
+    }
+    
     formattedValue = formatNumberWithStep(newElementValue, element.step, element.min, element.roundingMethod)
   } else {
+    if (element.formatWithUnit) {
+      let unit;
+      [newElementValue, unit] = element.formatWithUnit(newElementValue)
+  
+      element.unitElement.innerText = unit;
+    }
+    
     formattedValue = formatNumberWithUnits(newElementValue, element.min)
   }
   
@@ -194,8 +278,12 @@ function updateElement(element, newRatio, newRawValue) {
 function updateVInputComponent(components, value, min, max) {
   components.input.value = value;
 
-  components.btnDec.disabled = value <= min;
-  components.btnInc.disabled = (max !== undefined) ? value >= max : false
+  if (components.btnDec) {
+    components.btnDec.disabled = value <= min;
+  }
+  if (components.btnInc) {
+    components.btnInc.disabled = (max !== undefined) ? value >= max : false
+  }
 }
 
 function registerVInput(id, system, position, sortedSystemIds, systems, initialValue) {
@@ -296,7 +384,6 @@ function registerVInput(id, system, position, sortedSystemIds, systems, initialV
   input.addEventListener('blur', () => {
     if (!updateValue(input.value)) {
       input.value = system.value
-      updateValue(lastValidInput)
     }
   })
   // disable wheeling
