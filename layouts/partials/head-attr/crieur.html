@@ -58,9 +58,10 @@
 {{ end }}
 
 {{ $crieur := slice }}
-{{ $crieur := $crieur | append (resources.Match "js/crieur/**/*.js") }}
-{{ $crieur := $crieur | append (resources.Match "js/crieur/*.js") }}
-{{ $crieur := $crieur | resources.Concat "js/crieur.js" }}
+{{ $crieur = $crieur | append (resources.Match "js/crieur/**/*.js") }}
+{{ $crieur = $crieur | append (resources.Match "js/crieur/*.js") }}
+{{ $crieur = $crieur | append (resources.Get "js/common/url.js") }}
+{{ $crieur = $crieur | resources.Concat "js/crieur.js" }}
 {{ if hugo.IsProduction }}
   {{ $crieur = $crieur | minify | fingerprint }}
 {{ end }}

@@ -105,7 +105,15 @@ function init(placeData, decoData, style) {
   // return true if the url points to a specific place
   // and false otherwise
   function handleUrl() {
-    let str_id = getURLFile()
+    let [str_id, params] = [null, null]
+    try {
+      [str_id, params] = getURLFile()
+    } catch (e) {}
+
+    if (params) {
+      setURLFile(str_id)
+    }
+    
     if (str_id !== null) {
       const placeData = getPlaceFromStrId(str_id, PLACE_DATA)
       if (placeData) {
