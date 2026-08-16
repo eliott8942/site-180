@@ -295,7 +295,7 @@ function registerVInput(id, system, position, sortedSystemIds, systems, initialV
   input.addEventListener('input', () => updateValue(input.value))
   input.addEventListener('blur', () => {
     if (!updateValue(input.value)) {
-      input.value = system.input
+      input.value = system.value
       updateValue(lastValidInput)
     }
   })
