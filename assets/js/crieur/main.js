@@ -119,8 +119,6 @@ function init(placeData, decoData, style) {
     return false
   }
   
-  registerURLHashHook(() => handleUrl())
-  
   if (!handleUrl()) {
     // fold the search menu on mobile to make the attribution visible on first view
     if (document.documentElement.clientWidth <= 520) {
