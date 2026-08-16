@@ -27,7 +27,7 @@
           because chrome lighthouse complaint about it
         -->
         <div class="flex items-center grow-0 shrink-0">
-          <div class="max-md:max-w-80 max-w-96 w-full border-2 border-white rounded-xl overflow-hidden shadow-xl">
+          <div class="max-md:max-w-80 max-w-96 w-full aspect-square border-2 border-white rounded-xl overflow-hidden shadow-xl">
             {{ $containerWidth := 384 }}
             {{ $borderWidth := 2 }}
 
@@ -37,7 +37,7 @@
             {{ partial "media/image" (dict 
               "Src" .Params.image 
               "Alt" .Title 
-              "Class" "w-full aspect-square object-cover" 
+              "Class" "w-full h-full object-cover" 
               "Loading" "eager" 
               "FetchPriority" "high" 
               "Context" .
