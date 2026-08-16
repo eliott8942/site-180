@@ -35,8 +35,8 @@ durationMin: "45"
 - {{<v value="6" step="1" round="floor">}} gousses d'ail
 - {{<v value="60" unit="mL">}} de sauce soja
 - {{<v value="2" step="0.5">}} C.à.S de miel
-- {{<v value="300" unit="mL">}} de bouillon de légumes
-- {{<v value="2" unit="dL">}} de lait de coco
+- {{<v value="30" unit="cL">}} de bouillon de légumes
+- {{<v value="20" unit="cL">}} de lait de coco
 - {{<v value="1" step="0.25">}} C.à.S de maïzena
 - Coriandre moulue
 
