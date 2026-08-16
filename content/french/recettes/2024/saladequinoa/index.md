@@ -38,8 +38,8 @@ quantityMax: "4"
 
 La sauce :
 
-- {{<v value="1" step="0.25">}} c.a.s d'huile d'olive
-- {{<v value="0.5" step="0.25" round="ceil">}} c.a.s de jus de citron
+- {{<v value="1" step="0.25">}} C.à.S d'huile d'olive
+- {{<v value="0.5" step="0.25" round="ceil">}} C.à.S de jus de citron
 - Sel et poivre fraichement moulu
 - Faculatif : ail et moutarde
 

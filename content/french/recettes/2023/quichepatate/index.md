@@ -28,7 +28,7 @@ durationMin: "60"
 
 - 1 pâte brisée
 - {{<v value="100" unit="g">}} de fromage frais
-- {{<v value="20" unit="cl">}} cl de crème liquide
+- {{<v value="20" unit="cl">}} de crème liquide
 - {{<v value="1" step="1" round="ceil">}} bouquet de ciboulette
 - {{<v value="2" step="1" round="ceil">}} patates douces
 - {{<v value="3" step="1" round="ceil">}} oeufs

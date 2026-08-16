@@ -45,7 +45,7 @@ durationMin: "999"
 - {{<v value="600" unit="g">}} de Philadelphia
 - {{<v value="200" unit="g">}} de sucre
 - {{<v value="2" step="0.5">}} sachets de sucre vanillé
-- {{<v value="2" step="0.5">}} cuillères à soupe de maïzena
+- {{<v value="2" step="0.5">}} C.à.S de maïzena
 - {{<v value="4" step="1" round="ceil">}} oeufs et {{<v value="2" step="1" round="ceil">}} jaunes à température ambiente
 - {{<v value="200" unit="g">}} de crème acidulée
 - Jus de {{<v value="1" step="0.5" round="ceil">}} citron

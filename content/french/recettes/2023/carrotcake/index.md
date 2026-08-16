@@ -30,19 +30,19 @@ durationMin: "60"
 - {{<v value="90" unit="g">}} d'huile végétale
 - {{<v value="125" unit="g">}} de sucre
 - {{<v value="125" unit="g">}} de farine fluide
-- {{<v value="0.5" step="0.25">}} cuillière à café rase de muscade
-- {{<v value="1" step="0.25">}} cuillière à café d'extrait de vanille liquide
+- {{<v value="0.5" step="0.25">}} C.à.C de rase de muscade
+- {{<v value="1" step="0.25">}} C.à.C d'extrait de vanille liquide
 - {{<v value="0.5" step="0.25">}} sachet de levure chimique
-- {{<v value="1" step="0.25">}} cuillière à café rase de cannelle
+- {{<v value="1" step="0.25">}} C.à.C de rase de cannelle
 - {{<v value="150" unit="g">}} de carotte râpées (3 à 4 grosses carottes)
 - {{<v value="2" step="1">}} oeufs
 - {{<v value="60" unit="g">}} de noix concassées
 
 #### Pour le glaçage :
 
-- {{<v value="2" step="1" unit="/3">}} sachet de sucre vanillé
-- {{<v value="2" step="1" unit="/3">}} cuillière à soupe de miel
-- {{<v value="2" step="1" unit="/3">}} cuillière à café de cannelle
+- {{<v value="2" div="3">}} sachet de sucre vanillé
+- {{<v value="2" div="3">}} C.à.S de miel
+- {{<v value="2" div="3">}} C.à.C de cannelle
 - {{<v value="130" unit="g">}} de cream cheese
 
 {{<recettes/step-section step="1" >}} Préparation {{</recettes/step-section>}}

@@ -30,10 +30,10 @@ durationMin: "75"
 - {{<v value="400" unit="g">}} de purée de potimarron
 - {{<v value="200" unit="g">}} de lait condensé sucré
 - {{<v value="2" step="1" round="ceil">}} oeufs
-- {{<v value="1" step="0.5" round="floor">}} c. à c. de cannelle
-- {{<v value="1" step="0.5" round="floor">}} c. à c. de gingembre
-- {{<v value="0.5" step="0.5" round="floor">}} c. à c. de noix de muscade
-- {{<v value="0.5" step="0.25" round="floor">}} c. à c. de sel
+- {{<v value="1" step="0.5" round="floor">}} C.à.C de cannelle
+- {{<v value="1" step="0.5" round="floor">}} C.à.C de gingembre
+- {{<v value="0.5" step="0.5" round="floor">}} C.à.C de noix de muscade
+- {{<v value="0.5" step="0.25" round="floor">}} C.à.C de sel
 - 1 pâte à tarte
 
 {{<recettes/step-section step="1" >}} Préparation {{</recettes/step-section>}}

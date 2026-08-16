@@ -18,10 +18,10 @@ Pour 4 personnes
 - 90g d'huile végétale
 - 125g de sucre
 - 125g de farine fluide
-- 1/2 cuillière à café rase de muscade
-- 1 cuillière à café d'extrait de vanille liquide
+- 1/2 C.à.C rase de muscade
+- 1 C.à.C d'extrait de vanille liquide
 - 1/2 sachet de levure chimique
-- 1 cuillière à café rase de cannelle
+- 1 C.à.C rase de cannelle
 - 150g de carotte râpées (3 à 4 grosses carottes)
 - 2 oeufs
 - 60g de noix concassées
