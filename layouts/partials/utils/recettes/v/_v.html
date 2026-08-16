@@ -3,6 +3,8 @@
 {{ $id := .Get "id" | default "default" }}
 {{ $step := .Get "step" }}
 {{ $round := .Get "round" }}
+{{ $min := .Get "min" }}
+{{ $div := .Get "div" }}
 
 {{ $valueConfigIdent := print $id "Config" }}
 
@@ -21,8 +23,43 @@
 
 {{ $id_prefix_for_span := print $id_prefix "-" $number_of_values }}
 
-{{ if and (not (isset .Params "unit")) (not (isset .Params "step")) }}
-  {{ warnf "%s: Values for v systems without a unit should have a step. Value n°%i for v system %s doesn't have either of them." .Position (add $number_of_values 1) $id }}
+{{ if and (not (isset .Params "unit")) (not (isset .Params "step")) (not (isset .Params "div")) }}
+  {{ warnf "%s: Values for v systems without a unit should have a step or a div. Value n°%i for v system %s doesn't have either of them." .Position (add $number_of_values 1) $id }}
+{{ end }}
+
+{{ if and (isset .Params "step") (isset .Params "div") }}
+  {{ errorf "%s: Value n°%i for v system %s has a divisor and a step." .Position (add $number_of_values 1) $id }}
+{{ end }}
+
+{{ if (isset .Params "div") }}
+  {{ if le (float $div) 0.0 }}
+    {{ errorf "%s: Value n°%i for v system %s has a divisor below or equal to 0." .Position (add $number_of_values 1) $id }}
+  {{ end }}
+
+  {{ $frac := sub (float $div) (math.Floor (float $div)) }}
+  
+  {{ if ne $frac 0.0 }}
+    {{ warnf "%s: only integers are supported for div, found %s. The fractional part will be ignored." .Position $div }}
+  {{ end }}
+
+  {{ $div = (int $div) }}
+
+  {{ $frac := sub (float $value) (math.Floor (float $value)) }}
+  
+  {{ if ne $frac 0.0 }}
+    {{ warnf "%s: only integers are supported for value, found %s. The fractional part will be ignored." .Position $value }}
+  {{ end }}
+
+  {{ $value = (int $value) }}
+  {{ if isset .Params "min" }}
+    {{ $frac := sub (float $min) (math.Floor (float $min)) }}
+    
+    {{ if ne $frac 0.0 }}
+      {{ warnf "%s: only integers are supported for min, found %s. The fractional part will be ignored." .Position $min }}
+    {{ end }}
+  
+    {{ $min = (int $min) }}
+  {{ end }}
 {{ end }}
 
 {{ if (isset .Params "value")}}
@@ -34,11 +71,50 @@
 {{ if (isset .Params "step")}}
   {{ if eq (float $step) 0.0 }}
     {{ errorf "%s: Value n°%i for v system %s has a step of 0." .Position (add $number_of_values 1) $id }}
+
+  <!-- 
+    Values with a step but without unit are formatted using the int 
+    and fraction method (eg "5.75" becomes "5 and 3/4")
+  -->
+  {{ else if and (not (isset .Params "unit")) (lt (float $step) 1.0) }}
+    {{ $inv_step := div 1.0 (float $step) }}
+    {{ $inv_step_frac := sub $inv_step (math.Floor $inv_step) }}
+
+    {{ $proceed_to_modification := eq $inv_step_frac 0.0 }}
+    
+    <!-- 
+      If we can't find a perfectly round inverse, ask to find manually adapt for divisor. 
+      I prefer not to try to round anything, as i'm sure that will cause problems later.
+    -->
+    {{ if not $proceed_to_modification }}
+      {{ warnf "%s: Couldn't determine a suitable divisor for $step=%s. Please replace it with a divisor and adapt the other values instead." .Position $step }}
+    {{ end }}
+
+    {{ if $proceed_to_modification }}
+      {{ $adaptedValue := mul (float $value) $inv_step }}
+      {{ $frac := sub $adaptedValue (math.Floor $adaptedValue) }}
+      
+      {{ if ne $frac 0.0 }}
+        {{ warnf "%s: $value (%s) isn't divisible accurately by $step (%s). The remained will be ignored." .Position $value $step }}
+      {{ end }}
+      {{ $value = int $adaptedValue }}
+      
+      {{ if $min }}
+        {{ $adaptedMin := mul (float $min) $inv_step }}
+        {{ $frac := sub $adaptedMin (math.Floor $adaptedMin) }}
+  
+        {{ if ne $frac 0.0 }}
+          {{ warnf "%s: $min (%s) isn't divisible accurately by $step (%s). The remained will be ignored." .Position $min $step }}
+        {{ end }}
+        {{ $min = int $adaptedMin }}
+      {{ end }}
+  
+      {{ $div = $inv_step }}
+    {{ end }}
   {{ end }}
 {{ end }}
 
 {{ if (isset .Params "min")}}
-  {{ $min := .Get "min" }}
   {{ if le (float $min) 0.0 }}
     {{ errorf "%s: Value n°%i for v system %s has a min value less or equal to 0.0" .Position (add $number_of_values 1) $min }}
   {{ end }}
@@ -55,6 +131,31 @@
   {{ end }}
 {{ end }}
 
+{{ $initialValue := "" }}
+{{ if $div }}
+  {{ $fraction := div (float $value) (float $div) }}
+  {{ $fullPart := int (math.Floor $fraction) }}
+  {{ $fracPart := sub ($value) (mul $fullPart $div) }}
+
+  {{ $g := partial "utils/math/gcd.html" (dict "a" $fracPart "b" $div) }}
+  {{ $fracPart := div $fracPart $g }}
+  {{ $div := div $div $g }}
+
+  {{ if $fullPart }}
+    {{ $initialValue = print $initialValue $fullPart }}
+  {{ end }}
+
+  {{ if $fracPart }}
+    {{ if ne (len $initialValue) 0 }}
+      {{ $initialValue = print $initialValue " & " }}
+    {{ end }}
+
+    {{ $initialValue = print $initialValue (print $fracPart "/" $div) }}
+  {{ end }}
+{{ else }}
+  {{ $initialValue = $value }}
+{{ end }}
+
 <span 
   id="{{ $id_prefix_for_span }}"
   {{ if (isset .Params "value") }}
@@ -64,10 +165,13 @@
     v-step="{{$step}}"
   {{ end }}
   {{ if (isset .Params "min") }}
-    v-min="{{.Get "min"}}"
+    v-min="{{$min}}"
   {{ end }}
   {{ if (isset .Params "round") }}
     v-round="{{$round}}"
   {{ end }}
+  {{ if ($div) }}
+    v-div="{{$div}}"
+  {{ end }}
   class="shrink-0 text-nowrap -m-[2px] p-1 rounded-sm"
-><span class="label">{{ $value }}</span>{{ $unit }}</span>
+><span class="label">{{ $initialValue }}</span>{{ $unit }}</span>

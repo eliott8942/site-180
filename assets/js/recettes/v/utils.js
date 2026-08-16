@@ -66,3 +66,18 @@ function isSubsetOf(subset, superset) {
   }
   return true
 }
+
+// Source - https://stackoverflow.com/a/17445322
+// Posted by Yannis, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-08-16, License - CC BY-SA 3.0
+function gcd(a,b) {
+  a = Math.abs(a);
+  b = Math.abs(b);
+  if (b > a) {var temp = a; a = b; b = temp;}
+  while (true) {
+    if (b == 0) return a;
+    a %= b;
+    if (a == 0) return b;
+    b %= a;
+  }
+}

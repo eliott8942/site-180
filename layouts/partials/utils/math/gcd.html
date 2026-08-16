@@ -1,0 +1,16 @@
+{{ $a := int .a }}
+{{ $b := int .b }}
+
+{{ if lt $a 0 }}
+  {{ errorf "gcd.html: a (%d) must be non-negative." $a }}
+{{ end }}
+{{ if lt $b 0 }}
+  {{ errorf "gcd.html: b (%d) must be non-negative." $b }}
+{{ end }}
+
+{{ $result := $a }}
+{{ if ne $b 0 }}
+  {{ $result = partial "utils/math/gcd.html" (dict "a" $b "b" (mod $a $b)) }}
+{{ end }}
+
+{{ return $result }}

@@ -73,6 +73,12 @@ function processElements(elements) {
       continue
     }
 
+    let div = parseInt(element.getAttribute('v-div'))
+    if (div <= 0.0) {
+      invalidElements.push(element)
+      continue
+    }
+
     const round = element.getAttribute('v-round') || "default"
     let roundingMethod;
     switch (round) {
@@ -96,6 +102,7 @@ function processElements(elements) {
       baseValue,
       step,
       min,
+      div,
       roundingMethod
     })
   }
@@ -116,6 +123,36 @@ function formatNumberWithUnits(number, min) {
   return formattedVal.toString()
 }
 
+function formatNumberWithDiv(number, div, min, roundFunction) {
+  console.log(number, div, min)
+  
+  let round = roundFunction(number)
+  
+  if (!Number.isNaN(min)) {
+    round = Math.max(min, round)
+  }
+
+  const fullPart = Math.floor(round / div)
+  const fracPart = round - fullPart * div
+
+  let formatted = ""
+  if (fullPart) {
+    formatted += fullPart.toString()
+  }
+
+  if (fracPart) {
+    if (formatted.length > 0) {
+      formatted += " & "
+    }
+
+    const d = gcd(fracPart, div)
+
+    formatted += fracPart / d + '/' + div / d
+  }
+  
+  return formatted
+}
+
 function formatNumberWithStep(number, step, min, roundFunction) {
   let round = roundFunction(number / step)
   if (round == 0.0) {
@@ -133,8 +170,9 @@ function updateElement(element, newRatio, newRawValue) {
   let newElementValue = !Number.isNaN(element.baseValue) ? element.baseValue * newRatio : newRawValue;
 
   let formattedValue;
-  // We use nan to check if step is set
-  if (!Number.isNaN(element.step)) {
+  if (!Number.isNaN(element.div)) {
+    formattedValue = formatNumberWithDiv(newElementValue, element.div, element.min, element.roundingMethod)
+  } else if (!Number.isNaN(element.step)) {
     formattedValue = formatNumberWithStep(newElementValue, element.step, element.min, element.roundingMethod)
   } else {
     formattedValue = formatNumberWithUnits(newElementValue, element.min)
@@ -188,7 +226,6 @@ function registerVInput(id, system, position, sortedSystemIds, systems, initialV
     btnDec: btnDecElement
   }
 
-  let lastValidInput = system.baseValue;
   system.value = initialValue || system.baseValue;
   system.components = components;
   system.elements = processedElements;
@@ -210,13 +247,14 @@ function registerVInput(id, system, position, sortedSystemIds, systems, initialV
       return false
     }
 
-    newValue = Math.max(newValue, system.min)
+    if (Object.hasOwn(system, "min")) {
+      newValue = Math.max(newValue, system.min)
+    }
     if (Object.hasOwn(system, "max")) {
       newValue = Math.min(newValue, system.max)
     }
     updateVInputComponent(system.components, newValue, system.min, system.max)
     
-    lastValidInput = newValue;
     system.value = newValue;
 
     for (const element of processedElements) {
@@ -257,7 +295,7 @@ function registerVInput(id, system, position, sortedSystemIds, systems, initialV
   input.addEventListener('input', () => updateValue(input.value))
   input.addEventListener('blur', () => {
     if (!updateValue(input.value)) {
-      input.value = lastValidInput
+      input.value = system.input
       updateValue(lastValidInput)
     }
   })
