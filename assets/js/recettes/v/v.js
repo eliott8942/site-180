@@ -153,7 +153,14 @@ function updateElement(element, newRatio, newRawValue) {
   }
 }
 
-function registerVSystem(id, system, position, sortedSystemIds, systems, initialValue) {
+function updateVInputComponent(components, value, min, max) {
+  components.input.value = value;
+
+  components.btnDec.disabled = value <= min;
+  components.btnInc.disabled = (max !== undefined) ? value >= max : false
+}
+
+function registerVInput(id, system, position, sortedSystemIds, systems, initialValue) {
   const elements = getElementForEachId(...system.elements || [])
   if (elements == undefined) {
     return;
@@ -175,11 +182,18 @@ function registerVSystem(id, system, position, sortedSystemIds, systems, initial
   const btnIncElement = container.querySelector('.btn-inc')
   const btnDecElement = container.querySelector('.btn-dec')
 
+  const components = {
+    input,
+    btnInc: btnIncElement,
+    btnDec: btnDecElement
+  }
+
   let lastValidInput = system.baseValue;
   system.value = initialValue || system.baseValue;
-  input.value = system.value;
-  system.input = input;
+  system.components = components;
   system.elements = processedElements;
+
+  updateVInputComponent(components, system.value, system.min, system.max)
 
   // Note : we don't update the dependencies of those values here,
   // as they are updated by the initialization function
@@ -200,7 +214,7 @@ function registerVSystem(id, system, position, sortedSystemIds, systems, initial
     if (Object.hasOwn(system, "max")) {
       newValue = Math.min(newValue, system.max)
     }
-    input.value = newValue
+    updateVInputComponent(system.components, newValue, system.min, system.max)
     
     lastValidInput = newValue;
     system.value = newValue;
@@ -334,7 +348,7 @@ function initVSystems(vSystems) {
         updateElement(element, system.value / system.baseValue, system.value)
       }
     } else {
-      registerVSystem(systemId, system, i, sortedVSystems, vSystems, initialInputValues?.[systemId])
+      registerVInput(systemId, system, i, sortedVSystems, vSystems, initialInputValues?.[systemId])
     }
   }
 }
@@ -355,7 +369,7 @@ function resetVSystems(btn) {
     if (!system.dependencies) {
       if (system.value != system.baseValue) {
         system.value = system.baseValue;
-        system.input.value = system.baseValue;
+        updateVInputComponent(system.components, system.baseValue, system.min, system.max);
         
         for (const element of system.elements) {
           updateElement(element, system.value / system.baseValue, system.value)

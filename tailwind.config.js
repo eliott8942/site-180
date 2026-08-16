@@ -171,6 +171,7 @@ module.exports = {
       })
 
       addVariant('2-children', '&:has(> :nth-child(2))')
+      addVariant('not-disabled', '&:not(:disabled)')
 
       addBase({
         ':root': {
