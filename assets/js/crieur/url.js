@@ -1,9 +1,9 @@
 function setURLFile(str) {
-  window.history.replaceState({}, "", MAP_URL + "#" + str)
+  window.history.replaceState({}, "", PAGE_URL + "#" + str)
 }
 
 function clearURLFile() {
-  window.history.replaceState({}, "", MAP_URL)
+  window.history.replaceState({}, "", PAGE_URL)
 }
 
 function getURLFile() {
