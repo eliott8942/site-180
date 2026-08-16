@@ -9,16 +9,18 @@
 
     {{ $arrayName := print $vSystemInfo.idPrefix "_IDS" | upper }}
 
-    {{ if ne $vSystemInfo.numberOfValues 0 }}
-      const {{ $arrayName | safeJS }} = [
-        {{ range $i, $id := seq 0 (sub $vSystemInfo.numberOfValues 1) }}
-          {{ if ne $i 0 }}
-            ,
+    {{ if isset $vSystemInfo "numberOfValues" }}
+      {{ if ne $vSystemInfo.numberOfValues 0 }}
+        const {{ $arrayName | safeJS }} = [
+          {{ range $i, $id := seq 0 (sub $vSystemInfo.numberOfValues 1) }}
+            {{ if ne $i 0 }}
+              ,
+            {{ end }}
+          
+            {{ print $vSystemInfo.idPrefix "-" $id }}
           {{ end }}
-        
-          {{ print $vSystemInfo.idPrefix "-" $id }}
-        {{ end }}
-      ];
+        ];
+      {{ end }}
     {{ end }}
   {{ end }}
 
@@ -28,16 +30,18 @@
 
     {{ $arrayName := print $vSystemInfo.idPrefix "_IDS" | upper }}
 
-    {{ if ne $vSystemInfo.numberOfValues 0 }}
-      const {{ $arrayName | safeJS }} = [
-        {{ range $i, $id := seq 0 (sub $vSystemInfo.numberOfValues 1) }}
-          {{ if ne $i 0 }}
-            ,
+    {{ if isset $vSystemInfo "numberOfValues" }}
+      {{ if ne $vSystemInfo.numberOfValues 0 }}
+        const {{ $arrayName | safeJS }} = [
+          {{ range $i, $id := seq 0 (sub $vSystemInfo.numberOfValues 1) }}
+            {{ if ne $i 0 }}
+              ,
+            {{ end }}
+          
+            {{ print $vSystemInfo.idPrefix "-" $id }}
           {{ end }}
-        
-          {{ print $vSystemInfo.idPrefix "-" $id }}
-        {{ end }}
-      ];
+        ];
+      {{ end }}
     {{ end }}
   {{ end }}
 
