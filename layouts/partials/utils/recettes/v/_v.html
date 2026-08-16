@@ -157,7 +157,7 @@
 {{ end }}
 
 <span
-  class="inline-flex"
+  class="inline-flex shrink-0 text-nowrap -m-[2px] p-1 rounded-sm"
   id="{{ $id_prefix_for_span }}"
   {{ if (isset .Params "value") }}
     v-base-value="{{$value}}"
@@ -174,7 +174,6 @@
   {{ if ($div) }}
     v-div="{{$div}}"
   {{ end }}
-  class="shrink-0 text-nowrap -m-[2px] p-1 rounded-sm"
 >
   <span class="label">{{ $initialValue }}</span>
   {{ with $unit }}
