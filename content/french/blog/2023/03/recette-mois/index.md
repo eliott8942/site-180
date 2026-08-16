@@ -22,7 +22,7 @@ Pour 4 personnes
 - 1 C.à.C d'extrait de vanille liquide
 - 1/2 sachet de levure chimique
 - 1 C.à.C rase de cannelle
-- 150g de carotte râpées (3 à 4 grosses carottes)
+- 150g de carotte râpées
 - 2 oeufs
 - 60g de noix concassées
 - Pour le glaçage :

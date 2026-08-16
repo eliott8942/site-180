@@ -34,7 +34,7 @@ durationMin: "60"
 - {{<v value="1" step="0.25">}} C.à.C d'extrait de vanille liquide
 - {{<v value="0.5" step="0.25">}} sachet de levure chimique
 - {{<v value="1" step="0.25">}} C.à.C de rase de cannelle
-- {{<v value="150" unit="g">}} de carotte râpées (3 à 4 grosses carottes)
+- {{<v value="150" unit="g">}} de carotte râpées
 - {{<v value="2" step="1">}} oeufs
 - {{<v value="60" unit="g">}} de noix concassées
 
