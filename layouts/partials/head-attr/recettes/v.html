@@ -3,8 +3,13 @@
   <script src="{{ .RelPermalink }}" fetchpriority="high"></script>
 {{ end }}
 
+<script>
+  const PAGE_URL = {{ .page.RelPermalink }};
+</script>
+
 {{ $js := slice }}
 {{ $js = $js | append (resources.Match "js/recettes/v/*.js") }}
+{{ $js = $js | append (resources.Get "js/common/url.js") }}
 {{ $js = $js | resources.Concat "js/recettes/v.js" }}
 {{ if hugo.IsProduction }}
   {{ $js = $js | minify | fingerprint }}

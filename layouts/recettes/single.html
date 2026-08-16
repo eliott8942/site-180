@@ -1,6 +1,6 @@
 {{ define "headAttrs" }}
   {{ partial "head-attr/recettes" }}
-  {{ partial "head-attr/recettes/v" (dict "numberOfPeople" .Params.quantity)}}
+  {{ partial "head-attr/recettes/v" (dict "numberOfPeople" .Params.quantity "page" .)}}
 {{ end }}
 
 {{ define "main" }}

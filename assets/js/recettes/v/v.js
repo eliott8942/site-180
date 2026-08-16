@@ -1,5 +1,24 @@
-let SORTED_SYSTEMS_ID = null
+let SORTED_SYSTEMS_IDS = null
 let V_SYSTEMS = null
+let V_INPUTS = null
+
+function updateURL() {
+  const params = Object.fromEntries(Object.entries(V_INPUTS)
+    .filter(([_, value]) => value.value !== value.baseValue)
+    .map(([key, value]) => [key, value.value])
+  )
+
+  setURLFile("", params)
+}
+
+function getInitialValuesFromURL() {
+  let [_, params] = [null, null]
+  try {
+    [_, params] = getURLFile()
+  } catch (e) { }
+
+  return params
+}
 
 function getElementForEachId(...ids) {
   let array = []
@@ -134,7 +153,7 @@ function updateElement(element, newRatio, newRawValue) {
   }
 }
 
-function registerVSystem(id, system, position, sortedSystemIds, systems) {
+function registerVSystem(id, system, position, sortedSystemIds, systems, initialValue) {
   const elements = getElementForEachId(...system.elements || [])
   if (elements == undefined) {
     return;
@@ -157,10 +176,18 @@ function registerVSystem(id, system, position, sortedSystemIds, systems) {
   const btnDecElement = container.querySelector('.btn-dec')
 
   let lastValidInput = system.baseValue;
-  input.value = system.baseValue;
-  system.value = system.baseValue;
+  system.value = initialValue || system.baseValue;
+  input.value = system.value;
   system.input = input;
   system.elements = processedElements;
+
+  // Note : we don't update the dependencies of those values here,
+  // as they are updated by the initialization function
+  if (system.value !== system.baseValue) {
+    for (const element of processedElements) {
+      updateElement(element, system.value / system.baseValue)
+    }
+  }
   
   function updateValue(inputValue) {
     let newValue = parseInt(inputValue)
@@ -207,6 +234,8 @@ function registerVSystem(id, system, position, sortedSystemIds, systems) {
         }
       }
     }
+
+    updateURL()
 
     return true
   }
@@ -258,24 +287,27 @@ function validateExpression(systemId, system, expressionStr, parser) {
   return expression
 }
 
-function registerVSystems(vSystems) {
+function initVSystems(vSystems) {
   console.log(vSystems)
   
-  if (SORTED_SYSTEMS_ID) {
+  if (SORTED_SYSTEMS_IDS) {
     throw 'V systems were already registered'
   }
   
   const sortedVSystems = topologicalSort(vSystems, (system) => system.dependents || [])
-  SORTED_SYSTEMS_ID = sortedVSystems;
+  SORTED_SYSTEMS_IDS = sortedVSystems;
   V_SYSTEMS = vSystems;
+  V_INPUTS = Object.fromEntries(Object.entries(V_SYSTEMS).filter(([_, value]) => !value.dependencies))
 
+  const initialInputValues = getInitialValuesFromURL()
+  
   const parser = new exprEval.Parser()
   
   for (let i = 0; i < sortedVSystems.length; i += 1) {
     const systemId = sortedVSystems[i];
     const system = vSystems[sortedVSystems[i]];
 
-    if (system.expressionVariables) {
+    if (system.dependencies) {
       const expression = validateExpression(systemId, system, system.expression, parser)
       if (expression === null) {
         continue;
@@ -290,17 +322,19 @@ function registerVSystems(vSystems) {
       system.elements = processedElements;
 
       const dependencyVariables = {};
-      for (const id of system.dependencies) {
-        dependencyVariables[id] = vSystems[id].value
+      const dependencyVariablesForBaseValue = {};
+      for (let i = 0; i < system.dependencies.length; i += 1) {
+        dependencyVariables[system.expressionVariables[i]] = vSystems[system.dependencies[i]].value          
+        dependencyVariablesForBaseValue[system.expressionVariables[i]] = vSystems[system.dependencies[i]].baseValue  
       }
       system.value = system.expression.evaluate(dependencyVariables);
-      system.baseValue = system.value;
+      system.baseValue = system.expression.evaluate(dependencyVariablesForBaseValue);
 
       for (const element of processedElements) {
         updateElement(element, system.value / system.baseValue, system.value)
       }
     } else {
-      registerVSystem(systemId, system, i, sortedVSystems, vSystems)
+      registerVSystem(systemId, system, i, sortedVSystems, vSystems, initialInputValues?.[systemId])
     }
   }
 }
@@ -314,8 +348,8 @@ function resetVSystems(btn) {
     })
   })
   
-  for (let i = 0; i < SORTED_SYSTEMS_ID.length; i += 1) {
-    const system = V_SYSTEMS[SORTED_SYSTEMS_ID[i]];
+  for (let i = 0; i < SORTED_SYSTEMS_IDS.length; i += 1) {
+    const system = V_SYSTEMS[SORTED_SYSTEMS_IDS[i]];
 
     // reset leafs
     if (!system.dependencies) {
@@ -343,4 +377,6 @@ function resetVSystems(btn) {
       }
     }
   }
+
+  updateURL()
 }

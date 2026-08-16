@@ -45,7 +45,7 @@
     {{ end }}
   {{ end }}
 
-  registerVSystems(
+  initVSystems(
     {
       {{ range $i, $id := $page.Store.Get "vSystems" }}
         {{ $arrayName := print $id "_IDS" | upper }}
