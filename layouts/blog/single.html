@@ -52,19 +52,19 @@
             {{ .Title }}
           </h1>
         
-          <div class="flex items-center text-lg">
+          <div class="flex flex-wrap justify-center items-center text-lg">
             <!-- Note : the text are on the same line of as the icons because otherwise hugo put a space between them -->
-            <div>
+            <div class="shrink-0">
               <i class="fa-solid fa-circle-user mr-1"></i>{{ strings.Trim (.Params.author | default "180°C") " " }}
             </div>
       
-            <div class="[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25">
+            <div class="shrink-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25">
               <i class="fa-solid fa-calendar mr-1"></i>{{ time.Format ":date_short" .PublishDate }}
             </div>
 
             {{ partial "components/blog/time-indicator" (dict
               "timeMin" .Params.lectureTimeMin 
-              "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25"
+              "class" "shrink-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25"
             ) }}
           </div>
         </div>

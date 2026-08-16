@@ -56,22 +56,22 @@
             {{ .Title }}
           </h1>
         
-          <div class="flex items-center text-lg pb-2">
+          <div class="flex flex-wrap items-center justify-center text-lg pb-2">
             <!-- Note : the text are on the same line of as the icons because otherwise hugo put a space between them -->
-            <div>
+            <div class="shrink-0">
               <i class="fa-solid fa-circle-user mr-1"></i>{{ strings.Trim (.Params.author | default "180°C") " " }}
             </div>
       
             {{ partial "components/recipe/indicators/time-indicator" (dict
               "timeMin" .Params.durationMin 
-              "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25"
+              "class" "shrink-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25"
               "icon" "fa-hourglass-start"
             ) }}
 
             {{ partial "components/recipe/indicators/number-people-indicator" (dict
               "quantityMin" .Params.quantityMin
               "quantityMax" .Params.quantityMax 
-              "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25"
+              "class" "shrink-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25"
               "icon" "fa-users"
             ) }}
           </div>
