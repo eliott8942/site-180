@@ -1,4 +1,4 @@
-{{ $value := .Get "value" | default 0 }}
+{{ $value := .Get "value" }}
 {{ $unit := .Get "unit" }}
 {{ $id := .Get "id" | default "default" }}
 {{ $step := .Get "step" }}
@@ -23,6 +23,12 @@
 
 {{ if and (not (isset .Params "unit")) (not (isset .Params "step")) }}
   {{ warnf "%s: Values for v systems without a unit should have a step. Value n°%i for v system %s doesn't have either of them." .Position (add $number_of_values 1) $id }}
+{{ end }}
+
+{{ if (isset .Params "value")}}
+  {{ if eq (float $value) 0.0 }}
+    {{ errorf "%s: Value n°%i for v system %s has a base value of 0." .Position (add $number_of_values 1) $id }}
+  {{ end }}
 {{ end }}
 
 {{ if (isset .Params "step")}}
@@ -50,8 +56,10 @@
 {{ end }}
 
 <span 
-  id="{{ $id_prefix_for_span }}" 
-  v-base-value="{{$value}}" 
+  id="{{ $id_prefix_for_span }}"
+  {{ if (isset .Params "value") }}
+    v-base-value="{{$value}}"
+  {{ end }}
   {{ if (isset .Params "step") }}
     v-step="{{$step}}"
   {{ end }}

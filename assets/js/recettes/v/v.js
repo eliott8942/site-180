@@ -27,30 +27,27 @@ function processElements(elements) {
   const invalidElements = []
   const processedElements = []
   for (const element of elements) {
-    const baseNumberStr = element.getAttribute('v-base-value')
-    if (!baseNumberStr) {
+    // We use nan to check later if the base value is set
+    const baseValue = parseFloat(element.getAttribute('v-base-value'))
+    if (baseValue == 0.0) {
       invalidElements.push(element)
       continue
     }
-    const baseNumber = parseFloat(baseNumberStr)
-    if (Number.isNaN(baseNumber)) {
-      invalidElements.push(element)
-      continue
-    }
+    
     const labelElement = element.querySelector('.label')
     if (!labelElement) {
       invalidElements.push(element)
       continue
     }
 
-    // We use nan to check if step is set
+    // We use nan to check later if step is set
     let step = parseFloat(element.getAttribute('v-step'))
     if (step == 0.0) {
       invalidElements.push(element)
       continue
     }
 
-    // We use nan to check if step is set
+    // We use nan to check later if min is set
     let min = parseFloat(element.getAttribute('v-min'))
     if (min <= 0.0) {
       invalidElements.push(element)
@@ -77,7 +74,7 @@ function processElements(elements) {
     processedElements.push({
       container: element, 
       element: labelElement,
-      baseNumber: baseNumber,
+      baseValue,
       step,
       min,
       roundingMethod
@@ -113,8 +110,8 @@ function formatNumberWithStep(number, step, min, roundFunction) {
   return formattedVal.toString()
 }
 
-function updateElement(element, newRatio) {
-  let newElementValue = element.baseNumber * newRatio
+function updateElement(element, newRatio, newRawValue) {
+  let newElementValue = !Number.isNaN(element.baseValue) ? element.baseValue * newRatio : newRawValue;
 
   let formattedValue;
   // We use nan to check if step is set
@@ -206,7 +203,7 @@ function registerVSystem(id, system, position, sortedSystemIds, systems) {
         system.value = newValue;
 
         for (const element of system.elements) {
-          updateElement(element, system.value / system.baseValue)
+          updateElement(element, system.value / system.baseValue, system.value)
         }
       }
     }
@@ -262,6 +259,8 @@ function validateExpression(systemId, system, expressionStr, parser) {
 }
 
 function registerVSystems(vSystems) {
+  console.log(vSystems)
+  
   if (SORTED_SYSTEMS_ID) {
     throw 'V systems were already registered'
   }
@@ -298,7 +297,7 @@ function registerVSystems(vSystems) {
       system.baseValue = system.value;
 
       for (const element of processedElements) {
-        updateElement(element, system.value / system.baseValue)
+        updateElement(element, system.value / system.baseValue, system.value)
       }
     } else {
       registerVSystem(systemId, system, i, sortedVSystems, vSystems)
@@ -325,7 +324,7 @@ function resetVSystems(btn) {
         system.input.value = system.baseValue;
         
         for (const element of system.elements) {
-          updateElement(element, system.value / system.baseValue)
+          updateElement(element, system.value / system.baseValue, system.value)
         }
       }
     } else {
@@ -339,7 +338,7 @@ function resetVSystems(btn) {
         system.value = newValue;
         
         for (const element of system.elements) {
-          updateElement(element, system.value / system.baseValue)
+          updateElement(element, system.value / system.baseValue, system.value)
         }
       }
     }
