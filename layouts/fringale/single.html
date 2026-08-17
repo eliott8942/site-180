@@ -6,7 +6,9 @@
 
   <script defer
     crossorigin="anonymous"
-    integrity="{{ $script.Data.Integrity }}"
+    {{ with $script.Data.Integrity }}
+      integrity="{{ . }}"
+    {{ end }}
     src="{{ $script.RelPermalink }}"
   ></script>
 {{ end }}

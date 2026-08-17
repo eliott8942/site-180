@@ -20,7 +20,9 @@
 -->
 <script
   crossorigin="anonymous"
-  integrity="{{ $js.Data.Integrity }}"
+  {{ with $js.Data.Integrity }}
+    integrity="{{ . }}"
+  {{ end }}
   src="{{ $js.RelPermalink }}"
 ></script>
 

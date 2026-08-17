@@ -73,7 +73,9 @@
 
 <script
   crossorigin="anonymous"
-  integrity="{{ $crieur.Data.Integrity }}"
+  {{ with $crieur.Data.Integrity }}
+    integrity="{{ . }}"
+  {{ end }}
   src="{{ $crieur.RelPermalink }}"
 ></script>
 

@@ -25,7 +25,9 @@
 <!-- main scripts -->
 <script
   crossorigin="anonymous"
-  integrity="{{ $mainJS.Data.Integrity }}"
+  {{ with $mainJS.Data.Integrity }}
+    integrity="{{ . }}"
+  {{ end }}
   src="{{ $mainJS.RelPermalink }}"
   defer
 ></script>
