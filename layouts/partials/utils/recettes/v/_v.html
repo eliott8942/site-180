@@ -147,11 +147,11 @@
 
   {{ if $fracPart }}
     {{ if ne (len $initialValue) 0 }}
-      {{ $initialValue = print $initialValue " & " }}
+      {{ $initialValue = print $initialValue " " }}
     {{ end }}
 
     {{ $fraction := partial "utils/strings/fraction" (dict "numerator" (int $fracPart) "denominator" (int $div)) }}
-    {{ $initialValue = print $initialValue " " $fraction }}
+    {{ $initialValue = print $initialValue $fraction }}
   {{ end }}
 {{ else }}
   {{ $initialValue = $value }}
