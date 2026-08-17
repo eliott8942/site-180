@@ -45,6 +45,7 @@
       {{ with site.Params.search }}
         {{ if .enable }}
           <button
+            type="button"
             aria-label="search"
             class="border-border text-dark hover:text-primary dark:border-darkmode-border inline-block text-xl dark:text-white"
             data-target="search-modal"

@@ -310,7 +310,7 @@ class FullscreenControl {
   _elementFactory() {
     return Lit.html`
       <div class="maplibregl-ctrl maplibregl-ctrl-group">
-        <button class="${this._fullscreenHandler.isInFullscreen() ? "maplibregl-ctrl-shrink" : "maplibregl-ctrl-fullscreen"}" type="button" @click=${() => this._onFullscreenClick()} aria-label="Fullscreen">
+        <button type="button" class="${this._fullscreenHandler.isInFullscreen() ? "maplibregl-ctrl-shrink" : "maplibregl-ctrl-fullscreen"}" type="button" @click=${() => this._onFullscreenClick()} aria-label="Fullscreen">
           <span class="maplibregl-ctrl-icon"></span>
         </button>
       </div>
