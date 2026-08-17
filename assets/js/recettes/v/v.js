@@ -212,12 +212,12 @@ function formatNumberWithDiv(number, div, min, roundFunction) {
 
   if (fracPart) {
     if (formatted.length > 0) {
-      formatted += " & "
+      formatted += " "
     }
 
     const d = gcd(fracPart, div)
 
-    formatted += fracPart / d + '/' + div / d
+    formatted += fractionChar(fracPart / d, div / d)
   }
   
   return formatted

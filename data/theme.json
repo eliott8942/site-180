@@ -46,6 +46,10 @@
       "tertiary": {
         "base": "Lato:wght@100;200;300;400;500;600;700;800;900",
         "type": "sans-serif"
+      },
+      "numbers": {
+        "base": "IBM+Plex+Sans:ital,wght@0,100..700;1,100..700",
+        "type": "sans-serif"
       }
     },
     "font_size": {

@@ -1,0 +1,55 @@
+{{ $num := .numerator }}
+{{ $den := .denominator }}
+{{ $useKnown := true }}
+{{ if isset . "useKnown" }}
+  {{ $useKnown = .useKnown }}
+{{ end }}
+
+{{ if not (and (isset . "numerator") (isset . "denominator")) }}
+  {{ errorf "fraction.html partial requires both \"numerator\" and \"denominator\"" }}
+{{ end }}
+{{ if eq $den 0 }}
+  {{ errorf "fraction.html partial: denominator cannot be 0" }}
+{{ end }}
+
+{{ $known := dict
+  "1/2" "½" "1/3" "⅓" "2/3" "⅔"
+  "1/4" "¼" "3/4" "¾"
+  "1/5" "⅕" "2/5" "⅖" "3/5" "⅗" "4/5" "⅘"
+  "1/6" "⅙" "5/6" "⅚"
+  "1/7" "⅐"
+  "1/8" "⅛" "3/8" "⅜" "5/8" "⅝" "7/8" "⅞"
+  "1/9" "⅑"
+  "1/10" "⅒"
+  "0/3" "↉"
+}}
+
+{{ $supMap := dict
+  "0" "⁰" "1" "¹" "2" "²" "3" "³" "4" "⁴"
+  "5" "⁵" "6" "⁶" "7" "⁷" "8" "⁸" "9" "⁹"
+}}
+{{ $subMap := dict
+  "0" "₀" "1" "₁" "2" "₂" "3" "₃" "4" "₄"
+  "5" "₅" "6" "₆" "7" "₇" "8" "₈" "9" "₉"
+}}
+{{ $fractionSlash := "⁄" }}
+
+{{ $key := printf "%d/%d" $num $den }}
+
+{{ $result := "" }}
+
+{{ if and $useKnown (isset $known $key) }}
+  {{ $result = index $known $key }}
+{{ else }}
+  {{ $sup := "" }}
+  {{ range $c := (split (printf "%d" $num) "") }}
+    {{ $sup = printf "%s%s" $sup (index $supMap $c) }}
+  {{ end }}
+  {{ $sub := "" }}
+  {{ range $c := (split (printf "%d" $den) "") }}
+    {{ $sub = printf "%s%s" $sub (index $subMap $c) }}
+  {{ end }}
+  {{ $result = printf "%s%s%s" $sup $fractionSlash $sub }}
+{{ end }}
+
+{{ return $result }}

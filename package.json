@@ -20,7 +20,7 @@
   "description": "hugo tailwindcss boilerplate",
   "license": "MIT",
   "scripts": {
-    "dev": "HUGO_HOST_DOMAIN=localhost:1313 hugo server",
+    "dev": "HUGO_HOST_DOMAIN=localhost:1313 hugo server --minify",
     "build": "HUGO_HOST_DOMAIN=localhost:1313 hugo --gc --minify --templateMetrics --templateMetricsHints --forceSyncStatic",
     "prod": "HUGO_HOST_DOMAIN=localhost:1313 hugo server --disableFastRender --navigateToChanged --templateMetrics --templateMetricsHints --watch --forceSyncStatic -e production --minify",
     "clean": "rm -rf public/ resources/_gen && hugo mod clean",

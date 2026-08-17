@@ -14,33 +14,6 @@ let h3 = h4 * font_scale;
 let h2 = h3 * font_scale;
 let h1 = h2 * font_scale;
 
-let fontPrimaryName,
-  fontPrimaryType,
-  fontSecondaryName,
-  fontSecondaryType,
-  fontTeriaryName,
-  fontTeriaryType;
-
-if (theme.fonts.font_family.primary) {
-  // Extract font names from google font urls
-  fontPrimaryName = theme.fonts.font_family.primary.base
-    .replace(/\+/g, " ")
-    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;]+/gi, "");
-  fontPrimaryType = theme.fonts.font_family.primary.type;
-}
-if (theme.fonts.font_family.secondary) {
-  fontSecondaryName = theme.fonts.font_family.secondary.base
-    .replace(/\+/g, " ")
-    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;]+/gi, "");
-  fontSecondaryType = theme.fonts.font_family.secondary.type;
-}
-if (theme.fonts.font_family.tertiary) {
-  fontTeriaryName = theme.fonts.font_family.tertiary.base
-    .replace(/\+/g, " ")
-    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;]+/gi, "");
-  fontTeriaryType = theme.fonts.font_family.tertiary.type;
-}
-
 const STRING_LITERAL_RE = /['"`]((?:[^'"`\\]|\\.)*)['"`]/g;
 const CLASS_TOKEN_RE = /[a-zA-Z0-9_-]+/g;
 const TEMPLATE_EXPR_RE = /\$\{[^}]*\}/g; // strip `${...}` interpolations
@@ -138,9 +111,10 @@ module.exports = {
         h6: h6 + "rem",
       },
       fontFamily: {
-        primary: [fontPrimaryName, fontPrimaryType],
-        secondary: [fontSecondaryName, fontSecondaryType],
-        tertiary: [fontTeriaryName, fontTeriaryType],
+        primary: ["Heebo", "sans-serif"],
+        secondary: ["Signika", "sans-serif"],
+        tertiary: ["Lato", "sans-serif"],
+        numbers: ["IBM Plex Sans", "sans-serif"],
       },
       boxShadow: {
         'centered-lg': '0 0px 15px rgb(0 0 0 / 0.1)',

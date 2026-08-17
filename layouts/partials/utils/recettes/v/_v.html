@@ -150,33 +150,36 @@
       {{ $initialValue = print $initialValue " & " }}
     {{ end }}
 
-    {{ $initialValue = print $initialValue (print $fracPart "/" $div) }}
+    {{ $fraction := partial "utils/strings/fraction" (dict "numerator" (int $fracPart) "denominator" (int $div)) }}
+    {{ $initialValue = print $initialValue " " $fraction }}
   {{ end }}
 {{ else }}
   {{ $initialValue = $value }}
 {{ end }}
 
-<span
-  class="inline-flex shrink-0 text-nowrap -m-[2px] p-1 rounded-sm"
-  id="{{ $id_prefix_for_span }}"
-  {{ if (isset .Params "value") }}
-    v-base-value="{{$value}}"
-  {{ end }}
-  {{ if (isset .Params "step") }}
-    v-step="{{$step}}"
-  {{ end }}
-  {{ if (isset .Params "min") }}
-    v-min="{{$min}}"
-  {{ end }}
-  {{ if (isset .Params "round") }}
-    v-round="{{$round}}"
-  {{ end }}
-  {{ if ($div) }}
-    v-div="{{$div}}"
-  {{ end }}
->
-  <span class="label">{{ $initialValue }}</span>
-  {{ with $unit }}
-    <span class="unit">{{ $unit }}</span>
-  {{ end }}
+<span class="mr-1">
+  <span
+    class="inline-flex shrink-0 text-nowrap -m-[2px] p-1 rounded-sm font-numbers"
+    id="{{ $id_prefix_for_span }}"
+    {{ if (isset .Params "value") }}
+      v-base-value="{{$value}}"
+    {{ end }}
+    {{ if (isset .Params "step") }}
+      v-step="{{$step}}"
+    {{ end }}
+    {{ if (isset .Params "min") }}
+      v-min="{{$min}}"
+    {{ end }}
+    {{ if (isset .Params "round") }}
+      v-round="{{$round}}"
+    {{ end }}
+    {{ if ($div) }}
+      v-div="{{$div}}"
+    {{ end }}
+  >
+    <span class="label">{{ $initialValue }}</span>
+    {{ with $unit }}
+      <span class="unit">{{ $unit }}</span>
+    {{ end }}
+  </span>
 </span>
