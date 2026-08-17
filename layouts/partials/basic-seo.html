@@ -55,9 +55,6 @@
   {{ errorf "%s no image for SEO found" . }}
 {{ end }}
 
-<!-- title -->
-<title>{{ $title }}</title>
-
 <!-- meta noindex -->
 {{ if .Param "noindex" }}
   <meta name="robots" content="noindex,nofollow" />
