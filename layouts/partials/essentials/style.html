@@ -51,4 +51,4 @@
   {{ $styles = $styles | minify | fingerprint | resources.PostProcess }}
 {{ end }}
 
-<link rel="stylesheet" href="{{ $styles.RelPermalink }}"></link>
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" />

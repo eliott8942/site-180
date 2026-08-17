@@ -28,4 +28,4 @@
 {{ if hugo.IsProduction }}
   {{ $css = $css | minify | fingerprint }}
 {{ end }}
-<link rel="stylesheet" href="{{ $css.RelPermalink }}"></link>
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" />

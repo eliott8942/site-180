@@ -39,7 +39,7 @@
   <script src="{{ .RelPermalink }}" fetchpriority="high" defer></script>
 {{ end }}
 {{ with (resources.Get "libs/maplibregl/maplibregl.css" | fingerprint) }}
-  <link rel="stylesheet" href="{{ .RelPermalink }}"></link>
+  <link rel="stylesheet" href="{{ .RelPermalink }}" />
 {{ end }}
 
 {{ with resources.Get "libs/fuse.js" }}
@@ -53,7 +53,7 @@
 <!-- main application logic -->
 {{ with (resources.Get "scss/crieur/crieur.scss" | toCSS | css.PostCSS | minify | fingerprint) }}
   {{ with resources.Copy "css/crieur.css" . }}
-    <link rel="stylesheet" href="{{ .RelPermalink }}"></link>
+    <link rel="stylesheet" href="{{ .RelPermalink }}" />
   {{ end }}
 {{ end }}
 
