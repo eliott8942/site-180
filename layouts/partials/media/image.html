@@ -59,8 +59,12 @@
     src="{{ $imagePath | absURL }}"
     alt="{{ .Alt }}"
     class="{{ $class }} img"
-    height="{{ $height }}"
-    width="{{ $width }}" 
+    {{ if $width }}
+      width="{{ $width }}"
+    {{ end }}
+    {{ if $height }}
+      height="{{ $height }}"
+    {{ end }} 
   />
 {{ else }}
   <!-- /image cdn -->
@@ -96,8 +100,12 @@
         {{ if $fetchpriority }}fetchpriority="{{ $fetchpriority }}"{{ end }}
         alt="{{ .Alt }}"
         class="{{ $class }} img"
-        width="{{ $width }}"
-        height="{{ $height }}"
+        {{ if $width }}
+          width="{{ $width }}"
+        {{ end }}
+        {{ if $height }}
+          height="{{ $height }}"
+        {{ end }}
       />
     {{ else }}
       <!-- Resize image -->
@@ -140,18 +148,22 @@
           {{ end }}
           {{ if $fetchpriority }}fetchpriority="{{ $fetchpriority }}"{{ end }}
           class="{{ if $placeholder }}lazy{{ end }} {{ $class }} img"
-          width="{{- with $width -}}
-            {{- . -}}
-          {{- else -}}
-            {{- $image.Width -}}
-          {{- end -}}
-          "
-          height="{{- with $height -}}
-            {{- . -}}
-          {{- else -}}
-            {{- $image.Height -}}
-          {{- end -}}
-          "
+          {{ if or $width $image.Width }}
+            width="{{- with $width -}}
+              {{- . -}}
+            {{- else -}}
+              {{- $image.Width -}}
+            {{- end -}}
+            "
+          {{ end }}
+          {{ if or $height $image.Height }}
+            height="{{- with $height -}}
+              {{- . -}}
+            {{- else -}}
+              {{- $image.Height -}}
+            {{- end -}}
+            "
+          {{ end }}
           onerror="this.onerror='null';this.src='{{ $image.RelPermalink }}';" />
       {{ else }}
         <!-- /if image size less then 500x and size not defined -->
@@ -246,8 +258,13 @@
               lazy
             {{ end }} {{ $class }} img"
             alt="{{ .Alt }}"
-            width="{{ $image.Width }}"
-            height="{{ $image.Height }}" />
+            {{ if $width }}
+              width="{{ $width }}"
+            {{ end }}
+            {{ if $height }}
+              height="{{ $height }}"
+            {{ end }}
+          />
         </picture>
       {{ end }}
     {{ end }}
