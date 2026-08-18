@@ -25,7 +25,7 @@
   "scripts": {
     "ci:build": "run-s '_build -- --baseURL {1}' 'ci:build:lint {1}' --",
     "ci:build:lint": "run-s -c _lint:html:validate 'ci:lint:html:scan-links {1}' --",
-    "ci:lint:html:scan-links": "sh scripts/ci/link-check.sh",
+    "ci:lint:html:scan-links": "bash scripts/ci/link-check.sh",
 
     "_lint:html:scan-links": "linkinator public",
     "_lint:html:validate": "html-validate public/**/*.html",
