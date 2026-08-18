@@ -1,0 +1,12 @@
+{{ $topBg := partial "utils/get-img" (dict "img" "images/crieur/tops-bg.png" "context" .) }}
+{{ $topBgEven := partial "utils/get-img" (dict "img" "images/crieur/tops-bg-even.png" "context" .) }}
+
+{{ $topBg = $topBg.Process "webp fill 90x90" }}
+{{ $topBgEven = $topBgEven.Process "webp fill 90x90" }}
+
+<style>
+  :root {
+    --crieur-tops-odd: url("{{ $topBg.RelPermalink }}");
+    --crieur-tops-even: url("{{ $topBgEven.RelPermalink }}");
+  }
+</style>

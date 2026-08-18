@@ -1,0 +1,33 @@
+{{ range $key, $path := hugo.Data.crieur.supportedSocialIcons }}
+  {{ $img := resources.Get $path }}
+  {{ if not $img }}
+    {{ errorf "%s doesn't exists" $path }}
+  {{ else }}
+    {{ $imageExt := path.Ext $path }}
+    {{ $resizableFormats := slice ".png" ".jpg" ".jpeg" }}
+    {{ if in $resizableFormats $imageExt }}
+      {{ $img = $img.Resize hugo.Data.crieur.iconSocialSize }}
+    {{ end }}
+
+    {{ with resources.Copy $path $img }}
+      {{ .Publish }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ range $key, $path := hugo.Data.crieur.otherIcons }}
+  {{ $img := resources.Get $path }}
+  {{ if not $img }}
+    {{ errorf "%s doesn't exists" $path }}
+  {{ else }}
+    {{ $imageExt := path.Ext $path }}
+    {{ $resizableFormats := slice ".png" ".jpg" ".jpeg" }}
+    {{ if in $resizableFormats $imageExt }}
+      {{ $img = $img.Resize hugo.Data.crieur.iconSize }}
+    {{ end }}
+
+    {{ with resources.Copy $path $img }}
+      {{ .Publish }}
+    {{ end }}
+  {{ end }}
+{{ end }}

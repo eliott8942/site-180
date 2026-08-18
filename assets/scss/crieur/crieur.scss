@@ -90,7 +90,7 @@
 }
 
 .crieur-tops {
-  @apply flex flex-row min-h-28 p-2 rounded-md odd:rotate-3 even:-rotate-3 border-2 border-black/50 odd:bg-[url(/images/crieur/tops-bg.png)] even:bg-[url(/images/crieur/tops-bg-even.png)] bg-size-[45px] bg-repeat shadow-md;
+  @apply flex flex-row min-h-28 p-2 rounded-md odd:rotate-3 even:-rotate-3 border-2 border-black/50 odd:bg-[image:--crieur-tops-odd] even:bg-[image:--crieur-tops-even] bg-size-[45px] bg-repeat shadow-md;
 
   &:nth-child(odd) {
     & .metadata {
