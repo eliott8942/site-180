@@ -23,7 +23,7 @@
   "description": "hugo tailwindcss boilerplate",
   "license": "MIT",
   "scripts": {
-    "ci:build": "run-s '_build --baseURL {1}' 'ci:build:lint {1}' --",
+    "ci:build": "run-s '_build -- --baseURL {1}' 'ci:build:lint {1}' --",
     "ci:build:lint": "run-s -c _lint:html:validate 'ci:lint:html:scan-links {1}' --",
     "ci:lint:html:scan-links": "sh scripts/ci/link-check.sh",
 
