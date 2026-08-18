@@ -1,0 +1,30 @@
+{
+  "concurrency": 100,
+  "config": "string",
+  "recurse": true,
+  "skip": [
+    "www.facebook.com",
+    "x.com",
+    "reddit.com",
+    "wa.me",
+    "t.me",
+    "www.instagram.com",
+    "www.linkedin.com",
+    "%23*"
+  ],
+  "silent": true,
+  "timeout": 0,
+  "markdown": true,
+  "checkCss": true,
+  "checkFragments": true,
+  "redirects": "allow",
+  "requireHttps": "on",
+  "allowInsecureCerts": false,
+  "retry": true,
+  "retryErrors": true,
+  "retryErrorsCount": 3,
+  "retryErrorsJitter": 5,
+  "statusCodes": {
+    "410": "warn"
+  }
+}
