@@ -24,7 +24,11 @@
           </h2>
         {{ end }}
         <div class="mb-8 text-lg">
-          <p>{{ .Inner | markdownify }}</p>
+          <!-- 
+            Note : Do not try to use the paragraph elements with the markdown renderer,
+            as it generate <p> elements and <p> elements can't be one into another
+          -->
+          {{ .Inner | markdownify }}
         </div>
       </div>
     </div>
