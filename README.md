@@ -9,7 +9,9 @@ If you want to check the roadmap, check [ROADMAP.md](./ROADMAP.md)
 
 ## Development and maintaining
 
-See [DEVELOPMENT.md](./DEVELOPMENT.md) and [MAINTAINING.md](./MAINTAINING.md)
+For the content authors, those who write articles, see [MAINTAINING.md](./MAINTAINING.md).
+
+For the developpers, those who want to add features to the website and understand the website architecture, see also [DEVELOPMENT.md](./DEVELOPMENT.md).
 
 ## License
 
