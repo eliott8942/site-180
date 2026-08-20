@@ -1,4 +1,6 @@
 export default {
+  // FIXME : i didn't managed to make that config work with stylelint-config-tailwindcss/scss.
+  // When used with it, it generates non senses errors.
   extends: [
     "stylelint-config-recommended",
     "stylelint-config-recommended-scss",
@@ -38,9 +40,5 @@ export default {
         ],
       },
     ],
-    "selector-class-pattern": null,
-    "selector-id-pattern": null,
-    "no-descending-specificity": null,
-    "import-notation": "string",
   },
 };
