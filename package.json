@@ -29,7 +29,7 @@
     "_lint:html:scan-links": "linkinator public",
     "_lint:html:validate": "html-validate public/**/*.html",
     "_lint:html": "run-s -c _lint:html:validate _lint:html:scan-links",
-    "lint:markdown": "markdownlint-cli2",
+    "lint:content": "markdownlint-cli2",
     "lint:style": "stylelint \"**/*.{css,scss,sass}\"",
     "_build": "hugo --gc --minify --templateMetrics --templateMetricsHints --forceSyncStatic",
     "build": "HUGO_HOST_DOMAIN=localhost:1313 run-s _build _lint:html",
