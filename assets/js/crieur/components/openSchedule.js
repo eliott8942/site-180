@@ -60,7 +60,7 @@ const _scheduleRowElement = (i, dayData, timespanInfo, now, strings) => {
   const showNowBar = (now.getDay() + 6) % 7 >= i
   
   const _dayTagElement = (dayTag) => Lit.html`
-    <div class="shrink-0 bg-white rounded-full ml-0.5 flex items-center justify-center shadow-md w-8 aspect-square ${isActiveDay ? "font-bold text-red-500 border-2 border-red-500" : "border"}">
+    <div class="shrink-0 bg-white rounded-full mx-1 flex items-center justify-center shadow-md w-8 aspect-square ${isActiveDay ? "font-bold text-red-500 border-2 border-red-500" : "border"}">
       <span class="text-sm leading-none">${dayTag}</span>
     </div>
   `
@@ -195,7 +195,7 @@ const scheduleElement = (scheduleData) => {
       <div class="w-full relative">
         <div class="absolute w-full h-full z-0">
           <div class="flex flex-row h-full">
-            <div class="w-9"></div>
+            <div class="w-10"></div>
             <div class="grow">
               ${_hourBarsOverlayElement(timespanInfo, now)}
             </div>
