@@ -10,81 +10,90 @@
         <label for="infopanel-toggle-inner" class="absolute w-full h-full z-0 has-[#infopanel-toggle-inner:checked]:hidden"></label>
 
         <div class="relative bg-white h-full overflow-auto rounded-xl shadow-lg z-10">
-          <!-- Sticky header -->
-          <div class="h-12 flex flex-row-reverse sticky top-0">
-            <div class="toggle aspect-square w-12">
-              <input id="infopanel-toggle-inner" type="checkbox" class="hidden" checked="true"/>
-              <label
-                for="infopanel-toggle-inner"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-              </label>
-            </div>
-          </div>
-          
-
-          {{ with .Params.sections }}
-          {{ range $i, $section := . }}
-            <section
-              class="section-sm py-2{{ if not (modBool $i 2) }}
-                bg-gradient
-              {{ else if (ne $i (sub (len $.Params.sections) 1) ) }}
-                bg-gradient-reverse
-              {{ end }}"
-            >
-              <div class="container px-10">
-                <div class="row items-center justify-between">
-                  <div
-                    class="mb:md-0 {{ if not (modBool $i 2) }}
-                      md:order-2
-                    {{ end }} md:col-5 mb-6"
+          <div class="relative">
+            <!-- Sticky header -->
+            <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
+              <div class="h-12 flex flex-row-reverse sticky top-0 pointer-events-auto">
+                <div class="toggle aspect-square w-12">
+                  <input id="infopanel-toggle-inner" type="checkbox" class="hidden" checked="true"/>
+                  <label
+                    for="infopanel-toggle-inner"
                   >
-                    {{ partial "media/image" (dict "Src" .image "Alt" .imagealt) }}
-                  </div>
-                  <div
-                    class="{{ if not (modBool $i 2) }}
-                      md:order-1
-                    {{ end }} md:col-7 lg:col-6"
-                  >
-                    <h2 class="mb-4 font-tertiary font-extrabold">
-                      {{ .title | markdownify }}
-                    </h2>
-                    <div class="mb-8 text-lg content">
-                      {{ .content | markdownify }}
-                    </p>
-                    <ul class="list-none">
-                      {{ range .bulletpoints }}
-                        <li class="relative mb-4 pl-6">
-                          <i class="fa fa-check absolute left-0 top-1.5"></i>
-                          {{ .name | markdownify }}
-                          {{ if .list }}
-                            <ul class="list-none">
-                              {{ range .list }}
-                                <li class="relative mb-4">
-                                  {{ . | markdownify }}
-                                </li>
-                              {{ end }}
-                            </ul>
-                          {{ end }}
-                        </li>
-                      {{ end }}
-                    </ul>
-                    <p class="mb-8 text-lg">
-                      {{ .alert | markdownify }}
-                    </p>
-                    {{ with .button }}
-                      {{ if .enable }}
-                        <a class="btn btn-primary mt-6" href="{{ .link | absURL }}">
-                          {{ .label }}
-                          <i class="fa fa-arrow-right pl-2"></i>
-                        </a>
-                      {{ end }}
-                    {{ end }}
-                  </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                  </label>
                 </div>
               </div>
-            </section>
-          {{ end }}
+            </div>
+            
+            <div class="py-8">
+              {{ with .Params.sections }}
+              {{ range $i, $section := . }}
+                <section
+                  class="py-2{{ if not (modBool $i 2) }}
+                    bg-gradient
+                  {{ else if (ne $i (sub (len $.Params.sections) 1) ) }}
+                    bg-gradient-reverse
+                  {{ end }}"
+                >
+                  <div class="container">
+                    <div class="row items-center justify-between">
+                      <div
+                        class="mb:md-0 {{ if not (modBool $i 2) }}
+                          md:order-2
+                        {{ end }} md:col-5 mb-6"
+                      >
+                        {{ partial "media/image" (dict "Src" .image "Alt" .imagealt) }}
+                      </div>
+                      <div
+                        class="{{ if not (modBool $i 2) }}
+                          md:order-1
+                        {{ end }} md:col-7 lg:col-6"
+                      >
+                        <h2 class="mb-4 font-tertiary font-extrabold">
+                          {{ .title | markdownify }}
+                        </h2>
+                        <div class="mb-8 text-lg content">
+                          {{ .content | markdownify }}
+                        </p>
+                        {{ with .bulletpoints }}
+                          <ul class="list-none">
+                            {{ range . }}
+                              <li class="relative mb-4 pl-6">
+                                <i class="fa fa-check absolute left-0 top-1.5"></i>
+                                {{ .name | markdownify }}
+                                {{ if .list }}
+                                  <ul class="list-none">
+                                    {{ range .list }}
+                                      <li class="relative mb-4">
+                                        {{ . | markdownify }}
+                                      </li>
+                                    {{ end }}
+                                  </ul>
+                                {{ end }}
+                              </li>
+                            {{ end }}
+                          </ul>
+                        {{ end }}
+                        {{ with .alert }}
+                          <p class="mb-8 text-lg">
+                            {{ . | markdownify }}
+                          </p>
+                        {{ end }}
+                        {{ with .button }}
+                          {{ if .enable }}
+                            <a class="btn btn-primary mt-6" href="{{ .link | absURL }}">
+                              {{ .label }}
+                              <i class="fa fa-arrow-right pl-2"></i>
+                            </a>
+                          {{ end }}
+                        {{ end }}
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              {{ end }}
+            </div>
+          </div>
         {{ end }}
 
         {{ .Content }}
