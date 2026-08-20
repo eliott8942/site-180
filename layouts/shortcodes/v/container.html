@@ -1,11 +1,13 @@
 <div class="relative p-2 bg-gray-50 border rounded-md z-10 shadow-md md:float-end md:w-80 not-prose">
   <div class="mb-2">
     <div class="float-right flex flex-row items-center">
-      <button type="button" class="h-full aspect-square text-lg mr-2 -m-1 p-1 flex items-center justify-center" onclick="resetVSystems(this)">
-        <i class="fa-solid fa-arrow-rotate-left"></i>
-      </button>
+      <div class="h-8 aspect-square text-lg mr-2 -m-1 p-1 hover:bg-black/10 rounded-sm">
+        <button type="button" class="h-full aspect-square text-lg rounded-sm flex items-center justify-center" onclick="resetVSystems(this)">
+          <i class="fa-solid fa-arrow-rotate-left"></i>
+        </button>
+      </div>
       
-      <a href="{{ relURL "blog/2026/08/recette-v2/" }}" class="w-fit aspect-square">
+      <a href="{{ relURL "blog/2026/08/recette-v2/" }}" class="w-fit aspect-square -m-1 p-1 hover:bg-black/10 rounded-sm">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info-icon lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
       </a>
     </div>
