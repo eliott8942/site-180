@@ -7,8 +7,8 @@
     "@tailwindcss/typography": "^0.5.20",
     "autoprefixer": "^10.5.4",
     "csv-parse": "^7.0.2",
-    "html-validate": "^11.7.0",
-    "js-yaml": "^5.2.3",
+    "html-validate": "^11.8.0",
+    "js-yaml": "^5.3.0",
     "linkinator": "7.5.0",
     "markdownlint-cli2": "^0.23.2",
     "npm-run-all": "^4.1.5",
@@ -26,27 +26,21 @@
     "ci:build": "run-s '_build -- --baseURL {1}' 'ci:build:lint {1}' --",
     "ci:build:lint": "run-s -c _lint:html:validate 'ci:lint:html:scan-links {1}' --",
     "ci:lint:html:scan-links": "bash scripts/ci/link-check.sh",
-
     "_lint:html:scan-links": "linkinator public",
     "_lint:html:validate": "html-validate public/**/*.html",
     "_lint:html": "run-s -c _lint:html:validate _lint:html:scan-links",
-
     "lint:markdown": "markdownlint-cli2",
     "lint:style": "stylelint \"**/*.{css,scss,sass}\"",
-
     "_build": "hugo --gc --minify --templateMetrics --templateMetricsHints --forceSyncStatic",
     "build": "HUGO_HOST_DOMAIN=localhost:1313 run-s _build _lint:html",
-
     "dev": "HUGO_HOST_DOMAIN=localhost:1313 hugo server --minify",
     "prod": "HUGO_HOST_DOMAIN=localhost:1313 hugo server --disableFastRender --navigateToChanged --templateMetrics --templateMetricsHints --watch --forceSyncStatic -e production --minify",
-
     "clean": "rm -rf public/ resources/_gen && hugo mod clean",
-
     "update-modules": "node ./scripts/clearModules.js && hugo mod clean --all && hugo mod get -u ./... && hugo mod tidy",
     "update-members": "node ./scripts/updateMembersList.js"
   },
   "dependencies": {
-    "baseline-browser-mapping": "^2.11.13",
+    "baseline-browser-mapping": "^2.11.15",
     "caniuse-lite": "^1.0.30001809"
   }
 }
