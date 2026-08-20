@@ -10,6 +10,7 @@
           {{ range site.Menus.footer }}
             <li class="m-3 inline-block">
               <a
+                class="hover:underline underline-offset-2"
                 {{ if findRE `^http` .URL }}
                   target="_blank" rel="noopener"
                 {{ end }}
