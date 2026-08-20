@@ -45,7 +45,6 @@ target = "assets/watching/hugo_stats.json"
 ############################# Build ##############################
 [build]
 noJSConfigInAssets = false
-useResourceCacheWhen = 'fallback'
 [build.buildStats]
 enable = true
 [[build.cachebusters]]
