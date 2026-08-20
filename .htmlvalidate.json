@@ -6,6 +6,7 @@
     "html-validate:recommended"
   ],
   "rules": {
+    "element-permitted-content": "error",
     "doctype-style": "off",
     "no-inline-style": "off",
     "attr-quotes": "off",
