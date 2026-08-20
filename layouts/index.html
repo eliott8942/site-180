@@ -15,12 +15,12 @@
             <h1
               class="font-tertiary font-extrabold lg:text-8xl sm:text-6xl text-light mb-3 sm:mt-14 lg:mt-28"
             >
-              {{ .title | markdownify }}
+              {{ .title }}
             </h1>
             <p
               class="font-tertiary font-normal text-theme-light lg:text-3xl sm:text-xl m-0"
             >
-              {{ .content | markdownify }}
+              {{ .content }}
             </p>
           </div>
           <svg
@@ -65,7 +65,7 @@
               {{ end }} md:col-7 lg:col-6"
             >
               <h2 class="mb-4 font-tertiary font-extrabold">
-                {{ .title | markdownify }}
+                {{ .title }}
               </h2>
 
               <p class="mb-8 text-lg">
