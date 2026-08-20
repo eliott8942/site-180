@@ -36,7 +36,7 @@ quantityMax: "4"
 - Sel
 - Poivre
 
-La sauce :
+## La sauce :
 
 - {{<v value="1" step="0.25">}} C.à.S d'huile d'olive
 - {{<v value="0.5" step="0.25" round="ceil">}} C.à.S de jus de citron
