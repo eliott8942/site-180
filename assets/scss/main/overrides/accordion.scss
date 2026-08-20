@@ -1,0 +1,7 @@
+// accordion
+.accordion {
+  @apply border-border bg-theme-light dark:border-darkmode-border dark:bg-darkmode-theme-light mb-6 overflow-hidden rounded-lg border;
+  &-header {
+    @apply text-dark dark:text-darkmode-dark;
+  }
+}

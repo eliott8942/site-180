@@ -1,0 +1,28 @@
+.logo-container {
+  --logo-blur: 3px;
+
+  background-repeat: no-repeat;
+
+
+  background-image: var(--bg-logo-url);
+  background-size: calc(100% - 4 * var(--logo-blur));
+  background-position: top calc(2 * var(--logo-blur)) left calc(2 * var(--logo-blur));
+  // background-size: contain;
+
+  &:hover {
+    .logo {
+      backdrop-filter: blur(var(--logo-blur));
+    }
+  }
+
+  margin: calc(-2 * var(--logo-blur));
+  
+  .logo {
+    backdrop-filter: blur(0px);
+
+    width: 100%;
+    height: 100%;
+    
+    padding: calc(2 * var(--logo-blur));
+  }
+}

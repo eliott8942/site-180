@@ -21,3 +21,14 @@
 .btn-outline-secondary {
   @apply border-secondary bg-light text-secondary dark:text-secondary hover:bg-secondary hover:text-light dark:hover:bg-darkmode-light dark:hover:text-dark;
 }
+
+.copy-btn .clicked-svg {
+  display: none;
+}
+
+.copy-btn.clicked .clicked-svg {
+  display: block;
+}
+.copy-btn.clicked .default-svg {
+  display: none;
+}

@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// externals css/scss with our overrides
+// Note : since that scss code is in a subdirectory, we import from out of it
+@import "../search";
+@import "../images";
+@import "../toc";
+@import "../tab";
+@import "../accordion";
+@import "../modal";
+@import "../notice";
+
+@import "overrides/accordion";
+@import "overrides/cookie-box";
+@import "overrides/modal";
+@import "overrides/search";
+@import "overrides/swiper";
+@import "overrides/tab";
+@import "overrides/table-of-content";
+
+// our css/scss
+@layer base {
+  @import "base";
+}
+
+@layer components {
+  @import "menubar";
+  @import "buttons";
+}
+
+@layer utilities {
+  @import "utilities";
+}
+
+@import "underline";
+@import "content";
+@import "custom";
+@import "social";
+@import "logo";
+@import "forms";

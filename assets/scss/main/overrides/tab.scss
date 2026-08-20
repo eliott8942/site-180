@@ -1,0 +1,19 @@
+// tab
+.tab {
+  @apply border-border dark:border-darkmode-border overflow-hidden rounded-lg border;
+  &-nav {
+    @apply border-border bg-theme-light dark:border-darkmode-border dark:bg-darkmode-theme-light pl-4;
+
+    &-item {
+      @apply text-dark dark:text-darkmode-dark px-8 text-lg #{!important};
+      &.active {
+        @apply border-dark dark:border-darkmode-primary;
+      }
+    }
+  }
+  &-content {
+    &-panel {
+      @apply px-4 pt-0 #{!important};
+    }
+  }
+}

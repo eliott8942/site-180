@@ -44,7 +44,7 @@
     {{ $styles = $styles | append (resources.Get .link) }}
   {{ end }}
 {{ end }}
-{{ $styles := $styles | append (resources.Get "scss/main.scss" | toCSS) }}
+{{ $styles := $styles | append (resources.Get "scss/main/main.scss" | toCSS) }}
 {{ $styles = $styles | resources.Concat "css/style.css" }}
 {{ $styles = $styles | css.PostCSS }}
 {{ if hugo.IsProduction }}
