@@ -27,15 +27,19 @@
 
 @layer components {
   @import "menubar";
-  @import "buttons";
 }
 
 @layer utilities {
   @import "utilities";
 }
 
-@import "underline";
+// Note : buttons needs to come after content to override
+// it's style when used.
+
 @import "content";
+
+@import "underline";
+@import "buttons";
 @import "custom";
 @import "social";
 @import "logo";
