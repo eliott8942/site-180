@@ -4,15 +4,15 @@ const themePath = path.join(__dirname, "data/theme.json");
 const themeRead = fs.readFileSync(themePath, "utf8");
 const theme = JSON.parse(themeRead);
 
-let font_initial_size = Number(theme.fonts.font_size.base.replace("px", ""));
-let font_scale = Number(theme.fonts.font_size.scale);
+const font_initial_size = Number(theme.fonts.font_size.base.replace("px", ""));
+const font_scale = Number(theme.fonts.font_size.scale);
 
-let h6 = font_initial_size / font_initial_size;
-let h5 = h6 * font_scale;
-let h4 = h5 * font_scale;
-let h3 = h4 * font_scale;
-let h2 = h3 * font_scale;
-let h1 = h2 * font_scale;
+const h6 = font_initial_size / font_initial_size;
+const h5 = h6 * font_scale;
+const h4 = h5 * font_scale;
+const h3 = h4 * font_scale;
+const h2 = h3 * font_scale;
+const h1 = h2 * font_scale;
 
 const STRING_LITERAL_RE = /['"`]((?:[^'"`\\]|\\.)*)['"`]/g;
 const CLASS_TOKEN_RE = /[a-zA-Z0-9_-]+/g;
@@ -107,7 +107,9 @@ module.exports = {
         h3: h3 + "rem",
         "h3-sm": h3 * 0.8 + "rem",
         h4: h4 + "rem",
+        "h4-sm": h4 * 0.8 + "rem",
         h5: h5 + "rem",
+        "h5-sm": h5 * 0.8 + "rem",
         h6: h6 + "rem",
       },
       fontFamily: {

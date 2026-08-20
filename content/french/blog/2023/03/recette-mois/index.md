@@ -9,11 +9,11 @@ summary: "Carrot Cake (pour 4 personnes)"
 lectureTimeMin: 10
 ---
 
-### Carrot Cake
+# Carrot Cake
 
 Pour 4 personnes
 
-#### Ingrédients
+## Ingrédients
 
 - 90g d'huile végétale
 - 125g de sucre
@@ -31,7 +31,7 @@ Pour 4 personnes
   - 2/3 cuillière à café de cannelle
   - 130g de cream cheese
 
-#### Préparation (45-55 min)
+## Préparation (45-55 min)
 
 1. Commencez par préchauffer le four à 180 degrés.
 2. Mélangez au fouet les oeufs et le sucre.

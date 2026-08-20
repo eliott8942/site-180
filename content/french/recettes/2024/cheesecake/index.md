@@ -27,12 +27,12 @@ durationMin: "999"
   {{<v/input fa-icon="fa-users" suffix="personne(s)">}}
 {{</v/container>}}
 
-##### La base
+## La base
 
 - {{<v value="200" unit="g">}} de biscuits (Petit-beurre, Digestiv et/ou Spéculoos)
 - {{<v value="100" unit="g">}} de beurre fondu
 
-##### Le curd
+## Le curd
 
 - {{<v value="4" step="1" round="ceil">}} citrons bio
 - {{<v value="2" step="0.5">}} cuillères à café de maïzena
@@ -40,7 +40,7 @@ durationMin: "999"
 - {{<v value="120" unit="g">}} de sucre
 - {{<v value="2" step="1" round="ceil">}} oeufs frais
 
-##### L'appareil
+## L'appareil
 
 - {{<v value="600" unit="g">}} de Philadelphia
 - {{<v value="200" unit="g">}} de sucre

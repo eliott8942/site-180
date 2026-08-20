@@ -42,14 +42,14 @@
                     {{ partial "media/image" (dict "Src" .image "Alt" .imagealt) }}
                   </div>
                   <div
-                    class="content {{ if not (modBool $i 2) }}
+                    class="{{ if not (modBool $i 2) }}
                       md:order-1
                     {{ end }} md:col-7 lg:col-6"
                   >
                     <h2 class="mb-4 font-tertiary font-extrabold">
                       {{ .title | markdownify }}
                     </h2>
-                    <p class="mb-8 text-lg">
+                    <div class="mb-8 text-lg content">
                       {{ .content | markdownify }}
                     </p>
                     <ul class="list-none">

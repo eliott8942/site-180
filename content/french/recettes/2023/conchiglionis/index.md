@@ -35,7 +35,7 @@ durationMin: "50"
 
 - {{<v value="20" step="1">}} conchiglionis
 
-#### Pour la farce
+## Pour la farce
 
 - {{<v value="500" unit="g">}} d'épinards _(frais de préférence)_
 - {{<v value="300" unit="g">}} de ricotta
@@ -43,7 +43,7 @@ durationMin: "50"
 - {{<v value="1" step="1">}} oeuf
 - {{<label text="Optionnel">}} Noix de muscade
 
-#### Pour la sauce
+## Pour la sauce
 
 - {{<v value="400" unit="g">}} de tomates pelées
 - {{<v value="1" step="1">}} gousses d'ail
