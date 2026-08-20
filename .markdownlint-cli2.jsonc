@@ -1,10 +1,12 @@
 {
   "config": {
-    // allow inline html
-    "MD033": false,
-
-    // FIXME: remove that skip later
-    "MD013": false
+    "MD033": false, // allow inline html
+    "MD013": false, // arbitrary line length
+    // multiple titles allowed, as they are used as subtitles instead
+    "MD025": false,
+    // allow ordered list to start not at 1, because we can put separators
+    // between items in recipees
+    "MD029": false
   },
   "globs": ["**/*.md"],
   "ignores": [
