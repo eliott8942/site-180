@@ -1,11 +1,9 @@
-# 180°C Website (v1.5-beta)
+# 180°C Website (v2.0-beta)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![pages-build-deployment](https://github.com/180-C/site-180/actions/workflows/hugo.yaml/badge.svg)](https://github.com/180-C/site-180/actions/workflows/hugo.yaml)
 
-This repository contains the source code of the 180°C website v1.5.
-
-Currently, that version is still on beta. If you want to check the released versions, see the `release` branch.
+This repository contains the source code of the 180°C website v2.0. That version is still in beta.
 
 If you want to check the roadmap, check [ROADMAP.md](./ROADMAP.md)
 
@@ -25,4 +23,4 @@ Released under the [MIT License](LICENSE).
 ## Authors
 
 - [Antonin Faure](https://github.com/antoninfaure) (v1.0)
-- [Eliott Tornassat](eliott.tornassat@epfl.ch) (v1.5)
+- [Eliott Tornassat](eliott.tornassat@epfl.ch) (v2.0)
