@@ -1,25 +1,13 @@
-.btn {
-  @apply inline-block rounded border border-transparent px-5 py-2 font-semibold capitalize transition;
-}
-
-.btn-sm {
-  @apply rounded-sm px-4 py-1.5 text-sm;
-}
-
 .btn-primary {
-  @apply border-primary bg-primary text-light dark:text-light hover:bg-light hover:text-primary dark:hover:bg-light dark:hover:text-primary;
-}
-
-.btn-outline-primary {
-  @apply border-primary bg-light text-primary dark:text-primary hover:bg-primary hover:text-light dark:hover:bg-primary dark:hover:text-light;
-}
-
-.btn-secondary {
-  @apply border-secondary bg-secondary text-light dark:text-light hover:bg-light hover:text-secondary dark:hover:bg-light dark:hover:text-secondary;
-}
-
-.btn-outline-secondary {
-  @apply border-secondary bg-light text-secondary dark:text-secondary hover:bg-secondary hover:text-light dark:hover:bg-darkmode-light dark:hover:text-dark;
+  @apply 
+    inline-block 
+    py-2 px-4 rounded-full 
+    text-white font-semibold 
+    shadow-inner shadow-white/50 
+    bg-gradient-to-b from-red-300 via-30% via-red-500 to-red-600 
+    hover:scale-105 hover:from-red-300 hover:via-red-400 hover:to-red-600 
+    border border-red-500/50
+    duration-150 transition-all;
 }
 
 .copy-btn .clicked-svg {
