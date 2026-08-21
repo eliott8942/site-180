@@ -12,11 +12,5 @@
     // between items in recipees
     "MD029": false
   },
-  "globs": ["**/*.md"],
-  "ignores": [
-    "**/node_modules/**", 
-    "public/**", 
-    "resources/**", 
-    "ROADMAP.md",
-  ]
+  "globs": ["content/**/*.md"]
 }
