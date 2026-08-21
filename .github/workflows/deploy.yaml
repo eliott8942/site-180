@@ -68,7 +68,7 @@ jobs:
 
       - name: Build with Hugo
         # Note : do not insert a full domain url in the baseURL config. It breaks everything.
-        # If you want a .Permalink with host included, concat a .RelPermalink with the HUGO_HOST_DOMAIN environment variable.
+        # If you want a .Permalink with host included, use the partial "utils/get-url-with-host".
         run: |
           npm run ci:build "/${{ github.event.repository.name }}/"
 
