@@ -38,9 +38,23 @@
       </div>
 
       <div class="flex flex-row justify-center gap-5 max-sm:pb-5">
+        {{ $pagesRoot := site.GetPage "association" }}
+
+        {{ $active := eq .Path $pagesRoot.Path }}
+        <a
+          href="{{ $pagesRoot.RelPermalink }}"
+          class="h4 font-secondary text-black hover:text-primary {{ if $active }}nav-link-active{{ end }} duration-100"
+        >
+          <!-- Note : isset .Params "currentYear" didn't worked for some reason -->
+          {{ if not $pagesRoot.Params.currentYear }}
+            {{ errorf "%s: $pagesRoot.Params.currentYear is not set" $pagesRoot }}
+          {{ end }}
+          
+          {{ $pagesRoot.Params.currentYear }}
+        </a>
+
         {{ $currentPageName := .File.ContentBaseName }}
-        {{ $pages := site.GetPage "/association/" }}
-        {{ range $page := $pages.RegularPages.Reverse }}
+        {{ range $page := $pagesRoot.RegularPagesRecursive.Reverse }}
           {{ $pageName := $page.File.ContentBaseName }}
 
           {{ $active := eq $currentPageName $pageName }}

@@ -1,9 +1,3 @@
 {{ define "main" }}
-  {{ $currentYearPagePath := print "association/" .Params.currentYear }}
-  {{ $currentYearPage := .Site.GetPage $currentYearPagePath }}
-  {{ if not $currentYearPage }}
-    {{ errorf "%s: Couldn't find currentYear page %s" . $currentYearPagePath }}
-  {{ end }}
-
-  {{ partial "pages/association/single" $currentYearPage }}
+  {{ partial "pages/association/single" . }}
 {{ end }}
