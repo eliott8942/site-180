@@ -81,7 +81,7 @@
   @apply flex flex-row flex-nowrap overflow-auto w-full;
 
   & .crieur-social-links {
-    @apply grow h-12 flex justify-center rounded-md bg-white hover:bg-gray-200 m-1 py-1;
+    @apply grow h-12 flex justify-center rounded-md bg-transparent hover:bg-gray-200 duration-75 m-1 py-1;
 
     & .crieur-icon {
       @apply m-1;
