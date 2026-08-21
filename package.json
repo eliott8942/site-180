@@ -7,7 +7,7 @@
     "@tailwindcss/typography": "^0.5.20",
     "autoprefixer": "^10.5.4",
     "csv-parse": "^7.0.2",
-    "html-validate": "^11.8.0",
+    "html-validate": "^11.9.0",
     "js-yaml": "^5.3.0",
     "linkinator": "7.5.0",
     "markdownlint-cli2": "^0.23.2",
