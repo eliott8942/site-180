@@ -20,23 +20,23 @@
 
   <label class="grow min-w-0 flex flex-row h-full items-center p-2 gap-2 bg-white overflow-hidden">
     {{ if $icon }}
-      <div class="h-full shrink-0 flex items-center justify-center">
+      <span class="h-full shrink-0 flex items-center justify-center">
         <i class="fa-solid {{ $icon }}"></i>
-      </div>
+      </span>
     {{ end }}
 
-    <div class="grow"></div>
+    <span class="grow"></span>
     
-    <div class="grow-0 shrink-0 w-[--num-char]" style="--num-char:{{$max_length}}ch;">
+    <span class="grow-0 shrink-0 w-[--num-char]" style="--num-char:{{$max_length}}ch;">
       <input
         type="number" 
         class="max-w-full min-w-0 outline-none border-0 focus:ring-0 pointer-events-auto z-0 text-black appearance-none hide-default-controls text-right max-h-full p-0"
         {{ if $value }} value="{{ $value }}" {{ end }}
       />
-    </div>
+    </span>
 
     {{ if $suffix }}
-      <div class="text-nowrap text-ellipsis overflow-hidden">{{ $suffix }}</div>
+      <span class="text-nowrap text-ellipsis overflow-hidden">{{ $suffix }}</span>
     {{ end }}
   </label>
   <button type="button" class="btn-inc h-full aspect-square grow-0 shrink-0 border-l bg-gray-100 not-disabled:hover:bg-gray-200 not-disabled:active:bg-gray-300 flex items-center justify-center disabled:text-gray-400" aria-label="Increment value">
