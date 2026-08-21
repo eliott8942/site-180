@@ -86,9 +86,9 @@
     
                   <span class="flex flex-row flex-nowrap shrink-0 align-middle m-1 px-2 py-1 rounded-full bg-white border shadow-sm">
                     {{ partial "components/indicator/badges/icon" (dict "data" $badge_data "label" $i ) }}
-                    <div class="ml-1 leading-none">
+                    <span class="ml-1 leading-none">
                       {{ i18n (print "intolerances/" $i) }}
-                    </div>
+                    </span>
                   </span>
                 {{ end }}
 
