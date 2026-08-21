@@ -4,6 +4,10 @@
     "MD013": false, // arbitrary line length
     // multiple titles allowed, as they are used as subtitles instead
     "MD025": false,
+    // allow headings to have trailing punctuation
+    "MD026": {
+      "punctuation": ".,;!。，；！"
+    },
     // allow ordered list to start not at 1, because we can put separators
     // between items in recipees
     "MD029": false

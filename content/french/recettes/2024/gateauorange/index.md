@@ -27,7 +27,7 @@ durationMin: "60"
   {{<v/input fa-icon="fa-users" suffix="personne(s)">}}
 {{</v/container>}}
 
-## Pour le gâteau:
+## Pour le gâteau :
 
 - {{<v value="150" unit="g">}} de farine
 - {{<v value="5" step="0.5" round="ceil" unit="g">}} de levure chimique
@@ -35,7 +35,7 @@ durationMin: "60"
 - {{<v value="3" step="1" round="ceil">}} oeufs
 - Zestes de {{<v value="3" step="1" round="ceil">}} oranges
 
-## Pour le sirop:
+## Pour le sirop :
 
 - Jus de {{<v value="3" step="1" round="ceil">}} oranges
 - {{<v value="300" unit="g">}} de sucre

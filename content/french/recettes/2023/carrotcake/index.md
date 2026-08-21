@@ -38,7 +38,7 @@ durationMin: "60"
 - {{<v value="2" step="1">}} oeufs
 - {{<v value="60" unit="g">}} de noix concassées
 
-## Pour le glaçage
+## Pour le glaçage :
 
 - {{<v value="2" div="3">}} sachet de sucre vanillé
 - {{<v value="2" div="3">}} C.à.S de miel
