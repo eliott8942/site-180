@@ -7,8 +7,6 @@ title = "180°C"
 theme = "hugoplate"
 # Default time zone for time stamps; use any valid tz database name: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
 timeZone = "Europe/Zurich"
-# post pagination
-pagination.pagerSize = 2 # see https://gohugo.io/extras/pagination/
 # post excerpt
 summaryLength = 10 # see https://gohugo.io/content-management/excerpts/
 # disable language
@@ -16,6 +14,10 @@ disableLanguages = [ "en" ] # example: ["fr"] for disable french language. see h
 hasCJKLanguage = false #  If hasCJKLanguage true, auto-detect Chinese/Japanese/Korean Languages in the content. see: https://gohugo.io/getting-started/configuration/#hascjklanguage
 
 defaultContentLanguage = "fr"
+
+[pagination]
+  disableAliases = true
+  pagerSize = 2
 
 [taxonomies]
     blog_categories = "blog/categories"
