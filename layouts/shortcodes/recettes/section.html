@@ -1,9 +1,9 @@
 {{ $icon := .Get "fa-icon" }}
 
 <div class="relative h4 z-10 font-secondary text-blue-900 flex flex-wrap first:mt-0 mt-5">
-  <span class="inline-block relative mr-2 shrink-0 w-4">
+  <div class="inline-block relative mr-2 shrink-0 w-4">
     <div class="h-px absolute left-0 top-1/2 -translate-y-1/2 w-full border-2 z-0 border-blue-900"></div>
-  </span>
+  </div>
 
   {{ if $icon }}
     <span class="flex items-center mr-2"><i class="fa-solid {{$icon}}"></i></span>
@@ -19,7 +19,7 @@
     {{ end }}
   {{ end }}
 
-  <span class="relative h-[1lh] grow flex-nowrap overflow-hidden">
+  <div class="inline-block relative h-[1lh] grow flex-nowrap overflow-hidden">
     <div class="ml-2 h-px absolute left-0 top-1/2 -translate-y-1/2 w-full border-2 z-0 border-blue-900"></div>
-  </span>
+  </div>
 </div>
