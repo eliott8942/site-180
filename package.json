@@ -28,7 +28,7 @@
     "ci:build:post-verify": "run-s -c _lint:html 'ci:build:scan-links {1}' --",
     "ci:build:scan-links": "bash scripts/ci/link-check.sh",
     "_build:scan-links": "linkinator public",
-    "_lint:html": "html-validate public/**/*.html public/*.html",
+    "_lint:html": "html-validate 'public/'",
     "_build:post-verify": "run-s -c _lint:html _build:scan-links",
     "lint:content": "markdownlint-cli2",
     "lint:style": "stylelint \"**/*.{css,scss,sass}\"",
