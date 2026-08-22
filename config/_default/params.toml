@@ -27,7 +27,7 @@ google_adsense = ""     # example: ca-pub-xxxxxxxxxxxxxxxx
 # custom script on header, example: custom_script= "<script>console.log(\"Hello World\")</script>"
 custom_script = ""
 # copyright
-copyright = "180°C - Based on HugoPlate by [Zeon Studio](https://zeon.studio)"
+copyright = "© 180°C"
 
 # Preloader
 [preloader]
