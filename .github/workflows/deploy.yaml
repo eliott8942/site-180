@@ -17,21 +17,25 @@ permissions:
   id-token: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+# However, do NOT cancel in-progress runs as we want to allow these deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 # Environment variables available to all jobs and steps in this workflow
 env:
+  # Hugo build mode. Note : the name production here is kinda misleading,
+  # because we only use that environment to enable optimizations (css and js minification for example).
+  # Think of it like a release mode rather than a production build.
   HUGO_ENV: production
   HUGO_ENVIRONMENT: production
+
+  # Set the base url, hugo needs them to generate share links
   HUGO_HOST_DOMAIN: https://${{ github.event.repository.owner.name }}.github.io
+  
   HUGO_VERSION: "0.162.1"
   GO_VERSION: "1.25.12"
   NODE_VERSION: "24.19.0"
-  TINA_CLIENT_ID: ${{ vars.TINA_CLIENT_ID }}
-  TINA_TOKEN: ${{ vars.TINA_TOKEN }}
 
 jobs:
   # Build job
@@ -66,7 +70,7 @@ jobs:
       - name: Install npm dependencies
         run: npm install
 
-      - name: Build with Hugo
+      - name: Run the ci:build script
         # Note : do not insert a full domain url in the baseURL config. It breaks everything.
         # If you want a .Permalink with host included, use the partial "utils/get-url-with-host".
         run: |
