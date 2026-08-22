@@ -15,8 +15,6 @@ hasCJKLanguage = false #  If hasCJKLanguage true, auto-detect Chinese/Japanese/K
 
 defaultContentLanguage = "fr"
 
-enableRobotsTXT = true
-
 [pagination]
   disableAliases = true
   pagerSize = 2

@@ -189,3 +189,7 @@
 {{ with $twitterAuthor }}
   <meta name="twitter:creator" content="@{{ . }}" />
 {{ end }}
+
+{{ if ne (getenv "HUGO_IS_PRODUCTION_BUILD") "true" }}
+  <meta name="robots" content="noindex, nofollow">
+{{ end }}
