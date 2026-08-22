@@ -1,14 +1,14 @@
 {
   "supportedSocialIcons": {
-    "instagram": "images/icons/thirdparty/instagram.png",
-    "x": "images/icons/thirdparty/x-white.svg",
-    "facebook": "images/icons/thirdparty/facebook.png",
-    "tiktok": "images/icons/thirdparty/tiktok.png",
-    "tripadvisor": "images/icons/thirdparty/tripadvisor.png", 
+    "instagram": "images/brands/instagram.png",
+    "x": "images/brands/x-white.svg",
+    "facebook": "images/brands/facebook.png",
+    "tiktok": "images/brands/tiktok.png",
+    "tripadvisor": "images/brands/tripadvisor.png", 
     "site": "images/icons/www.svg"
   },
   "otherIcons": {
-    "google-maps": "images/icons/thirdparty/google-maps.svg"
+    "google-maps": "images/brands/google-maps.svg"
   },
   "iconSocialSize": "40x",
   "entryThumbnailSize": "88x88",
