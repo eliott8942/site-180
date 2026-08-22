@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-SUBPATH="${1:-test}"
+SUBPATH="${1:-}"
 SOURCE_DIR="public"
 PORT="${LINT_LINKS_PORT:-8099}"
 
