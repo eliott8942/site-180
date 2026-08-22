@@ -4,7 +4,7 @@
     "MD013": false, // arbitrary line length
     // multiple titles allowed, as they are used as subtitles instead
     "MD025": false,
-    // allow headings to have trailing punctuation
+    // allow headings to have the `:` punctuation, used in recipees
     "MD026": {
       "punctuation": ".,;!。，；！"
     },
