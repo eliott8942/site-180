@@ -13,10 +13,6 @@ For the content authors, those who write articles, see [MAINTAINING.md](./MAINTA
 
 For the developpers, those who want to add features to the website and understand the website architecture, see also [DEVELOPMENT.md](./DEVELOPMENT.md).
 
-## License
-
-Released under the [MIT License](LICENSE).
-
 ## Credits
 
 - Original theme : [Hugoplate](https://github.com/zeon-studio/hugoplate)
@@ -26,3 +22,21 @@ Released under the [MIT License](LICENSE).
 
 - [Antonin Faure](https://github.com/antoninfaure) (v1.0)
 - [Eliott Tornassat](eliott.tornassat@epfl.ch) (v2.0)
+
+## License
+
+Copyright © 2026 180°C
+
+The website code is licensed under the MIT License.
+
+The content of the articles (`content/` and `assets/images/`) is licensed under CC-BY-SA 4.0, unless stated 
+otherwise.
+
+This project uses third-party assets under the following licenses :
+
+- Font Awesome Free — fonts: SIL OFL 1.1, icons: CC-BY 4.0
+- Lucide — ISC
+
+All the licenses are in the `licenses/` directory, except for the code license which is at project root (`./LICENSE`).
+
+The icons under `assets/brands/` are trademarks of their respective owners and are used for identification purposes only, in accordance with each owner's brand guidelines. Their use does not imply any affiliation with, sponsorship by, or endorsement from the trademark holders.
