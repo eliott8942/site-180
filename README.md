@@ -39,4 +39,6 @@ This project uses third-party assets under the following licenses :
 
 All the licenses are in the `licenses/` directory, except for the code license which is at project root (`./LICENSE`).
 
-The icons under `assets/brands/` are trademarks of their respective owners and are used for identification purposes only, in accordance with each owner's brand guidelines. Their use does not imply any affiliation with, sponsorship by, or endorsement from the trademark holders.
+This website also use thirdparty open-source libraries in `assets/libs/`. Please refer to their licenses as well.
+
+The icons under `assets/images/brands/` are trademarks of their respective owners and are used for identification purposes only, in accordance with each owner's brand guidelines. Their use does not imply any affiliation with, sponsorship by, or endorsement from the trademark holders.
