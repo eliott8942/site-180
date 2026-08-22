@@ -19,8 +19,8 @@ Released under the [MIT License](LICENSE).
 
 ## Credits
 
-- [Hugo](https://gohugo.io/)
-- [Hugoplate](https://github.com/zeon-studio/hugoplate)
+- Original theme : [Hugoplate](https://github.com/zeon-studio/hugoplate)
+- Icon providers : Font Awesome, Lucide, [svgrepo](www.svgrepo.com)
 
 ## Authors
 
