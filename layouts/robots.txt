@@ -1,0 +1,12 @@
+User-agent: *
+{{ if eq (getenv "HUGO_IS_PRODUCTION_BUILD") "true" }}
+Allow: /
+
+Disallow: *.json
+Disallow: */page/*
+
+Sitemap: {{ "sitemap.xml" | absURL }}
+
+{{ else }}
+Disallow: /
+{{ end }}

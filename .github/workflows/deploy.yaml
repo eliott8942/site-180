@@ -24,6 +24,10 @@ concurrency:
 
 # Environment variables available to all jobs and steps in this workflow
 env:
+  # Tell hugo whether or not this build will be push to production server or to
+  # a pre-production server (like a beta).
+  HUGO_IS_PRODUCTION_BUILD: ${{ vars.IS_PRODUCTION }}
+  
   # Hugo build mode. Note : the name production here is kinda misleading,
   # because we only use that environment to enable optimizations (css and js minification for example).
   # Think of it like a release mode rather than a production build.
