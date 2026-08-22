@@ -1,0 +1,73 @@
+{
+  "supportedSocialIcons": {
+    "instagram": {
+      "image_path": "images/brands/instagram-white.svg",
+
+      "style": "default",
+      "color_class": {
+        "bg": "bg-[#ff1656]",
+        "bg_hover": "bg-[#ff4a7c]",
+        "image": "text-white"
+      }
+    },
+    "x": {
+      "image_path": "images/brands/x-white.svg",
+
+      "style": "default",
+      "color_class": {
+        "bg": "bg-black",
+        "bg_hover": "bg-[#444444]",
+        "image": "text-white"
+      }
+    },
+    "whatsapp": {
+      "image_path": "images/brands/whats-app-white.svg",
+
+      "style": "default",
+      "color_class": {
+        "bg": "bg-[#25d366]",
+        "bg_hover": "bg-[#53e48a]",
+        "image": "text-white"
+      }
+    },
+    "linkedin": {
+      "image_path": "images/brands/linkedin-white.png",
+      "image_style": "translate-x-[5%] translate-y-[5%]",
+
+      "style": "default",
+      "color_class": {
+        "bg": "bg-[#0a66c2]",
+        "bg_hover": "bg-[#5099e2]",
+        "image": "text-white"
+      }
+    },
+    "telegram": {
+      "image_path": "images/brands/telegram-white.svg",
+      "image_style": "scale-150",
+
+      "style": "default",
+      "color_class": {
+        "bg": "bg-[#29a9ea]",
+        "bg_hover": "bg-[#68c7f8]",
+        "image": "text-white"
+      }
+    },
+    "facebook": {
+      "image_path": "images/brands/facebook.png",
+
+      "style": "hover_layer",
+      "color_class": {
+        "bg": "bg-[#0865fe]"
+      }
+    },
+    "reddit": {
+      "image_path": "images/brands/reddit.svg",
+      "image_style": "p-1",
+
+      "style": "hover_layer",
+      "color_class": {
+        "bg": "bg-[#ff4500]"
+      }
+    }
+  }
+}

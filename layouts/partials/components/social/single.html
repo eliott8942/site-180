@@ -8,40 +8,51 @@
   rel="noopener"
   aria-label="share {{ $network }}"
 >
-  {{ if eq $network "x" }}
-    <div class="h-10 aspect-square p-2 rounded-md bg-black text-white hover:bg-[#444444] duration-75">
-      {{ partial "media/image" (dict "Src" "images/brands/x-white.svg" "Class" "w-full h-full object-contain" "Size" "40x" "Alt" "facebook icon") }}
-    </div>
-  {{ else if eq $network "reddit" }}
-    <div class="relative h-10 aspect-square rounded-md overflow-hidden bg-[#ff4500] group/social">
-      <div class="absolute z-10 top-0 left-0 w-full h-full bg-transparent group-hover/social:bg-white/25 duration-75"></div>
-      <div class="relative h-full w-full p-1 z-0">
-        {{ partial "media/image" (dict "Src" "images/brands/reddit.svg" "Class" "w-full h-full object-contain" "Size" "40x" "Alt" "reddit icon") }}
-      </div>
-    </div>
-  {{ else if eq $network "telegram" }}
-    <div class="h-10 aspect-square p-2 rounded-md bg-[#29a9ea] text-white hover:bg-[#68c7f8] duration-75">
-      {{ partial "media/image" (dict "Src" "images/brands/telegram-white.svg" "Class" "w-full h-full object-contain scale-150" "Size" "40x" "Alt" "telegram icon") }}
-    </div>
-  {{ else if eq $network "instagram" }}
-    <div class="h-10 aspect-square p-2 rounded-md bg-[#ff1656] text-white hover:bg-[#ff4a7c] duration-75">
-      {{ partial "media/image" (dict "Src" "images/brands/instagram-white.svg" "Class" "w-full h-full object-contain" "Size" "40x" "Alt" "instagram icon") }}
-    </div>
-  {{ else if eq $network "linkedin" }}
-    <div class="h-10 aspect-square p-2 rounded-md  bg-[#0a66c2] text-white hover:bg-[#5099e2] duration-75">
-      {{ partial "media/image" (dict "Src" "images/brands/linkedin-white.png" "Class" "w-full h-full object-contain translate-x-[5%] translate-y-[5%]" "Size" "40x" "Alt" "linkedin icon") }}
-    </div>
-  {{ else if eq $network "whatsapp" }}
-    <div class="h-10 aspect-square p-2 rounded-md  bg-[#25d366] text-white hover:bg-[#53e48a] duration-75">
-      {{ partial "media/image" (dict "Src" "images/brands/whats-app-white.svg" "Class" "w-full h-full object-contain" "Size" "40x" "Alt" "what's app icon") }}
-    </div>
-  {{ else if eq $network "facebook" }}
-    <div class="relative h-10 aspect-square rounded-md overflow-hidden bg-[#0865fe] group/social">
-      <div class="absolute z-10 top-0 left-0 w-full h-full bg-transparent group-hover/social:bg-white/25 duration-75"></div>
-      <div class="relative z-0 h-full w-full">
-        {{ partial "media/image" (dict "Src" "images/brands/facebook.png" "Class" "w-full h-full object-contain" "Size" "80x" "Alt" "facebook icon") }}
-      </div>
-    </div>
+  {{ if isset hugo.Data.social.supportedSocialIcons $network }}
+    {{ $config := index hugo.Data.social.supportedSocialIcons $network }}
+
+    {{ if not (isset $config "style") }}
+      {{ errorf "Missing `style` field for %s in data/social.json" $network }}
+    {{ end }}
+
+    {{ $alt := print $network " icon" }}
+
+    {{ if eq $config.style "default" }}
+      {{ if not (isset $config "color_class") }}
+        {{ errorf "Missing `color_class` field for %s in data/social.json" $network }}
+      {{ else }}
+        {{ $required_fields := slice "bg" "bg_hover" "image" }}
+        {{ range $required := $required_fields }}
+          {{ if not (isset $config.color_class $required) }}
+            {{ errorf "Missing `%s` field for %s in data/social.json" $required $network }}
+          {{ end }}
+        {{ end }}
+
+        {{ $style := print "w-full h-full object-contain" " " $config.image_style }}
+        <div class="h-10 aspect-square p-2 rounded-md {{ $config.color_class.bg }} {{ $config.color_class.image }} hover:{{ $config.color_class.bg_hover }} duration-75">
+          {{ partial "media/image" (dict "Src" $config.image_path "Class" $style "Size" "80x" "Alt" $alt) }}
+        </div>
+      {{ end }}
+    {{ else if eq $config.style "hover_layer" }}
+      {{ if not (isset $config "color_class") }}
+        {{ errorf "Missing `color_class` field for %s in data/social.json" $network }}
+      {{ else }}
+        {{ $required_fields := slice "bg" }}
+        {{ range $required := $required_fields }}
+          {{ if not (isset $config.color_class $required) }}
+            {{ errorf "Missing `%s` field for %s in data/social.json" $required $network }}
+          {{ end }}
+        {{ end }}
+
+        {{ $style := print "w-full h-full object-contain" " " $config.image_style }}
+        <div class="relative h-10 aspect-square rounded-md overflow-hidden {{ $config.color_class.bg }} group/social">
+          <div class="absolute z-10 top-0 left-0 w-full h-full bg-transparent group-hover/social:bg-white/25 duration-75"></div>
+          <div class="relative z-0 h-full w-full">
+            {{ partial "media/image" (dict "Src" $config.image_path "Class" $style "Size" "80x" "Alt" $alt) }}
+          </div>
+        </div>
+      {{ end }}
+    {{ end }}
   {{ else }}
     {{ errorf "%s: Unknown network `%s`" $scope $network }}
   {{ end }}
