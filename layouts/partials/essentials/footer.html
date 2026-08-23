@@ -27,11 +27,10 @@
               {{ else }}
                 {{ .URL | relLangURL }}
               {{ end }}"
-              >
-                {{ .Name }}
-                <i class="fa-solid fa-arrow-up-right-from-square opacity-50 group-hover/link:opacity-100"></i>
-              </a
             >
+              <span class="group-hover/link:underline underline-offset-2 decoration-2">{{ .Name }}</span>
+              <i class="fa-solid fa-arrow-up-right-from-square opacity-50 group-hover/link:opacity-100 scale-75"></i>
+            </a>
           {{ end }}
         </div>
 
@@ -48,9 +47,9 @@
     </div>
   </div>
 
-  <div class="border-t">
-    <div class="flex flex-wrap items-center justify-center py-4 bg-white">
-      <div class="w-full sm:w-fit sm:pr-4 sm:border-r border-black/20 sm:mr-4 text-center">
+  <div class="border-t text-sm">
+    <div class="flex flex-wrap items-center justify-center py-4">
+      <div class="w-full sm:w-fit max-sm:pb-1 sm:pr-4 sm:border-r border-black/20 sm:mr-4 text-center">
         {{ site.Params.copyright }}
       </div>
 
