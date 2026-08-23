@@ -37,8 +37,12 @@ This project uses third-party assets under the following licenses :
 - Font Awesome Free — fonts: SIL OFL 1.1, icons: CC-BY 4.0
 - Lucide — ISC
 
-All the licenses are in the `licenses/` directory, except for the code license which is at project root (`./LICENSE`).
-
 This website also use thirdparty open-source libraries in `assets/libs/`. Please refer to their licenses as well.
 
+### The none free parts 
+
+Our logo (`assets/images/logo.png`) and all content related to our books (`content/french/fringale/`) are fully copyrighted and may not be used without our prior permission.
+
 The icons under `assets/images/brands/` are trademarks of their respective owners and are used for identification purposes only, in accordance with each owner's brand guidelines. Their use does not imply any affiliation with, sponsorship by, or endorsement from the trademark holders.
+
+All the licenses are in the `licenses/` directory, except for the code license which is at project root (`./LICENSE`).
