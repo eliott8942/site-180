@@ -48,7 +48,15 @@ function initMap(placeData, decoData, style) {
     container: document.getElementById('map')
   }), 'top-right')
 
-  MAP.addControl(new maplibregl.AttributionControl(), 'bottom-right')
+  MAP.addControl(
+    new maplibregl.AttributionControl({
+      compact: true,
+      customAttribution: [
+        'Map powered by <a href="https://maplibre.org/" target="_blank">MapLibre</a>'
+      ]
+    }),
+    'bottom-right'
+  )
   MAP.addControl(new HelpControl(), 'bottom-right')
 
   MAP.on('load', () => {
@@ -275,72 +283,6 @@ function convertToGeoJSON(placeData) {
       }
     }))
   };
-}
-
-class HelpControl {
-  constructor() {
-    this._elementFactory = Lit.html`
-      <div class="toggle maplibregl-ctrl maplibregl-ctrl-help h-6 aspect-square bg-white rounded-full font-bold text-lg">
-        <label for="infopanel-toggle-inner">?</label>
-      </div>
-    `
-  }
-  
-  onAdd(_map) {
-    this._element = document.createElement("div")
-    Lit.render(this._elementFactory, this._element);
-    
-    return this._element;
-  }
-
-  onRemove() {
-    this._container.parentNode.removeChild(this._container)
-
-    delete this._element;
-    this._element = undefined;
-  }
-}
-
-class FullscreenControl {
-  constructor(params) {
-    this._params = params
-    this._fullscreenHandler = new FullscreenControler() 
-  }
-
-  _elementFactory() {
-    return Lit.html`
-      <div class="maplibregl-ctrl maplibregl-ctrl-group">
-        <button type="button" class="${this._fullscreenHandler.isInFullscreen() ? "maplibregl-ctrl-shrink" : "maplibregl-ctrl-fullscreen"}" type="button" @click=${() => this._onFullscreenClick()} aria-label="Fullscreen">
-          <span class="maplibregl-ctrl-icon"></span>
-        </button>
-      </div>
-    `
-  }
-
-  _onFullscreenClick() {
-    if (this._fullscreenHandler.isInFullscreen()) {
-      this._fullscreenHandler.exitFullscreen()
-    } else {
-      this._fullscreenHandler.enterFullscreen(this._params.container)
-    }
-
-    this._fullscreen = !this._fullscreen
-    Lit.render(this._elementFactory(), this._element);
-  }
-
-  onAdd(_map) {
-    this._element = document.createElement("div")
-    Lit.render(this._elementFactory(), this._element);
-
-    return this._element
-  }
-
-  onRemove() {
-    this._container.parentNode.removeChild(this._container)
-    
-    delete this._element;
-    this._element = undefined;
-  }
 }
 
 function selectPlaceOnMap(placeData, mode) {
