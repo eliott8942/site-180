@@ -25,7 +25,7 @@ For the developpers, those who want to add features to the website and understan
 
 ## License
 
-Copyright © 2026 180°C
+Copyright © 2026 Association 180°C
 
 The website code is licensed under the MIT License.
 

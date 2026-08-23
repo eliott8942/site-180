@@ -1,4 +1,4 @@
-Copyright (c) 2026 180°C. All rights reserved.
+Copyright (c) 2026 Association 180°C. All rights reserved.
 
 This license applies to the `content/french/fringale` directory.
 
@@ -7,7 +7,7 @@ This directory is proprietary and protected by copyright law.
 No permission is granted to copy, reproduce, distribute, modify, create
 derivative works from, publicly display, or otherwise use these assets,
 in whole or in part, in any form or by any means, without the prior
-written consent of 180°C.
+written consent of Association 180°C.
 
 All rights not expressly granted are reserved.
 
