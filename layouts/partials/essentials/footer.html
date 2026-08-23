@@ -2,38 +2,39 @@
   <div class="container">
     <div class="row items-center py-10">
       <!-- navbar brand/logo -->
-      <div class="md:col-3 mb-8 flex items-center justify-center gap-2 md:mb-0 md:mt-0 md:text-right">
-        <div>
-          {{ site.Params.copyright | markdownify }}
-        </div>
-      </div>
+      <div class="flex flex-row justify-between flex-wrap gap-2">
+        <div class="flex flex-col gap-2 mb-4 mr-12">
+          <div class="text-2xl font-semibold mb-4">
+            {{ site.Title }}
 
-      <!-- Links -->
-      <div class="md:col-6 mb-8 text-center md:mb-0">
-        <ul>
-          {{ range site.Menus.footer }}
-            <li class="m-3 inline-block">
-              <a
-                class="hover:underline underline-offset-2"
-                {{ if findRE `^http` .URL }}
-                  target="_blank" rel="noopener"
-                {{ end }}
-                href="{{ if findRE `^#` .URL }}
-                  {{ if not $.IsHome }}
-                    {{ site.BaseURL | relLangURL }}
-                  {{ end }}{{ .URL }}
-                {{ else }}
-                  {{ .URL | relLangURL }}
-                {{ end }}"
-                >{{ .Name }}</a
+            {{ with site.Params.subtitle }}
+              <div class="text-lg font-normal opacity-80">
+                {{ . }}
+              </div>
+            {{ end }}
+          </div>
+  
+          {{ range site.Menus.footer_main }}
+            <a
+              class="block font-semibold hover:text-black group/link"
+              {{ if findRE `^http` .URL }}
+                target="_blank" rel="noopener"
+              {{ end }}
+              href="{{ if findRE `^#` .URL }}
+                {{ if not $.IsHome }}
+                  {{ site.BaseURL | relLangURL }}
+                {{ end }}{{ .URL }}
+              {{ else }}
+                {{ .URL | relLangURL }}
+              {{ end }}"
               >
-            </li>
+                {{ .Name }}
+                <i class="fa-solid fa-arrow-up-right-from-square opacity-50 group-hover/link:opacity-100"></i>
+              </a
+            >
           {{ end }}
-        </ul>
-      </div>
+        </div>
 
-      <!-- Social medias -->
-      <div class="md:col-3 mb-8 flex items-center justify-center gap-2 md:mb-0 md:mt-0 md:text-right">
         <div class="flex flex-row w-min gap-2">
           {{ range $social := hugo.Data.main.social }}
             {{ partial "components/social/single" (dict 
@@ -44,6 +45,31 @@
           {{ end }}
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="border-t">
+    <div class="flex flex-wrap items-center justify-center py-4 bg-white">
+      <div class="w-full sm:w-fit sm:pr-4 sm:border-r border-black/20 sm:mr-4 text-center">
+        {{ site.Params.copyright }}
+      </div>
+
+      {{ range site.Menus.footer }}
+        <a
+          class="block hover:underline underline-offset-2"
+          {{ if findRE `^http` .URL }}
+            target="_blank" rel="noopener"
+          {{ end }}
+          href="{{ if findRE `^#` .URL }}
+            {{ if not $.IsHome }}
+              {{ site.BaseURL | relLangURL }}
+            {{ end }}{{ .URL }}
+          {{ else }}
+            {{ .URL | relLangURL }}
+          {{ end }}"
+          >{{ .Name }}</a
+        >
+      {{ end }}
     </div>
   </div>
 </footer>
