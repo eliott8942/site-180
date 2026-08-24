@@ -1,45 +1,21 @@
 ---
-title: "Recette du mois - Mars 2023"
+title: "Recette du mois - Carrot Cake"
 subtitle: ""
 date: 2023-03-04T17:26:00Z
 image: "thumbnail.png"
 "blog/categories": ["Recettes du mois"]
 draft: false
-summary: "Carrot Cake (pour 4 personnes)"
 lectureTimeMin: 10
 ---
 
-# Carrot Cake
+Chers membres,
 
-Pour 4 personnes
+C'est officiel : ce mois-ci, la Recette du Mois de notre site est le délicieux Carrot Cake ! 🎂
 
-## Ingrédients
+Moelleux, fondant et parfait pour les gourmands, ce gâteau est prêt à être réalisé dans votre propre cuisine. Vous souhaitez tenter l'expérience mais vous avez besoin de la recette exacte et de nos meilleures astuces ?
 
-- 90g d'huile végétale
-- 125g de sucre
-- 125g de farine fluide
-- 1/2 C.à.C rase de muscade
-- 1 C.à.C d'extrait de vanille liquide
-- 1/2 sachet de levure chimique
-- 1 C.à.C rase de cannelle
-- 150g de carotte râpées
-- 2 oeufs
-- 60g de noix concassées
-- Pour le glaçage :
-  - 2/3 sachet de sucre vanillé
-  - 2/3 cuillière à soupe de miel
-  - 2/3 cuillière à café de cannelle
-  - 130g de cream cheese
+Toutes les instructions détaillées sont déjà en ligne pour vous accompagner :
 
-## Préparation (45-55 min)
+{{<recettes/card recipe-path="recettes/2023/carrotcake">}}
 
-1. Commencez par préchauffer le four à 180 degrés.
-2. Mélangez au fouet les oeufs et le sucre.
-3. Incorporez l'extrait de vanille, la muscade, la cannelle et l'huile, toujours à l'aide du fouet.
-4. Ajoutez la farine et la levure. Commencez à mélanger, jusqu'à obtention d'une pâte lisse.
-5. Ajoutez les carottes râpées et les noix concassées. Mélangez au fouet doucement jusqu'à ce que la pâte soit homogène.
-6. Huilez et farinez légèrement le moule (voire les 2 moules car la dose le permet) et versez la préparation.
-7. Enfournez 30 à 40 minutes selon votre four. Piquez pour vérifier que le gâteau soit cuit.
-8. Mélangez les ingrédients du glaçage puis étalez le sur le gâteau une fois refroidi.
-9. Mettez à refroidir le gâteau avec glaçage pendant quelques heures.
-10. Dégustez !
+Bon appétit et à vous de jouer !

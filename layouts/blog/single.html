@@ -1,3 +1,7 @@
+{{ define "headAttrs" }}
+  {{ partial "head-attr/recettes" }}
+{{ end }}
+
 {{ define "main" }}
   {{ $image := partial "utils/get-img" (dict "img" .Params.image "context" .) }}
 

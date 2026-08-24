@@ -1,0 +1,100 @@
+{{ $recipe_path := .Get "recipe-path" }}
+
+{{ $page := .Site.GetPage $recipe_path }}
+{{ if not $page }}
+  {{ errorf "%s: Couldn't find path %s" .Position $recipe_path }}
+{{ else }}
+  {{ with $page }}
+    <div 
+      class="
+        mx-auto md:my-8
+        relative
+        border
+        flex flex-row
+        bg-body
+        shadow-md hover:shadow-lg
+        h-32 md:h-40
+        md:max-w-[40rem]
+        hover:scale-[103%]
+        z-0 hover:z-10
+        rounded-xl overflow-hidden 
+        cursor-pointer
+        transition-transform
+        duration-100
+        not-prose
+      "
+    >
+      <a href="{{ .RelPermalink }}" class="absolute w-full h-full z-10" aria-label="Recipe link"></a>
+
+      <div class="h-full shrink overflow-hidden">
+        {{ $containerWidth := 126 }}
+        {{ $borderWidth := 1 }}
+  
+        <!-- Subtract the size of the border, then scale up by two -->
+        {{ $width := mul (sub $containerWidth (mul $borderWidth 2)) 2 }}
+        {{ $sizeStr := print $width "x" $width }}
+        
+        {{ partial "media/image" (dict 
+          "Src" .Params.image
+          "Alt" .Title 
+          "Class" "!h-full !w-full object-cover !mb-0" 
+          "Loading" "eager" 
+          "FetchPriority" "high" 
+          "Context" .
+          "Size" $sizeStr
+          "Command" "Fill"
+        ) }}
+      </div>
+      
+      <div class="flex flex-col p-3 md:p-4 border-l shrink grow min-w-64">
+        <div class="flex flex-row justify-between flex-wrap max-md:text-sm">
+          <!-- 
+            Metadata containers
+            We need it because we have some css rules which activates when we're not the first 
+            child of a container
+          -->
+    
+          <div>
+            {{ partial "components/recipe/indicators/time-indicator" (dict "timeMin" .Params.durationMin "class" "opacity-50" "scope" . "icon" "fa-hourglass-start") }}
+          </div>
+          <div>
+            {{ partial "components/recipe/indicators/number-people-indicator" (dict
+              "quantityMin" .Params.quantityMin
+              "quantityMax" .Params.quantityMax 
+              "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25 opacity-75"
+              "icon" "fa-users"
+            ) }}
+          </div>
+        </div>
+    
+        <!-- TODO : make it expand into the card, so the description can be only shown when hovered -->
+        <div class="my-2 flex flex-col grow">
+          <div class="h4 font-secondary leading-none text-h4-sm md:text-h4 text-black"> {{ .Title }} </div>
+        </div>
+    
+        <div class="flex flex-row flex-wrap justify-between items-center md:text-lg">
+          <div class="flex flex-row flex-wrap">
+            {{ partial "components/indicator/badges/list" (dict 
+              "scope" . 
+              "badges" .Params.intolerances 
+              "domain" hugo.Data.recettes.intolerances
+              "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2"
+            ) }}
+    
+            {{ if .Params.spicinessLevel }}
+              {{ partial "components/indicator/levels/level" (dict 
+                "scope" . 
+                "value" .Params.spicinessLevel 
+                "domain" hugo.Data.recettes.spiciness
+                "class" "[&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2"
+              ) }}
+            {{ end }}
+          </div>
+          <div class="flex flex-row flex-wrap">
+            {{ partial "components/indicator/levels/level" (dict "scope" . "value" .Params.copiosityLevel "domain" hugo.Data.recettes.copiosity) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  {{ end }}
+{{ end }}
