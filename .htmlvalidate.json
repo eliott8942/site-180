@@ -11,6 +11,7 @@
     "no-inline-style": "off",
     "attr-quotes": "off",
     "no-trailing-whitespace": "off",
-    "no-raw-characters": ["error", { "relaxed": true }]
+    "no-raw-characters": ["error", { "relaxed": true }],
+    "valid-id": ["error", { "relaxed": true }]
   }
 }
