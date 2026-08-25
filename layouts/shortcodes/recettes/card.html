@@ -13,8 +13,8 @@
         flex flex-row
         bg-body
         shadow-md hover:shadow-lg
-        h-32 md:h-40
-        md:max-w-[40rem]
+        h-32
+        md:max-w-[32rem]
         hover:scale-[103%]
         z-0 hover:z-10
         rounded-xl overflow-hidden 
@@ -46,8 +46,8 @@
         ) }}
       </div>
       
-      <div class="flex flex-col p-3 md:p-4 border-l shrink grow min-w-64">
-        <div class="flex flex-row justify-between flex-wrap max-md:text-sm">
+      <div class="flex flex-col p-3 border-l shrink grow min-w-64">
+        <div class="flex flex-row justify-between flex-wrap text-sm">
           <!-- 
             Metadata containers
             We need it because we have some css rules which activates when we're not the first 
@@ -69,10 +69,10 @@
     
         <!-- TODO : make it expand into the card, so the description can be only shown when hovered -->
         <div class="my-2 flex flex-col grow">
-          <div class="h4 font-secondary leading-none text-h4-sm md:text-h4 text-black"> {{ .Title }} </div>
+          <div class="h4 font-secondary leading-none text-h4-sm text-black"> {{ .Title }} </div>
         </div>
     
-        <div class="flex flex-row flex-wrap justify-between items-center md:text-lg">
+        <div class="flex flex-row flex-wrap justify-between items-center">
           <div class="flex flex-row flex-wrap">
             {{ partial "components/indicator/badges/list" (dict 
               "scope" . 
