@@ -12,7 +12,7 @@
     {{ $config := index hugo.Data.social.supportedSocialIcons $network }}
 
     {{ if not (isset $config "style") }}
-      {{ errorf "Missing `style` field for %s in data/social.json" $network }}
+      {{ errorf "%s: Missing `style` field for %s in data/social.json" $scope $network }}
     {{ end }}
 
     {{ $alt := print $network " icon" }}
