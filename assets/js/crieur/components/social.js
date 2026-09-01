@@ -2,7 +2,7 @@ const PATHS = absolutizeURLMap({
   'facebook': "images/brands/facebook.png",
   'instagram': "images/brands/instagram.png",
   'x': "images/brands/x-white.svg",
-  'tiktok': "images/brands/tiktok.png",
+  'tiktok': "images/brands/tiktok.svg",
   'tripadvisor': "images/brands/tripadvisor.png",
   'site': "images/icons/www.svg"
 })
