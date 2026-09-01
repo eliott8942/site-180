@@ -1,4 +1,7 @@
 ---
+type: association
+layout: list
+
 currentYear: 2026
 
 # Banner
