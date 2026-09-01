@@ -1,0 +1,44 @@
+{{ $scope := .scope }}
+{{ $network := .network }}
+{{ $style := .style | default "" }}
+{{ $size := .size | default "80x80" }}
+{{ $variant := .variant | default "colored" }}
+
+{{ if isset hugo.Data.social.supportedSocialIcons $network }}
+  {{ $config := index hugo.Data.social.supportedSocialIcons $network }}
+
+  {{ $alt := print $network " icon" }}
+
+  {{ $path := "" }}
+  {{ if eq $variant "colored" }}
+    {{ if isset $config "image_path" }}
+      {{ $path = $config.image_path }}
+    {{ else }}
+      {{ errorf "%s: network %s doesn't have a colored image path set via $image_path" $scope $network }}
+    {{ end }}
+  {{ else if eq $variant "white" }}
+    {{ if isset $config "image_white_path" }}
+      {{ $path = $config.image_white_path }}
+    {{ else }}
+      {{ errorf "%s: network %s doesn't have a white image path set via $image_white_path" $scope $network }}
+    {{ end }}
+  {{ else if eq $variant "black" }}
+    {{ if isset $config "image_black_path" }}
+      {{ $path = $config.image_black_path }}
+    {{ else }}
+      {{ errorf "%s: network %s doesn't have a black image path set via $image_black_path" $scope $network }}
+    {{ end }}
+  {{ else }}
+    {{ errorf "%s: Unknown variant %s" $scope $variant }}
+  {{ end }}
+
+  {{ with $config.image_style }}
+    {{ $style = print $style " " . }}
+  {{ end }}
+
+  {{ if ne $path "" }}
+    {{ partial "media/image" (dict "Src" $path "Class" $style "Size" $size "Alt" $alt) }}
+  {{ end }}
+{{ else }}
+  {{ errorf "%s: Unknown network `%s`" $scope $network }}
+{{ end }}

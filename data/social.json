@@ -2,6 +2,8 @@
   "supportedSocialIcons": {
     "instagram": {
       "image_path": "images/brands/instagram-white.svg",
+      "image_black_path": "images/brands/instagram-black.svg",
+      "image_white_path": "images/brands/instagram-white.svg",
 
       "style": "default",
       "color_class": {
@@ -12,6 +14,8 @@
     },
     "x": {
       "image_path": "images/brands/x-white.svg",
+      "image_black_path": "images/brands/x-black.png",
+      "image_white_path": "images/brands/x-white.svg",
 
       "style": "default",
       "color_class": {
@@ -22,6 +26,8 @@
     },
     "whatsapp": {
       "image_path": "images/brands/whats-app-white.svg",
+      "image_black_path": "images/brands/whats-app-black.svg",
+      "image_white_path": "images/brands/whats-app-white.svg",
 
       "style": "default",
       "color_class": {
@@ -32,6 +38,7 @@
     },
     "linkedin": {
       "image_path": "images/brands/linkedin-white.png",
+      "image_white_path": "images/brands/linkedin-white.png",
       "image_style": "translate-x-[5%] translate-y-[5%]",
 
       "style": "default",
@@ -43,6 +50,7 @@
     },
     "telegram": {
       "image_path": "images/brands/telegram-white.svg",
+      "image_black_path": "images/brands/telegram-black.svg",
       "image_style": "scale-150",
 
       "style": "default",
@@ -54,6 +62,8 @@
     },
     "facebook": {
       "image_path": "images/brands/facebook.png",
+      "image_black_path": "images/brands/facebook-black.png",
+      "image_white_path": "images/brands/facebook-white.png",
 
       "style": "hover_layer",
       "color_class": {
@@ -68,6 +78,11 @@
       "color_class": {
         "bg": "bg-[#ff4500]"
       }
+    },
+    "tiktok": {
+      "image_black_path": "images/brands/tiktok-black.svg",
+      "image_white_path": "images/brands/tiktok-white.svg",
+      "image_style": "scale-150"
     }
   }
 }
