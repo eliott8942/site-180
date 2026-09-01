@@ -56,7 +56,7 @@
             {{ .Title }}
           </h1>
         
-          <div class="flex flex-wrap items-center justify-center text-lg pb-2">
+          <div class="flex flex-wrap items-center max-md:justify-center text-lg md:text-xl pb-2 w-full">
             <!-- Note : the text are on the same line of as the icons because otherwise hugo put a space between them -->
             <div class="shrink-0">
               <i class="fa-solid fa-circle-user mr-1"></i>{{ strings.Trim (.Params.author | default "180°C") " " }}
@@ -74,41 +74,39 @@
               "class" "shrink-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25"
               "icon" "fa-users"
             ) }}
+
+            {{ if .Params.spicinessLevel }}
+              <span class="shrink-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25 leading-none">
+                {{ $params := (dict 
+                  "scope" . 
+                  "value" .Params.spicinessLevel 
+                  "domain" hugo.Data.recettes.spiciness 
+                  "class" "leading-none mr-1"
+                ) }}
+          
+                {{ partial "components/indicator/levels/level" $params }}
+              </span>
+            {{ end }}
           </div>
 
-          {{ if or (ne (len .Params.intolerances) 0) (isset .Params "spicinessLevel") }}
-            <div class="flex items-center text-lg -mx-1">
-    
-              <div class="flex flex-row flex-wrap max-md:justify-center text-lg">
+          <div class="flex flex-col gap-2">
+            {{ if ne (len .Params.intolerances) 0 }}
+              <div class="first:mt-2 flex flex-row flex-wrap max-md:justify-center text-lg gap-1">
+                <span class="font-secondary font-bold shrink-0 w-full max-md:text-center">{{ print (i18n "intolerances_label") " :" }}</span>
                 {{ partial "components/indicator/badges/utils/validate-words" (dict "domain" hugo.Data.recettes.intolerances "badges" .Params.intolerances "scope" .) }}
                 {{ range $i := .Params.intolerances }}
                   {{ $badge_data := index hugo.Data.recettes.intolerances $i }}
-    
-                  <span class="flex flex-row flex-nowrap shrink-0 align-middle m-1 px-2 py-1 rounded-full bg-white border shadow-sm">
+          
+                  <span class="flex flex-row flex-nowrap shrink-0 align-middle px-2 py-1 rounded-full bg-white border shadow-sm">
                     {{ partial "components/indicator/badges/icon" (dict "data" $badge_data "label" $i ) }}
                     <span class="ml-1 leading-none">
                       {{ i18n (print "intolerances/" $i) }}
                     </span>
                   </span>
                 {{ end }}
-
-                {{ if .Params.spicinessLevel }}
-                  <span class="flex flex-row flex-nowrap shrink-0 align-middle m-1 px-2 py-1 rounded-full bg-white border shadow-sm leading-none">
-                    {{ $params := (dict 
-                      "scope" . 
-                      "value" .Params.spicinessLevel 
-                      "domain" hugo.Data.recettes.spiciness 
-                      "class" "leading-none mr-1"
-                    ) }}
-
-                    {{ partial "components/indicator/levels/level" $params }}
-                    {{ $labels := partial "components/indicator/levels/utils/get-breakpoint-for-level" $params }}
-                    {{ i18n (print "spiciness/" (index $labels 0)) }}
-                  </span>
-                {{ end }}
               </div>
-            </div>
-          {{ end }}
+            {{ end }}
+          </div>
         </div>
       </div>
     </div>
@@ -116,9 +114,6 @@
 
   <section class="section-sm justify-center bg-gradient-reverse relative z-10">
     <div class="container">
-      <!-- Sticky header gradient -->
-      <!-- <div class="sticky top-0 bg-gradient-to-b from-white section-sm pb-0 z-10"></div> -->
-
       <article class="z-0">
         <div class="content mb-10">
           {{ partial "utils/render-content" . }}

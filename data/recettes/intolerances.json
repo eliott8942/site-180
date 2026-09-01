@@ -18,5 +18,8 @@
   },
   "nuts": {
     "icon": "icon-nut" 
+  },
+  "spice": {
+    "icon": "icon-pepper" 
   }
 }

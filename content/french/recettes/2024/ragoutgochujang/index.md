@@ -11,7 +11,7 @@ thumbnail: "ragoutgochujang.png"
 "recettes/copiosity": ["Copieux", "Tres copieux"]
 copiosityLevel: 3.5
 veganLevel: "vegetarian"
-intolerances: ["gluten", "soja_sauce", "nuts"]
+intolerances: ["gluten", "soja_sauce", "nuts", "spice"]
 spicinessLevel: 1
 quantityMin: "2"
 quantityMax: "6"
