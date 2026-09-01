@@ -7,6 +7,8 @@
   {{ $image := partial "utils/get-img" (dict "img" .Params.image "context" .) }}
 
   {{ $bg_image := $image.Filter images.Grayscale }}
+  <!-- Note : Resizing to 1920x is enough as we apply a blur filter over it -->
+  {{ $bg_image := $image.Resize "1920x" }}
   {{ $bg_image = $bg_image.Process (print hugo.Data.image.defaultEncoding " " "q50") }}
 
   <section class="relative">
