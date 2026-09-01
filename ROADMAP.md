@@ -12,7 +12,7 @@
 
   - [X] Ability to share
 
-  - [ ] Redirect to recipees when for the recipe of the month
+  - [X] Redirect to recipees when for the recipe of the month
 
 - [ ] Redesign Recipee page
 
