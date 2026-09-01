@@ -70,6 +70,9 @@
 - id: recettes/copiosity
   translation: "Générosité du plat"
 
+- id: intolerances_label
+  translation: "Intolerances"
+
 - id: intolerances/gluten
   translation: "Gluten"
 
@@ -87,6 +90,9 @@
 
 - id: intolerances/nuts
   translation: "Fruits a coque"
+
+- id: intolerances/spice
+  translation: "Piment"
 
 - id: spiciness/level_1
   translation: "Piquant"
