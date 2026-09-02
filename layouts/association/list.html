@@ -26,7 +26,7 @@
             </ul>
             {{ with .button }}
               {{ if .enable }}
-                <a class="btn btn-primary mt-6" href="{{ .link | absURL }}">
+                <a class="btn btn-primary mt-6" href="{{ .link | relLangURL }}">
                   {{ .label }}
                   <i class="fa-solid fa-arrow-right"></i>
                 </a>

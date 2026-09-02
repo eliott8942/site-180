@@ -141,13 +141,7 @@
               {{ if findRE `^http` .URL }}
                 target="_blank" rel="noopener"
               {{ end }}
-              href="{{- if findRE `^#` .URL -}}
-                {{- if not $.IsHome -}}
-                  {{- site.BaseURL | relLangURL -}}
-                {{- end }}{{- .URL -}}
-              {{- else -}}
-                {{- .URL | relLangURL -}}
-              {{- end -}}"
+              href="{{ .URL | relLangURL }}"
               >{{ .Name }}</a
             >
           </li>
