@@ -8,8 +8,6 @@ banner:
     Parmi nos projets : La **Spice League** : un top chef étudiant, le deuxième volume du livre de cuisine étudiante nommé **Fringale**, et le **Crieur**, notre carnet virtuel d'adresses étudiantes à Lausanne. <br><br>
     Nous nous organisons en 4 pôles: événementiel, création, sponsoring et communication. Plus d'informations sur chacun ci-dessous.
 
-    Helo world !
-
   image: "/images/association.png"
   button:
     enable: true
