@@ -25,73 +25,11 @@
               </div>
             </div>
             
-            <div class="py-8">
+            <div class="container py-8">
               {{ $context := . }}
 
-              {{ range $i, $section := .Params.sections }}
-                <section
-                  class="py-2{{ if not (modBool $i 2) }}
-                    bg-gradient
-                  {{ else if (ne $i (sub (len $.Params.sections) 1) ) }}
-                    bg-gradient-reverse
-                  {{ end }}"
-                >
-                  <div class="container">
-                    <div class="row items-center justify-between">
-                      <div
-                        class="mb:md-0 {{ if not (modBool $i 2) }}
-                          md:order-2
-                        {{ end }} md:col-5 mb-6"
-                      >
-                        {{ partial "media/image" (dict "Src" .image "Alt" .imagealt "Context" $context) }}
-                      </div>
-                      <div
-                        class="{{ if not (modBool $i 2) }}
-                          md:order-1
-                        {{ end }} md:col-7 lg:col-6"
-                      >
-                        <h2 class="mb-4 font-tertiary font-extrabold">
-                          {{ .title | markdownify }}
-                        </h2>
-                        <div class="mb-8 text-lg content">
-                          {{ .content | markdownify }}
-                        </div>
-                        {{ with .bulletpoints }}
-                          <ul class="list-none">
-                            {{ range . }}
-                              <li class="relative mb-4 pl-6">
-                                <i class="fa fa-check absolute left-0 top-1.5"></i>
-                                {{ .name | markdownify }}
-                                {{ if .list }}
-                                  <ul class="list-none">
-                                    {{ range .list }}
-                                      <li class="relative mb-4">
-                                        {{ . | markdownify }}
-                                      </li>
-                                    {{ end }}
-                                  </ul>
-                                {{ end }}
-                              </li>
-                            {{ end }}
-                          </ul>
-                        {{ end }}
-                        {{ with .alert }}
-                          <p class="mb-8 text-lg">
-                            {{ . | markdownify }}
-                          </p>
-                        {{ end }}
-                        {{ with .button }}
-                          {{ if .enable }}
-                            <a class="btn btn-primary mt-6" href="{{ .link | relLangURL }}">
-                              {{ .label }}
-                              <i class="fa fa-arrow-right"></i>
-                            </a>
-                          {{ end }}
-                        {{ end }}
-                      </div>
-                    </div>
-                  </div>
-                </section>
+              {{ range .Params.sections }}
+                {{ partial "components/content/image-section" (merge . (dict "Context" $context)) }}
               {{ end }}
             </div>
           </div>
