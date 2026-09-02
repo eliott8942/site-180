@@ -16,7 +16,7 @@
   
           {{ range site.Menus.footer_main }}
             <a
-              class="block font-semibold hover:text-black group/link"
+              class="block font-semibold hover:text-black group/link w-fit"
               {{ if findRE `^http` .URL }}
                 target="_blank" rel="noopener"
               {{ end }}
@@ -28,7 +28,7 @@
           {{ end }}
         </div>
 
-        <div class="flex flex-row w-min gap-2">
+        <div class="flex flex-row h-fit w-min gap-2">
           {{ range $social := hugo.Data.main.social }}
             {{ partial "components/social/single" (dict 
               "scope" .
