@@ -48,50 +48,11 @@
     <section
       class="section-sm bg-gradient-reverse *:py-2"
     >
-      {{ range $i, $e:= .Params.sections }}
-        <div class="container px-6">
-          <div class="row items-center justify-between">
-            <div
-              class="mb:md-0 {{ if not (modBool $i 2) }}
-                md:order-2
-              {{ end }} md:col-5 mb-6"
-            >
-              {{ partial "media/image" (dict "Src" .image "Alt" "feature image") }}
-            </div>
-
-            <div
-              class="{{ if not (modBool $i 2) }}
-                md:order-1
-              {{ end }} md:col-7 lg:col-6"
-            >
-              <h2 class="mb-4 font-tertiary font-extrabold">
-                {{ .title }}
-              </h2>
-
-              <p class="mb-8 text-lg">
-                {{ .content | markdownify }}
-              </p>
-
-              <ul class="list-none">
-                {{ range .bulletpoints }}
-                  <li class="relative mb-4 pl-6">
-                    <i class="fa-solid fa-check absolute left-0 top-1.5"></i>
-                    {{ . | markdownify }}
-                  </li>
-                {{ end }}
-              </ul>
-              {{ with .button }}
-                {{ if .enable }}
-                  <a class="btn-primary mt-6" href="{{ .link | relLangURL }}">
-                    {{ .label }}
-                    <i class="fa-solid fa-arrow-right"></i>
-                  </a>
-                {{ end }}
-              {{ end }}
-            </div>
-          </div>
-        </div>
-      {{ end }}
+      <div class="container px-6">
+        {{ range .Params.sections }}
+          {{ partial "components/content/image-section" (merge . (dict "Context" .Page)) }}
+        {{ end }}
+      </div>
     </section>
     <!-- /Sections -->
 {{ end }}

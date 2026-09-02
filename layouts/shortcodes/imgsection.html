@@ -1,36 +1,4 @@
-{{ $class := .Get "class" }}
-{{ $image := .Get "image" }}
-{{ $side := .Get "side" | default "right" }}
-{{ $title := .Get "title" }}
-{{ $imgclass := .Get "imgclass" | default "" }}
+<!-- Noop operation to make hugo accepts inner values -->
+{{ $_ := .Inner }}
 
-
-<section class="section-sm py-2 {{ $class }}">
-  <div class="container px-10">
-    <div class="row items-center justify-between">
-      <div
-        class="m-0 {{ if eq $side "right" }}
-          md:order-2
-        {{ end }} md:col-5">
-        {{ partial "media/image" (dict "Src" $image "Alt" "feature image" "Class" $imgclass "Context" .Page) }}
-      </div>
-      <div
-        class="m-0 {{ if eq $side "right" }}
-          md:order-1
-        {{ end }} md:col-7 lg:col-6">
-        {{ if $title }}
-          <h2 class="mb-4 font-tertiary font-extrabold">
-            {{ $title | markdownify }}
-          </h2>
-        {{ end }}
-        <div class="mb-8 text-lg">
-          <!-- 
-            Note : Do not try to use the paragraph elements with the markdown renderer,
-            as it generate <p> elements and <p> elements can't be one into another
-          -->
-          {{ .Inner | markdownify }}
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+{{ partial "components/content/image-section" (merge .Params (dict "Context" .Page)) }}
