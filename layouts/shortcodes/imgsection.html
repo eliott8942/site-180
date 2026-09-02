@@ -1,4 +1,13 @@
 <!-- Noop operation to make hugo accepts inner values -->
-{{ $_ := .Inner }}
+{{ $image := .Get "image" }}
+{{ $side := .Get "side" }}
+{{ $title := .Get "title" }}
+{{ $inner := .Inner }}
 
-{{ partial "components/content/image-section" (merge .Params (dict "Context" .Page)) }}
+{{ partial "components/content/image-section" (dict 
+  "Context" .Page
+  "image" $image
+  "title" $title
+  "side" $side
+  "content" $inner
+) }}

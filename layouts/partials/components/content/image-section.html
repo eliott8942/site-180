@@ -1,4 +1,11 @@
-<div class="mt-8 first:mt-0 row even:flex-row-reverse items-center justify-between">
+{{ $side_style := "even:flex-row-reverse" }}
+{{ if eq .side "left" }}
+  {{ $side_style = "" }}
+{{ else if eq .side "right" }}
+  {{ $side_style = "flex-row-reverse" }}
+{{ end }}
+
+<div class="mt-8 first:mt-0 row {{ $side_style }} items-center justify-between">
   <div class="mb:md-0 md:col-5 mb-6 max-md:flex max-md:justify-center">
     {{ partial "media/image" (dict "Src" .image "Alt" "feature image" "Class" "!w-full max-md:!max-w-96" "Context" .Context) }}
   </div>
