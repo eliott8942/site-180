@@ -32,7 +32,7 @@
         slidesPerView: 1,
         slidesPerGroup: 1,
       },
-      768: {
+      654: {
         slidesPerView: 2,
         slidesPerGroup: 1,
       },
