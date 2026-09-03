@@ -1,7 +1,7 @@
 {{ $step := .Get "step" | default "1" }}
 
-<div class="relative h4 z-10 font-secondary text-blue-900 flex flex-wrap">
-  <div class="inline-block relative mr-2 shrink-0">
+<div class="relative h3 z-10 font-secondary text-blue-900 flex flex-wrap">
+  <div class="inline-flex items-center relative mr-2 shrink-0 text-h4 md:text-h3-sm">
     <div class="relative flex h-[1lh] aspect-square items-center justify-center border-4 rounded-full mr-2 border-blue-900 bg-white mx-4 z-10"> {{ $step }} </div>
     <div class="h-px absolute left-0 top-1/2 -translate-y-1/2 w-full border-2 z-0 border-blue-900"></div>
   </div>

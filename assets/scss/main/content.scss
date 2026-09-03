@@ -2,9 +2,9 @@
 .content {
   @apply prose max-w-none;
   @apply prose-headings:mb-[.3em] prose-headings:mt-[.6em];
-  @apply prose-h1:text-h3-sm;
-  @apply prose-h2:text-h4-sm;
-  @apply prose-h3:text-h5-sm;
+  @apply prose-h1:text-h3 prose-h1:max-md:text-h3-sm;
+  @apply prose-h2:text-h4 prose-h2:max-md:text-h4-sm;
+  @apply prose-h3:text-h5 prose-h3:max-md:text-h5-sm;
   @apply prose-img:max-w-full prose-img:rounded;
   @apply prose-hr:border-border prose-hr:dark:border-darkmode-border;
   @apply prose-p:text-base prose-p:text-text prose-p:dark:text-darkmode-text;

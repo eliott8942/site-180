@@ -149,6 +149,7 @@ module.exports = {
       })
 
       addVariant('2-children', '&:has(> :nth-child(2))')
+      addVariant('in-prose', '.content &')
       addVariant('not-disabled', '&:not(:disabled)')
 
       addBase({
