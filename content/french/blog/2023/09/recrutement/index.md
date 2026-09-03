@@ -30,7 +30,7 @@ Projets :
 
 {{< /imgsection >}}
 
-{{< imgsection image="recrutement2.jpg" title="Pôle Création" side="left" imgclass="rounded-xl" >}}
+{{< imgsection image="recrutement2.jpg" title="Pôle Création" imgclass="rounded-xl" >}}
 Développer le site web de 180°C avec des articles, des recettes, des vidéos et autres. Compétences en rédaction et/ou graphisme requises.
 
 Projets :
