@@ -12,9 +12,9 @@
 >
   {{ if eq $type "mail" }}
     <i class="fa-solid fa-envelope opacity-50 group-hover/link:opacity-100 scale-75"></i>
-    <span class="group-hover/link:underline underline-offset-2 decoration-2">{{ .Text }}</span>
+    <span class="underline underline-offset-2 decoration-black/20 hover:decoration-black decoration-2">{{ .Text }}</span>
   {{ else }}
-    <span class="group-hover/link:underline underline-offset-2 decoration-2">{{ .Text }}</span>
+    <span class="underline underline-offset-2 decoration-black/20 hover:decoration-black decoration-2">{{ .Text }}</span>
     <i class="fa-solid fa-arrow-up-right-from-square opacity-50 group-hover/link:opacity-100 scale-75"></i>
   {{ end }}
 </a>
