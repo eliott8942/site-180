@@ -1,0 +1,7 @@
+{{ $type := "" }}
+
+{{ if strings.HasPrefix . "mailto:" }}
+  {{ $type = "mail" }}
+{{ end }}
+
+{{ return $type }}

@@ -32,9 +32,16 @@
     {{ end }}
     {{ with .button }}
       {{ if .enable }}
+        {{ $type := partial "utils/url/determine-type" .link }}
+      
         <a class="btn btn-primary mt-6" href="{{ .link | relLangURL }}">
-          {{ .label }}
-          <i class="fa-solid fa-arrow-right"></i>
+          {{ if eq $type "mail" }}
+            <i class="fa-solid fa-envelope"></i>
+            {{ .label }}
+          {{ else }}
+            {{ .label }}
+            <i class="fa-solid fa-arrow-right"></i>
+          {{ end }}
         </a>
       {{ end }}
     {{ end }}

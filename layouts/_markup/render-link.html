@@ -1,3 +1,5 @@
+{{ $type := partial "utils/url/determine-type" .Destination }}
+
 <a 
   class="not-prose font-semibold hover:text-black group/link w-fit"
   href="{{ .Destination | safeURL }}"
@@ -8,6 +10,11 @@
     target="_blank" rel="noreferrer"
   {{ end }}
 >
-  <span class="group-hover/link:underline underline-offset-2 decoration-2">{{ .Text }}</span>
-  <i class="fa-solid fa-arrow-up-right-from-square opacity-50 group-hover/link:opacity-100 scale-75"></i>
+  {{ if eq $type "mail" }}
+    <i class="fa-solid fa-envelope opacity-50 group-hover/link:opacity-100 scale-75"></i>
+    <span class="group-hover/link:underline underline-offset-2 decoration-2">{{ .Text }}</span>
+  {{ else }}
+    <span class="group-hover/link:underline underline-offset-2 decoration-2">{{ .Text }}</span>
+    <i class="fa-solid fa-arrow-up-right-from-square opacity-50 group-hover/link:opacity-100 scale-75"></i>
+  {{ end }}
 </a>
