@@ -17,8 +17,8 @@
           {{ range site.Menus.footer_main }}
             <a
               class="block font-semibold hover:text-black group/link w-fit"
-              {{ if findRE `^http` .URL }}
-                target="_blank" rel="noopener"
+              {{ if partial "utils/url/is-external" .URL }}
+                target="_blank" rel="noreferrer"
               {{ end }}
               href="{{ .URL | relLangURL }}"
             >
@@ -50,8 +50,8 @@
       {{ range site.Menus.footer }}
         <a
           class="block hover:underline underline-offset-2"
-          {{ if findRE `^http` .URL }}
-            target="_blank" rel="noopener"
+          {{ if partial "utils/url/is-external" .URL }}
+            target="_blank" rel="noreferrer"
           {{ end }}
           href="{{ .URL | relLangURL }}"
         >

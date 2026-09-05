@@ -1,0 +1,11 @@
+{{ $url := urls.Parse . }}
+{{ $hostStr := getenv "HUGO_HOST_DOMAIN" }}
+{{ if not $hostStr }}
+  {{ errorf "HUGO_HOST_DOMAIN must be set to determine internal vs external links" }}
+{{ end }}
+{{ $isExternal := false }}
+{{ if $url.Host }}
+  {{ $host := urls.Parse $hostStr }}
+  {{ $isExternal = ne $url.Host $host.Host }}
+{{ end }}
+{{ return $isExternal }}

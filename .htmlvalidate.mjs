@@ -1,9 +1,15 @@
-{
+import { defineConfig } from "html-validate";
+
+export default defineConfig({
   "elements": [
     "html5"
   ],
   "extends": [
-    "html-validate:recommended"
+    "html-validate:recommended",
+    "custom-plugin:recommended"
+  ],
+  "plugins": [
+    "./.htmlvalidate.plugin.mjs",
   ],
   "rules": {
     "element-permitted-content": "error",
@@ -14,4 +20,4 @@
     "no-raw-characters": ["error", { "relaxed": true }],
     "valid-id": ["error", { "relaxed": true }]
   }
-}
+})

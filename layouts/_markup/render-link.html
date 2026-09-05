@@ -1,0 +1,13 @@
+<a 
+  class="not-prose font-semibold hover:text-black group/link w-fit"
+  href="{{ .Destination | safeURL }}"
+  {{ with .Title }}
+    title="{{ . }}"
+  {{ end }}
+  {{ if partial "utils/url/is-external" .Destination }}
+    target="_blank" rel="noreferrer"
+  {{ end }}
+>
+  <span class="group-hover/link:underline underline-offset-2 decoration-2">{{ .Text }}</span>
+  <i class="fa-solid fa-arrow-up-right-from-square opacity-50 group-hover/link:opacity-100 scale-75"></i>
+</a>
