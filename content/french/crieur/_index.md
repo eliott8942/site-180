@@ -13,7 +13,7 @@ sections:
     imagealt: "How to image"
 
   - title: "Comment suggérer une adresse ?"
-    content: 'Si tu souhaites ajouter une adresse, il te suffit de remplir ce <a href="https://docs.google.com/forms/d/e/1FAIpQLScGHtHfjQ7F1O0ZQxnow55NWiNM-r-cCGhcCGIGlziFJTSX3A/viewform">formulaire</a> et nous l''ajouterons sur la carte en moins de temps qu''il n''en faut pour crier l''heure !'
+    content: 'Si tu souhaites ajouter une adresse, il te suffit de remplir ce [formulaire](https://docs.google.com/forms/d/e/1FAIpQLScGHtHfjQ7F1O0ZQxnow55NWiNM-r-cCGhcCGIGlziFJTSX3A/viewform") et nous l''ajouterons sur la carte en moins de temps qu''il n''en faut pour crier l''heure !'
     image: "/images/crieur-suggest.png"
     imagealt: "Suggest place image"
 
