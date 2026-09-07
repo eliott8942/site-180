@@ -1,5 +1,5 @@
 {{ $url := urls.Parse . }}
-{{ $hostStr := getenv "HUGO_HOST_DOMAIN" }}
+{{ $hostStr := partial "utils/url/get-host-url" }}
 {{ if not $hostStr }}
   {{ errorf "HUGO_HOST_DOMAIN must be set to determine internal vs external links" }}
 {{ end }}

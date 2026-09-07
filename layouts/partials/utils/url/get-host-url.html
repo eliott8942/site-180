@@ -1,0 +1,9 @@
+{{ $hostStr := getenv "HUGO_HOST_DOMAIN" }}
+{{ if not $hostStr }}
+  <!-- Check if we're in production mode -->
+  {{ if ne (getenv "HUGO_IS_PRODUCTION_BUILD") "true" }}
+    {{ $hostStr = "https://localhost:1313/" }}
+  {{ end }}
+{{ end }}
+
+{{ return $hostStr }}
