@@ -10,7 +10,7 @@
       {{ $bg_logo := resources.Get .Site.Params.logo }}
       {{ $bg_logo = $bg_logo.Resize .Site.Params.logo_width }}
       {{ if .Site.Params.logo_webp }}
-        {{ $bg_logo = $bg_logo.Process "webp" }}
+        {{ $bg_logo = $bg_logo.Process hugo.Data.image.defaultEncoding }}
       {{ end }}
       
       <a class="navbar-brand block scale-none hover:scale-110 duration-75 logo-container" href="{{ site.BaseURL | relLangURL }}" style="--bg-logo-url:url({{ $bg_logo.RelPermalink }})">
