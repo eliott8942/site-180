@@ -106,7 +106,27 @@
 
   - [ ] 3D Rendering of the books
 
-- [ ] Events Schedule
+- [X] Events Schedule
+
+  - [X] Separators
+
+    - [X] Year
+
+  - [X] Upcoming Event Card
+
+    - [X] Optional kind : Tournament (Spice League)
+  
+    - [X] Status (Cancelled, Postponed)
+
+    - [X] Socials
+
+    - [X] Book we do sell at the event
+
+    - [X] Max count for small events (usefull for Spice League)
+
+  - [X] Past events
+
+    - [X] Past events card
 
 - [ ] Optimization
 
