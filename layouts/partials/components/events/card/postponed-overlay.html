@@ -1,0 +1,7 @@
+{{ $bg_image := resources.Get "images/events/postponed-bg.png" }}
+{{ $bg_image = $bg_image.Resize "x150" }}
+{{ $bg_image = $bg_image.Process hugo.Data.image.defaultEncoding }}
+
+<div class="absolute top-0 left-0 w-full h-full bg-[url({{ $bg_image.RelPermalink }})] bg-size-[auto_75px] bg-center bg-no-repeat flex items-center justify-center text-2xl text-white font-secondary font-semibold">
+  {{ i18n "postponed" }}
+</div>

@@ -1,0 +1,56 @@
+{{ $cancelled := eq .status "cancelled" }}
+{{ $postponed := eq .status "postponed" }}
+
+<div class="flex flex-col w-36 justify-between {{ if $cancelled }}  bg-[#eb7078] {{ else }} bg-primary {{ end }} border rounded-lg h-full overflow-hidden shadow-md">
+  <div class="h-4 w-full flex flex-row items-center justify-between">
+    <div class="ml-8 w-2 bg-black/80 aspect-square rounded-full"></div>
+    <div class="mr-8 w-2 bg-black/80 aspect-square rounded-full"></div>
+  </div>
+  
+  <div class="relative bg-white rounded-t-lg py-2 {{ if $cancelled }}  text-black/50 {{ else }} text-black {{ end }}">
+    {{ $start_time := time .start }}
+    {{ $end_time := time .end }}
+
+    {{ if and (eq $start_time.Year $end_time.Year) (eq $start_time.YearDay $end_time.YearDay) }}
+      <div class="flex flex-col items-center">
+        <div class="text-lg font-black"> {{ $start_time | time.Format "Jan" }} </div>
+        <div class="text-4xl font-semibold"> {{ $start_time | time.Format "02" }} </div>
+        <div class="text-sm text-gray-500 font-bold"> {{ $start_time | time.Format "15:04" }} - {{ $end_time | time.Format "15:04" }} </div>
+      </div>
+    {{ else if and (eq $start_time.Year $end_time.Year) (eq $start_time.Month $end_time.Month) }}
+      <div class="flex flex-col items-center">
+        <div class="text-lg font-black"> {{ $start_time | time.Format "Jan" }} </div>
+
+        <div>
+          <div class="text-4xl font-semibold">
+            {{ print ($start_time | time.Format "02") " - " ($end_time | time.Format "02") }}
+          </div>
+          <div class="text-sm text-gray-500 font-bold flex flex-row justify-between w-full"> 
+            <span> {{ $start_time | time.Format "15:04" }} </span>
+            <span> {{ $end_time | time.Format "15:04" }} </span>
+          </div>
+        </div>
+      </div>
+    {{ else }}
+      <div class="flex flex-row justify-center items-center">
+        <div class="flex flex-col items-center">
+          <div class="text-lg font-black"> {{ $start_time | time.Format "Jan" }} </div>
+          <div class="text-4xl font-semibold"> {{ $start_time | time.Format "02" }} </div>
+          <div class="text-sm text-gray-500 font-bold"> {{ $start_time | time.Format "15:04" }} </div>
+        </div>
+
+        <div class="text-4xl">&nbsp;-&nbsp;</div>
+        
+        <div class="flex flex-col items-center">
+          <div class="text-lg font-black"> {{ $end_time | time.Format "Jan" }} </div>
+          <div class="text-4xl font-semibold"> {{ $end_time | time.Format "02" }} </div>
+          <div class="text-sm text-gray-500 font-bold"> {{ $end_time | time.Format "15:04" }} </div>
+        </div>
+      </div>
+    {{ end }}
+
+    {{ if $postponed }}
+      {{ partial "components/events/card/postponed-overlay" }}
+    {{ end }}
+  </div>
+</div>

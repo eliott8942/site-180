@@ -1,0 +1,39 @@
+{{ define "main" }}
+  <section class="relative section-sm !pt-0 overflow-x-hidden">
+    <div class="w-full flex justify-start mb-4">
+      <a class="m-2 bg-white rounded-full border text-xl flex items-center text-dark dark:text-white lg:order-1 w-fit p-3 shadow-md" href="{{ "events/" | relURL }}"> <i class="fa-solid fa-arrow-left"></i> </a>
+    </div>
+    
+    <div class="relative container text-center section-pb z-20">
+      <h1>{{ .Title | title }}</h1>
+    </div>
+
+    {{ $buildTime := partial "utils/get-build-date" }}
+    {{ $buildYear := $buildTime.Year }}
+
+    {{ $pages := .Site.GetPage "events/data" }}
+
+    <div class="container">
+      {{ range $pages.Pages.Reverse }}
+        {{ $year := int (.File.ContentBaseName) }}
+
+        {{ if ge $year $buildYear }}
+          {{ continue }}
+        {{ end }}
+        
+        <div class="group/year mt-8 first:mt-0">
+          {{ partial "components/events/old/year-separator" $year }}
+
+          <!-- ceildiv(n / 2) = n / 2 + n % 2 (we're working with ints) -->
+          {{ $row_number := add (div (len .Pages) 2) (mod (len .Pages) 2) }}
+
+          <div class="grid gap-2 md:grid-flow-col md:grid-cols-2" style="grid-template-rows: repeat({{$row_number}}, minmax(0, auto));">
+            {{ range .Pages.ByParam "start" }}
+              {{ partial "components/events/old/card" . }}
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

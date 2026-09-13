@@ -14,9 +14,12 @@ main:
   - name: "Blog"
     url: "blog/"
     weight: 5
+  - name: "Events"
+    url: "events/"
+    weight: 6
   - name: "L'association"
     url: "association/"
-    weight: 6
+    weight: 7
 
 footer_main:
   - name: "A propos"

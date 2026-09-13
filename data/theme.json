@@ -36,7 +36,7 @@
   "fonts": {
     "font_family": {
       "primary": {
-        "base": "Heebo:wght@400;600",
+        "base": "Heebo:wght@400;600;700;800",
         "type": "sans-serif"
       },
       "secondary": {

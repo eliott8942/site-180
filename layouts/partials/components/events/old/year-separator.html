@@ -1,0 +1,30 @@
+{{ $bg1 := partial "utils/get-img" (dict "img" "images/events/bg-1.png") }}
+{{ $bg2 := partial "utils/get-img" (dict "img" "images/events/bg-2.png") }}
+{{ $bg3 := partial "utils/get-img" (dict "img" "images/events/bg-3.png") }}
+{{ $bg4 := partial "utils/get-img" (dict "img" "images/crieur/tops-bg.png") }}
+
+{{ $bg1 = $bg1.Resize "96x96" }}
+{{ $bg1 = $bg1.Process hugo.Data.image.defaultEncoding }}
+
+{{ $bg2 = $bg2.Resize "96x96" }}
+{{ $bg2 = $bg2.Process hugo.Data.image.defaultEncoding }}
+
+{{ $bg3 = $bg3.Resize "96x96" }}
+{{ $bg3 = $bg3.Process hugo.Data.image.defaultEncoding }}
+
+{{ $bg4 = $bg4.Resize "96x96" }}
+{{ $bg4 = $bg4.Process hugo.Data.image.defaultEncoding }}
+
+<div class="border-t-2 mt-8 first:mt-0 flex flex-row">
+  <div class="text-h2-sm shrink-0 mr-2">{{ . }}</div>
+  <div class="relative h-6 grow">
+    <div class="absolute h-full w-full z-10 bg-gradient-to-r from-white to-transparent"></div>
+    <div class="
+      h-full bg-size-[48px]
+      group-nth-last-mod-[0/4]/year:bg-[url({{$bg4.RelPermalink}})] 
+      group-nth-last-mod-[1/4]/year:bg-[url({{$bg1.RelPermalink}})]
+      group-nth-last-mod-[2/4]/year:bg-[url({{$bg2.RelPermalink}})]
+      group-nth-last-mod-[3/4]/year:bg-[url({{$bg3.RelPermalink}})]
+      "></div>
+  </div>
+</div>

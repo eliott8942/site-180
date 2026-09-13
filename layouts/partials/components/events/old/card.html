@@ -1,0 +1,34 @@
+<div class="flex flex-row">
+  <div class="h-[1lh] mr-2 flex flex-col items-end text-sm opacity-75 font-semibold">
+    {{ $start_time := time .Params.start }}
+    {{ $end_time := time .Params.end }}
+
+    {{ $same_day := and (eq $start_time.YearDay $end_time.YearDay) (eq $start_time.Year $end_time.Year) }}
+    {{ if $same_day }}
+      {{ $start_str := time.Format "02/01" $start_time }}
+      <div class="text-nowrap">
+        <i class="fa-solid fa-circle scale-50 -translate-y-0.5"></i>
+        {{ $start_str }}
+      </div>
+    {{ else }}
+      {{ $start_str := time.Format "02/01" $start_time }}
+      {{ $end_str := time.Format "02/01" $end_time  }}
+
+      <div class="text-nowrap">
+        <i class="fa-solid fa-circle scale-50 -translate-y-0.5"></i>
+        {{ $start_str }}
+      </div>
+      <div class="mt-1">
+        {{ print $end_str }}
+      </div>
+    {{ end }}
+  </div>
+  <div class="grow">
+    <h4 class="text-h4-sm leading-none"> {{ .Title }} </h4>
+
+    {{ $address := .Params.location.address }}
+    <div>
+      {{ print $address.postal_code " " $address.city }}
+    </div>
+  </div>
+</div>

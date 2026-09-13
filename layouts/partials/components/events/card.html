@@ -1,0 +1,76 @@
+{{ $cancelled := eq .Params.status "cancelled" }}
+
+<div class="group/entry mt-7">
+  <div class="relative bg-white border rounded-lg {{ if not $cancelled }} shadow-md {{ end }}">
+    {{ if $cancelled }}
+      <div class="absolute top-6 md:top-8 left-0 w-full h-full">
+        {{ partial "components/events/card/cancelled-overlay" (dict "class" "z-20")}}
+      </div>
+    {{ end }}
+    
+    <div class="
+      absolute top-0 -translate-y-1/4 {{ if $cancelled }} z-10 {{ else }} z-30 {{ end }}
+      scale-75
+      group-even/entry:right-0 group-even/entry:translate-x-1/4 group-even/entry:rotate-6 group-even/entry:mr-3
+      group-even/odd:left-0 group-odd/entry:-translate-x-1/4 group-odd/entry:-rotate-6 group-odd/entry:ml-3
+    ">
+      {{ with .Params.registration }}
+        <div class="
+          absolute top-0 -translate-y-1/4 z-10
+          group-odd/entry:right-0 group-odd/entry:translate-x-2/3 group-odd/entry:rotate-12 group-even/entry:mr-3
+          group-even/odd:left-0 group-even/entry:-translate-x-2/3 group-even/entry:-rotate-12 group-odd/entry:ml-3
+        ">
+          {{ partial "components/events/card/people-number" (dict "number" 20 "status" .Params.status) }}
+        </div>
+      {{ end }}
+      
+      {{ partial "components/events/card/day" (dict "start" .Params.start "end" .Params.end "status" .Params.status) }}
+    </div>
+  
+    <div class="w-full h-full flex flex-col overflow-hidden {{ if $cancelled }} opacity-60 {{ end }}">
+      <div class="grow mb-4 p-3">
+        <div class="w-28 h-16 md:h-18 group-odd/entry:float-left group-even/entry:float-right"></div>
+  
+        <h3>
+          {{ if eq .Params.event_kind "tournament" }} 🏆 {{ end }}
+          {{ .Title }}
+        </h3>
+  
+        {{ $address := .Params.location.address }}
+        <div>
+          <i class="fa-solid fa-location-dot"></i>
+          {{ print $address.address ", " $address.postal_code " " $address.city }}
+        </div>
+      </div>
+
+      {{ if .Params.registration }}
+        {{ $disabled := and .Params.status (in (slice "postponed" "cancelled") .Params.status) }}
+
+        <div class="flex justify-center mb-2">
+          {{ if $disabled }}
+            <div class="bg-gray-500 p-2 px-4 rounded-full text-white font-semibold text-xl opacity-50"> <i class="fa-solid fa-pencil"></i> {{ i18n "register" }} </div>
+          {{ else }}
+            <a class="bg-primary p-2 px-4 rounded-full text-white font-semibold text-xl"> <i class="fa-solid fa-pencil"></i> {{ i18n "register" }} </a>
+          {{ end }}
+        </div>
+      {{ end }}
+      
+      {{ $selling_books := .Params.selling | default slice }}
+      {{ $link := .Params.link | default slice }}
+
+      {{ if gt (len $selling_books) 0 }}
+        <div class="flex flex-row-reverse flex-wrap justify-between items-end mt-2">
+          {{ if gt (len $link) 0 }}
+            {{ partial "components/events/card/socials" (dict "link" $link "scope" . "disabled" $cancelled) }}
+          {{ end }}
+
+          <div class="grow">
+            {{ partial "components/events/card/selling" (dict "books" $selling_books "scope" . "class" "shrink-0 grow-0 w-fit") }}
+          </div>
+        </div>
+      {{ else }}
+        {{ partial "components/events/card/socials" (dict "link" $link "scope" . "disabled" $cancelled "class" "justify-end") }}
+      {{ end }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+{{ $time := "" }}
+{{ with hugo.Data.dev.override.buildDate }}
+  {{ if eq (getenv "HUGO_IS_PRODUCTION_BUILD") "true" }}
+    {{ $time = now }}
+  {{ else }}
+    {{ $time = time . }}
+  {{ end }}
+{{ else }}
+  {{ $time = now }}
+{{ end }}
+
+{{ return $time }}

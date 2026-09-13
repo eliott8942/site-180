@@ -1,0 +1,57 @@
+<div class="flex flex-row m-2 {{ .class }}">
+  {{ $scope := .scope }}
+  {{ $disabled := .disabled }}
+  {{ range (sort .link "social") }}
+    <div class="border-r border-black/20 last:border-0 group/social">
+      {{ if $disabled }}
+        <div class="h-full py-1 px-2 mx-1 group-first/social:ml-0 group-last/social:mr-0 opacity-50">
+          {{ if eq .social "website" }}
+            <div class="h-full">
+              {{ partial "media/image" (dict
+                "Src" "images/icons/www.svg"
+                "Alt" "website"
+                "Class" "!h-6 !w-auto"
+              ) }}
+            </div>
+          {{ else }}
+            <!-- 
+              Note: we set the width of the image here instead of the height,
+              because setting only the height instead causes the browsers to
+              panic a lot. I didn't find an easy solution to what was happening.
+            -->
+            {{ partial "components/social/icon" (dict 
+              "scope" $scope
+              "network" .social
+              "size" "24x"
+              "variant" "black"
+            )}}
+          {{ end }}
+        </div>
+      {{ else }}
+        <a href="{{ .url }}" target="_blank" rel="noreferrer" class="h-full block rounded-md hover:bg-black/15 py-1 px-2 mx-1 group-first/social:ml-0 group-last/social:mr-0">
+          {{ if eq .social "website" }}
+            <div class="h-full">
+              {{ partial "media/image" (dict
+                "Src" "images/icons/www.svg"
+                "Alt" "website"
+                "Class" "!h-6 !w-auto"
+              ) }}
+            </div>
+          {{ else }}
+            <!-- 
+              Note: we set the width of the image here instead of the height,
+              because setting only the height instead causes the browsers to
+              panic a lot. I didn't find an easy solution to what was happening.
+            -->
+            {{ partial "components/social/icon" (dict 
+              "scope" $scope
+              "network" .social
+              "size" "24x"
+              "variant" "black"
+            )}}
+          {{ end }}
+        </a>
+      {{ end }}
+    </div>
+  {{ end }}
+</div>

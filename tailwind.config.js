@@ -68,6 +68,9 @@ module.exports = {
       padding: "2rem",
     },
     extend: {
+      width: {
+        "11/10": "110%",
+      },
       borderColor: {
         primary: theme.colors.default.theme_color.primary,
         secondary: theme.colors.default.theme_color.secondary,
@@ -124,6 +127,8 @@ module.exports = {
         'centered-lg': '0 0px 15px rgb(0 0 0 / 0.1)',
         'inner-xl': 'inset 0 20px 25px rgb(0 0 0 / 0.1)',
         'inner-centered': 'inset 0 0px 4px rgb(0 0 0 / 0.1)',
+        'inner-centered-lg': 'inset 0 0px 15px rgb(0 0 0 / 0.1)',
+        'inner-reverted': 'inset 0 -2px 4px rgb(0 0 0 / 0.1)'
       }
     },
   },
@@ -141,7 +146,7 @@ module.exports = {
         5: "3rem",
       },
     }),
-    require('tailwindcss/plugin')(( { matchUtilities, addVariant, theme, addBase }) => {
+    require('tailwindcss/plugin')(( { matchUtilities, matchVariant, addVariant, theme, addBase }) => {
       matchUtilities({
         'bg-size': (value) => ({
           'background-size': value
@@ -151,6 +156,24 @@ module.exports = {
       addVariant('2-children', '&:has(> :nth-child(2))')
       addVariant('in-prose', '.content &')
       addVariant('not-disabled', '&:not(:disabled)')
+
+
+      matchVariant('group-nth-mod', (value, { modifier }) => {
+        const [offset, base] = value.split('/').map(Number)
+        const formula = offset === 0 ? `${base}n` : `${base}n + ${offset}`
+        const group = modifier
+          ? `:merge(.group\\/${modifier})`
+          : ':merge(.group)'
+        return `${group}:nth-child(${formula}) &`
+      })
+      matchVariant('group-nth-last-mod', (value, { modifier }) => {
+        const [offset, base] = value.split('/').map(Number)
+        const formula = offset === 0 ? `${base}n` : `${base}n + ${offset}`
+        const group = modifier
+          ? `:merge(.group\\/${modifier})`
+          : ':merge(.group)'
+        return `${group}:nth-last-child(${formula}) &`
+      })
 
       addBase({
         ':root': {

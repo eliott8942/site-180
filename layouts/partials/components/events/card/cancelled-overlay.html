@@ -1,0 +1,10 @@
+{{ $banderoll_bg := resources.Get "images/events/cancelled-banderoll.png" }}
+{{ $banderoll_bg = $banderoll_bg.Resize "x64" }}
+{{ $banderoll_bg = $banderoll_bg.Process hugo.Data.image.defaultEncoding }}
+
+<div class="absolute top-1/2 left-1/2 w-11/10 h-8 bg-[url({{ $banderoll_bg.RelPermalink }})] bg-size-[auto_32px] -translate-x-1/2 -translate-y-1/2 rotate-6 shadow-md text-center font-semibold text-black text-2xl {{ .class }}">
+  {{ i18n "cancelled" }}
+</div>
+<div class="absolute top-1/2 left-1/2 w-11/10 h-8 bg-[url({{ $banderoll_bg.RelPermalink }})] bg-size-[auto_32px] -translate-x-1/2 -translate-y-1/2 -rotate-6 shadow-md text-center font-semibold text-black text-2xl {{ .class }}">
+  {{ i18n "cancelled" }}
+</div>

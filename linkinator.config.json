@@ -10,6 +10,7 @@
     "t.me",
     "www.instagram.com",
     "www.linkedin.com",
+    "docs.google.com",
     "%23*"
   ],
   "silent": true,

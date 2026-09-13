@@ -22,6 +22,15 @@
 - id: share
   translation: Partager
 
+- id: cancelled
+  translation: Annulé
+
+- id: postponed
+  translation: Reporté
+
+- id: register
+  translation: S'inscrire
+
 - id: search_input_placeholder
   translation: Rechercher un article ...
 
