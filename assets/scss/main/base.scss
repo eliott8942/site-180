@@ -32,7 +32,7 @@ h3,
 
 h4,
 .h4 {
-  @apply text-h4 font-medium;
+  @apply text-h4-sm md:text-h4 font-medium;
 }
 
 h5,
