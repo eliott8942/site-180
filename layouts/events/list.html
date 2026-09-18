@@ -1,18 +1,24 @@
 {{ define "main" }}
   <section class="relative section-sm !pt-0 overflow-x-hidden">
     <div class="w-full flex justify-end mb-4">
-      <a class="m-2 bg-white rounded-full border text-xl flex items-center text-dark dark:text-white lg:order-1 w-fit p-3 shadow-md" href="{{ "events/past-events" | relURL }}"> <i class="fa-solid fa-clock-rotate-left"></i> </a>
-    </div>
-
-    <div class="relative container text-center section-pb z-20">  
-      <h1>{{ .Title }}</h1>
+      <a 
+        class="m-2 bg-white rounded-full border text-xl flex items-center text-dark dark:text-white lg:order-1 w-fit p-3 shadow-md" 
+        href="{{ "events/past-events" | relURL }}" 
+        aria-label="Past events"
+      >
+        <i class="fa-solid fa-clock-rotate-left"></i>
+      </a>
     </div>
 
     {{ $buildTime := partial "utils/get-build-date" }}
     {{ $buildYear := $buildTime.Year }}
 
+    {{ $listPage := . }}
+    
     {{ $pages := .Site.GetPage "events/data" }}
-    {{ range $pages.Pages }}
+    {{ $yearShown := 0 }}
+    {{ $lastYearShown := $buildYear }}
+    {{ range $pages.Pages.ByParam "File.BaseFileName" }}
       {{ $year := int (.File.ContentBaseName) }}
 
       {{ if lt $year $buildYear }}
@@ -21,6 +27,15 @@
       {{ if ge $year (add $buildYear 2) }}
         {{ break }}
       {{ end }}
+
+      {{ if eq $yearShown 0 }}
+        <div class="relative container text-center section-pb z-20">  
+          <h1>{{ $listPage.Title }}</h1>
+        </div>
+      {{ end }}
+
+      {{ $yearShown = add $yearShown 1 }}
+      {{ $lastYearShown = $year }}
       
       <div class="container group/year mt-8 first:mt-0">
         {{ partial "components/events/separator/year" $year }}
@@ -28,7 +43,7 @@
         <!-- ceildiv(n / 2) = n / 2 + n % 2 (we're working with ints) -->
         {{ $row_number := add (div (len .Pages) 2) (mod (len .Pages) 2) }}
 
-        <div class="grid gap-2 md:gap-3 md:grid-cols-2 xl:grid-cols-3">
+        <div class="grid gap-2 md:gap-3 xl:gap-x-8 md:grid-cols-2 xl:grid-cols-3">
           {{ $pages := .Pages.ByParam "start" }}
 
           {{ range .Pages.ByParam "start" }}
@@ -36,6 +51,45 @@
           {{ end }}
         </div>
       </div>
+    {{ end }}
+
+    {{ if eq $yearShown 0 }}
+      <div class="container text-center">
+        <div class="row justify-center">
+          <div class="sm:col-10 md:col-8 lg:col-6 flex flex-col items-center">
+            {{ partial "media/image" (dict
+              "Src" "images/events/empty.svg"
+              "Alt" "empty image"
+              "Class" "!h-40 mb-8"
+            ) }}
+            <h1 class="h3 mb-4">
+              Oh... on dirais qu'il n'y a pas d'evenements à venir !
+            </h1>
+            <div class="content">
+              <p>
+                Reviens peut etre plus tard ?
+              </p>
+            </div>
+            <a
+              href="{{ site.BaseURL | relLangURL }}"
+              class="btn btn-primary mt-8"
+            >
+              Page d'acceuil
+            </a>
+          </div>
+        </div>
+      </div>
+    {{ else }}
+      {{ $lastPage := index (last 1 ($pages.Pages.ByParam "File.BaseFileName")) 0 }}
+      {{ $nextYear := add $lastYearShown 1 }}
+      {{ $lastYear := int ($lastPage.File.ContentBaseName) }}
+
+      {{ if le $nextYear $lastYear }}
+        <div class="relative pt-8 container">
+          {{ partial "components/events/separator/year" $nextYear }}
+          <div class="absolute bottom-0 left-0 w-full h-[200%] bg-gradient-to-b from-transparent to-white"></div>
+        </div>
+      {{ end }}
     {{ end }}
   </section>
 {{ end }}
