@@ -1,7 +1,13 @@
 {{ define "main" }}
   <section class="relative section-sm !pt-0 overflow-x-hidden">
     <div class="w-full flex justify-start mb-4">
-      <a class="m-2 bg-white rounded-full border text-xl flex items-center text-dark dark:text-white lg:order-1 w-fit p-3 shadow-md" href="{{ "events/" | relURL }}"> <i class="fa-solid fa-arrow-left"></i> </a>
+      <a 
+        class="m-2 bg-white rounded-full border text-xl flex items-center text-dark dark:text-white lg:order-1 w-fit p-3 shadow-md" 
+        href="{{ "events/" | relURL }}"
+        aria-label="Return"
+      > 
+        <i class="fa-solid fa-arrow-left"></i>
+      </a>
     </div>
     
     <div class="relative container text-center section-pb z-20">
