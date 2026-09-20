@@ -6,7 +6,7 @@
       <div class="grow flex items-center justify-center drop-shadow-none group-hover/book-card:drop-shadow-2xl scale-95 group-hover/book-card:scale-100 transition-all duration-300">
         {{ partial "components/fringale/book-3d" (dict 
           "image" $image 
-          "class" "!max-h-96 !w-auto" 
+          "class" "!max-h-96 !w-auto shadow-lg group-hover/book-card:shadow-none duration-300" 
           "side_color" .Params.side_color 
           "context" . 
           "size" "x768"
