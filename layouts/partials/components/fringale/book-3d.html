@@ -3,8 +3,9 @@
 {{ $side_color := .side_color }}
 {{ $context := .context }}
 {{ $size := .size }}
+{{ $effects := .effects | default "cell-shading" }}
 
-<div class="card-hover-3d cell-shading group/book-3d" style="--card-tickness:23px;--max-tilt:30deg">
+<div class="card-hover-3d {{ $effects }} group/book-3d w-fit" style="--card-tickness:23px;--max-tilt:30deg;--hover-scale:1.03;--hover-y-offset:-4px;">
   <div class="card">
     <div class="outline-1 outline-black/15 face-front shadow-xl outline group-hover/book-3d:outline-0">
       {{ partial "media/image" (dict "Src" $image "Alt" .Title "Class" $class "Context" $context "Size" .size "Alt" "book front image") }}

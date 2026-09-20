@@ -31,8 +31,8 @@ function initHover3DEffect() {
             (var(--px) - 0.5) * var(--max-tilt) * 2 * 1
           )
         )
-        scale3d(1.03, 1.03, 1.03)
-        translateY(-4px)`;
+        scale3d(var(--hover-scale), var(--hover-scale), var(--hover-scale))
+        translateY(var(--hover-y-offset))`;
       container.classList.add('effect-active');
     }
 
