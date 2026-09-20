@@ -54,6 +54,7 @@
 
 /* Class applied directly to <input class="hide-default-controls" ...> */
 input.hide-default-controls {
+  appearance: textfield;
   -moz-appearance: textfield;
 
   &::-webkit-outer-spin-button,
