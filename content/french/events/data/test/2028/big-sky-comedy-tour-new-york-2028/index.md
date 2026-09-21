@@ -11,12 +11,11 @@ start: "2028-06-13T17:30:00"
 end: "2028-06-16T06:49:22"
 link:
   - social: "tiktok"
-    url: "https://tiktok.com/bigskycomedytour"
+    url: "https://www.google.com"
   - social: "x"
-    url: "https://x.com/bigskycomedytour"
+    url: "https://www.google.com"
   - social: "website"
-    url: "https://www.bigskycomedytour.org"
+    url: "https://www.google.com"
   - social: "facebook"
-    url: "https://facebook.com/bigskycomedytour"
+    url: "https://www.google.com"
 ---
-Get ready for Big Sky Comedy Tour, taking place right in the heart of New York. There will be food, music, and plenty of activities to keep the crowd entertained. All ages are welcome, so bring the whole crew.

@@ -11,8 +11,8 @@ start: "2025-10-19T13:15:00"
 end: "2025-10-25T11:50:22"
 link:
   - social: "facebook"
-    url: "https://facebook.com/neonnightrun"
+    url: "https://www.google.com"
   - social: "website"
-    url: "https://www.neonnightrun.events"
+    url: "https://www.google.com"
 ---
 Neon Night Run is back, and this year's edition promises to be bigger than ever in Detroit. Local artists, makers, and performers will be on hand throughout the event. All ages are welcome, so bring the whole crew.

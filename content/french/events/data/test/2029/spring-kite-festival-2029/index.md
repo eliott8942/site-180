@@ -11,12 +11,11 @@ start: "2029-02-25T12:15:00"
 end: "2029-02-25T20:15:00"
 link:
   - social: "facebook"
-    url: "https://facebook.com/springkitefestival"
+    url: "https://www.google.com"
   - social: "tiktok"
-    url: "https://tiktok.com/springkitefestival"
+    url: "https://www.google.com"
   - social: "website"
-    url: "https://www.springkitefestival.com"
+    url: "https://www.google.com"
   - social: "instagram"
-    url: "https://instagram.com/springkitefestival"
+    url: "www.google.com"
 ---
-Spring Kite Festival is back, and this year's edition promises to be bigger than ever in Houston. Vendors, workshops, and pop-up stands will line the venue for the occasion. Rain or shine, the show goes on — see you there!

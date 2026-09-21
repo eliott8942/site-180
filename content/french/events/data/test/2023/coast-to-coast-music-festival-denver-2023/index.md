@@ -11,9 +11,9 @@ start: "2023-09-04T20:45:00"
 end: "2023-09-04T23:45:00"
 link:
   - social: "website"
-    url: "https://www.coasttocoastmusicfes.com"
+    url: "https://www.google.com"
   - social: "tiktok"
-    url: "https://tiktok.com/coasttocoastmusicfes"
+    url: "https://www.google.com"
   - social: "x"
-    url: "https://x.com/coasttocoastmusicfes"
+    url: "https://www.google.com"
 ---

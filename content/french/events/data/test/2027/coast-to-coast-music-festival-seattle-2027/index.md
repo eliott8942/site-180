@@ -11,9 +11,9 @@ start: "2027-05-12T16:45:00"
 end: "2027-05-18T20:06:47"
 link:
   - social: "facebook"
-    url: "https://facebook.com/coasttocoastmusicfes"
+    url: "https://www.google.com"
   - social: "website"
-    url: "https://www.coasttocoastmusicfes.com"
+    url: "https://www.google.com"
   - social: "tiktok"
-    url: "https://tiktok.com/coasttocoastmusicfes"
+    url: "https://www.google.com"
 ---

@@ -14,5 +14,5 @@ selling:
   - "fringale/volume2"
 link:
   - social: "x"
-    url: "https://x.com/localauthorsbookfair"
+    url: "https://www.google.com"
 ---

@@ -16,9 +16,9 @@ selling:
   - "fringale/volume2"
 link:
   - social: "tiktok"
-    url: "https://tiktok.com/voltagenationtour"
+    url: "https://www.google.com"
   - social: "x"
-    url: "https://x.com/voltagenationtour"
+    url: "https://www.google.com"
   - social: "website"
-    url: "https://www.voltagenationtour.com"
+    url: "https://www.google.com"
 ---

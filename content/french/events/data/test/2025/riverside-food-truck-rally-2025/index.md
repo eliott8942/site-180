@@ -11,9 +11,9 @@ start: "2025-04-01T07:00:00"
 end: "2025-04-01T08:00:00"
 link:
   - social: "facebook"
-    url: "https://facebook.com/riversidefoodtruckra"
+    url: "https://www.google.com"
   - social: "tiktok"
-    url: "https://tiktok.com/riversidefoodtruckra"
+    url: "https://www.google.com"
   - social: "instagram"
-    url: "https://instagram.com/riversidefoodtruckra"
+    url: "https://www.google.com"
 ---

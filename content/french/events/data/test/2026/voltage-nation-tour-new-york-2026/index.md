@@ -12,9 +12,9 @@ end: "2026-02-01T15:00:00"
 status: "cancelled"
 link:
   - social: "tiktok"
-    url: "https://tiktok.com/voltagenationtour"
+    url: "https://www.google.com"
   - social: "x"
-    url: "https://x.com/voltagenationtour"
+    url: "https://www.google.com"
   - social: "facebook"
-    url: "https://facebook.com/voltagenationtour"
+    url: "https://www.google.com"
 ---

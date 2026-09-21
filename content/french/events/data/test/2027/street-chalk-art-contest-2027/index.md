@@ -11,5 +11,5 @@ start: "2027-05-17T13:30:00"
 end: "2027-05-23T17:11:08"
 link:
   - social: "instagram"
-    url: "https://instagram.com/streetchalkartcontes"
+    url: "https://www.google.com"
 ---

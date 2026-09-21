@@ -11,9 +11,9 @@ start: "2024-07-21T13:15:00"
 end: "2024-07-21T15:15:00"
 link:
   - social: "website"
-    url: "https://www.oldtownantiquemarket.org"
+    url: "https://www.google.com"
   - social: "instagram"
-    url: "https://instagram.com/oldtownantiquemarket"
+    url: "https://www.google.com"
   - social: "x"
-    url: "https://x.com/oldtownantiquemarket"
+    url: "https://www.google.com"
 ---

@@ -11,9 +11,9 @@ start: "2024-05-17T18:15:00"
 end: "2024-05-19T20:17:46"
 link:
   - social: "website"
-    url: "https://www.charityfunrun.org"
+    url: "https://www.google.com"
   - social: "tiktok"
-    url: "https://tiktok.com/charityfunrun"
+    url: "https://www.google.com"
   - social: "facebook"
-    url: "https://facebook.com/charityfunrun"
+    url: "https://www.google.com"
 ---

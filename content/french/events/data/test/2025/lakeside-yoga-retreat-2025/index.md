@@ -11,5 +11,5 @@ start: "2025-02-15T18:00:00"
 end: "2025-02-16T00:00:00"
 link:
   - social: "facebook"
-    url: "https://facebook.com/lakesideyogaretreat"
+    url: "https://www.google.com"
 ---

@@ -11,8 +11,7 @@ start: "2029-04-09T11:30:00"
 end: "2029-04-11T10:08:10"
 link:
   - social: "tiktok"
-    url: "https://tiktok.com/starlightanthemstour"
+    url: "https://www.google.com"
   - social: "instagram"
-    url: "https://instagram.com/starlightanthemstour"
+    url: "https://www.google.com"
 ---
-Starlight Anthems Tour kicks off in Atlanta, welcoming visitors from near and far. There will be food, music, and plenty of activities to keep the crowd entertained. Follow us online for the latest updates and schedule changes.

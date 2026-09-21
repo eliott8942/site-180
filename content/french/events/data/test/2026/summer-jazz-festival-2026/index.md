@@ -13,8 +13,8 @@ event_kind: "tournament"
 status: "postponed"
 registration:
   max_people: 10
-  link: test
+  link: "https://www.google.com"
 link:
   - social: "tiktok"
-    url: "https://tiktok.com/summerjazzfestival"
+    url: "https://www.google.com"
 ---

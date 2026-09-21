@@ -11,9 +11,9 @@ start: "2025-11-21T16:00:00"
 end: "2025-11-22T00:00:00"
 link:
   - social: "facebook"
-    url: "https://facebook.com/downtownartwalk"
+    url: "https://www.google.com"
   - social: "tiktok"
-    url: "https://tiktok.com/downtownartwalk"
+    url: "https://www.google.com"
   - social: "website"
-    url: "https://www.downtownartwalk.com"
+    url: "https://www.google.com"
 ---

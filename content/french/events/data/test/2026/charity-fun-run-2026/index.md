@@ -14,11 +14,11 @@ selling:
   - "fringale/volume2"
 link:
   - social: "tiktok"
-    url: "https://tiktok.com/charityfunrun"
+    url: "https://www.google.com"
   - social: "website"
-    url: "https://www.charityfunrun.com"
+    url: "https://www.google.com"
   - social: "instagram"
-    url: "https://instagram.com/charityfunrun"
+    url: "https://www.google.com"
   - social: "facebook"
-    url: "https://facebook.com/charityfunrun"
+    url: "https://www.google.com"
 ---

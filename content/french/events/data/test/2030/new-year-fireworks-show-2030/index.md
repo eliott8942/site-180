@@ -11,8 +11,7 @@ start: "2030-07-13T17:15:00"
 end: "2030-07-14T01:15:00"
 link:
   - social: "facebook"
-    url: "https://facebook.com/newyearfireworksshow"
+    url: "https://www.google.com"
   - social: "x"
-    url: "https://x.com/newyearfireworksshow"
+    url: "https://www.google.com"
 ---
-New Year Fireworks Show kicks off in Brooklyn, welcoming visitors from near and far. The lineup features a mix of local talent and special guest appearances. Bring your friends and family for a day to remember.

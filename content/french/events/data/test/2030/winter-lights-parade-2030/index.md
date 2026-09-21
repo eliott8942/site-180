@@ -11,10 +11,9 @@ start: "2030-03-28T13:15:00"
 end: "2030-03-28T17:15:00"
 link:
   - social: "tiktok"
-    url: "https://tiktok.com/winterlightsparade"
+    url: "https://www.google.com"
   - social: "instagram"
-    url: "https://instagram.com/winterlightsparade"
+    url: "https://www.google.com"
   - social: "website"
-    url: "https://www.winterlightsparade.org"
+    url: "https://www.google.com"
 ---
-Winter Lights Parade is back, and this year's edition promises to be bigger than ever in Anchorage. Local artists, makers, and performers will be on hand throughout the event. All ages are welcome, so bring the whole crew.

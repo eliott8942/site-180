@@ -11,5 +11,5 @@ start: "2024-06-27T18:30:00"
 end: "2024-06-27T20:30:00"
 link:
   - social: "facebook"
-    url: "https://facebook.com/echohorizonworldtour"
+    url: "https://www.google.com"
 ---

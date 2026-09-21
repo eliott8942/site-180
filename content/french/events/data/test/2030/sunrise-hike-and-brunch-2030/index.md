@@ -11,10 +11,9 @@ start: "2030-11-04T15:15:00"
 end: "2030-11-04T18:15:00"
 link:
   - social: "tiktok"
-    url: "https://tiktok.com/sunrisehikeandbrunch"
+    url: "https://www.google.com"
   - social: "facebook"
-    url: "https://facebook.com/sunrisehikeandbrunch"
+    url: "https://www.google.com"
   - social: "instagram"
-    url: "https://instagram.com/sunrisehikeandbrunch"
+    url: "https://www.google.com"
 ---
-Get ready for Sunrise Hike & Brunch, taking place right in the heart of Philadelphia. Expect live entertainment, local vendors, and something for everyone in the family. Rain or shine, the show goes on — see you there!

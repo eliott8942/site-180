@@ -12,5 +12,5 @@ end: "2027-01-15T04:12:27"
 status: "postponed"
 link:
   - social: "tiktok"
-    url: "https://tiktok.com/voltagenationtour"
+    url: "https://www.google.com"
 ---

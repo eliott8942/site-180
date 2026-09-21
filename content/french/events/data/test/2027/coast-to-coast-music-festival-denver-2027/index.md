@@ -14,9 +14,9 @@ selling:
   - "fringale/volume2"
 link:
   - social: "instagram"
-    url: "https://instagram.com/coasttocoastmusicfes"
+    url: "https://www.google.com"
   - social: "tiktok"
-    url: "https://tiktok.com/coasttocoastmusicfes"
+    url: "https://www.google.com"
   - social: "website"
-    url: "https://www.coasttocoastmusicfes.com"
+    url: "https://www.google.com"
 ---

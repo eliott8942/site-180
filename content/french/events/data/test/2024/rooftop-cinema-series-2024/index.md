@@ -11,9 +11,9 @@ start: "2024-01-22T17:00:00"
 end: "2024-01-27T03:52:48"
 link:
   - social: "x"
-    url: "https://x.com/rooftopcinemaseries"
+    url: "https://www.google.com"
   - social: "facebook"
-    url: "https://facebook.com/rooftopcinemaseries"
+    url: "https://www.google.com"
   - social: "tiktok"
-    url: "https://tiktok.com/rooftopcinemaseries"
+    url: "https://www.google.com"
 ---

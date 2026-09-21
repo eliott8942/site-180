@@ -11,12 +11,11 @@ start: "2029-06-18T13:45:00"
 end: "2029-06-18T17:45:00"
 link:
   - social: "website"
-    url: "https://www.starlightanthemstour.org"
+    url: "https://www.google.com"
   - social: "facebook"
-    url: "https://facebook.com/starlightanthemstour"
+    url: "https://www.google.com"
   - social: "x"
-    url: "https://x.com/starlightanthemstour"
+    url: "https://www.google.com"
   - social: "tiktok"
-    url: "https://tiktok.com/starlightanthemstour"
+    url: "https://www.google.com"
 ---
-Join us for Starlight Anthems Tour, a highlight of the local calendar in Dallas. Local artists, makers, and performers will be on hand throughout the event. Arrive early, as this event tends to draw a big crowd.

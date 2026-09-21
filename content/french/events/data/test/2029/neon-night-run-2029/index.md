@@ -11,8 +11,7 @@ start: "2029-08-20T19:45:00"
 end: "2029-08-25T08:04:08"
 link:
   - social: "instagram"
-    url: "https://instagram.com/neonnightrun"
+    url: "https://www.google.com"
   - social: "website"
-    url: "https://www.neonnightrun.org"
+    url: "https://www.google.com"
 ---
-Neon Night Run returns to Detroit, bringing the community together for a memorable time. Vendors, workshops, and pop-up stands will line the venue for the occasion. Arrive early, as this event tends to draw a big crowd.
