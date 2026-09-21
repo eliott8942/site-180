@@ -1,0 +1,76 @@
+{{ $buildTime := partial "utils/get-build-date" }}
+{{ $buildYear := $buildTime.Year }}
+
+{{ $pages := .Site.GetPage "events/data" }}
+
+{{ $yearShown := 0 }}
+{{ $lastYearShown := $buildYear }}
+
+{{ $id := .Path }}
+{{ $id = after 1 $id }}
+
+<section class="section-pb-sm w-full bg-gradient-reverse">
+  <div class="md:container max-md:mx-4">
+    <div class="rounded-lg border border-black/20 bg-white shadow-md overflow-hidden">
+      <div class="text-center z-20 py-4 px-4 border-b border-black/20 bg-gray-200 shadow-lg">  
+        <h2 class="h3 font-tertiary font-extrabold md:col-10 lg:col-8 xl:col-6 mx-auto text-center">
+          Points de vente(s)
+        </h2>
+      </div>
+
+      {{ range $pages.Pages.ByParam "File.BaseFileName" }}
+        {{ $year := int (.File.ContentBaseName) }}
+      
+        {{ if lt $year $buildYear }}
+          {{ continue }}
+        {{ end }}
+        {{ if ge $year (add $buildYear 2) }}
+          {{ break }}
+        {{ end }}
+    
+        {{ $eventsToShow := slice }}
+    
+        {{ $pages := .Pages.ByParam "start" }}
+        {{ range $event := .Pages.ByParam "start" }}
+          {{ if in (slice "cancelled" "postponed") $event.Params.status }}
+            {{ continue }}
+          {{ end }}
+          
+          {{ with $event.Params.selling }}
+            {{ if in . $id }}
+              {{ $eventsToShow = $eventsToShow | append $event }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+    
+        {{ if gt (len $eventsToShow) 0 }}
+          {{ $yearShown = add $yearShown 1 }}
+          {{ $lastYearShown = $year }}
+        
+          <div class="relative group/year first:mt-0">
+            <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 z-10 bg-white font-bold font-secondary text-2xl py-0.5 px-2 rounded-md border border-black/20 leading-5">
+              {{ $year }}
+            </div>
+            
+            {{ range $eventsToShow }}
+              {{ partial "components/fringale/selling-section/card" . }}
+            {{ end }}
+          </div>
+        {{ end }}
+      {{ end }}
+      {{ if eq $yearShown 0 }}
+        <div class="text-center">
+          Pas encore
+        </div>
+      {{ else }}
+        {{ $lastPage := index (last 1 ($pages.Pages.ByParam "File.BaseFileName")) 0 }}
+        {{ $nextYear := add $lastYearShown 1 }}
+        {{ $lastYear := int ($lastPage.File.ContentBaseName) }}
+      
+        {{ if le $nextYear $lastYear }}
+          
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</section>

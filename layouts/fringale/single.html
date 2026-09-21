@@ -1,4 +1,6 @@
 {{ define "headAttrs" }}
+  {{ partial "head-attr/effects/card-hover-3d" }}
+
   {{ $script := resources.Get "js/fringale/single.js" }}
   {{ if hugo.IsProduction }}
     {{ $script = $script | minify | fingerprint }}
@@ -11,30 +13,70 @@
     {{ end }}
     src="{{ $script.RelPermalink }}"
   ></script>
+
+  {{ $css := partial "utils/get-img" (dict "img" "3d-view-lighting.css" "context" .) }}
+  <style>
+    {{ $css.Content | safeCSS }}
+  </style>
 {{ end }}
 
 {{ define "main" }}
-  {{ $gallery := partial "utils/fringale/get-gallery-files.html" . }}
-  
-  <div class="flex flex-col lg:flex-row w-full lg:min-h-full">
-    <!-- Image gallery -->
-    <div class="relative bg-gradient-reverse">
-      {{ partial "components/fringale/image-gallery" (dict "gallery" $gallery "context" .) }}
-    </div>
-
-    <!-- Info panel -->
-    <div class="grow shrink-0 lg:border-l max-lg:border-t max-lg:border-b lg:h-full lg:w-[24rem] 2xl:w-[32rem] max-lg:w-full shadow-centered-lg">
-      <!-- Description -->
-      <div class="sticky top-0">
-        <div class="p-10">
-          <h1 class="h2">
-            {{ .Title }}
-          </h1>
-          <div class="content">
-            {{ partial "utils/render-content" . }}
+  <section class="lg:section-sm">
+    <div class="lg:container">
+      <div class="lg:flex">
+        <div class="relative bg-gray-100 max-lg:w-full flex justify-center items-center h-80 sm:h-96 lg:h-[28rem] xl:h-[32rem] lg:aspect-square shrink-0 lg:rounded-lg lg:border lg:shadow-md">
+          <div class="border shadow-xl">
+            {{ partial "media/image" (dict 
+              "Src" .Params.cover
+              "Alt" "book cover"
+              "Class" "!h-64 sm:!h-72 lg:!h-80 xl:!h-96 !w-auto" 
+              "Context" . 
+              "Size" "x768"
+            ) }}
+          </div>
+        </div>
+        <!-- Info panel -->
+        <div class="grow max-lg:border-t lg:h-full max-lg:w-full">
+          <!-- Description -->
+          <div class="max-lg:md:container max-lg:my-10 lg:ml-10 max-md:mx-10">
+            <h1 class="h2">
+              {{ .Title }}
+            </h1>
+            {{ if .Params.price }}
+              <div class="text-2xl font-regular"> {{ .Params.price }} </div>
+            {{ end }}
+            <div class="content">
+              {{ partial "utils/render-content" . }}
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  {{ $images := .Resources.Match "gallery/*" }}
+  {{ partial "components/fringale/gallery-section" (dict "img" $images "context" .) }}
+
+  <section class="lg:container section-pb-sm">
+    {{ partial "components/fringale/3d-view" (dict 
+      "class" "w-full h-[32rem] max-md:max-h-screen-with-pad lg:border lg:rounded-lg lg:shadow-md"
+      "cover" .Params.cover
+      "side_color" .Params.side_color
+      "context" .
+      "bg_img" "3d-view-bg.jpg"
+      "book_shadow_img" "book-shadow.png"
+    ) }}
+  </section>
+
+  {{ partial "components/fringale/selling-section" . }}
+
+  <!-- Related posts -->
+  {{ $related := 
+    (where site.RegularPages "Section" .Section) 
+    | intersect (where site.RegularPages ".Title" "!=" .Title)
+  }}
+  {{ $related = $related | shuffle | first 3 }}
+  {{ with $related }}
+    {{ partial "components/posts-swipe" (dict "Title" (i18n "related_posts") "Posts" $related "kind" "book") }}
+  {{ end }}
 {{ end }}

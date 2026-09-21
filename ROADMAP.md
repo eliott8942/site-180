@@ -90,9 +90,9 @@
 
 - [ ] Redesign Search
 
-- [ ] Redesign Fringale page
+- [X] Redesign Fringale page
 
-  - [ ] Add sales schedule
+  - [X] Add sales schedule
 
   - [X] List page
   
@@ -102,9 +102,7 @@
 
     - [X] Image grid on large screens 
 
-      - [X] 6 or above pictures
-
-  - [ ] 3D Rendering of the books
+  - [X] 3D View of the books
 
 - [X] Events Schedule
 

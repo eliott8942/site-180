@@ -32,4 +32,40 @@ function initSlider() {
   handleChange(mq); // run on load
 }
 
-document.addEventListener('DOMContentLoaded', initSlider);
+function init() {
+  initSlider()
+
+  let swiper;
+  const mq = window.matchMedia("(min-width: 1024px)");
+  
+  function initSwiper() {
+    if (!mq.matches && !swiper) {
+      swiper = new Swiper(".gallery-slider", {
+        spaceBetween: 24,
+        loop: false,
+        slidesPerView: 1,
+        slidesPerGroup: 1,
+        centeredSlides: false,
+        pagination: {
+          el: ".gallery-slider-pagination",
+          type: "bullets",
+          clickable: true,
+        },
+        breakpoints: {
+          1023: {
+            slidesPerView: 1,
+            slidesPerGroup: 1,
+          },
+        },
+      });
+    } else if (mq.matches && swiper) {
+      swiper.destroy(true, true); // deleteInstance, cleanStyles
+      swiper = undefined;
+    }
+  }
+  
+  initSwiper();
+  mq.addEventListener("change", initSwiper);
+}
+
+document.addEventListener('DOMContentLoaded', init);

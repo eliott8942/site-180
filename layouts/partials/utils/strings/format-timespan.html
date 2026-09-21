@@ -1,0 +1,31 @@
+{{ $start_time := time .start }}
+{{ $end_time := time .end }}
+
+{{ $str := "" }}
+{{ if and (eq $start_time.Year $end_time.Year) (eq $start_time.YearDay $end_time.YearDay) }}
+  {{ $str = print
+    ($start_time | time.Format "02")
+    " "
+    ($start_time | time.Format "Jan")
+    " "
+    ($start_time | time.Format "15:04")
+    " - "
+    ($end_time | time.Format "15:04")
+  }}
+{{ else }}
+  {{ $str = print
+    ($start_time | time.Format "02")
+    " "
+    ($start_time | time.Format "Jan")
+    " "
+    ($start_time | time.Format "15:04")
+    " - "
+    ($end_time | time.Format "02")
+    " "
+    ($end_time | time.Format "Jan")
+    " "
+    ($end_time | time.Format "15:04")
+  }}
+{{ end }}
+
+{{ return $str }}

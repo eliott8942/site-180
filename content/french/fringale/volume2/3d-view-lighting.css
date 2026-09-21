@@ -1,0 +1,16 @@
+.group\/3d-view {
+  /* existing color/strength settings ... */
+  --overlay-ambient-color:#ecc7a1;
+  --overlay-ambient-factor: 0.8;
+
+  --overlay-main-light-color: #e7e0d7;
+  --overlay-main-light-factor: 1;
+  --overlay-main-light-default-factor: 0.6;
+
+  --overlay-floor-color: #e8bb8b;
+  --overlay-floor-color-factor: 0.6;
+
+  --shadow-opacity: 0.7;
+
+  --light-falloff-power: 2;
+}

@@ -39,6 +39,9 @@ function initHover3DEffect() {
     function handleExit() {
       innerCard.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1,1,1) translateY(0px)';
       container.classList.remove('effect-active');
+
+      innerCard.style.setProperty('--px', `0.5`);
+      innerCard.style.setProperty('--py', `0.5`);
     }
     
     container.addEventListener('mousemove', (e) => {
@@ -50,6 +53,8 @@ function initHover3DEffect() {
       handleMove(e.touches[0].clientX, e.touches[0].clientY)
     })
     container.addEventListener('touchend', () => handleExit())
+
+    handleExit()
   }
 }
 document.addEventListener('DOMContentLoaded', initHover3DEffect);

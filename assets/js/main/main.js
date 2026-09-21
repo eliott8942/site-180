@@ -40,7 +40,6 @@
         slidesPerView: 3,
         slidesPerGroup: 1,
       },
-      
     },
   });
 

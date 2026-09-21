@@ -1,0 +1,43 @@
+<div class="group/entry">
+  <div class="relative border-b border-black/20 group-odd/entry:bg-gray-100">
+    <div class="w-full h-full flex max-md:flex-col flex-row overflow-hidden">
+      <div class="grow p-3 py-4">
+        <h3 class="h4 font-bold">
+          {{ if eq .Params.event_kind "tournament" }} 🏆 {{ end }}
+          {{ .Title }}
+        </h3>
+  
+        {{ $address := .Params.location.address }}
+        <div>
+          <i class="fa-solid fa-location-dot"></i>
+          {{ print $address.address ", " $address.postal_code " " $address.city }}
+        </div>
+        <div>
+          <i class="fa-solid fa-calendar"></i>
+          {{ partial "utils/strings/format-timespan" (dict "start" .Params.start "end" .Params.end) }}
+        </div>
+      </div>
+
+      {{ $selling_books := .Params.selling | default slice }}
+      {{ $link := .Params.link | default slice }}
+
+      {{ if gt (len $selling_books) 0 }}
+        <div class="flex flex-row-reverse md:flex-col-reverse flex-wrap justify-between items-end">
+          {{ if gt (len $link) 0 }}
+            {{ partial "components/events/card/socials" (dict "link" $link "scope" .) }}
+          {{ end }}
+
+          <div class="grow">
+            {{ partial "components/events/card/selling" (dict 
+              "books" $selling_books 
+              "scope" . 
+              "class" "shrink-0 grow-0 w-fit max-md:border-t max-md:border-r md:border-l md:border-b p-2 max-md:rounded-tr-lg md:rounded-bl-lg shadow-md bg-black/10 border-black/10"
+            ) }}
+          </div>
+        </div>
+      {{ else }}
+        {{ partial "components/events/card/socials" (dict "link" $link "scope" . "class" "justify-end") }}
+      {{ end }}
+    </div>
+  </div>
+</div>

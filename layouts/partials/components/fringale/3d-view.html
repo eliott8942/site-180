@@ -1,0 +1,53 @@
+{{ $bg_image := partial "utils/get-img" (dict "img" .bg_img "context" .context) }}
+{{ $book_shadow_img := false }}
+{{ if .book_shadow_img }}
+  {{ $book_shadow_img = partial "utils/get-img" (dict "img" .book_shadow_img "context" .context) }}
+{{ end }}
+
+<div class="group/3d-view relative {{ .class }} flex items-center justify-center bg-[url({{ $bg_image.RelPermalink }})] bg-cover bg-center overflow-hidden">
+  <!-- Interface overlay -->
+  <div class="absolute pointer-events-none top-0 left-0 w-full h-full z-20">
+    <div class="absolute pointer-events-auto top-0 right-0 m-2">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-12 aspect-square lucide lucide-scan-box preview-icon opacity-75"><path d="M12 12v5.5"/><path d="M17 3h2a2 2 0 012 2v2"/><path d="M21 17v2a2 2 0 01-2 2h-2"/><path d="M3 7V5a2 2 0 012-2h2"/><path d="M7 21H5a2 2 0 01-2-2v-2"/><path d="M7.264 9.252 12 12l4.737-2.748"/><path d="M7.995 8.514A2 2 0 007 10.244v3.516a2 2 0 00.996 1.73l3 1.74a2 2 0 002.008 0l3-1.74A2 2 0 0017 13.76v-3.517a2 2 0 00-.995-1.73l-3-1.742a2 2 0 00-1.892-.064z"/></svg>
+    </div>
+
+    <div class="absolute pointer-events-auto bottom-0 left-1/2 -translate-x-1/2 p-4">
+      <input id="see-back-toggle" type="checkbox" class="hidden" />
+
+      <label for="see-back-toggle" class="p-2 block rounded-full bg-white/50 backdrop-blur-md shadow-md hover:scale-110 hover:bg-white duration-75 cursor-pointer">
+        {{ partial "media/image" (dict
+          "Src" "images/fringale/rotate-3d.svg"
+          "Alt" "Rotate 180°"
+          "Class" "!h-8 aspect-square"
+        ) }}
+      </label>
+    </div>
+  </div>
+
+  {{ $image := partial "utils/get-img" (dict "img" .cover "context" .context) }}
+
+  <div class="relative scale-75 has-[.effect-active]:scale-100 duration-300 z-10">
+    {{ partial "components/fringale/book-3d" (dict 
+      "image" $image
+      "class" "!max-h-96 !w-auto shadow-lg group-hover/book-card:shadow-none duration-300" 
+      "side_color" .side_color 
+      "context" .context 
+      "size" "x768"
+      "effects" "cell-shading dynamic-light default-floating"
+    ) }}
+  </div>
+
+  {{ with $book_shadow_img }}
+    <div class="
+      pointer-events-none
+      absolute top-0 left-0 w-full h-full
+      bg-[url({{ $book_shadow_img.RelPermalink }})] bg-cover bg-center 
+      mix-blend-multiply
+      opacity-[var(--shadow-opacity)]
+      group-has-[.effect-active]/3d-view:opacity-0
+      duration-150 
+      animate-[float-bounce-shadow_1.5s_ease-in-out_infinite]
+      group-has-[.effect-active]/3d-view:animate-none
+    "></div>
+  {{ end }}
+</div>

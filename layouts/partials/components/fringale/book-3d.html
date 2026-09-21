@@ -7,8 +7,10 @@
 
 <div class="card-hover-3d {{ $effects }} group/book-3d w-fit" style="--card-tickness:23px;--max-tilt:30deg;--hover-scale:1.03;--hover-y-offset:-4px;">
   <div class="card">
-    <div class="outline-1 outline-black/15 face-front outline group-hover/book-3d:outline-0">
+    <div class="relative outline-1 outline-black/15 face-front outline group-hover/book-3d:outline-0">
       {{ partial "media/image" (dict "Src" $image "Alt" .Title "Class" $class "Context" $context "Size" .size "Alt" "book front image") }}
+
+      <div class="light-overlay"></div>
     </div>
 
     {{ $image := resources.Get "images/fringale/book_side_page_texture.png" }}
@@ -17,15 +19,19 @@
     {{ $imageSide.Publish }}
     
     <div class="face-left border-l" style="background-color: {{ $side_color }};">
+      <div class="light-overlay"></div>
     </div>
     <div class="face-right">
       <div class="h-full w-full bg-[url({{ $imageSide.RelPermalink }})] bg-size-[80px] bg-repeat-cover"></div>
+      <div class="light-overlay"></div>
     </div>
     <div class="face-top border-r">
       <div class="h-full w-full bg-[url({{ $image.RelPermalink }})] bg-size-[80px] bg-repeat-cover"></div>
+      <div class="light-overlay"></div>
     </div>
     <div class="face-bottom border-r">
       <div class="h-full w-full bg-[url({{ $image.RelPermalink }})] bg-size-[80px] bg-repeat-cover"></div>
+      <div class="light-overlay"></div>
     </div>
   </div>
 </div>
