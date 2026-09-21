@@ -6,6 +6,8 @@ export default {
     "stylelint-config-recommended-scss",
   ],
   rules: {
+    "scss/operator-no-newline-after": null,
+    "scss/operator-no-newline-before": null,
     "scss/at-rule-no-unknown": [
       true,
       {
