@@ -1,0 +1,4 @@
+- Recettes du mois
+  - Fevrier 2023 (content/french/2023/02/recette-mois/)
+  - Mars 2023 (content/french/2023/02/recette-mois/)
+- Recette v2 (content/french/2026/08/recette-v2)
