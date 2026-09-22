@@ -52,7 +52,7 @@
             {{ .Title }}
           </h1>
         
-          <div class="flex flex-wrap justify-center items-center text-lg md:text-xl">
+          <div class="flex flex-wrap max-md:justify-center items-center text-lg md:text-xl">
             <!-- Note : the text are on the same line of as the icons because otherwise hugo put a space between them -->
             <div class="shrink-0">
               <i class="fa-solid fa-circle-user mr-1"></i>{{ strings.Trim (.Params.author | default "180°C") " " }}
