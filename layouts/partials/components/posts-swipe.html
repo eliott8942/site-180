@@ -19,7 +19,7 @@
               {{ else if eq $kind "recipe" }}
                 {{ partial "components/recipe/card" (dict "page" . "width" "395") }}
               {{ else if eq $kind "book" }}
-                {{ partial "components/fringale/card" (dict "page" . "size" "x395" "no_3d" "true") }}
+                {{ partial "components/fringale/card" (dict "page" .) }}
               {{ else }}
                 {{ errorf "Unknown card kind : %s" $kind }}
               {{ end }}
