@@ -1,5 +1,6 @@
 {{ define "headAttrs" }}
   {{ partial "head-attr/effects/card-hover-3d" }}
+  {{ partial "head-attr/effects/card-drag-3d" }}
 
   {{ $script := resources.Get "js/fringale/single.js" }}
   {{ if hugo.IsProduction }}

@@ -1,4 +1,4 @@
-{{ $script := resources.Get "js/effects/card-hover-3d.js" }}
+{{ $script := resources.Get "js/effects/card-drag-3d.js" }}
 {{ if hugo.IsProduction }}
   {{ $script = $script | minify | fingerprint }}
 {{ end }}
