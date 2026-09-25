@@ -5,9 +5,20 @@
   {{ $side_style = "flex-row-reverse" }}
 {{ end }}
 
+{{ $variant := .variant | default "default" }}
+
 <div class="mt-8 first:mt-0 row {{ $side_style }} items-center justify-between">
   <div class="mb:md-0 md:col-5 mb-6 max-md:flex max-md:justify-center">
-    {{ partial "media/image" (dict "Src" .image "Alt" "feature image" "Class" "!w-full max-md:!max-w-96 rounded-xl" "Context" .Context) }}
+    {{ if eq $variant "default" }}
+      {{ partial "media/image" (dict "Src" .image "Alt" "feature image" "Class" "!w-full max-md:!max-w-96 rounded-xl" "Context" .Context) }}
+    {{ else if eq $variant "shortcode" }}
+      <div class="w-full max-md:max-w-96 border rounded-xl overflow-hidden shadow-lg not-prose">
+        {{ partial "media/image" (dict "Src" .image "Alt" "feature image" "Class" "!w-full !h-full !mb-0" "Context" .Context) }}
+      </div>
+    {{ else }}
+      {{ warnf "Unknown variant %s" $variant }}
+      {{ partial "media/image" (dict "Src" .image "Alt" "feature image" "Class" "!w-full max-md:!max-w-96 rounded-xl" "Context" .Context) }}
+    {{ end }}
   </div>
   <div class="md:col-7 lg:col-6">
     {{ with .title }}
