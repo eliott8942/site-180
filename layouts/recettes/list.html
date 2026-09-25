@@ -12,14 +12,14 @@
 
   <!-- Tag selection -->
   <!-- Note : That needs to be at the root of the "header" block to work. -->
-  {{ partial "components/indicator/tags/selector-in-header" ( dict "scope" . "class" "z-10" "selectorClass" "container" "allSections" (slice "tags" "order" "categories" "copiosity" "duration")) }}
+  {{ partial "components/indicator/tags/selector-in-header" ( dict "scope" . "class" "z-10" "selectorClass" "sm:container" "allSections" (slice "tags" "order" "categories" "copiosity" "duration")) }}
 {{ end }}
 
 {{ define "main" }}
   <section class="section-sm pt-2">
     <div class="container relative max-mid-md:max-w-96">
       <!-- blog posts -->
-      <div class="relative max-mid-md:px-6 grid mid-md:grid-cols-2 lg:grid-cols-3 gx-5 mt-3 gap-5 z-0 mb-10">
+      <div class="relative grid mid-md:grid-cols-2 lg:grid-cols-3 gx-5 mt-3 gap-5 z-0 mb-10">
         {{ $paginator:= .Paginate .RegularPages 6 }}
         {{ range $paginator.Pages }}
           {{ partial "components/recipe/card" (dict "page" . "width" "414") }}
