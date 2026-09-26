@@ -23,15 +23,6 @@
   position: relative;
 }
 
-.card-3d .card .face-back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transform: rotateY(180deg) translateZ(var(--card-tickness));
-}
-
 .card-3d .card .face-left {
   position: absolute;
   top: 0;
@@ -76,56 +67,4 @@
 
 .card-3d.cell-shading.effect-active {
   filter: drop-shadow(0px 0px 1px rgba(0,0,0,0.5));
-}
-
-/* Drag mode specific classes */
-.card-drag-3d {
-  cursor: grab;
-}
-
-.card-drag-3d.effect-active {
-  cursor: grabbing;
-}
-
-/* Default floating */
-@keyframes float-bounce-shadow {
-  0%, 100% {
-    translate: 0 0;
-  }
-  50% {
-    translate: 12px -1px;
-  }
-}
-
-/* Default floating */
-@keyframes float-bounce {
-  0%, 100% {
-    translate: 0 0;
-  }
-  50% {
-    translate: 0 -6px;
-  }
-}
-
-@keyframes float-rotation {
-  0% {
-    rotate: 0 1 0 -12deg;
-  }
-  50% {
-    rotate: 0 1 0 12deg;
-  }
-  100% {
-    rotate: 0 1 0 -12deg;
-  }
-}
-
-.card-3d.default-floating .card {
-  animation:
-    float-bounce 1.5s ease-in-out infinite,
-    float-rotation 4s ease-in-out infinite;
-}
-
-/* pause the idle float as soon as the user starts interacting */
-.card-3d.default-floating.effect-active .card {
-  animation: none;
 }

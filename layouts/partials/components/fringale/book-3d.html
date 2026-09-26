@@ -1,22 +1,11 @@
 {{ $class := .class }}
 {{ $front := .image }}
-{{ $back := .back_image }}
 {{ $side_color := .side_color }}
 {{ $context := .context }}
 {{ $size := .size }}
-{{ $kind := .kind | default "hover" }}
 {{ $effects := .effects | default "cell-shading" }}
 
-{{ $kind_class := "" }}
-{{ if eq $kind "hover" }}
-  {{ $kind_class = "card-hover-3d" }}
-{{ else if eq $kind "drag" }}
-  {{ $kind_class = "card-drag-3d" }}
-{{ else }}
-  {{ errorf "%s: Unknown book kind %s" $context $kind }}
-{{ end }}
-
-<div class="{{ $kind_class }} card-3d {{ $effects }} group/book-3d w-fit" style="--card-tickness:23px;--max-tilt:30deg;--hover-scale:1.03;--hover-y-offset:-4px;">
+<div class="card-hover-3d card-3d {{ $effects }} group/book-3d w-fit" style="--card-tickness:23px;--max-tilt:30deg;--hover-scale:1.03;--hover-y-offset:-4px;">
   <div class="card">
     <div class="face-front relative outline-1 outline-black/15 outline group-hover/book-3d:outline-0">
       {{ partial "media/image" (dict "Src" $front "Alt" .Title "Class" $class "Context" $context "Size" .size "Alt" "book front image") }}
@@ -39,11 +28,5 @@
     <div class="face-bottom">
       <div class="h-full w-full bg-[url({{ $image.RelPermalink }})] bg-size-[80px] bg-repeat-cover"></div>
     </div>
-
-    {{ if eq $kind "drag" }}
-      <div class="face-back relative outline-1 outline-black/15 outline group-hover/book-3d:outline-0">
-        {{ partial "media/image" (dict "Src" $back "Alt" .Title "Class" $class "Context" $context "Size" .size "Alt" "book front image") }}
-      </div>
-    {{ end }}
   </div>
 </div>

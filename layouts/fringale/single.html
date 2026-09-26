@@ -1,6 +1,5 @@
 {{ define "headAttrs" }}
   {{ partial "head-attr/effects/card-hover-3d" }}
-  {{ partial "head-attr/effects/card-drag-3d" }}
 
   {{ $script := resources.Get "js/fringale/single.js" }}
   {{ if hugo.IsProduction }}
@@ -52,18 +51,6 @@
 
   {{ $images := .Resources.Match "gallery/*" }}
   {{ partial "components/fringale/gallery-section" (dict "img" $images "context" .) }}
-
-  <section class="lg:container section-pb-sm">
-    {{ partial "components/fringale/3d-view" (dict 
-      "class" "w-full h-[32rem] max-md:max-h-screen-with-pad lg:border lg:rounded-lg lg:shadow-md"
-      "cover" .Params.cover
-      "back" .Params.back
-      "side_color" .Params.side_color
-      "context" .
-      "bg_img" "3d-view-bg.jpg"
-      "book_shadow_img" "book-shadow.png"
-    ) }}
-  </section>
 
   {{ partial "components/fringale/selling-section" . }}
 
