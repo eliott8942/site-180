@@ -1,0 +1,8 @@
+{{ $style := .Get 0 | default "fas" }}
+{{ $icon := .Get 1 }}
+
+{{ if and $icon ($style | in (slice "fas" "far" "fal" "fad" "fab")) }}
+  <i class="{{ $style }} fa-{{ $icon }}"></i>
+{{ else }}
+  {{ errorf "Invalid icon usage. Check style and name." }}
+{{ end }}   
