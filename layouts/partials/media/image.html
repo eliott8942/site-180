@@ -29,6 +29,11 @@
 {{ $placeholder:= .Placeholder | default false }}
 {{ $placeholderQuality:= "40x q20" }}
 
+{{ if not $imagePath }}
+  {{ errorf "%s: Couldn't find '%s'" $context $imagePath }}
+  {{ return }}
+{{ end }}
+
 {{ with $context.Resources.GetMatch $imagePath }}
   {{ $contentImage = true }}
 {{ end }}
