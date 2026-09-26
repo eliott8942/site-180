@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row justify-center">
+    <div class="flex sm:col-10 md:col-8 lg:col-6 items-center flex-col text-center">
+      {{ partial "media/image" (dict
+        "Src" "images/events/no-events-icon.svg"
+        "Alt" "no events icon"
+        "Context" .
+        "Class" "!h-40"
+      ) }}
+      
+      <h1 class="h2 mb-4">
+        Il n'y a pas d'évenements pour l'instant !
+      </h1>
+      <div class="content">
+        <p>
+          Reviens plus tard, le temps qu'ils soient organisés.
+        </p>
+      </div>
+      <a
+        href="{{ site.BaseURL | relLangURL }}"
+        class="btn btn-primary mt-8"
+      >
+        Page d'acceuil
+      </a>
+    </div>
+  </div>
+</div>
