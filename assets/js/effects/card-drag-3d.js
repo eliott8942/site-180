@@ -36,6 +36,7 @@ function init3dCardDrag() {
     const face_right = card.querySelector('.face-right')
     const face_top = card.querySelector('.face-top')
     const face_bottom = card.querySelector('.face-bottom')
+    const face_back = card.querySelector('.face-back')
     
     if (card === null) {
       console.error(`Failed to setup the 3d hover effect for a container\n${container}`);
@@ -76,6 +77,10 @@ function init3dCardDrag() {
       if (face_bottom) {
         const n = faceNormal(card.data.rotX, 90);
         face_bottom.style.filter = `brightness(${shade(n)})`;
+      }
+      if (face_back) {
+        const n = faceNormal(card.data.rotX, card.data.rotY + 180);
+        face_back.style.filter = `brightness(${shade(n)})`;
       }
     }
     applyRotation();

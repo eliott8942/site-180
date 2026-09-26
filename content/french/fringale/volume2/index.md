@@ -4,6 +4,7 @@ draft: false
 date: 2023-09-01T00:00:00Z
 gallery: "gallery/"
 cover: "cover.png"
+back: "back.png"
 side_color: "#ffffff"
 price: "10 CHF"
 ---

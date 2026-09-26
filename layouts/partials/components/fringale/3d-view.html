@@ -24,11 +24,11 @@
     </div>
   </div>
 
-  {{ $image := partial "utils/get-img" (dict "img" .cover "context" .context) }}
 
   <div class="relative scale-75 has-[.effect-active]:scale-100 duration-300 z-10">
     {{ partial "components/fringale/book-3d" (dict 
-      "image" $image
+      "image" .cover
+      "back_image" .back
       "class" "!max-h-96 !w-auto shadow-lg group-hover/book-card:shadow-none duration-300" 
       "side_color" .side_color 
       "context" .context 
