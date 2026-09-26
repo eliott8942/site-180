@@ -52,8 +52,6 @@
   {{ $images := .Resources.Match "gallery/*" }}
   {{ partial "components/fringale/gallery-section" (dict "img" $images "context" .) }}
 
-  {{ partial "components/fringale/selling-section" . }}
-
   <!-- Related posts -->
   {{ $related := 
     (where site.RegularPages "Section" .Section) 
