@@ -111,3 +111,6 @@
 
 - id: v/settings_container_title
   translation: "Parametres"
+
+- id: selling-points
+  translation: "Points de vente"
