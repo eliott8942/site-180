@@ -14,11 +14,6 @@
     {{ end }}
     src="{{ $script.RelPermalink }}"
   ></script>
-
-  {{ $css := partial "utils/get-img" (dict "img" "3d-view-lighting.css" "context" .) }}
-  <style>
-    {{ $css.Content | safeCSS }}
-  </style>
 {{ end }}
 
 {{ define "main" }}
