@@ -4,15 +4,26 @@
 
     <!-- Select pages which are up to two years ahead -->
     {{ $data := .Site.GetPage "/events/data" }}
-    {{ $pages := slice }}
+    {{ $years := slice }}
+    {{ $pages := dict }}
     {{ range $page := .Site.RegularPages }}
       {{ with $page.Params.start }}
         {{ $year := (time .).Year }}
         {{ if lt $year $build_date.Year }}
-          {{ $pages = $pages | append $page }}
+          {{ $key := string $year }}
+          {{ $existing := index $pages $key }}
+          {{ if $existing }}
+            {{ $pages = merge $pages (dict $key ($existing | append $page)) }}
+          {{ else }}
+            {{ $pages = merge $pages (dict $key (slice $page)) }}
+          {{ end }}
+
+          {{ $years = $years | append $key }}
         {{ end }}
       {{ end }}
     {{ end }}
+
+    {{ $years = $years | uniq }}
     
     {{ if ne (len $pages) 0 }}
       <div class="w-full container flex justify-start mb-4 md:my-4">
@@ -30,8 +41,12 @@
       </div>
 
       <div class="container">
-        {{ range $pages.ByParam "start" }}
-          
+        {{ range $year := sort $years "" "desc" }}
+          {{ partial "components/events/old/year-separator" $year }}
+
+          {{ range sort (index $pages $year) "Params.start" }}
+            {{ partial "components/events/old/card" . }}
+          {{ end }}
         {{ end }}
       </div>
     {{ else }}
