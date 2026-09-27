@@ -1,15 +1,55 @@
 {{ define "main" }}
   <section class="relative section-sm !pt-0 overflow-x-hidden">
-    <div class="w-full flex justify-end mb-4">
-      <a 
-        class="m-2 bg-white rounded-full border text-xl flex items-center text-dark dark:text-white lg:order-1 w-fit p-3 shadow-md hover:scale-110" 
-        href="{{ "events/past-events" | relURL }}"
-        aria-label="Return"
-      > 
-        <i class="fa-solid fa-clock-rotate-left"></i>
-      </a>
-    </div>
+    {{ $build_date := partial "utils/get-build-date" }}
 
-    {{ partial "components/events/no-events" }}
+    <!-- Select pages which are up to two years ahead -->
+    {{ $data := .Site.GetPage "/events/data" }}
+    {{ $pages := slice }}
+    {{ range $page := .Site.RegularPages }}
+      {{ with $page.Params.start }}
+        {{ $year := (time .).Year }}
+        {{ if and (ge $year $build_date.Year) (lt $year (add $build_date.Year 2)) }}
+          {{ $pages = $pages | append $page }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    
+    {{ if ne (len $pages) 0 }}
+      <div class="w-full md:absolute md:z-10 md:top-0 md:mt-4">
+        <div class="lg:container flex justify-end">
+          <a 
+            class="max-md:m-4 md:max-lg:mx-4 bg-white rounded-full border text-xl flex items-center text-dark dark:text-white lg:order-1 w-fit p-3 shadow-md hover:scale-110" 
+            href="{{ "events/past-events" | relURL }}"
+            aria-label="Return"
+          > 
+            <i class="fa-solid fa-clock-rotate-left"></i>
+          </a>
+        </div>
+      </div>
+    
+      <div class="md:mt-4 md:z-0 relative lg:container md:max-lg:mx-4 max-md:text-center z-20">
+        <h1>{{ .Title | humanize }}</h1>
+      </div>
+
+      <div class="lg:container">
+        Hello world !
+        
+        {{ range $pages.ByParam "start" }}
+          
+        {{ end }}
+      </div>
+    {{ else }}
+      <div class="w-full container flex justify-end mb-4 md:my-4">
+        <a 
+          class="max-md:m-4 bg-white rounded-full border text-xl flex items-center text-dark dark:text-white lg:order-1 w-fit p-3 shadow-md hover:scale-110" 
+          href="{{ "events/past-events" | relURL }}"
+          aria-label="Return"
+        > 
+          <i class="fa-solid fa-clock-rotate-left"></i>
+        </a>
+      </div>
+    
+      {{ partial "components/events/no-events" }}
+    {{ end }}
   </section>
 {{ end }}

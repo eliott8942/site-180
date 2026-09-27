@@ -1,15 +1,53 @@
 {{ define "main" }}
   <section class="relative section-sm !pt-0 overflow-x-hidden">
-    <div class="w-full flex justify-start mb-4">
-      <a 
-        class="m-2 bg-white rounded-full border text-xl flex items-center text-dark dark:text-white lg:order-1 w-fit p-3 shadow-md hover:scale-110" 
-        href="{{ "events/" | relURL }}"
-        aria-label="Return"
-      > 
-        <i class="fa-solid fa-arrow-left"></i>
-      </a>
-    </div>
+    {{ $build_date := partial "utils/get-build-date" }}
+
+    <!-- Select pages which are up to two years ahead -->
+    {{ $data := .Site.GetPage "/events/data" }}
+    {{ $pages := slice }}
+    {{ range $page := .Site.RegularPages }}
+      {{ with $page.Params.start }}
+        {{ $year := (time .).Year }}
+        {{ if lt $year $build_date.Year }}
+          {{ $pages = $pages | append $page }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
     
-    {{ partial "components/events/old/no-events" }}
+    {{ if ne (len $pages) 0 }}
+      <div class="w-full container flex justify-start mb-4 md:my-4">
+        <a 
+          class="max-md:m-4 bg-white rounded-full border text-xl flex items-center text-dark dark:text-white lg:order-1 w-fit p-3 shadow-md hover:scale-110" 
+          href="{{ "events/" | relURL }}"
+          aria-label="Return"
+        > 
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+      </div>
+    
+      <div class="relative container text-center section-pb-sm z-20">
+        <h1>{{ .Title | humanize }}</h1>
+      </div>
+
+      <div class="container">
+        Hello world !
+        
+        {{ range $pages.ByParam "start" }}
+          
+        {{ end }}
+      </div>
+    {{ else }}
+      <div class="w-full container flex justify-start mb-4 md:my-4">
+        <a 
+          class="max-md:m-4 bg-white rounded-full border text-xl flex items-center text-dark dark:text-white lg:order-1 w-fit p-3 shadow-md hover:scale-110" 
+          href="{{ "events/" | relURL }}"
+          aria-label="Return"
+        > 
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+      </div>
+    
+      {{ partial "components/events/old/no-events" }}
+    {{ end }}
   </section>
 {{ end }}
