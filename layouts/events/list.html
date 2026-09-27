@@ -26,7 +26,7 @@
     {{ $years = $years | uniq }}
     
     {{ if ne (len $pages) 0 }}
-      <div class="w-full container flex justify-end mb-4 md:my-4">
+      <div class="w-full sm:container flex justify-end mb-4 md:my-4">
         <a 
           class="max-md:m-4 bg-white rounded-full border text-xl flex items-center text-dark dark:text-white lg:order-1 w-fit p-3 shadow-md hover:scale-110" 
           href="{{ "events/past-events" | relURL }}"
