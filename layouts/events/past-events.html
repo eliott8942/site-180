@@ -40,13 +40,15 @@
         <h1>{{ .Title | humanize }}</h1>
       </div>
 
-      <div class="container">
+      <div class="container grid lg:grid-cols-2 gap-3">
         {{ range $year := sort $years "" "desc" }}
-          {{ partial "components/events/old/year-separator" $year }}
-
-          {{ range sort (index $pages $year) "Params.start" }}
-            {{ partial "components/events/old/card" . }}
-          {{ end }}
+          <div>
+            {{ partial "components/events/old/year-separator" $year }}
+  
+            {{ range sort (index $pages $year) "Params.start" }}
+              {{ partial "components/events/old/card" . }}
+            {{ end }}
+          </div>
         {{ end }}
       </div>
     {{ else }}
