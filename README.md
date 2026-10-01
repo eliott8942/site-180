@@ -39,10 +39,14 @@ This project uses third-party assets under the following licenses :
 
 This website also use thirdparty open-source libraries in `assets/libs/`. Please refer to their licenses as well.
 
+There are some test data for the time being in this repo. Uusually they're in `content/<section>/data/test/...`. In those folders we use Unsplash pictures ([License](https://unsplash.com/license)) as placeholders just to test that everything is working correctly.
+
 ### The none free parts 
 
 Our logo (`assets/images/logo.png`) and all content related to our books (`content/french/fringale/`) are fully copyrighted and may not be used without our prior permission.
 
-The icons under `assets/images/brands/` are trademarks of their respective owners and are used for identification purposes only, in accordance with each owner's brand guidelines. Their use does not imply any affiliation with, sponsorship by, or endorsement from the trademark holders.
+We also have people's faces under `content/french/association/` that are fully copyrighted as well. Obviously, don't use those.
+
+This website use icons from social medias. Their icons are located in `assets/images/brands/`. They're the trademarks of their respective owners and are used for identification purposes only, in accordance with each owner's brand guidelines. Their use does not imply any affiliation with, sponsorship by, or endorsement from the trademark holders.
 
 All the licenses are in the `licenses/` directory, except for the code license which is at project root (`./LICENSE`).
