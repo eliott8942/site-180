@@ -209,7 +209,7 @@
           <a 
             class="btn btn-primary grow text-center text-nowrap" 
             href="{{ .link | relLangURL }}"
-            {{ if partial "utils/url/is-external" .Destination }}
+            {{ if partial "utils/url/is-external" .link }}
               target="_blank" rel="noreferrer"
             {{ end }}
           >
