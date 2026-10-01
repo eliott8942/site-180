@@ -135,7 +135,7 @@
       {{ end }}
       
       <!-- Apply enconding -->
-      {{ warnf "INFO : Processing `%s`" $image }}
+      {{ warnf "%s INFO : Processing `%s`" $context $image }}
       {{ $image = $image.Process $encoding }}
 
       <!-- If the image is small enough, generate only one variant -->

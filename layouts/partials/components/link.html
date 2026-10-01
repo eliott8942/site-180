@@ -1,0 +1,27 @@
+{{ if not .url }}
+  {{ errorf "Didn't gave a url to a link" }}
+{{ end }}
+{{ if not .text }}
+  {{ errorf "Didn't gave a text to a link" }}
+{{ end }}
+
+{{ $type := partial "utils/url/determine-type" .url }}
+
+<a 
+  class="not-prose font-semibold hover:text-black group/link w-fit"
+  href="{{ .url | safeURL }}"
+  {{ with .Title }}
+    title="{{ .text }}"
+  {{ end }}
+  {{ if partial "utils/url/is-external" .url }}
+    target="_blank" rel="noreferrer"
+  {{ end }}
+>
+  {{ if eq $type "mail" }}
+    <i class="fa-solid fa-envelope opacity-50 group-hover/link:opacity-100 scale-75"></i>
+    <span class="group-hover/link:underline underline-offset-2 decoration-2">{{ .text }}</span>
+  {{ else }}
+    <span class="group-hover/link:underline underline-offset-2 decoration-2">{{ .text }}</span>
+    <i class="fa-solid fa-arrow-up-right-from-square opacity-50 group-hover/link:opacity-100 scale-75"></i>
+  {{ end }}
+</a>

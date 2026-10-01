@@ -112,9 +112,7 @@
 
   - [X] Upcoming Event Card
 
-    - [X] Optional kind : Tournament (Spice League)
-  
-    - [X] Status (Cancelled, Postponed)
+    - [X] Status (Cancelled)
 
     - [X] Socials
 

@@ -1,0 +1,264 @@
+{{ $address := .Params.location.address }}
+{{ $id := .File.UniqueID }}
+
+<div class="
+  relative border md:rounded-lg overflow-hidden
+  group/entry
+  shadow-md max-md:has-[#open-toggle-inner-{{ $id }}:checked]:shadow-centered-2xl md:has-[#open-toggle-inner-{{ $id }}:checked]:shadow-xl max-md:has-[#open-toggle-inner-{{ $id }}:checked]:shadow-black/40
+  z-0 has-[#open-toggle-inner-{{ $id }}:checked]:z-10
+  max-md:m-0 max-md:has-[#open-toggle-inner-{{ $id }}:checked]:-my-10 first:max-md:has-[#open-toggle-inner-{{ $id }}:checked]:-mt-5  last:max-md:has-[#open-toggle-inner-{{ $id }}:checked]:mb-5 first:max-md:origin-top
+  max-md:scale-100 max-md:has-[#open-toggle-inner-{{ $id }}:checked]:scale-105
+  duration-75
+">
+  <!-- Entry header -->
+  <div class="
+    relative z-0 
+    md:rounded-lg
+    has-[#open-toggle-inner-{{ $id }}:checked]:z-10
+    has-[#open-toggle-inner-{{ $id }}:checked]:border-b border-0
+    md:has-[#open-toggle-inner-{{ $id }}:checked]:shadow-md shadow-none
+    overflow-hidden duration-75
+    bg-white
+  ">
+    <div class="
+      absolute 
+      z-0 top-0
+      group-even/entry:right-0 group-odd/entry:left-0 
+      w-2/5 group-hover/entry:w-3/5 max-sm:w-1/2 max-sm:group-hover/entry:w-3/5 max-lg:w-1/3 max-lg:group-hover/entry:w-1/2
+      duration-150 h-full
+    ">
+      <div class="
+        absolute z-10 top-0 h-full aspect-[2/1] max-lg:aspect-[3/2] scale-100 translate-x-0 md:group-hover/entry:scale-150 
+        md:group-even/entry:group-hover/entry:translate-x-1/4 md:group-odd/entry:group-hover/entry:-translate-x-1/4
+        group-even/entry:bg-[linear-gradient(120deg,white_20%,transparent_80%)] max-lg:group-even/entry:bg-[linear-gradient(120deg,white_30%,transparent_70%)]  group-even/entry:left-0
+        group-odd/entry:bg-[linear-gradient(120deg,transparent_20%,white_80%)] max-lg:group-odd/entry:bg-[linear-gradient(120deg,transparent_30%,white_70%)]  group-odd/entry:right-0
+      "></div>
+      
+      {{ partial "media/image" (dict
+        "Src" .Params.thumbnail
+        "Alt" "entry image"
+        "Context" .
+        "Size" "2006x326"
+        "Command" "Fill"
+        "Class" "!h-full !w-full object-cover object-center opacity-50 group-hover/entry:opacity-75"
+      ) }}
+    </div>
+
+    <label for="open-toggle-inner-{{ $id }}" class="absolute top-0 left-0 w-full h-full z-20 cursor-pointer"></label>
+    <label for="close-toggle-inner-{{ $id }}" class="absolute top-0 left-0 w-full h-full z-30 cursor-pointer hidden group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:block"></label>
+
+    <div class="p-6 sm:px-8 w-full">
+      <div class="group-odd/entry:text-end w-4/5 max-md:w-3/4 relative z-10 group-odd/entry:right-0 group-odd/entry:ml-auto mb-4">
+        <h2 class="relative grow font-primary h3 mb-2 group-hover/entry:underline underline-offset-2 decoration-2 cursor-pointer"> 
+          {{ .Title }}
+    
+          <input id="open-toggle-inner-{{ $id }}" type="radio" name="open-toggle" class="hidden" />
+          <input id="close-toggle-inner-{{ $id }}" type="radio" name="open-toggle" class="hidden" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="inline-block align-middle ml-1 h-8 w-8 duration-75 group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:rotate-180">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+          <label for="open-toggle-inner-{{ $id }}" class="absolute inset-0 z-10 cursor-pointer"></label>
+          <label for="close-toggle-inner-{{ $id }}" class="absolute inset-0 z-20 cursor-pointer hidden group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:block"></label>
+        </h2>
+  
+        <div class="text-lg md:text-xl text-black font-semibold"> 
+          <i class="fa-solid fa-calendar"></i>
+          {{ partial "utils/strings/format-timespan" (dict "start" .Params.start "end" .Params.end "context" .) }}
+        </div>
+        
+        <div class="text-lg"> 
+          <i class="fa-solid fa-location-dot"></i>
+          {{ printf "%s, %s %s" $address.address $address.postal_code $address.city }}
+        </div>
+
+        {{ with .Params.registration }}
+          <div class="
+            relative text-lg
+            group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:top-10 top-0
+            group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:opacity-0 opacity-100
+            duration-75 max-md:duration-[40ms]
+          ">
+            {{ warnf "%s" . }}
+            
+            {{ with index . "max_people" }}
+              <i class="fa-solid fa-users"></i> {{ . }}, 
+            {{ end }}
+            <span class="font-semibold text-black">
+              <i class="fa-solid fa-pencil"></i> {{ i18n "events/registration-needed" }}
+            </span>
+          </div>
+        {{ end }}
+      </div>
+      
+      <!-- Social icons -->
+      <div class="
+        relative flex flex-row gap-2 flex-wrap group-odd/entry:flex-row-reverse justify-between z-50
+        group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:top-10 top-0
+        group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:opacity-0 opacity-100
+        duration-75 max-md:duration-[40ms]
+      ">
+        <div class="
+          text-lg relative group-odd/entry:ml-auto w-fit
+          flex flex-row gap-2
+        ">
+          {{ $context := . }}
+          {{ range $i, $link := .Params.link }}
+            {{ if ne $i 0 }}
+              <div class="inline-block w-px h-8 my-1 bg-black/25"></div>
+            {{ end }}
+          
+            <a href="{{ $link.url }}" target="_blank" rel="noreferrer" class="h-10 p-2 hover:bg-black/10 rounded-md">
+              {{ if eq "website" .social }}
+                {{ partial "media/image" (dict
+                  "Context" $context
+                  "Src" "images/icons/www.svg"
+                  "Alt" "www icon"
+                  "Class" "!h-full !w-auto"
+                  "Size" "60x40"
+                ) }}
+              {{ else }}
+                {{ partial "components/social/icon" (dict
+                  "scope" $context
+                  "network" $link.social
+                  "variant" "black"
+                  "style" "!h-full !w-auto"
+                  "size" "80x80"
+                ) }}
+              {{ end }}
+            </a>
+          {{ end }}
+        </div>
+
+        {{ with .Params.selling }}
+          <div class="flex flex-row items-center h-12 rounded-md bg-white/50 backdrop-blur-sm border gap-2 p-2 -m-1">
+            <i class="fa-solid fa-cart-shopping"></i>
+            
+            {{ range . }}
+              {{ $site := site.GetPage . }}
+
+              {{ partial "media/image" (dict
+                "Context" $site
+                "Src" $site.Params.cover
+                "Alt" "www icon"
+                "Class" "!h-full !w-auto"
+                "Size" "x40"
+              ) }}
+            {{ end }}
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Entry content -->
+  <div class="
+    flex flex-col
+    group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:max-h-[599px]
+    group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:border-b border-0
+    max-h-0 duration-75 overflow-hidden bg-white
+  ">
+    <div class="m-6 sm:mx-8 grow">
+      {{ partial "utils/render-content" . }}
+
+      <!-- Selling books -->
+      {{ with .Params.selling }}
+        <div class="my-4 border p-2 rounded-lg bg-gray-100 shadow-md max-md:text-center">
+          <div class="h3 font-secondary font-semibold text-black"> <i class="fa-solid fa-store"></i> {{ i18n "events/selling" }} </div>
+        </div>
+
+        <div class="flex flex-col gap-2 p-2">
+          {{ range . }}
+            <div class="flex flex-row items-center h-16">
+              {{ $site := site.GetPage . }}
+
+              <i class="fa-solid fa-circle scale-50 opacity-50"></i>
+
+              <div class="border shadow-md ml-2">
+                {{ partial "media/image" (dict
+                  "Context" $site
+                  "Src" $site.Params.cover
+                  "Alt" "www icon"
+                  "Class" "!h-full !w-auto"
+                  "Size" "x64"
+                ) }}
+              </div>
+
+              <div class="ml-2 ">
+                <div class="leading-5 h5 font-secondary font-semibold text-black">
+                  {{ partial "components/link" (dict "text" $site.Title "url" $site.RelPermalink) }}
+                </div>
+
+                {{ $site.Params.price }}
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      {{ end }}
+
+      <!-- Registration -->
+      {{ with .Params.registration }}
+        <div class="flex flex-row flex-nowrap items-center justify-center text-lg md:text-xl gap-4 border rounded-full pl-4 shadow-lg w-fit mx-auto mt-8">
+          {{ with index . "max_people" }}
+            <span class="text-xl font-semibold text-nowrap">
+              <i class="fa-solid fa-users"></i> {{ . }}
+            </span>
+          {{ end }}
+
+          {{ $type := partial "utils/url/determine-type" .link }}
+          <a 
+            class="btn btn-primary grow text-center text-nowrap" 
+            href="{{ .link | relLangURL }}"
+            {{ if partial "utils/url/is-external" .Destination }}
+              target="_blank" rel="noreferrer"
+            {{ end }}
+          >
+            {{ if eq $type "mail" }}
+              <span class="mx-10">
+                <i class="fa-solid fa-envelope"></i>
+                {{ i18n "events/register" }}
+              </span>
+            {{ else }}
+              <span class="mx-10">
+                <i class="fa-solid fa-pencil"></i>
+                {{ i18n "events/register" }}
+              </span>
+            {{ end }}
+          </a>
+        </div>
+      {{ end }}
+    </div>
+    
+    <div class="m-6 sm:mx-8 mt-0 shrink-0">
+      <!-- Social icons -->
+      <div class="text-lg flex flex-row group-odd/entry:justify-end gap-2 duration-75">
+        {{ $context := . }}
+        {{ range $i, $link := .Params.link }}
+          {{ if ne $i 0 }}
+            <div class="inline-block w-px h-8 my-1 bg-black/25"></div>
+          {{ end }}
+        
+          <a href="{{ $link.url }}" target="_blank" rel="noreferrer" class="h-10 p-2 hover:bg-black/10 rounded-md">
+            {{ if eq "website" .social }}
+              {{ partial "media/image" (dict
+                "Context" $context
+                "Src" "images/icons/www.svg"
+                "Alt" "www icon"
+                "Class" "!h-full !w-auto"
+                "Size" "60x40"
+              ) }}
+            {{ else }}
+              {{ partial "components/social/icon" (dict
+                "scope" $context
+                "network" $link.social
+                "variant" "black"
+                "style" "!h-full !w-auto"
+                "size" "80x80"
+              ) }}
+            {{ end }}
+          </a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>

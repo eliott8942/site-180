@@ -114,3 +114,12 @@
 
 - id: selling-points
   translation: "Points de vente"
+
+- id: events/selling
+  translation: A la vente
+
+- id: events/registration-needed
+  translation: Inscription requise
+
+- id: events/register
+  translation: S'inscrire

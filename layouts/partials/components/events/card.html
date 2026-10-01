@@ -1,0 +1,5 @@
+{{ if eq .Params.status "cancelled" }}
+  {{ partial "components/events/cancelled-card" . }}
+{{ else }}
+  {{ partial "components/events/active-card" . }}
+{{ end }}

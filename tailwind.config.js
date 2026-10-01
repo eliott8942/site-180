@@ -132,11 +132,12 @@ module.exports = {
         numbers: ["IBM Plex Sans", "sans-serif"],
       },
       boxShadow: {
-        'centered-lg': '0 0px 15px rgb(0 0 0 / 0.1)',
-        'inner-xl': 'inset 0 20px 25px rgb(0 0 0 / 0.1)',
-        'inner-centered': 'inset 0 0px 4px rgb(0 0 0 / 0.1)',
-        'inner-centered-lg': 'inset 0 0px 15px rgb(0 0 0 / 0.1)',
-        'inner-reverted': 'inset 0 -2px 4px rgb(0 0 0 / 0.1)'
+        'centered-lg': '0 0px 15px rgb(--tw-shadow-color / 0.1)',
+        'centered-2xl': '0 0px 40px rgb(--tw-shadow-color / 0.1)',
+        'inner-xl': 'inset 0 20px 25px rgb(--tw-shadow-color / 0.1)',
+        'inner-centered': 'inset 0 0px 4px rgb(--tw-shadow-color / 0.1)',
+        'inner-centered-lg': 'inset 0 0px 15px rgb(--tw-shadow-color / 0.1)',
+        'inner-reverted': 'inset 0 -2px 4px rgb(--tw-shadow-color / 0.1)'
       }
     },
   },

@@ -1,31 +1,27 @@
-{{ $start_time := time .start }}
-{{ $end_time := time .end }}
+{{ $context := .context }}
+{{ $startRaw := .start }}
+{{ $endRaw := .end }}
 
-{{ $str := "" }}
-{{ if and (eq $start_time.Year $end_time.Year) (eq $start_time.YearDay $end_time.YearDay) }}
-  {{ $str = print
-    ($start_time | time.Format "02")
-    " "
-    ($start_time | time.Format "Jan")
-    " "
-    ($start_time | time.Format "15:04")
-    " - "
-    ($end_time | time.Format "15:04")
-  }}
-{{ else }}
-  {{ $str = print
-    ($start_time | time.Format "02")
-    " "
-    ($start_time | time.Format "Jan")
-    " "
-    ($start_time | time.Format "15:04")
-    " - "
-    ($end_time | time.Format "02")
-    " "
-    ($end_time | time.Format "Jan")
-    " "
-    ($end_time | time.Format "15:04")
-  }}
+{{ if not $startRaw }}
+  {{ errorf "%s: missing required front matter param 'start'" $context }}
+{{ end }}
+{{ if not $endRaw }}
+  {{ errorf "%s: missing required front matter param 'end'" $context }}
 {{ end }}
 
-{{ return $str }}
+{{ $start := time $startRaw }}
+{{ $end := time $endRaw }}
+
+{{ $sameMonth := eq ($start.Format "2006-01") ($end.Format "2006-01") }}
+{{ $sameDay := eq ($start.Format "2006-01-02") ($end.Format "2006-01-02") }}
+
+{{ $text := "" }}
+{{ if $sameDay }}
+  {{ $text = time.Format "Jan 2" $start | title }}
+{{ else if $sameMonth }}
+  {{ $text = printf "%s – %s" (time.Format "Jan 2" $start | title) (time.Format "2" $end | title) }}
+{{ else }}
+  {{ $text = printf "%s – %s" (time.Format "Jan 2" $start | title) (time.Format "Jan 2" $end | title) }}
+{{ end }}
+
+{{ return $text }}

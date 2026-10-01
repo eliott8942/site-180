@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <section class="relative section-sm !pt-0 overflow-x-hidden">
+  <section class="relative section-sm !pt-0 overflow-x-clip">
     {{ $build_date := partial "utils/get-build-date" }}
 
     <!-- Select pages which are up to two years ahead -->
@@ -26,7 +26,7 @@
     {{ $years = $years | uniq }}
     
     {{ if ne (len $pages) 0 }}
-      <div class="w-full sm:container flex justify-end mb-4 md:my-4">
+      <div class="w-full md:container flex justify-end mb-4 md:my-4">
         <a 
           class="max-md:m-4 bg-white rounded-full border text-xl flex items-center text-dark dark:text-white lg:order-1 w-fit p-3 shadow-md hover:scale-110" 
           href="{{ "events/past-events" | relURL }}"
@@ -40,9 +40,19 @@
         <h1>{{ .Title | humanize }}</h1>
       </div>
 
-      <div class="lg:container">
+      <div class="md:container flex flex-col md:gap-5">
         {{ range $year := sort $years "" }}
-          
+          <!-- Div for the sticky year separator -->
+          <div class="flex flex-col md:gap-5">
+            {{ partial "components/events/year-separator" $year }}
+
+            <!-- Container so that first entry can have :first css selector -->
+            <div class="flex flex-col md:gap-5">
+              {{ range sort (index $pages $year) "Params.start" }}
+                {{ partial "components/events/card" . }}
+              {{ end }}
+            </div>
+          </div>
         {{ end }}
       </div>
     {{ else }}
