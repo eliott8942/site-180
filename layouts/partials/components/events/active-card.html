@@ -79,8 +79,6 @@
             group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:opacity-0 opacity-100
             duration-75 max-md:duration-[40ms]
           ">
-            {{ warnf "%s" . }}
-            
             {{ with index . "max_people" }}
               <i class="fa-solid fa-users"></i> {{ . }}, 
             {{ end }}

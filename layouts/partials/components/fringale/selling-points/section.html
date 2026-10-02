@@ -1,0 +1,71 @@
+<section class="relative section-sm !pt-0 overflow-x-clip bg-gradient-reverse">
+  {{ $build_date := partial "utils/get-build-date" }}
+  {{ $page_id := strings.TrimPrefix "/" .Path }}
+
+  <!-- Select pages which are up to two years ahead -->
+  {{ $data := .Site.GetPage "/events/data" }}
+  {{ $years := slice }}
+  {{ $pages := dict }}
+  {{ $max_num := 6 }}
+  {{ $i := 0 }}
+  {{ range $page := .Site.RegularPages }}
+    {{ warnf "%s %s" $page.Params.selling $page_id }}
+  
+    {{ with $page.Params.start }}
+      {{ $year := (time .).Year }}
+
+      {{ $is_in_span := and (ge $year $build_date.Year) (lt $year (add $build_date.Year 2)) }}
+      {{ $contains_book := in $page.Params.selling $page_id }}
+      
+      {{ if and $is_in_span $contains_book }}
+        {{ $key := string $year }}
+        {{ $existing := index $pages $key }}
+        {{ if $existing }}
+          {{ $pages = merge $pages (dict $key ($existing | append $page)) }}
+        {{ else }}
+          {{ $pages = merge $pages (dict $key (slice $page)) }}
+        {{ end }}
+
+        {{ $years = $years | append $key }}
+        {{ $i := add $i 1 }}
+
+        {{ if eq $i $max_num }}
+          {{ break }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ $years = $years | uniq }}
+  
+  {{ if ne (len $pages) 0 }}
+    <div class="container flex flex-col md:gap-5">
+      <div class="container my-4 border p-2 rounded-lg bg-gray-100 shadow-md text-center">
+        <div class="h3 font-secondary font-semibold text-black"> <i class="fa-solid fa-store"></i> {{ i18n "fringale/selling-points" }} </div>
+      </div>
+      
+      {{ range $year := sort $years "" }}
+        {{ partial "components/fringale/selling-points/year-separator" $year }}
+
+        <!-- Container so that first entry can have :first css selector -->
+        <div class="flex flex-col gap-5">
+          {{ range sort (index $pages $year) "Params.start" }}
+            {{ partial "components/fringale/selling-points/card" . }}
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  {{ else }}
+    <div class="w-full container flex justify-end mb-4 md:my-4">
+      <a 
+        class="max-md:m-4 bg-white rounded-full border text-xl flex items-center text-dark dark:text-white lg:order-1 w-fit p-3 shadow-md hover:scale-110" 
+        href="{{ "events/past-events" | relURL }}"
+        aria-label="Return"
+      > 
+        <i class="fa-solid fa-clock-rotate-left"></i>
+      </a>
+    </div>
+  
+    {{ partial "components/events/no-events" }}
+  {{ end }}
+</section>

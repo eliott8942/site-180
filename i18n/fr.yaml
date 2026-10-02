@@ -112,7 +112,7 @@
 - id: v/settings_container_title
   translation: "Parametres"
 
-- id: selling-points
+- id: fringale/selling-points
   translation: "Points de vente"
 
 - id: events/selling
