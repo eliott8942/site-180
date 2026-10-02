@@ -39,7 +39,7 @@
   {{ $years = $years | uniq }}
   
   {{ if ne (len $pages) 0 }}
-    <div class="container flex flex-col md:gap-5">
+    <div class="container flex flex-col">
       <div class="container my-4 border p-2 rounded-lg bg-gray-100 shadow-md text-center">
         <div class="h3 font-secondary font-semibold text-black"> <i class="fa-solid fa-store"></i> {{ i18n "fringale/selling-points" }} </div>
       </div>
