@@ -41,7 +41,7 @@ This website also use thirdparty open-source libraries in `assets/libs/`. Please
 
 There are some test data for the time being in this repo. Uusually they're in `content/<section>/data/test/...`. In those folders we use Unsplash pictures ([License](https://unsplash.com/license)) as placeholders just to test that everything is working correctly.
 
-### The none free parts 
+### The non-free parts 
 
 Our logo (`assets/images/logo.png`) and all content related to our books (`content/french/fringale/`) are fully copyrighted and may not be used without our prior permission.
 
