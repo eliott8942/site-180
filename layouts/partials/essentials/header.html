@@ -73,90 +73,89 @@
     </div>
 
     <!-- main navbar -->
-    <ul
-      id="nav-menu"
-      class="navbar-nav"
-    >
-      {{ $currentPage := . }}
-      {{ range site.Menus.main }}
-        {{ $menuURL := .URL | relLangURL }}
-        {{ $pageURL:= $currentPage.RelPermalink | relLangURL }}
-
-        {{ $active := hasPrefix $pageURL $menuURL }}
-        <!-- If the menu url is the home url ("/") check for strict equality -->
-        {{ $baseURL := "" | relLangURL }}
-        {{ if eq $menuURL $baseURL  }}
-          {{ $active = eq $pageURL $menuURL }}
+    <div id="nav-menu" class="navbar-nav">
+      <ul>
+        {{ $currentPage := . }}
+        {{ range site.Menus.main }}
+          {{ $menuURL := .URL | relLangURL }}
+          {{ $pageURL:= $currentPage.RelPermalink | relLangURL }}
+  
+          {{ $active := hasPrefix $pageURL $menuURL }}
+          <!-- If the menu url is the home url ("/") check for strict equality -->
+          {{ $baseURL := "" | relLangURL }}
+          {{ if eq $menuURL $baseURL  }}
+            {{ $active = eq $pageURL $menuURL }}
+          {{ end }}
+          
+          {{ if .HasChildren }}
+            <li class="nav-item nav-dropdown group relative">
+              <span
+                class="nav-link {{ range .Children }}
+                  {{ $childURL := .URL | absLangURL }}
+                  {{ $active := eq $childURL $pageURL }}
+                  {{ if $active }}active{{ end }}
+                {{ end }} inline-flex items-center"
+              >
+                {{ .Name }}
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                  <path
+                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                  />
+                </svg>
+              </span>
+              <ul
+                class="nav-dropdown-list lg:group-hover:visible lg:group-hover:opacity-100"
+              >
+                {{ range .Children }}
+                  {{ $childURL := .URL | absLangURL }}
+                  {{ $active := eq $childURL $pageURL }}
+                  <li class="nav-dropdown-item">
+                    <a
+                      class="nav-dropdown-link {{ if $active }}
+                        active
+                      {{- end -}}"
+                      {{ if findRE `^http` .URL }}
+                        target="_blank" rel="noopener"
+                      {{ end }}
+                      href="{{- if findRE `^#` .URL -}}
+                        {{- if not $.IsHome -}}
+                          {{- site.BaseURL | relLangURL -}}
+                        {{- end }}
+                        {{- .URL -}}
+                      {{- else -}}
+                        {{- .URL | relLangURL -}}
+                      {{- end -}}"
+                    >
+                      {{ .Name }}
+                    </a>
+                  </li>
+                {{ end }}
+              </ul>
+            </li>
+          {{ else }}
+            <li class="nav-item">
+              <a
+                class="nav-link {{ if $active }}nav-link-active{{ end }}"
+                {{ if findRE `^http` .URL }}
+                  target="_blank" rel="noopener"
+                {{ end }}
+                href="{{ .URL | relLangURL }}"
+                >{{ .Name }}</a
+              >
+            </li>
+          {{ end }}
         {{ end }}
-        
-        {{ if .HasChildren }}
-          <li class="nav-item nav-dropdown group relative">
-            <span
-              class="nav-link {{ range .Children }}
-                {{ $childURL := .URL | absLangURL }}
-                {{ $active := eq $childURL $pageURL }}
-                {{ if $active }}active{{ end }}
-              {{ end }} inline-flex items-center"
-            >
-              {{ .Name }}
-              <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
-                <path
-                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                />
-              </svg>
-            </span>
-            <ul
-              class="nav-dropdown-list lg:group-hover:visible lg:group-hover:opacity-100"
-            >
-              {{ range .Children }}
-                {{ $childURL := .URL | absLangURL }}
-                {{ $active := eq $childURL $pageURL }}
-                <li class="nav-dropdown-item">
-                  <a
-                    class="nav-dropdown-link {{ if $active }}
-                      active
-                    {{- end -}}"
-                    {{ if findRE `^http` .URL }}
-                      target="_blank" rel="noopener"
-                    {{ end }}
-                    href="{{- if findRE `^#` .URL -}}
-                      {{- if not $.IsHome -}}
-                        {{- site.BaseURL | relLangURL -}}
-                      {{- end }}
-                      {{- .URL -}}
-                    {{- else -}}
-                      {{- .URL | relLangURL -}}
-                    {{- end -}}"
-                  >
-                    {{ .Name }}
-                  </a>
-                </li>
-              {{ end }}
-            </ul>
-          </li>
-        {{ else }}
-          <li class="nav-item">
+        {{ if site.Params.navigation_button.enable }}
+          <li class="mt-4 inline-block lg:hidden">
             <a
-              class="nav-link {{ if $active }}nav-link-active{{ end }}"
-              {{ if findRE `^http` .URL }}
-                target="_blank" rel="noopener"
-              {{ end }}
-              href="{{ .URL | relLangURL }}"
-              >{{ .Name }}</a
+              class="btn btn-outline-primary btn-sm"
+              href="{{ site.Params.navigation_button.link | relLangURL }}"
             >
+              {{ site.Params.navigation_button.label }}
+            </a>
           </li>
         {{ end }}
-      {{ end }}
-      {{ if site.Params.navigation_button.enable }}
-        <li class="mt-4 inline-block lg:hidden">
-          <a
-            class="btn btn-outline-primary btn-sm"
-            href="{{ site.Params.navigation_button.link | relLangURL }}"
-          >
-            {{ site.Params.navigation_button.label }}
-          </a>
-        </li>
-      {{ end }}
-    </ul>
+      </ul>
+    </div>
   </nav>
 </header>

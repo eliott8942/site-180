@@ -44,17 +44,26 @@
 
 .navbar:has(#nav-toggle input[type="checkbox"]:checked) {
   #nav-menu {
-    @apply lg:flex max-lg:max-h-96 max-lg:pb-6;
+    @apply lg:flex max-lg:max-h-96;
+
+    ul {
+      @apply max-lg:pb-6;
+    }
   }
 }
 
 #nav-menu {
-  @apply order-3 block lg:flex w-full max-lg:max-h-0 pb-0 lg:order-1 lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8 duration-100 overflow-hidden;
+  @apply order-3 w-full max-lg:max-h-0 pb-0 lg:order-1 lg:w-auto duration-100 max-lg:h-screen-with-pad overflow-auto;
+
+  ul {
+    @apply block lg:flex lg:space-x-2 xl:space-x-8 lg:w-auto lg:pb-0;
+  }
 }
 
 .header {
-  @apply bg-body dark:bg-darkmode-body py-3 z-50;
+  @apply bg-body dark:bg-darkmode-body pt-3 lg:pb-3 z-50;
 }
+
 .header-space {
   min-height: calc(1.5rem + 70px);
 }
@@ -69,7 +78,7 @@ body:has(#nav-toggle input[type="checkbox"]:checked) .header-dim {
 
 // navbar items
 .navbar {
-  @apply relative flex flex-wrap items-center justify-between;
+  @apply relative flex flex-wrap items-center justify-between gap-y-3;
 }
 
 .navbar-brand {

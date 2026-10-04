@@ -1,3 +1,5 @@
+@tailwind utilities;
+
 .bg-gradient {
   @apply dark:from-darkmode-theme-light dark:to-darkmode-body bg-gradient-to-b from-[rgba(248,248,248,1)] from-[0.53%] to-white to-[83.28%];
 }
@@ -37,11 +39,13 @@
   @apply top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
 }
 
-.max-h-screen-with-pad {
-  max-height: calc(100dvh - 1.5rem - 70px);
-}
-.h-screen-with-pad {
-  height: calc(100dvh - 1.5rem - 70px);
+@layer utilities {
+  .max-h-screen-with-pad {
+    max-height: calc(100dvh - 1.5rem - 70px);
+  }
+  .h-screen-with-pad {
+    height: calc(100dvh - 1.5rem - 70px);
+  }
 }
 
 .unselectable {
