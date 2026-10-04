@@ -34,6 +34,9 @@
 .crieur-status-closed {
   @apply text-red-500
 }
+.crieur-status-desc {
+  @apply text-gray-500
+}
 
 .group:not(:has(#searchmenu-toggle-inner:checked)) .crieur-info-shown {
   @apply sm:-translate-x-[21rem];
