@@ -4,19 +4,19 @@
 <div class="
   relative border md:rounded-lg overflow-hidden
   group/entry
-  shadow-md max-md:has-[#open-toggle-inner-{{ $id }}:checked]:shadow-centered-2xl md:has-[#open-toggle-inner-{{ $id }}:checked]:shadow-xl max-md:has-[#open-toggle-inner-{{ $id }}:checked]:shadow-black/40
-  z-0 has-[#open-toggle-inner-{{ $id }}:checked]:z-10
-  max-md:m-0 max-md:has-[#open-toggle-inner-{{ $id }}:checked]:-my-10 first:max-md:has-[#open-toggle-inner-{{ $id }}:checked]:-mt-5  last:max-md:has-[#open-toggle-inner-{{ $id }}:checked]:mb-5 first:max-md:origin-top
-  max-md:scale-100 max-md:has-[#open-toggle-inner-{{ $id }}:checked]:scale-105
+  shadow-md max-md:on-[open-toggle-inner-{{ $id }}]:shadow-centered-2xl md:on-[open-toggle-inner-{{ $id }}]:shadow-xl max-md:on-[open-toggle-inner-{{ $id }}]:shadow-black/40
+  z-0 on-[open-toggle-inner-{{ $id }}]:z-10
+  max-md:m-0 max-md:on-[open-toggle-inner-{{ $id }}]:-my-10 first:max-md:on-[open-toggle-inner-{{ $id }}]:-mt-5  last:max-md:on-[open-toggle-inner-{{ $id }}]:mb-5 first:max-md:origin-top
+  max-md:scale-100 max-md:on-[open-toggle-inner-{{ $id }}]:scale-105
   duration-75
 ">
   <!-- Entry header -->
   <div class="
     relative z-0 
     md:rounded-lg
-    has-[#open-toggle-inner-{{ $id }}:checked]:z-10
-    has-[#open-toggle-inner-{{ $id }}:checked]:border-b border-0
-    md:has-[#open-toggle-inner-{{ $id }}:checked]:shadow-md shadow-none
+    on-[open-toggle-inner-{{ $id }}]:z-10
+    on-[open-toggle-inner-{{ $id }}]:border-b border-0
+    md:on-[open-toggle-inner-{{ $id }}]:shadow-md shadow-none
     overflow-hidden duration-75
     bg-white
   ">
@@ -45,7 +45,7 @@
     </div>
 
     <label for="open-toggle-inner-{{ $id }}" class="absolute top-0 left-0 w-full h-full z-20 cursor-pointer"></label>
-    <label for="close-toggle-inner-{{ $id }}" class="absolute top-0 left-0 w-full h-full z-30 cursor-pointer hidden group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:block"></label>
+    <label for="close-toggle-inner-{{ $id }}" class="absolute top-0 left-0 w-full h-full z-30 cursor-pointer hidden on-[open-toggle-inner-{{ $id }}]/entry:block"></label>
 
     <div class="p-6 sm:px-8 w-full">
       <div class="group-odd/entry:text-end w-4/5 max-md:w-3/4 relative z-10 group-odd/entry:right-0 group-odd/entry:ml-auto mb-4">
@@ -55,11 +55,11 @@
           <input id="open-toggle-inner-{{ $id }}" type="radio" name="open-toggle" class="hidden" />
           <input id="close-toggle-inner-{{ $id }}" type="radio" name="open-toggle" class="hidden" />
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="inline-block align-middle ml-1 h-8 w-8 duration-75 group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:rotate-180">
+            class="inline-block align-middle ml-1 h-8 w-8 duration-75 on-[open-toggle-inner-{{ $id }}]/entry:rotate-180">
             <path d="m6 9 6 6 6-6"/>
           </svg>
           <label for="open-toggle-inner-{{ $id }}" class="absolute inset-0 z-10 cursor-pointer"></label>
-          <label for="close-toggle-inner-{{ $id }}" class="absolute inset-0 z-20 cursor-pointer hidden group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:block"></label>
+          <label for="close-toggle-inner-{{ $id }}" class="absolute inset-0 z-20 cursor-pointer hidden on-[open-toggle-inner-{{ $id }}]/entry:block"></label>
         </h2>
   
         <div class="text-lg md:text-xl text-black font-semibold"> 
@@ -75,8 +75,8 @@
         {{ with .Params.registration }}
           <div class="
             relative text-lg
-            group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:top-10 top-0
-            group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:opacity-0 opacity-100
+            on-[open-toggle-inner-{{ $id }}]/entry:top-10 top-0
+            on-[open-toggle-inner-{{ $id }}]/entry:opacity-0 opacity-100
             duration-75 max-md:duration-[40ms]
           ">
             {{ with index . "max_people" }}
@@ -92,8 +92,8 @@
       <!-- Social icons -->
       <div class="
         relative flex flex-row gap-2 flex-wrap group-odd/entry:flex-row-reverse justify-between z-50
-        group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:top-10 top-0
-        group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:opacity-0 opacity-100
+        on-[open-toggle-inner-{{ $id }}]/entry:top-10 top-0
+        on-[open-toggle-inner-{{ $id }}]/entry:opacity-0 opacity-100
         duration-75 max-md:duration-[40ms]
       ">
         <div class="
@@ -152,8 +152,8 @@
   <!-- Entry content -->
   <div class="
     flex flex-col
-    group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:max-h-[599px]
-    group-has-[#open-toggle-inner-{{ $id }}:checked]/entry:border-b border-0
+    on-[open-toggle-inner-{{ $id }}]/entry:max-h-[599px]
+    on-[open-toggle-inner-{{ $id }}]/entry:border-b border-0
     max-h-0 duration-75 overflow-hidden bg-white
   ">
     <div class="m-6 sm:mx-8 grow">
