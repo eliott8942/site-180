@@ -63,12 +63,16 @@
             <div class="shrink-0">
               <i class="fa-solid fa-circle-user mr-1"></i>{{ strings.Trim (.Params.author | default "180°C") " " }}
             </div>
-      
-            {{ partial "components/recipe/indicators/time-indicator" (dict
-              "timeMin" .Params.durationMin 
-              "class" "shrink-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25"
-              "icon" "fa-hourglass-start"
-            ) }}
+
+            <div class="shrink-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25">
+              <i class="fa-solid fa-hourglass-start"></i>
+  
+              {{ partial "utils/strings/duration-time.html" (dict
+                "timeInMin" .Params.durationMin
+                "scope" .
+                "maxTimeInMin" hugo.Data.recettes.duration.max_showable_duration
+              ) }}
+            </div>
 
             {{ partial "components/recipe/indicators/number-people-indicator" (dict
               "quantityMin" .Params.quantityMin

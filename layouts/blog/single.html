@@ -67,10 +67,14 @@
               <i class="fa-solid fa-calendar mr-1"></i>{{ time.Format ":date_short" .PublishDate }}
             </div>
 
-            {{ partial "components/blog/time-indicator" (dict
-              "timeMin" .Params.lectureTimeMin 
-              "class" "shrink-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25"
-            ) }}
+            <div class="shrink-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25">
+              <i class="fa-solid fa-clock"></i>
+
+              {{ partial "utils/strings/duration-time.html" (dict
+                "timeInMin" .Params.lectureTimeMin
+                "scope" .
+              ) }}
+            </div>
           </div>
         </div>
       </div>

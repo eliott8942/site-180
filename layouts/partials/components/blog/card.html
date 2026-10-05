@@ -54,11 +54,17 @@
           child of the container
         -->
         <div>
-          {{ partial "components/blog/time-indicator" (dict "timeMin" .Params.lectureTimeMin "class" "opacity-50" "scope" .) }}
+          <div class="opacity-50">
+            <i class="fa-solid fa-clock"></i>
+
+            {{ partial "utils/strings/duration-time.html" (dict
+              "timeInMin" .Params.lectureTimeMin
+              "scope" .
+            ) }}
+          </div>
         </div>
       </div>
   
-      <!-- TODO : make it expand into the card, so the description can be only shown when hovered -->
       <div class="my-2 flex flex-col grow">
         <h4> {{ .Title }} </h4>
         <div class="grow">
