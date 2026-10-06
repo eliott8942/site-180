@@ -32,13 +32,17 @@
         {{ range $page := $pagesRoot.RegularPages.Reverse }}
           {{ $pageName := $page.File.ContentBaseName }}
 
-          {{ $active := eq $currentPageName $pageName }}
-          <a
-            href="{{ $page.RelPermalink }}"
-            class="h4 font-secondary text-black hover:text-primary {{ if $active }}nav-link-active{{ end }} duration-100"
-          >
-            {{ $pageName }}
-          </a>
+          {{ if $page.Params.disabled }}
+            <span class="h4 font-secondary text-black/40"> {{ $pageName }} </span>
+          {{ else }}
+            {{ $active := eq $currentPageName $pageName }}
+            <a
+              href="{{ $page.RelPermalink }}"
+              class="h4 font-secondary text-black hover:text-primary {{ if $active }}nav-link-active{{ end }} duration-100"
+            >
+              {{ $pageName }}
+            </a>
+          {{ end }}
         {{ end }}
       </div>
     </div>
