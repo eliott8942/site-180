@@ -10,11 +10,11 @@
   <label for="{{ $id }}" class="relative z-0">
     {{ partial "media/svg-inline" (dict
       "src" .selectedIcon
-      "class" (print (printf "on-[%s]/root:hidden" $id) " " $iconClass)
+      "class" (print (printf "on-[%s]/root:block hidden" $id) " " $iconClass)
     ) }}
     {{ partial "media/svg-inline" (dict
       "src" .defaultIcon
-      "class" (print (printf "on-[%s]/root:block hidden" $id) " " $iconClass)
+      "class" (print (printf "on-[%s]/root:hidden" $id) " " $iconClass)
     ) }}
   </label>
   <label for="{{ $id2 }}" class="absolute inset-0 z-10 hidden on-[{{ $id }}]/root:block"></label>
