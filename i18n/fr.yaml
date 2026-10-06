@@ -123,3 +123,6 @@
 
 - id: events/register
   translation: S'inscrire
+
+- id: events/full
+  translation: Complet

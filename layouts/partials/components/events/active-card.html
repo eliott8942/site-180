@@ -77,19 +77,25 @@
         </div>
 
         {{ with .Params.registration }}
-          <div class="
-            relative text-lg
-            on-[open-toggle-inner-{{ $id }}]/entry:top-10 top-0
-            on-[open-toggle-inner-{{ $id }}]/entry:opacity-0 opacity-100
-            duration-75 max-md:duration-[40ms]
-          ">
-            {{ with index . "max_people" }}
-              <i class="fa-solid fa-users"></i> {{ . }}, 
-            {{ end }}
-            <span class="font-semibold text-black">
-              <i class="fa-solid fa-pencil"></i> {{ i18n "events/registration-needed" }}
-            </span>
-          </div>
+          {{ if .full }}
+            <div class="relative text-white bg-primary w-fit px-2 rounded-full font-semibold group-odd/entry:right-0 group-odd/entry:ml-auto">
+              <i class="fa-solid fa-users"></i> {{ i18n "events/full" }}
+            </div>
+          {{ else }}
+            <div class="
+              relative text-lg
+              on-[open-toggle-inner-{{ $id }}]/entry:top-10 top-0
+              on-[open-toggle-inner-{{ $id }}]/entry:opacity-0 opacity-100
+              duration-75 max-md:duration-[40ms]
+            ">
+              {{ with index . "max_people" }}
+                <i class="fa-solid fa-users"></i> {{ . }}, 
+              {{ end }}
+              <span class="font-semibold text-black">
+                <i class="fa-solid fa-pencil"></i> {{ i18n "events/registration-needed" }}
+              </span>
+            </div>
+          {{ end }}
         {{ end }}
       </div>
       
@@ -200,35 +206,37 @@
 
       <!-- Registration -->
       {{ with .Params.registration }}
-        {{ $type := partial "utils/url/determine-type" .link }}
-        {{ $icon := cond (eq $type "mail") "fa-envelope" "fa-pencil" }}
-        {{ $people := index . "max_people" }}
-      
-        <div class="flex items-center justify-center gap-2 sm:gap-4 text-lg md:text-xl
-                    border rounded-full shadow-lg mt-8 max-w-80 mx-auto
-                    {{ if $people }}pl-4{{ end }}">
-          {{ with $people }}
-            <span class="font-semibold text-nowrap">
-              <i class="fa-solid fa-users" aria-hidden="true"></i> {{ . }}
-            </span>
-          {{ end }}
-      
-          <a
-            class="btn btn-primary rounded-full grow min-w-0 text-center"
-            href="{{ .link | relLangURL }}"
-            {{ if partial "utils/url/is-external" .link }}
-              target="_blank" rel="noreferrer"
+        {{ if not .full }}
+          {{ $type := partial "utils/url/determine-type" .link }}
+          {{ $icon := cond (eq $type "mail") "fa-envelope" "fa-pencil" }}
+          {{ $people := index . "max_people" }}
+        
+          <div class="flex items-center justify-center gap-2 sm:gap-4 text-lg md:text-xl
+                      border rounded-full shadow-lg mt-8 max-w-80 mx-auto
+                      {{ if $people }}pl-4{{ end }}">
+            {{ with $people }}
+              <span class="font-semibold text-nowrap">
+                <i class="fa-solid fa-users" aria-hidden="true"></i> {{ . }}
+              </span>
             {{ end }}
-          >
-            {{ if eq $type "mail" }}
-              <i class="fa-solid fa-envelope"></i>
-              {{ i18n "events/register" }}
-            {{ else }}
-              <i class="fa-solid fa-pencil"></i>
-              {{ i18n "events/register" }}
-            {{ end }}
-          </a>
-        </div>
+        
+            <a
+              class="btn btn-primary rounded-full grow min-w-0 text-center"
+              href="{{ .link | relLangURL }}"
+              {{ if partial "utils/url/is-external" .link }}
+                target="_blank" rel="noreferrer"
+              {{ end }}
+            >
+              {{ if eq $type "mail" }}
+                <i class="fa-solid fa-envelope"></i>
+                {{ i18n "events/register" }}
+              {{ else }}
+                <i class="fa-solid fa-pencil"></i>
+                {{ i18n "events/register" }}
+              {{ end }}
+            </a>
+          </div>
+        {{ end }}
       {{ end }}
     </div>
     

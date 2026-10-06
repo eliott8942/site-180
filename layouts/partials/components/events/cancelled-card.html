@@ -56,7 +56,6 @@
         {{ with .Params.registration }}
           <div class="
             relative text-lg
-            duration-75 max-md:duration-[40ms]
           ">
             {{ warnf "%s" . }}
             
@@ -64,7 +63,7 @@
               <i class="fa-solid fa-users"></i> {{ . }}, 
             {{ end }}
             <span class="font-semibold text-black">
-              <i class="fa-solid fa-pencil"></i> {{ i18n "events/registration-needed" }}
+              <i class="fa-solid fa-pencil"></i>
             </span>
           </div>
         {{ end }}
