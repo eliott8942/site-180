@@ -44,23 +44,27 @@
       ) }}
     </div>
 
-    <label for="open-toggle-inner-{{ $id }}" class="absolute top-0 left-0 w-full h-full z-20 cursor-pointer"></label>
-    <label for="close-toggle-inner-{{ $id }}" class="absolute top-0 left-0 w-full h-full z-30 cursor-pointer hidden on-[open-toggle-inner-{{ $id }}]/entry:block"></label>
+    {{ partial "components/toggle/radio-zone" (dict 
+      "id" (print "open-toggle-inner-" $id) 
+      "class" "absolute top-0 left-0 w-full h-full z-20")
+    }}
 
     <div class="p-6 sm:px-8 w-full">
       <div class="group-odd/entry:text-end w-4/5 max-md:w-3/4 relative z-10 group-odd/entry:right-0 group-odd/entry:ml-auto mb-4">
-        <h2 class="relative grow font-primary h3 mb-2 group-hover/entry:underline underline-offset-2 decoration-2 cursor-pointer"> 
-          {{ .Title }}
-    
-          <input id="open-toggle-inner-{{ $id }}" type="radio" name="open-toggle" class="hidden" />
-          <input id="close-toggle-inner-{{ $id }}" type="radio" name="open-toggle" class="hidden" />
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="inline-block align-middle ml-1 h-8 w-8 duration-75 on-[open-toggle-inner-{{ $id }}]/entry:rotate-180">
-            <path d="m6 9 6 6 6-6"/>
-          </svg>
-          <label for="open-toggle-inner-{{ $id }}" class="absolute inset-0 z-10 cursor-pointer"></label>
-          <label for="close-toggle-inner-{{ $id }}" class="absolute inset-0 z-20 cursor-pointer hidden on-[open-toggle-inner-{{ $id }}]/entry:block"></label>
-        </h2>
+        <div class="group/title">
+          <h2 class="relative grow font-primary h3 mb-2 group-hover/entry:underline underline-offset-2 decoration-2 cursor-pointer"> 
+            {{ .Title }}
+
+            {{ partial "components/toggle/radio" (dict
+              "id" (print "open-toggle-inner-" $id)
+              "group" "open-toggles"
+              "class" "inline-block align-middle"
+              "selectedIcon" "images/icons/lucide/chevron-up.svg"
+              "defaultIcon" "images/icons/lucide/chevron-down.svg"
+              "iconClass" "h-9 w-9 object-cover"
+            ) }}
+          </h2>
+        </div>
   
         <div class="text-lg md:text-xl text-black font-semibold"> 
           <i class="fa-solid fa-calendar"></i>

@@ -214,7 +214,13 @@ module.exports = {
       matchVariant('on', (id, { modifier }) => {
         const sel = `#${id.replace(/^#/, '')}:checked`
         if (!modifier) return `&:has(${sel})`
-        const group = modifier === 'group' ? '.group' : `.group\\/${modifier}`
+        const nameMap = {
+          'group': '.group',
+          'root': ':root'
+        }
+        const group = modifier in nameMap
+          ? nameMap[modifier]
+          : `.group\\/${modifier}`
         return `&:is(:where(${group}):has(${sel}) *)`
       })
       matchVariant('on-focus', (id, { modifier }) => {

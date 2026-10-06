@@ -1,0 +1,22 @@
+{{ $src := .src }}
+{{ $class := .class | default "" }}
+{{ with resources.Get (printf "%s" $src) }}
+  {{ $content := .Content }}
+  {{ if $class }}
+    {{ with index (findRE `<svg[^>]*>` $content 1) 0 }}
+      {{ $tag := . }}
+      {{ $newTag := "" }}
+      {{ if findRE `\sclass="` $tag }}
+        {{/* class exists: append to its value */}}
+        {{ $newTag = replaceRE `(\sclass=")([^"]*)(")` (printf `${1}${2} %s${3}` $class) $tag }}
+      {{ else }}
+        {{/* no class: add one */}}
+        {{ $newTag = replaceRE `<svg` (printf `<svg class="%s"` $class) $tag 1 }}
+      {{ end }}
+      {{ $content = replace $content $tag $newTag 1 }}
+    {{ end }}
+  {{ end }}
+  {{ $content | safeHTML }}
+{{ else }}
+  {{ errorf "svg inline partial: %s not found" $src }}
+{{ end }}

@@ -19,7 +19,7 @@
                   <label
                     for="infopanel-toggle-inner"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    {{ partial "media/svg-inline" (dict "src" "images/icons/lucide/x.svg") }}
                   </label>
                 </div>
               </div>
@@ -43,25 +43,22 @@
           <input type="text" id="searchmenu-input" class="grow outline-none border-0 focus:ring-0 text-lg shrink pointer-events-auto z-0 text-black" placeholder="Chercher un restaurant..." autocomplete="off" onfocus="switchToSearchMode()" oninput="updateSearch()"/>
 
           <!-- Search menu toggle -->
-          <div class="toggle relative h-full aspect-square pointer-events-auto border-b z-20" id="searchmenu-toggle">
-            <input id="searchmenu-toggle-inner" type="checkbox" class="hidden" checked="true" onchange="updateSearchMode()"/>
-            
-            <label
-              for="searchmenu-toggle-inner"
-              class="text-dark bg-white"
-            >
-              <span class="flex items-center justify-center h-full w-full">
-                <span class="show-toggle">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down max-sm:hidden"><path d="m9 18 6-6-6-6"/></svg>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up-icon lucide-chevron-up sm:hidden"><path d="m18 15-6-6-6 6"/></svg>
-                </span>
-                <span class="hide-toggle">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down sm:hidden"><path d="m6 9 6 6 6-6"/></svg>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up-icon lucide-chevron-up max-sm:hidden"><path d="m15 18-6-6 6-6"/></svg>
-                </span>
-              </span>
-            </label>
-          </div>
+          {{ partial "components/toggle/toggle" (dict
+            "id" "searchmenu-toggle-inner"
+            "checked" "true"
+            "labelClass" "text-black bg-white"
+            "onchange" "updateSearchMode()"
+            "class" "relative h-full aspect-square pointer-events-auto border-b z-20 sm:hidden"
+            "showIcon" "images/icons/lucide/chevron-up.svg"
+            "hideIcon" "images/icons/lucide/chevron-down.svg"
+          ) }}
+          {{ partial "components/toggle/toggle" (dict
+            "linkTo" "searchmenu-toggle-inner"
+            "labelClass" "text-black bg-white"
+            "class" "relative h-full aspect-square pointer-events-auto border-b z-20 hidden sm:block"
+            "showIcon" "images/icons/lucide/chevron-right.svg"
+            "hideIcon" "images/icons/lucide/chevron-left.svg"
+          ) }}
         </div>
         
         <div id="searchMenuContainer" class="sm:-translate-x-[--menu-folded-offset] sm:on-[searchmenu-toggle-inner]/group:-translate-x-0 h-full duration-150 left-0 overflow-hidden shadow-centered-lg">
@@ -83,7 +80,9 @@
                   on-focus-[searchmenu-input]/group:[&_.searchresult-part.highlighted]:text-black
                   on-focus-[searchmenu-input]/group:[&_.searchresult-part.highlighted]:font-medium
                   " 
-                  id="searchMenuCardContainer"></div>
+                  id="searchMenuCardContainer"
+                >
+                </div>
               </div>
             </div>
 
@@ -92,7 +91,7 @@
               <!-- Header --> 
               <div class="relative w-full flex flex-row h-12 items-center shrink-0 overflow-hidden border-b border-b-gray-400 bg-white shadow-lg z-10">
                 <button type="button" onclick="closePlace()" class="h-full aspect-square flex items-center justify-center" aria-label="Close panel button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                  {{ partial "media/svg-inline" (dict "src" "images/icons/lucide/arrow-left.svg") }}
                 </button>
 
                 <div id="placeInfoTitleInHeader" class="absolute flex left-1/2 -translate-x-1/2 font-bold text-lg h-full items-center leading-normal text-nowrap">
@@ -136,16 +135,13 @@
                         <label class="absolute w-full h-full cursor-pointer" for="description-toggle-inner"></label>
 
                         <!-- Fold toggle -->
-                        <div class="toggle opacity-75 aspect-square w-6 scale-75 float-left">
-                          <input id="description-toggle-inner" type="checkbox" class="hidden" checked="true"/>
-                          <label
-                            for="description-toggle-inner"
-                            class=""
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hide-toggle lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="show-toggle lucide lucide-chevron-up-icon lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
-                          </label>
-                        </div>
+                        {{ partial "components/toggle/toggle" (dict
+                          "id" "description-toggle-inner"
+                          "checked" "true"
+                          "class" "opacity-75 aspect-square w-6 scale-75 float-left"
+                          "showIcon" "images/icons/lucide/chevron-down.svg"
+                          "hideIcon" "images/icons/lucide/chevron-up.svg"
+                        ) }}
                         
                         <div id="placeInfoDescription" class="z-0 px-2"></div>
 
@@ -161,7 +157,7 @@
                     <!-- Recommendations Section -->
                     <div class="text-wrap px-2 py-2">
                       <div class="flex flex-row pb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info-icon lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                        {{ partial "media/svg-inline" (dict "src" "images/icons/lucide/info.svg") }}
     
                         <div class="font-bold ml-1" id="placeInfoTipsAndTopsTitle"></div>
                       </div>

@@ -1,0 +1,21 @@
+{{ $id := .id }}
+{{ $group := .group }}
+{{ $id2 := print $id "-unselected" }}
+{{ $iconClass := .iconClass }}
+
+<span class="relative {{ .class }}">
+  <input id="{{ $id }}" type="radio" name="{{ $group }} " class="hidden" />
+  <input id="{{ $id2 }}" type="radio" name="{{ $group }} " class="hidden" />
+
+  <label for="{{ $id }}" class="relative z-0">
+    {{ partial "media/svg-inline" (dict
+      "src" .selectedIcon
+      "class" (print (printf "on-[%s]/root:hidden" $id) " " $iconClass)
+    ) }}
+    {{ partial "media/svg-inline" (dict
+      "src" .defaultIcon
+      "class" (print (printf "on-[%s]/root:block hidden" $id) " " $iconClass)
+    ) }}
+  </label>
+  <label for="{{ $id2 }}" class="absolute inset-0 z-10 hidden on-[{{ $id }}]/root:block"></label>
+</span>

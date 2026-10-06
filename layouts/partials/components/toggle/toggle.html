@@ -1,0 +1,31 @@
+{{ $id := .id }}
+{{ $linkTo := .linkTo }}
+{{ $scope := .scope }}
+{{ $checked := .checked }}
+{{ $iconClass := .iconClass }}
+
+{{ if and (not $id) (not $linkTo) }}
+  {{ errorf "%s: $id or $linkTo wasn't given for a toggle" $scope }}
+{{ end }}
+
+{{ $idToLinkTo := $id | default $linkTo }}
+{{ $toggleGroup := "" }}
+{{ if $id }}
+  {{ $toggleGroup = print "group/" $id }}
+{{ end }}
+
+<span class="toggle {{ $toggleGroup }} {{ .class }}">
+  {{ if $id }}
+    <input id="{{ $id }}" type="checkbox" class="hidden" {{ if $checked }} checked {{ end }} onchange="{{ .onchange }}"/>
+  {{ end }}
+  <label for="{{ $idToLinkTo }}" class="{{ .labelClass }}">
+    {{ partial "media/svg-inline" (dict
+      "src" .showIcon
+      "class" (print (printf "on-[%s]/root:hidden" $idToLinkTo) " " $iconClass)
+    ) }}
+    {{ partial "media/svg-inline" (dict
+      "src" .hideIcon
+      "class" (print (printf "on-[%s]/root:block hidden" $idToLinkTo) " " $iconClass)
+    ) }}
+  </label>
+</span>
