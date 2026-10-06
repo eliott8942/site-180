@@ -16,7 +16,7 @@
 
 <span class="toggle {{ $toggleGroup }} {{ .class }}">
   {{ if $id }}
-    <input id="{{ $id }}" type="checkbox" class="hidden" {{ if $checked }} checked {{ end }} onchange="{{ .onchange }}"/>
+    <input id="{{ $id }}" type="checkbox" class="hidden" {{ if $checked }} checked {{ end }} onchange="{{ .onchange | safeJS }}"/>
   {{ end }}
   <label for="{{ $idToLinkTo }}" class="{{ .labelClass }}">
     {{ partial "media/svg-inline" (dict
