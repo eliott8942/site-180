@@ -11,7 +11,8 @@ function initComponents() {
     toggle,
     input,
     cardContainer,
-    panelContainer
+    panelContainer,
+    headerPanelContainer
   ] = getElementForEachId(
     "searchMenuLayer",
     "searchMenuContainer",
@@ -19,7 +20,8 @@ function initComponents() {
     "searchmenu-toggle-inner",
     "searchmenu-input",
     "searchMenuCardContainer",
-    "searchMenuPanelContainer"
+    "searchMenuPanelContainer",
+    "searchMenuHeaderPanelContainer"
   ) ?? [];
   
   if (!menuLayer) {
@@ -34,7 +36,8 @@ function initComponents() {
     toggle,
     input,
     cardContainer,
-    panelContainer
+    panelContainer,
+    headerPanelContainer
   };
 
   const [

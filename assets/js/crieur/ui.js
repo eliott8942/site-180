@@ -136,13 +136,15 @@ function updatePanelInfo(data) {
 
 function showPlaceInfo(placeData) {
   updatePanelInfo(placeData)
-  
+
+  SEARCH_COMPONENTS.headerPanelContainer.style.transform = "translateX(-100%)";
   SEARCH_COMPONENTS.panelContainer.style.transform = "translateX(-100%)";
   SEARCH_COMPONENTS.menuLayer.classList.add("crieur-info-shown");
   SEARCH_COMPONENTS.toggle.checked = true
 }
 
 function closePanelInfo() {
+  SEARCH_COMPONENTS.headerPanelContainer.style.transform = "translateX(0%)";
   SEARCH_COMPONENTS.panelContainer.style.transform = "translateX(0%)";
   SEARCH_COMPONENTS.menuLayer.classList.remove("crieur-info-shown");
 }

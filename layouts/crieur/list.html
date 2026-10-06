@@ -37,10 +37,26 @@
       </div>
       
       <!-- Search menu layer -->
-      <div id="searchMenuLayer" class="searchmenu-layer absolute flex flex-col shadow-centered-lg shadow-black/15 z-20 max-sm:w-full h-screen-with-pad sm:w-96 pointer-events-none max-sm:h-1/4 max-sm:on-[searchmenu-toggle-inner]/group:h-[--searchmenu-layer-height] bottom-0 duration-150">
+      <div id="searchMenuLayer" class="searchmenu-layer absolute flex flex-col z-20 max-sm:w-full h-screen-with-pad sm:w-96 pointer-events-none max-sm:h-1/4 max-sm:on-[searchmenu-toggle-inner]/group:h-[--searchmenu-layer-height] bottom-0 duration-150">
         <!-- Static header -->
-        <div id="searchMenuInputHeader" class="absolute w-full h-12 shrink-0 flex flex-row items-center border-b bg-white border-b-gray-400 pointer-events-none border-r border-gray-200 duration-150">
-          <input type="text" id="searchmenu-input" class="grow outline-none border-0 focus:ring-0 text-lg shrink pointer-events-auto z-0 text-black" placeholder="Chercher un restaurant..." autocomplete="off" onfocus="switchToSearchMode()" oninput="updateSearch()"/>
+        <div id="searchMenuInputHeader" class="absolute left-0 top-0 w-full h-12 shrink-0 border-b bg-white border-b-gray-400 pointer-events-auto border-r border-gray-200 duration-150 z-10 overflow-hidden">
+          <div id="searchMenuHeaderPanelContainer" class="relative shrink-0 w-full h-full flex flex-row -translate-x-0 duration-150">
+            <div class="relative shrink-0 w-full flex flex-row items-center">
+              <input type="text" id="searchmenu-input" class="grow outline-none border-0 focus:ring-0 text-lg shrink pointer-events-auto z-10 text-black" placeholder="Chercher un restaurant..." autocomplete="off" onfocus="switchToSearchMode()" oninput="updateSearch()"/>
+
+              <!-- Space for static button -->
+              <div class="h-full aspect-square shrink-0"></div>
+            </div>
+
+            <!-- Panel header -->
+            <div class="relative w-full flex flex-row h-12 items-center shrink-0 overflow-hidden border-b border-b-gray-400 bg-white shadow-lg z-20">
+              <button type="button" onclick="closePlace()" class="h-full aspect-square flex items-center justify-center" aria-label="Close panel button">
+                {{ partial "media/svg-inline" (dict "src" "images/icons/lucide/arrow-left.svg") }}
+              </button>
+  
+              <div id="placeInfoTitleInHeader" class="absolute flex left-1/2 -translate-x-1/2 font-bold text-lg h-full items-center leading-normal text-nowrap"></div>
+            </div>
+          </div>
 
           <!-- Search menu toggle -->
           {{ partial "components/toggle/toggle" (dict
@@ -48,20 +64,20 @@
             "checked" "true"
             "labelClass" "text-black bg-white"
             "onchange" "updateSearchMode()"
-            "class" "relative h-full aspect-square pointer-events-auto border-b z-20 sm:hidden"
+            "class" "absolute top-0 right-0 h-full aspect-square pointer-events-auto border-b z-20 sm:hidden"
             "showIcon" "images/icons/lucide/chevron-up.svg"
             "hideIcon" "images/icons/lucide/chevron-down.svg"
           ) }}
           {{ partial "components/toggle/toggle" (dict
             "linkTo" "searchmenu-toggle-inner"
             "labelClass" "text-black bg-white"
-            "class" "relative h-full aspect-square pointer-events-auto border-b z-20 hidden sm:block"
+            "class" "absolute top-0 right-0 h-full aspect-square pointer-events-auto border-b z-20 hidden sm:block"
             "showIcon" "images/icons/lucide/chevron-right.svg"
             "hideIcon" "images/icons/lucide/chevron-left.svg"
           ) }}
         </div>
         
-        <div id="searchMenuContainer" class="sm:-translate-x-[--menu-folded-offset] sm:on-[searchmenu-toggle-inner]/group:-translate-x-0 h-full duration-150 left-0 overflow-hidden shadow-centered-lg">
+        <div id="searchMenuContainer" class="relative sm:-translate-x-[--menu-folded-offset] sm:on-[searchmenu-toggle-inner]/group:-translate-x-0 h-full duration-150 left-0 overflow-hidden shadow-centered-lg shadow-black/15 z-0">
           <div id="searchMenuPanelContainer" class="relative h-full flex flex-row -translate-x-0 duration-150">
             <!-- Search menu -->
             <div class="flex flex-col h-full w-full duration-150 shrink-0">
@@ -88,15 +104,7 @@
 
             <!-- Place Info -->
             <div class="flex flex-col h-full w-full shrink-0 pointer-events-auto bg-white">
-              <!-- Header --> 
-              <div class="relative w-full flex flex-row h-12 items-center shrink-0 overflow-hidden border-b border-b-gray-400 bg-white shadow-lg z-10">
-                <button type="button" onclick="closePlace()" class="h-full aspect-square flex items-center justify-center" aria-label="Close panel button">
-                  {{ partial "media/svg-inline" (dict "src" "images/icons/lucide/arrow-left.svg") }}
-                </button>
-
-                <div id="placeInfoTitleInHeader" class="absolute flex left-1/2 -translate-x-1/2 font-bold text-lg h-full items-center leading-normal text-nowrap">
-                </div>
-              </div>
+              <div class="w-full h-12 shrink-0"></div>
               
               <div class="grow overflow-auto" id="placeInfoScrollableContainer">
                 <!-- Note : the src value is a placeholder. It will be changed by JS. -->
