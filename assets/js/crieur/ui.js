@@ -93,13 +93,18 @@ function updateTipsAndTops(tipsContainer, topsContainers, tips, tops, titleConta
 const _panelAddressElement = (data) => {
   if (data.location.map) {
     return Lit.html`
-      <a href="${data.location.map}">
-        <div class="h-[1lh] inline-block align-middle">
-          <div class="h-full aspect-square flex justify-center items-center overflow-visible">
-            <img src="${absolutizeURL("images/brands/google-maps.svg")}" class="h-full object-contain scale-[1.75]" alt="google map icon"/>
-          </div>
-        </div>
-        ${formatLongAddress(data.location.address)}
+      <a
+        class="font-semibold hover:text-black
+        group/link w-fit"
+        target="_blank"
+        rel="norefferer"
+        href="${data.location.map}"
+      >
+        <img src="${absolutizeURL("images/brands/google-maps.svg")}" class="h-4 inline-block object-contain scale-[1.75]" alt="google map icon"/>
+        <span class="underline underline-offset-2 decoration-black/20 group-hover/link:decoration-black decoration-2 align-middle">
+          ${formatLongAddress(data.location.address)}
+        </span>
+        <i class="fa-solid fa-arrow-up-right-from-square opacity-50 group-hover/link:opacity-100 scale-75"></i>
       </a>
     `
   } else {

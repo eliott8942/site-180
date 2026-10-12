@@ -139,17 +139,3 @@
     }
   }
 }
-
-#placeInfoAddress {
-  & a {
-    @apply text-center;
-
-    &:hover {
-      @apply underline
-    }
-  }
-
-  & .crieur-icon {
-    @apply h-4 inline-block align-middle;
-  }
-}
