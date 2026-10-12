@@ -55,7 +55,7 @@ function initComponents() {
     tops,
     tipsAndTopsTitle,
     scheduleContainer,
-    scheduleHourBarsContainer
+    placeInfoHeaderButton
   ] = getElementForEachId(
     "placeInfoScrollableContainer",
     "placeInfoTitle",
@@ -71,12 +71,14 @@ function initComponents() {
     "placeInfoTops",
     "placeInfoTipsAndTopsTitle",
     "placeInfoScheduleContainer",
+    "placeInfoHeaderButton"
     ) ?? [];
   
   if (!scrollableContainer) {
     console.warn("Failed to get all the elements for the panelInfo")
     return;
   }
+
 
   PLACE_INFO_COMPONENTS = {
     scrollableContainer,
@@ -93,8 +95,12 @@ function initComponents() {
     tops,
     tipsAndTopsTitle,
     scheduleContainer,
-    scheduleHourBarsContainer
+    placeInfoHeaderButton
   };
+
+  console.log(PLACE_INFO_COMPONENTS)
+
+  PLACE_INFO_COMPONENTS.placeInfoHeaderButton.addEventListener("click", closePlace)
 }
 
 function init(placeData, decoData, style) {

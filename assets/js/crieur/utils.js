@@ -3,7 +3,7 @@ function getElementForEachId(...ids) {
   let notFound = false
   for (const id of ids) {
     let element = document.getElementById(id)
-    if (element == undefined) {
+    if (!element) {
       console.warn(`Warning : ${id} could not be found. Make sure an element has that id.`)
       notFound = true;
 
