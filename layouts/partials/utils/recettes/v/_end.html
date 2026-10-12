@@ -1,125 +1,50 @@
 {{ $page := .Page }}
-{{ $allSystems := $page.Store.Get "vSystems" }}
+{{ $systems := $page.Store.Get "vSystems" | default slice }}
 
-{{ if $allSystems }}
-<script defer>
-  {{ range $id := $page.Store.Get "vSystems" }}
-    {{ $valueConfigIdent := print $id "Config" }}
-    {{ $vSystemInfo := $page.Store.Get $valueConfigIdent }}
-
-    {{ $arrayName := print $vSystemInfo.idPrefix "_IDS" | upper }}
-
-    {{ if isset $vSystemInfo "numberOfValues" }}
-      {{ if ne $vSystemInfo.numberOfValues 0 }}
-        const {{ $arrayName | safeJS }} = [
-          {{ range $i, $id := seq 0 (sub $vSystemInfo.numberOfValues 1) }}
-            {{ if ne $i 0 }}
-              ,
-            {{ end }}
-          
-            {{ print $vSystemInfo.idPrefix "-" $id }}
-          {{ end }}
-        ];
-      {{ end }}
-    {{ end }}
-  {{ end }}
-
-  {{ range $id := $page.Store.Get "vExpr" }}
-    {{ $valueConfigIdent := print $id "Config" }}
-    {{ $vSystemInfo := $page.Store.Get $valueConfigIdent }}
-
-    {{ $arrayName := print $vSystemInfo.idPrefix "_IDS" | upper }}
-
-    {{ if isset $vSystemInfo "numberOfValues" }}
-      {{ if ne $vSystemInfo.numberOfValues 0 }}
-        const {{ $arrayName | safeJS }} = [
-          {{ range $i, $id := seq 0 (sub $vSystemInfo.numberOfValues 1) }}
-            {{ if ne $i 0 }}
-              ,
-            {{ end }}
-          
-            {{ print $vSystemInfo.idPrefix "-" $id }}
-          {{ end }}
-        ];
-      {{ end }}
-    {{ end }}
-  {{ end }}
-
-  initVSystems(
-    {
-      {{ range $i, $id := $page.Store.Get "vSystems" }}
-        {{ $arrayName := print $id "_IDS" | upper }}
+{{ if $systems }}
+  <script>
+    {{ $init := dict }}
   
-        {{ $valueConfigIdent := print $id "Config" }}
-        {{ $vSystemInfo := $page.Store.Get $valueConfigIdent }}
+    {{ range $id := $systems }}
+      {{ $cfg := $page.Store.Get (print $id "Config") }}
+      {{ $entry := dict }}
   
-        {{ if ne $i 0 }}
-          ,
+      {{ with $cfg.numberOfValues }}
+        {{ $ids := slice }}
+        {{ range seq . }}
+          {{ $ids = $ids | append (printf "%s-%d" $cfg.idPrefix (sub . 1)) }}
         {{ end }}
-  
-        {{ $id }}: {
-          {{ if ne $vSystemInfo.numberOfValues 0 }}
-            elements: {{ $arrayName | safeJS }},
-          {{ end }}
-
-          {{ with $vSystemInfo.baseValue }}
-            baseValue: {{ . | safeJS }},
-          {{ end }}
-
-          {{ with $vSystemInfo.min }}
-            min: {{ . | safeJS }},
-          {{ end }}
-  
-          {{ with $vSystemInfo.max }}
-            max: {{ . | safeJS }},
-          {{ end }}
-          
-          {{ with $vSystemInfo.dependents }}
-            {{ if ne (len . ) 0 }}
-              dependents: [
-                {{ range $i, $id := . }}
-                  {{ if ne $i 0 }}
-                    ,
-                  {{ end }}
-                
-                  {{ . }}
-                {{ end }}
-              ],
-            {{ end }}
-          {{ end }}
-
-          {{ with $vSystemInfo.dependencies }}
-            {{ if ne (len . ) 0 }}
-              dependencies: [
-                {{ range $i, $id := . }}
-                  {{ if ne $i 0 }}
-                    ,
-                  {{ end }}
-                
-                  {{ . }}
-                {{ end }}
-              ],
-            
-              expressionVariables: [
-                {{ range $i, $id := . }}
-                  {{ if ne $i 0 }}
-                    ,
-                  {{ end }}
-                
-                  {{ partial "utils/strings/kebab-to-camel-case" . }}
-                {{ end }}
-              ],
-            {{ end }}
-          {{ end }}
-
-          {{ with $vSystemInfo.code }}
-            expression: {{ . }},
-          {{ end }}
-        }
+        {{ $entry = merge $entry (dict "elements" $ids) }}
       {{ end }}
-    }
-  );
-</script>
+  
+      {{/* numeric fields: keep a legitimate 0 */}}
+      {{ range $k := slice "baseValue" "min" "max" }}
+        {{ if isset $cfg $k }}
+          {{ $entry = merge $entry (dict $k (index $cfg $k)) }}
+        {{ end }}
+      {{ end }}
+  
+      {{ with $cfg.dependents }}
+        {{ $entry = merge $entry (dict "dependents" .) }}
+      {{ end }}
+  
+      {{ with $cfg.dependencies }}
+        {{ $vars := slice }}
+        {{ range . }}
+          {{ $vars = $vars | append (partial "utils/strings/kebab-to-camel-case" .) }}
+        {{ end }}
+        {{ $entry = merge $entry (dict "dependencies" . "expressionVariables" $vars) }}
+      {{ end }}
+  
+      {{ with $cfg.code }}
+        {{ $entry = merge $entry (dict "expression" .) }}
+      {{ end }}
+  
+      {{ $init = merge $init (dict $id $entry) }}
+    {{ end }}
+  
+    initVSystems({{ $init | jsonify | safeJS }});
+  </script>
 {{ end }}
 
-{{ warnf "INFO %s registered v systems : %s" .Position (.Page.Store.Get "vSystems") }}
+{{ warnf "INFO %s registered v systems : %s" .Position $systems }}
