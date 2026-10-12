@@ -45,7 +45,7 @@ function initMap(placeData, decoData, style) {
     showCompass: false
   }), 'top-right')
   MAP.addControl(new FullscreenControl({
-    container: document.getElementById('map')
+    container: document.getElementById('mapContainer')
   }), 'top-right')
 
   MAP.addControl(
