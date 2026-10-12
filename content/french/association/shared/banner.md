@@ -12,7 +12,7 @@ banner:
   buttons:
     - label: "Nous rejoindre"
       link: "mailto:epfl180c@gmail.com"
-    - label: "Statut"
+    - label: "Statuts"
       variant: "white"
       type: "file"
       link: "https://www.google.com"

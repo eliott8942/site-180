@@ -30,7 +30,7 @@ footer_main:
     weight: 2
 
 footer:
-  - name: "Statut"
+  - name: "Statuts"
     url: "https://www.google.com"
     weight: 1
     # FIXME:set it to the 180c repo when merged
