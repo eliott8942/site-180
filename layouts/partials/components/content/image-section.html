@@ -41,20 +41,31 @@
         {{ end }}
       </ul>
     {{ end }}
-    {{ with .button }}
-      {{ if .enable }}
-        {{ $type := partial "utils/url/determine-type" .link }}
-      
-        <a class="btn btn-primary mt-6" href="{{ .link | relLangURL }}">
-          {{ if eq $type "mail" }}
-            <i class="fa-solid fa-envelope"></i>
-            {{ .label }}
-          {{ else }}
-            {{ .label }}
-            <i class="fa-solid fa-arrow-right"></i>
-          {{ end }}
-        </a>
-      {{ end }}
+    {{ with .buttons }}
+      <div class="flex flex-row flex-wrap gap-4 mt-6">
+        {{ range . }}
+          {{ $type := .type | default (partial "utils/url/determine-type" .link) }}
+  
+            <a 
+              class="btn {{ .variant }}" 
+              href="{{ .link | relLangURL }}"
+              {{ if partial "utils/url/is-external" .link }}
+                target="_blank" rel="noreferrer"
+              {{ end }}
+            >
+              {{ if eq $type "mail" }}
+                <i class="fa-solid fa-envelope"></i>
+                {{ .label }}
+              {{ else if eq $type "file" }}
+                <i class="fa-solid fa-file"></i>
+                {{ .label }}
+              {{ else }}
+                {{ .label }}
+                <i class="fa-solid fa-arrow-right"></i>
+              {{ end }}
+            </a>
+        {{ end }}
+      </div>
     {{ end }}
   </div>
 </div>

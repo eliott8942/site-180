@@ -4,10 +4,6 @@ banner:
   title: "Savourez la vie étudiante !"
   content: "180°C - Association de cuisine EPFL-UNIL"
   image: "./images/banner.png"
-  button:
-    enable: false
-    label: "Get Started For Free"
-    link: "https://github.com/zeon-studio/hugoplate"
 
 news:
   title: "Quoi de neuf ?"
@@ -21,16 +17,14 @@ sections:
       - "Un carnet d'adresses"
       - "Des bons plans"
       - "Des réductions"
-    button:
-      enable: true
-      label: "Découvrir"
-      link: "./crieur"
+    buttons:
+      - label: "Découvrir"
+        link: "./crieur"
 
   - title: "L'Association"
     image: "/images/association.png"
     content: "On vous parle de nos projets, nos passions et notre organisation… parce qu'on ne compte pas que pour du beurre !"
-    button:
-      enable: true
-      label: "Voir plus"
-      link: "./association"
+    buttons:
+      - label: "Voir plus"
+        link: "./association"
 ---

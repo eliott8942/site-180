@@ -1,4 +1,4 @@
-.btn-primary {
+.btn {
   @apply 
     inline-block 
     py-2 px-4 rounded-full 
@@ -8,6 +8,12 @@
     hover:scale-105 hover:from-red-300 hover:via-red-400 hover:to-red-600 
     border border-red-500/50
     duration-150 transition-all;
+
+  &.white {
+    @apply shadow-inner-reverted text-black from-white to-white 
+    hover:from-white hover:to-white 
+    border border-gray-500/50;
+  }
 }
 
 .copy-btn .clicked-svg {

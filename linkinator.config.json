@@ -11,7 +11,7 @@
     "www.instagram.com",
     "www.linkedin.com",
     "docs.google.com",
-    "%23*"
+    "/css/%23"
   ],
   "silent": true,
   "timeout": 0,
@@ -24,8 +24,5 @@
   "retry": true,
   "retryErrors": true,
   "retryErrorsCount": 3,
-  "retryErrorsJitter": 5,
-  "statusCodes": {
-    "410": "warn"
-  }
+  "retryErrorsJitter": 5
 }

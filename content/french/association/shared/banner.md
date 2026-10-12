@@ -9,8 +9,11 @@ banner:
     Nous nous organisons en 4 pôles: événementiel, création, sponsoring et communication. Plus d'informations sur chacun ci-dessous.
 
   image: "/images/association.png"
-  button:
-    enable: true
-    label: "Nous rejoindre"
-    link: "mailto:epfl180c@gmail.com"
+  buttons:
+    - label: "Nous rejoindre"
+      link: "mailto:epfl180c@gmail.com"
+    - label: "Statut"
+      variant: "white"
+      type: "file"
+      link: "https://www.google.com"
 ---
