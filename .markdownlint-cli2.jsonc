@@ -10,7 +10,9 @@
     },
     // allow ordered list to start not at 1, because we can put separators
     // between items in recipees
-    "MD029": false
+    "MD029": false,
+    // allow raws urls because of shortcode usage
+    "MD034": false
   },
   "globs": ["content/**/*.md"]
 }
