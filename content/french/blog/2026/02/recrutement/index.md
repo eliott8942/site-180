@@ -2,7 +2,7 @@
 title: "Recrutement 2026"
 meta_title: ""
 description: "Recrutement 180°C 2026"
-image: "images/blog/26-02-2026-recrutement-2026.png"
+image: "thumbnail.png"
 "blog/categories": ["association"]
 summary: "Rejoint l'association 180°C ! "
 draft: false
@@ -12,7 +12,7 @@ lectureTimeMin: 5
 
 Tu es passionné-e de cuisine, tu adores partager tes recettes, ou tu veux simplement apprendre à cuisiner tout en t'amusant ? **180c est fait pour toi !** Que tu sois un chef ou une chef en herbe ou un-e débutant-e motivé-e, tu trouveras ta place parmi nous.
 
-### Pourquoi nous rejoindre ?
+# Pourquoi nous rejoindre ?
 
 - **Développe tes talents culinaires** : grâce aux différentes activités proposées par l'association (ateliers de création, teambuilding, chalet de l'avant, ...), tu pourras découvrir plein de recettes sur plein de thèmes différents !
 
@@ -20,7 +20,7 @@ Tu es passionné-e de cuisine, tu adores partager tes recettes, ou tu veux simpl
 
 - **Pour t'amuser**: rencontre des étudiant-e-s aussi passionné-e-s que toi, dans une ambiance conviviale et bienveillante.
 
-### Quels pôles recrutent ?
+# Quels pôles recrutent ?
 
 | Pôle | Missions | Pour qui ? |
 | --- | --- | --- |
@@ -29,6 +29,6 @@ Tu es passionné-e de cuisine, tu adores partager tes recettes, ou tu veux simpl
 | Communication | Animer les réseaux sociaux, créer des affiches, rédiger des articles, promouvoir nos événements. | Pour les passionné·e·s de graphisme, d’écriture ou de stratégie digitale. |
 | Sponsoring | Trouver des partenaires | Pour ceux qui aiment la négociation et pour qui les affaires sont les affaires ! |
 
-### Prêt à nous rejoindre ?
+# Prêt à nous rejoindre ?
 
 {{< biglink content="Alors rejoins-nous !" link="https://docs.google.com/forms/u/1/d/e/1FAIpQLSes3LE4YRidC9V2YNALKML8CsaMuf40WJTU3pWWWksW-FNbFA/viewform?usp=header&pli=1&authuser=1" >}}
