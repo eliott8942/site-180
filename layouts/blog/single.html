@@ -15,11 +15,11 @@
       <!-- Tiled background -->
       <div class="absolute w-full h-full overflow-hidden z-0 bg-gray-100">
         <div class="
-          absolute 
-          translate-center 
+          absolute
+          translate-center
           bg-[url({{ $bg_image.RelPermalink }})] bg-size-[80px] bg-repeat-space
-          saturate-0 opacity-5 
-          w-[120%] h-[700px] 
+          saturate-0 opacity-5
+          w-[120%] h-[700px]
           rotate-6"
         ></div>
         <div class="relative bg-gradient-to-b to-80% to-white/25 from-transparent w-full h-full z-10"></div>
@@ -34,31 +34,31 @@
 
             <!-- Subtract the size of the border, then scale up by two -->
             {{ $width := mul (sub $containerWidth (mul $borderWidth 2)) 2 }}
-            
-            {{ partial "media/image" (dict 
-              "Src" .Params.image 
-              "Alt" .Title 
-              "Class" "w-full h-full object-cover" 
-              "Loading" "eager" 
-              "FetchPriority" "high" 
+
+            {{ partial "media/image" (dict
+              "Src" .Params.image
+              "Alt" .Title
+              "Class" "w-full h-full object-cover"
+              "Loading" "eager"
+              "FetchPriority" "high"
               "Context" .
               "Size" (print $width "x" $width)
               "Command" "Fill"
             ) }}
           </div>
         </div>
-  
+
         <div class="flex flex-col items-start max-md:items-center max-md:mt-7 md:ml-7 ">
           <h1 class="h2 pb-2 max-md:text-center">
             {{ .Title }}
           </h1>
-        
+
           <div class="flex flex-wrap max-md:justify-center items-center text-lg md:text-xl">
             <!-- Note : the text are on the same line of as the icons because otherwise hugo put a space between them -->
             <div class="shrink-0">
               <i class="fa-solid fa-circle-user mr-1"></i>{{ strings.Trim (.Params.author | default "180°C") " " }}
             </div>
-      
+
             <div class="shrink-0 [&:not(:first-child)]:border-l [&:not(:first-child)]:ml-2 [&:not(:first-child)]:pl-2 border-secondary/25">
               <i class="fa-solid fa-calendar mr-1"></i>{{ time.Format ":date_short" .PublishDate }}
             </div>
@@ -94,8 +94,8 @@
   </section>
 
   <!-- Related posts -->
-  {{ $related := 
-    (where site.RegularPages "Section" .Section) 
+  {{ $related :=
+    (where site.RegularPages "Section" .Section)
     | intersect (where site.RegularPages ".Title" "!=" .Title)
   }}
   {{ $related = $related | shuffle | first 3 }}
