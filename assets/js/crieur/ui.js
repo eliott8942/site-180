@@ -94,17 +94,27 @@ const _panelAddressElement = (data) => {
   if (data.location.map) {
     return Lit.html`
       <a
-        class="font-semibold hover:text-black
+        class="font-semibold hover:text-black mx-4 text-center
         group/link w-fit"
         target="_blank"
         rel="norefferer"
         href="${data.location.map}"
       >
-        <img src="${absolutizeURL("images/brands/google-maps.svg")}" class="h-4 inline-block object-contain scale-[1.75]" alt="google map icon"/>
-        <span class="underline underline-offset-2 decoration-black/20 group-hover/link:decoration-black decoration-2 align-middle">
-          ${formatLongAddress(data.location.address)}
+        <span class="inline-block relative w-px overflow-visible h-4">
+          <span class="absolute top-0 right-0">
+            <img src="${absolutizeURL("images/brands/google-maps.svg")}" class="h-4 min-w-6 inline-block object-contain scale-[1.75]" alt="google map icon"/>
+          </span>
         </span>
-        <i class="fa-solid fa-arrow-up-right-from-square opacity-50 group-hover/link:opacity-100 scale-75"></i>
+        <span class="underline underline-offset-2 decoration-black/20 group-hover/link:decoration-black decoration-2 align-middle">
+          ${data.location.address.address},
+          <span class="text-nowrap">
+            ${data.location.address.postal_code} ${data.location.address.city}
+
+            <span class="inline-block w-px overflow-visible">
+              <i class="fa-solid fa-arrow-up-right-from-square opacity-50 group-hover/link:opacity-100 scale-75"></i>
+            </span>
+          </span>
+        </span>
       </a>
     `
   } else {
