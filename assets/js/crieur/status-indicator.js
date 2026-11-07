@@ -33,7 +33,7 @@ function statusSpanElement(scheduleArray) {
   let isOpen = false;
   let openSoon = false;
   let closeSoon = false;
-  let timeDelta;
+  let registeredTimeDelta;
 
   for (const timeSpan of dayArray) {
     const active = isNowInHourSpan(dayInMinutes, timeSpan[0], timeSpan[1])
@@ -43,13 +43,15 @@ function statusSpanElement(scheduleArray) {
 
     if (active) {
       isOpen = true;
-      timeDelta = subModulo(endMinutes, dayInMinutes, MINUTES_IN_DAY) 
+      let timeDelta = subModulo(endMinutes, dayInMinutes, MINUTES_IN_DAY) 
       if (timeDelta <= 30) {
+        registeredTimeDelta = timeDelta;
         closeSoon = true;
       }
     } else {
-      timeDelta = subModulo(startMinutes, dayInMinutes, MINUTES_IN_DAY)
+      let timeDelta = subModulo(startMinutes, dayInMinutes, MINUTES_IN_DAY)
       if (timeDelta <= 30) {
+        registeredTimeDelta = timeDelta;
         openSoon = true;
       }
     }
@@ -61,7 +63,7 @@ function statusSpanElement(scheduleArray) {
   if (isOpen) {
     if (closeSoon) {
       innerText = "Ferme bientôt";
-      timeText = `(${timeDelta}m)`
+      timeText = `(${registeredTimeDelta}m)`
       class_ = "crieur-status-close-soon";
     } else {
       innerText = "Ouvert";
@@ -70,7 +72,7 @@ function statusSpanElement(scheduleArray) {
   } else {
     if (openSoon) {
       innerText = "Ouvre bientôt";
-      timeText = `(${timeDelta}m)`
+      timeText = `(${registeredTimeDelta}m)`
       class_ = "crieur-status-open-soon";
     } else {
       innerText = "Fermé";
@@ -80,6 +82,6 @@ function statusSpanElement(scheduleArray) {
 
   return Lit.html`<span>
     <span class="${class_}">${innerText}</span>
-    ${ timeDelta && Lit.html`<span class="crieur-status-desc">${timeText}</span>` }
+    ${ registeredTimeDelta && Lit.html`<span class="crieur-status-desc">${timeText}</span>` }
   </span>`;
 }
