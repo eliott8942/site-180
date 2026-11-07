@@ -2,6 +2,5 @@
 [fr]
 label = "Fr"
 locale = "fr-fr"
-contentDir = "content/french"
 weight = 1
 
